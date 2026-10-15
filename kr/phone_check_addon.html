@@ -1,0 +1,40 @@
+
+<!-- ===== YHITF KR · 연락처 자릿수 검사 (2026-10-15) =====
+     국문 참가신청 위젯 맨 아래에 붙임. 기존 코드·DB 로직은 수정하지 않음.
+     - 대표자·참가자 연락처: 휴대폰 010-0000-0000 형식(01X, 10~11자리)만 통과
+     - 비상연락처: 0으로 시작하는 9~11자리(유선 02-000-0000 포함) 통과
+     - 미완성 번호(예: 010-1234, 010-1234-56)는 저장 전에 안내하고 막음
+-->
+<script>
+(function(){
+  'use strict';
+  var root=document.getElementById('yhitf-entry'); if(!root) return;
+  function digits(v){ return String(v||'').replace(/\D/g,''); }
+  function okMobile(v){ return /^01[016789]\d{7,8}$/.test(digits(v)); }
+  function okAny(v){ var d=digits(v);
+    if(/^01/.test(d)) return okMobile(d);            /* 휴대폰 */
+    if(/^02/.test(d)) return /^02\d{7,8}$/.test(d);  /* 서울 유선 */
+    return /^0[3-9]\d{8,9}$/.test(d);                /* 지역 유선·070 등 */
+  }
+  window.YH_KR_PHONE_OK={mobile:okMobile,any:okAny};
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('#entry-submit'); if(!b) return;
+    var list=Array.prototype.slice.call(root.querySelectorAll('input[type="tel"]')), bad=null, msg='';
+    list.forEach(function(inp){
+      if(bad || inp.offsetParent===null) return;
+      var v=inp.value.trim(); if(!v) return;               /* 빈 칸은 기존 필수 입력 검사가 안내 */
+      var emg=inp.name==='emergency_phone';
+      if(emg ? !okAny(v) : !okMobile(v)){
+        bad=inp;
+        msg=emg ? '비상연락망 연락처를 끝까지 정확히 입력해주세요.\n(예: 010-1234-5678, 02-123-4567)'
+                : '휴대폰 번호를 끝까지 정확히 입력해주세요.\n(예: 010-1234-5678)';
+      }
+    });
+    if(bad){
+      e.preventDefault(); e.stopImmediatePropagation();
+      alert(msg);
+      bad.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ bad.focus(); },350);
+    }
+  },true);
+})();
+</script>
