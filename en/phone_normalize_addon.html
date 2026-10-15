@@ -1,0 +1,72 @@
+
+<!-- ===== YHITF EN · phone number normalize (2026-10-15) =====
+     영문 참가신청 위젯 맨 아래에 붙임. 기존 코드·DB 로직은 수정하지 않음.
+     - 모든 전화번호 칸(대표자·참가자·비상연락처)을 국가번호 포함 국제형식(+821012345678)으로 통일
+     - 010-1234-5678 같은 한국 휴대폰은 +8210… 으로 자동 변환, 00 국제전화 접두는 + 로 변환
+     - 국가번호 없이 입력하면 저장 전에 안내하고 막음 (예: 2105531325)
+-->
+<style>
+#yhitf-entry .yh-tel-hint{margin-top:6px;font-size:12.5px;line-height:1.5;color:#777}
+#yhitf-entry .yh-tel-hint.err{color:#D93025;font-weight:700}
+</style>
+<script>
+(function(){
+  'use strict';
+  var root=document.getElementById('yhitf-entry'); if(!root) return;
+  var HINT='Include your country code, e.g. +1 (USA), +44 (UK), +82 (Korea).';
+
+  function norm(v){
+    var s=String(v||'').trim(); if(!s) return '';
+    var plus=/^\s*\+/.test(s), d=s.replace(/\D/g,'');
+    if(!plus && /^00/.test(d)){ plus=true; d=d.slice(2); }
+    if(plus){
+      if(/^820/.test(d)) d='82'+d.slice(3);          /* +82 010… → +82 10… */
+      return '+'+d;
+    }
+    if(/^01[016789]\d{7,8}$/.test(d)) return '+82'+d.slice(1);   /* Korean mobile 010… */
+    if(/^821[016789]\d{7,8}$/.test(d)) return '+'+d;            /* 8210… without + */
+    return null;                                                  /* country code missing */
+  }
+  function ok(v){ return /^\+[1-9]\d{7,14}$/.test(v) && !(/^\+82/.test(v) && !/^\+82\d{9,10}$/.test(v)); }
+  window.YH_PHONE_NORM=norm; window.YH_PHONE_OK=ok;
+
+  function hintOf(inp){
+    var h=inp.nextElementSibling;
+    if(!h || !h.classList || !h.classList.contains('yh-tel-hint')){
+      h=document.createElement('p'); h.className='yh-tel-hint'; h.textContent=HINT;
+      inp.parentNode.insertBefore(h,inp.nextSibling);
+    }
+    return h;
+  }
+  function check(inp,strict){
+    var h=hintOf(inp), raw=inp.value.trim();
+    if(!raw){ h.className='yh-tel-hint'; h.textContent=HINT; return !strict; }
+    var n=norm(raw);
+    if(n && ok(n)){ inp.value=n; h.className='yh-tel-hint'; h.textContent=HINT; return true; }
+    h.className='yh-tel-hint err';
+    h.textContent='Please add your country code at the start (e.g. +1 210 555 1234 for USA, +82 10 1234 5678 for Korea).';
+    return false;
+  }
+  function tels(){ return Array.prototype.slice.call(root.querySelectorAll('input[type="tel"]')); }
+
+  /* 힌트 표시 (참가자 카드가 추가될 때도) */
+  function addHints(){ tels().forEach(hintOf); }
+  addHints(); var t=null;
+  new MutationObserver(function(){ clearTimeout(t); t=setTimeout(addHints,120); }).observe(root,{childList:true,subtree:true});
+
+  /* 입력을 마치면 바로 변환 */
+  root.addEventListener('focusout',function(e){ if(e.target.matches && e.target.matches('input[type="tel"]')) check(e.target,false); });
+
+  /* 저장 버튼: 기존 저장 로직보다 먼저 전체 변환·검사 */
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('#entry-submit'); if(!b) return;
+    var list=tels(), bad=null;
+    list.forEach(function(inp){ if(!check(inp,false) && !bad) bad=inp; });
+    if(bad){
+      e.preventDefault(); e.stopImmediatePropagation();
+      alert('Please enter the phone number with your country code.\n\nExamples\nUSA: +1 210 555 1234\nUK: +44 7700 900123\nKorea: +82 10 1234 5678');
+      bad.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ bad.focus(); },350);
+    }
+  },true);
+})();
+</script>
