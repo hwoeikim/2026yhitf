@@ -1,0 +1,233 @@
+<!-- 2026 YHITF · MY REGISTRATION (EN, /my-entry) — 국문 참가정보 확인 v6 기반 영문판 (2026-10-15)
+     조회 API: 참가정보 확인 API v8 (lang:'en' → GLOBAL DB). 아임웹 코드 위젯 1개에 통째로 붙여넣기 -->
+<style>
+#yh-chk{--blue:#002ACF;--orange:#FF6D07;--ink:#212121;--sub:#666666;--mute:#999999;--line:#eaeaea;--bg:#f6f6f6;--otint:#FFF3EA;--btint:#EEF2FF;
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;color:var(--ink);
+  word-break:keep-all;-webkit-font-smoothing:antialiased;max-width:760px;margin:0 auto;padding:64px 20px 88px;line-height:1.6}
+#yh-chk *{box-sizing:border-box;margin:0;padding:0}
+#yh-chk h2{font-size:clamp(28px,4.4vw,40px);font-weight:900;letter-spacing:-.04em;line-height:1.25;color:var(--ink)}
+#yh-chk .lead{margin-top:10px;font-size:16px;color:var(--sub);line-height:1.6}
+#yh-chk form.q{margin-top:36px;display:grid;grid-template-columns:1.3fr 1fr auto;gap:12px;align-items:end}
+#yh-chk label{display:block;font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;color:var(--ink)}
+#yh-chk input{width:100%;height:56px;border:1px solid #d4d4d4;border-radius:12px;padding:0 18px;font:inherit;font-size:17px;line-height:1.2;color:var(--ink);background:#fff;transition:border-color .2s}
+#yh-chk input::placeholder{color:var(--mute)}
+#yh-chk input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,42,207,.12)}
+#yh-chk .help{margin-top:12px;font-size:14px;color:var(--sub);line-height:1.6}
+#yh-chk button{height:56px;padding:0 30px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:inherit;font-size:16px;font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s}
+#yh-chk button:hover{transform:translateY(-2px)}
+#yh-chk button:disabled{background:var(--mute);cursor:default;transform:none}
+#yh-chk .msg,#yh-chk .warn{position:relative;padding:16px 20px 16px 42px;border-radius:14px;background:var(--otint);color:var(--ink);font-size:15px;font-weight:600;line-height:1.6}
+#yh-chk .msg:before,#yh-chk .warn:before{content:'';position:absolute;left:20px;top:25px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+#yh-chk .msg{display:none;margin-top:24px}
+#yh-chk .msg.on{display:block}
+#yh-chk .warn{margin-bottom:8px}
+#yh-chk .warn a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+#yh-chk .res{display:none;margin-top:48px}
+#yh-chk .res.on{display:block}
+#yh-chk .sum{display:flex;flex-wrap:wrap;gap:10px 28px;padding:10px 0 18px}
+#yh-chk .sum p{font-size:14px;color:var(--mute);line-height:1.5}
+#yh-chk .sum p b{display:block;font-size:18px;color:var(--ink);font-weight:800}
+#yh-chk .sum p b small{font-size:14px;color:var(--sub);font-weight:600}
+#yh-chk .card{margin-top:14px;border-radius:18px;background:var(--bg);padding:28px 24px}
+#yh-chk .card .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#yh-chk .card .crs{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--blue);line-height:1.25}
+#yh-chk .card .crs small{font-size:16px;font-weight:700;color:var(--ink);margin-left:10px;letter-spacing:0}
+#yh-chk .badge{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;line-height:1}
+#yh-chk .badge.wait{background:var(--orange);color:var(--ink)}
+#yh-chk .badge.off{background:var(--line);color:var(--sub)}
+#yh-chk dl{margin-top:18px;display:grid;grid-template-columns:150px 1fr;gap:10px 16px;font-size:15px;line-height:1.5}
+#yh-chk dt{color:var(--mute)}
+#yh-chk dd{font-weight:600;color:var(--ink)}
+#yh-chk .al{display:inline-flex;align-items:baseline;gap:7px;font-weight:700;color:var(--ink)}
+#yh-chk .al:before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--orange);transform:translateY(-1px)}
+#yh-chk .al.s{display:flex;margin-top:4px;font-size:13px;font-weight:600;color:var(--sub)}
+#yh-chk .lock{margin-top:14px;border-radius:18px;padding:24px;border:1.5px solid var(--blue);background:#fff}
+#yh-chk .lock .lt{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.4;color:var(--ink)}
+#yh-chk .lock .ld{margin-top:6px;font-size:15px;color:var(--sub);line-height:1.6}
+#yh-chk .lock form{margin-top:16px;display:flex;gap:8px}
+#yh-chk .lock input{height:50px;font-size:17px;border-radius:12px;flex:1;min-width:0;letter-spacing:.02em}
+#yh-chk .lock button{height:50px;padding:0 24px;font-size:15px}
+#yh-chk .lock .out{margin-top:10px;font-size:14px;line-height:1.5}
+#yh-chk .lock .out:empty{display:none}
+#yh-chk .lock details{margin-top:14px;font-size:14px;color:var(--sub);line-height:1.6}
+#yh-chk .lock summary{cursor:pointer;font-weight:700;color:var(--ink);list-style:none}
+#yh-chk .lock summary::-webkit-details-marker{display:none}
+#yh-chk .lock summary:after{content:' +';color:var(--blue)}
+#yh-chk .lock details[open] summary:after{content:' −'}
+#yh-chk .lock details ul{margin-top:8px;padding-left:18px}
+#yh-chk .lock details b{color:var(--ink)}
+#yh-chk .lock.done{border-color:transparent;background:var(--btint);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#yh-chk .lock.done .lt{color:var(--blue)}
+#yh-chk .lock.done button{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+#yh-chk .card .other{margin-top:16px;font-size:14px;color:var(--sub);line-height:1.5}
+#yh-chk .notes{margin-top:36px;display:grid;gap:6px;font-size:14px;color:var(--sub);line-height:1.6}
+@media (max-width:640px){
+  #yh-chk{padding:44px 20px 64px}
+  #yh-chk form.q{grid-template-columns:1fr}
+  #yh-chk form.q button{width:100%}
+  #yh-chk dl{grid-template-columns:118px 1fr}
+  #yh-chk .card{padding:24px 20px}
+  #yh-chk .lock{padding:20px}
+  #yh-chk .lock form{flex-wrap:wrap}
+  #yh-chk .lock form button,#yh-chk .lock.done button{width:100%}
+}
+</style>
+
+<section id="yh-chk" aria-label="My Registration">
+  <h2>My Registration</h2>
+  <p class="lead">Look up your registration with your registration number or order number and your name.</p>
+
+  <form class="q" id="yhChkForm" novalidate>
+    <div>
+      <label for="yhChkApp">Registration No. or Order No.</label>
+      <input id="yhChkApp" autocomplete="off" placeholder="YHITF-EP-000123 or 202610081234567" maxlength="24" autocapitalize="characters">
+    </div>
+    <div>
+      <label for="yhChkName">Name</label>
+      <input id="yhChkName" autocomplete="name" placeholder="Name as registered">
+    </div>
+    <button type="submit" id="yhChkBtn">Look up</button>
+  </form>
+  <p class="help">Your registration number (YHITF-EP-… / YHITF-EG-…) is shown when you complete the registration form. Your order number (15 digits) is in MYPAGE &gt; Order History.<br>For group entries, the representative's name shows all participants; a participant's own name shows only their details.</p>
+
+  <p class="msg" id="yhChkMsg" role="alert"></p>
+  <div class="res" id="yhChkRes" aria-live="polite"></div>
+
+  <div class="notes">
+    <p>· Without an order number, your phone number, date of birth and address are partly hidden for privacy.</p>
+    <p>· To change your details, please contact us via MYPAGE &gt; Support by 18:00 KST, Fri, Nov 27, 2026.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var API_URL = 'https://script.google.com/macros/s/AKfycbxb81E5LX2q_HPgQog4gXNpPJERn7dSASLRH9Zaq9VK47tQp5Jb3B2S26QNTvSInOIx/exec';
+  var LANG = 'en';
+
+  var $=function(id){return document.getElementById(id);};
+  var form=$('yhChkForm'), btn=$('yhChkBtn'), msg=$('yhChkMsg'), res=$('yhChkRes');
+  if(!form) return;
+  var last=null;
+
+  var STATUS={paid:'Paid',none:'Not paid yet',deposit:'Awaiting bank transfer',check:'Under review',cancel:'Cancelled'};
+  var TYPE={'개인':'Individual','단체':'Group'};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function api(body){
+    body.lang=LANG;
+    return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();});
+  }
+  function showMsg(t){ msg.textContent=t; msg.classList.add('on'); res.classList.remove('on'); }
+  var cur=null, full=null;
+  function row(k,v,opt){
+    opt=opt||{};
+    if(!v){
+      if(opt.addr) return '<dt>'+k+'</dt><dd><span class="al">No address on file</span></dd>';
+      if(opt.open) return '<dt>'+k+'</dt><dd><span class="al">Not on file</span></dd>';
+      return '';
+    }
+    return '<dt>'+k+'</dt><dd>'+esc(v)+'</dd>';
+  }
+  /* 국가번호 포함 국제 번호 기준: 숫자 8~15자리가 아니면 확인 요청 */
+  function oddPhone(v){ var d=String(v||'').replace(/\D/g,''); return !!v && (d.length<8 || d.length>15); }
+  var ODD='<span class="al s">This number looks too short or too long. Please check it.</span>';
+  function phoneRow(k,v,on){
+    if(!on) return row(k,v);
+    if(!v) return '<dt>'+k+'</dt><dd><span class="al">No number on file</span></dd>';
+    return '<dt>'+k+'</dt><dd>'+esc(v)+(oddPhone(v)?ODD:'')+'</dd>';
+  }
+  function emgRow(f){
+    var n=f.emgName||'', ph=f.emgPhone||'';
+    if(!n&&!ph) return '<dt>Emergency contact</dt><dd><span class="al">No emergency contact on file</span></dd>';
+    return '<dt>Emergency contact</dt><dd>'+esc(n||'(no name)')+' '+(ph?esc(ph)+(oddPhone(ph)?ODD:''):'<span class="al s">No emergency contact number</span>')+'</dd>';
+  }
+  var HOWTO='<details><summary>Where do I find my order number?</summary><ul>'
+    +'<li>Log in → MYPAGE → Order History: the <b>order number (15 digits)</b> of your order.</li>'
+    +'<li>Group participants: please get the order number from the group representative who paid.</li>'
+    +'<li>It is different from your registration number (YHITF-…).</li></ul></details>';
+  function render(d){
+    var a=d.app, h='', opened=full?full.people.reduce(function(m,x){m[x.idx]=x;return m;},{}):{};
+    var ks={}, canAny=false;
+    d.people.forEach(function(p){ks[p.state]=1; if(p.canUnlock) canAny=true;});
+    var other=[]; d.people.forEach(function(p){ (p.paidElsewhere||[]).forEach(function(n){ if(other.indexOf(n)<0) other.push(n); }); });
+    if(other.length){
+      h+='<p class="warn">Another registration under the same name has already been paid: <b>'+other.map(esc).join(', ')+'</b><br>The paid registration is the valid one; this unpaid registration will not be processed. Please look up the number above.</p>';
+      ks.none=ks.deposit=ks.cancel=0;
+    }
+    if(ks.none) h+='<p class="warn">Payment has not been completed yet. Your registration is complete once you pay on the <a href="/registration">Registration page</a>, and then all details can be viewed. It may take 5–10 minutes after payment to appear.</p>';
+    if(ks.deposit) h+='<p class="warn">We have not confirmed your bank transfer yet. The status will change to Paid once it is confirmed (this may take some time).</p>';
+    if(ks.check) h+='<p class="warn">We are reviewing your payment. If you have questions, please contact us via MYPAGE &gt; Support.</p>';
+    var live=d.people.filter(function(p){return p.state!=='cancel';}).length;
+    if(ks.cancel && !live) h+='<p class="warn">This registration has been cancelled. To take part, please register again on the <a href="/registration">Registration page</a>.</p>';
+    else if(ks.cancel) h+='<p class="warn">Some participants have been cancelled (shown in grey). The other participants\' registrations remain valid.</p>';
+    h+='<div class="sum"><p>Registration No.<b>'+esc(a.appNo)+'</b></p><p>Entry type<b>'+esc(TYPE[a.type]||a.type||'-')+'</b></p>';
+    if(a.group) h+='<p>Group<b>'+esc(a.group)+'</b></p>';
+    if(d.scope==='group') h+='<p>Participants<b>'+live+(live<a.count?' <small>('+(a.count-live)+' cancelled)</small>':'')+'</b></p>';
+    if(full) h+='<p>Order No.<b>'+esc(full.orderNo)+'</b></p>';
+    h+='</div>';
+    if(full){
+      h+='<div class="lock done"><div><p class="lt">Verified · Showing all details</p>'
+        +'<p class="ld">If anything is wrong, please send your registration number and the correct details via MYPAGE &gt; Support by 18:00 KST, Fri, Nov 27, 2026.</p></div>'
+        +'<button type="button" id="yhChkHide">Hide again</button></div>';
+    } else if(canAny){
+      h+='<div class="lock"><p class="lt">Contact details and date of birth are hidden</p>'
+        +'<p class="ld">Enter your order number to verify it\'s you and see your phone number, emergency contact, date of birth and address in full.</p>'
+        +'<form id="yhChkUnlock" novalidate><input id="yhChkOrder" inputmode="numeric" autocomplete="off" maxlength="24" placeholder="15-digit order number (e.g. 202610081234567)" aria-label="Order number">'
+        +'<button type="submit">Show all</button></form><p class="out" role="status"></p>'+HOWTO+'</div>';
+    }
+    d.people.forEach(function(p){
+      var f=opened[p.idx], on=!!f;
+      h+='<div class="card"><div class="top"><p class="crs">'+esc(p.course||'-')+'<small>'+esc(p.name)+'</small></p>'
+        +((p.paidElsewhere||[]).length?'<span class="badge off">Paid under another registration</span>':'<span class="badge'+(p.paid?'':(p.state==='cancel'?' off':' wait'))+'">'+esc(STATUS[p.state]||p.status)+'</span>')+'</div><dl>'
+        +row('Race date',p.date)+row('Registered',p.appliedAt)+row('Gender',p.gender)
+        +row('Date of birth',on?f.birth:p.birth,{open:on})
+        +phoneRow('Phone',on?f.phone:p.phone,on)
+        +row('T-shirt',p.shirt)
+        +(on?emgRow(f):row('Emergency contact',p.emergency))
+        +(p.state!=='cancel'&&!(d.scope==='group'&&!(on?f.address:p.address))?row('Address',on?f.address:p.address,{addr:true}):'')  /* 단체는 대표자 주소만 받으므로 빈 참가자 주소는 숨김 */
+        +'</dl>'
+        +(full&&!on&&p.state!=='cancel'?'<p class="other">'+(p.canUnlock?'Hidden because this participant was paid under a different order number.':'Hidden because payment has not been completed.')+'</p>':'')
+        +'</div>';
+    });
+    res.innerHTML=h; res.classList.add('on'); msg.classList.remove('on');
+
+    var hide=$('yhChkHide');
+    if(hide) hide.addEventListener('click',function(){ full=null; render(cur); });
+    var uf=$('yhChkUnlock');
+    if(uf){
+      var inp=$('yhChkOrder'), ub=uf.querySelector('button'), out=uf.parentNode.querySelector('.out');
+      inp.addEventListener('input',function(){ this.value=this.value.replace(/[^\d\-\s]/g,''); out.textContent=''; });
+      uf.addEventListener('submit',function(e){
+        e.preventDefault();
+        var v=inp.value.replace(/\D/g,'');
+        if(v.length<10){ out.innerHTML='<span class="al">Please enter the order number in digits. (It is different from your registration number YHITF-…)</span>'; return; }
+        ub.disabled=true; ub.textContent='Checking…';
+        api({action:'unlock',appNo:last.appNo,name:last.name,orderNo:v})
+          .then(function(r){ if(r&&r.ok){ full=r; render(cur); } else { out.innerHTML='<span class="al">'+esc((r&&r.message)||'Verification failed.')+'</span>'; } })
+          .catch(function(){ out.innerHTML='<span class="al">We can\'t verify right now. Please try again in a moment.</span>'; })
+          .then(function(){ if(document.body.contains(ub)){ ub.disabled=false; ub.textContent='Show all'; } });
+      });
+    }
+  }
+
+  $('yhChkApp').addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var appNo=$('yhChkApp').value.trim(), name=$('yhChkName').value.trim();
+    var isOrd=!/[A-Z]/i.test(appNo) && appNo.replace(/\D/g,'').length>=10;
+    if(isOrd) appNo=appNo.replace(/\D/g,'');
+    else if(!/^(YHITF-?)?E?[PG]-?\d{1,6}$/i.test(appNo.replace(/\s/g,''))){ showMsg('Please enter your registration number (e.g. YHITF-EP-000123) or your 15-digit order number.'); return; }
+    if(!name){ showMsg('Please enter your name.'); return; }
+    btn.disabled=true; btn.textContent='Looking up…';
+    api({appNo:appNo,name:name})
+      .then(function(d){ if(d&&d.ok){ last={appNo:d.app.appNo,name:name}; cur=d; full=d.unlocked||null; render(d); } else showMsg((d&&d.message)||'Lookup failed. Please try again in a moment.'); })
+      .catch(function(){ showMsg('We can\'t look this up right now. Please try again in a moment.'); })
+      .then(function(){ btn.disabled=false; btn.textContent='Look up'; });
+  });
+
+  /* MYPAGE에서 넘어온 주문번호 자동 입력 (국문과 같은 키) */
+  try{
+    var no=sessionStorage.getItem('YHITF_ENTRY_ORDER')||''; sessionStorage.removeItem('YHITF_ENTRY_ORDER');
+    if(/^\d{12,20}$/.test(no)){ $('yhChkApp').value=no; $('yhChkName').focus(); }
+  }catch(e){}
+})();
+</script>
