@@ -1,0 +1,461 @@
+<!-- 2026 YHITF · ENTRY GUIDE (EN) — 국문 가이드 v8(라이브, 2026-10-15) 기반 영문판 · 아임웹 코드 위젯 1개 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700;62..125,800;62..125,900&display=swap">
+<style>
+#yh-g7{--blue:#002ACF;--orange:#FF6D07;--ink:#212121;--sub:#666666;--mute:#999999;--line:#eaeaea;--bg:#f6f6f6;--otint:#FFF3EA;--btint:#EEF2FF;
+  --m:clamp(20px,4.4vw,72px);--ease:cubic-bezier(.16,1,.3,1);
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;color:var(--ink);
+  word-break:keep-all;-webkit-font-smoothing:antialiased;line-height:1.6;background:#fff}
+/* 아임웹 섹션 폭을 벗어나 화면 전체 폭으로 */
+#yh-g7{width:var(--yhvw,100vw);margin-left:calc(50% - var(--yhvw,100vw) / 2);position:relative}
+html{overflow-x:clip}
+#yh-g7 *{box-sizing:border-box;margin:0;padding:0}
+#yh-g7 a{color:inherit;text-decoration:none}
+#yh-g7 .gbtn{border:0;background:none;text-shadow:none;box-shadow:none;margin:0;font-family:inherit;letter-spacing:normal;text-transform:none}
+#yh-g7 .gbtn.o{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+#yh-g7 .gpanel{background:transparent;border:0;box-shadow:none;margin-bottom:0;border-radius:0}
+#yh-g7 button.tab{border:0;box-shadow:none;outline-offset:2px}
+#yh-g7 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+#yh-g7 .wrap{max-width:1200px;margin:0 auto;padding:0 var(--m)}
+#yh-g7 .en{font-family:Archivo,Pretendard,sans-serif;font-stretch:62%;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:.88}
+#yh-g7 h2.t{font-size:clamp(34px,5vw,68px);font-weight:900;letter-spacing:-.045em;line-height:1.14}
+#yh-g7 .gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:60px;padding:0 34px;border-radius:999px;font-size:17px;font-weight:700;line-height:1;white-space:nowrap;transition:transform .35s var(--ease)}
+#yh-g7 .gbtn:hover{transform:translateY(-3px)}
+#yh-g7 .gbtn.w{background:#fff;color:var(--ink)}
+#yh-g7 .gbtn.b{background:var(--blue);color:#fff}
+#yh-g7 .gbtn.o{box-shadow:inset 0 0 0 1.5px currentColor}
+#yh-g7 .note{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:14px;font-weight:700;line-height:1.5}
+#yh-g7 .note:before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--orange);transform:translateY(-1px)}
+#yh-g7 .phb{background:#eaeaea;color:#666;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:700;line-height:1.5;padding:16px}
+#yh-g7 .phb small{display:block;font-weight:500;color:#999;margin-top:4px}
+
+/* 1 HOOK — 무슨 행사인지 먼저 */
+#yh-g7 .hook{position:relative;min-height:min(94vh,900px);display:flex;align-items:flex-end;color:#fff;background:#111;overflow:hidden}
+#yh-g7 .hook>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:yhG7Zoom 18s ease-out both}
+#yh-g7 .hook>img.m{display:none}
+@keyframes yhG7Zoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+@media (max-width:760px){#yh-g7 .hook>img.pc{display:none}#yh-g7 .hook>img.m{display:block}}
+@media (prefers-reduced-motion:reduce){#yh-g7 .hook>img{animation:none}}
+#yh-g7 .start{position:relative;overflow:hidden}
+#yh-g7 .start>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#yh-g7 .start:before{content:'';position:absolute;inset:0;z-index:1;background:rgba(17,17,17,.62);pointer-events:none}
+#yh-g7 .start>*:not(video){position:relative;z-index:2}
+#yh-g7 .hook:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.1) 75%),linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.6));pointer-events:none}
+#yh-g7 .hook .inner{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:clamp(80px,10vw,120px) var(--m) clamp(52px,7vw,96px)}
+#yh-g7 .hook .eb{font-size:clamp(17px,1.8vw,24px);font-weight:800;letter-spacing:-.03em;line-height:1.35}
+#yh-g7 br.mb{display:none}
+#yh-g7 .hook .id em,#yh-g7 .hook .eb em{font-style:normal;color:var(--orange)}
+#yh-g7 .hook h1{margin-top:14px;font-size:clamp(64px,9vw,148px)}
+#yh-g7 .dot{display:inline-block;width:.17em;height:.17em;border-radius:50%;background:var(--orange);margin-left:.05em;vertical-align:baseline}
+#yh-g7 .hook .id{margin-top:clamp(18px,2.4vw,28px);font-size:clamp(24px,3vw,40px);font-weight:900;letter-spacing:-.045em;line-height:1.25}
+#yh-g7 .hook .dt{margin-top:8px;display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
+#yh-g7 .hook .dt .en{font-size:clamp(26px,3.2vw,46px);line-height:1}
+#yh-g7 .hook .dt sup{font-family:Archivo,Pretendard,sans-serif;font-stretch:62%;font-weight:900;font-size:clamp(14px,1.3vw,18px);color:var(--orange);line-height:1;vertical-align:baseline;position:static}
+#yh-g7 .hook .loc{margin-top:clamp(22px,2.6vw,30px);font-size:clamp(26px,3.2vw,46px);font-weight:900;letter-spacing:-.045em;line-height:1.15}
+#yh-g7 .hook .bs{margin-top:clamp(26px,3.2vw,40px);display:flex;gap:12px;flex-wrap:wrap}
+
+/* 2 CHOOSE — 처음부터 5KM, 탭에서 바로 비교 */
+#yh-g7 .choose{padding:clamp(88px,11vw,150px) 0 clamp(72px,9vw,120px);background:var(--blue);color:#fff;transition:background .6s var(--ease),color .6s var(--ease)}
+#yh-g7 .choose.trail{background:var(--orange);color:var(--ink)}
+#yh-g7 .choose .eb{font-size:clamp(16px,1.5vw,20px);font-weight:800;letter-spacing:-.02em;color:#fff}
+#yh-g7 .choose .eb em{font-style:normal;color:var(--orange)}
+#yh-g7 .choose.trail .eb em{color:var(--ink)}
+#yh-g7 .choose h2.t{margin-top:8px}
+#yh-g7 .tabs{margin-top:clamp(28px,4vw,44px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1vw,14px)}
+#yh-g7 .tab{text-align:left;padding:clamp(16px,1.8vw,22px) clamp(16px,1.8vw,24px);border-radius:22px;background:rgba(255,255,255,.14);transition:background .45s var(--ease),color .45s var(--ease),transform .35s var(--ease)}
+#yh-g7 .choose.trail .tab{background:rgba(255,255,255,.3)}
+#yh-g7 .tab:hover{transform:translateY(-4px)}
+#yh-g7 .tab .en{display:block;font-size:clamp(52px,7.4vw,120px)}
+#yh-g7 .tab .en small{font-size:.36em;margin-left:.04em}
+#yh-g7 .tab .k{display:block;margin-top:10px;font-size:clamp(13px,1.2vw,15px);font-weight:900;letter-spacing:.03em}
+#yh-g7 .tab[aria-selected="true"]{background:#fff !important;color:var(--ink)}
+#yh-g7 .choose:not(.trail) .tab[aria-selected="true"] .k{color:var(--blue)}
+#yh-g7 .choose.trail .tab[aria-selected="true"] .k{color:var(--orange)}
+#yh-g7 .gpanel{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-areas:'info map' 'go prof';grid-template-rows:auto auto;row-gap:clamp(18px,2.4vw,28px);column-gap:clamp(24px,5vw,80px);align-items:start}
+#yh-g7 .gpanel .info{grid-area:info}
+#yh-g7 .gpanel .prof{grid-area:prof;align-self:start;text-align:center}
+#yh-g7 .gpanel .map{grid-area:map;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.18)}
+#yh-g7 .gpanel .go{grid-area:go;justify-self:start;align-self:start;margin-top:0}
+#yh-g7 .gpanel.flat .prof{display:none}
+#yh-g7 .gpanel .prof svg{margin-top:0}
+#yh-g7 .gpanel .nm{font-size:clamp(64px,8vw,120px)}
+#yh-g7 .gpanel .ty{margin-top:10px;font-size:clamp(18px,1.8vw,24px);font-weight:900}
+#yh-g7 .gpanel dl{margin-top:clamp(16px,2vw,24px);display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:16px}
+#yh-g7 .gpanel dt{opacity:.7}
+#yh-g7 .gpanel dd{font-weight:800}
+#yh-g7 .gpanel .rq{margin-top:12px;font-size:14px;font-weight:700}
+#yh-g7 .gpanel .go{margin-top:clamp(20px,2.4vw,28px)}
+#yh-g7 .choose:not(.trail) .gpanel .go .gbtn{background:#fff;color:var(--blue)}
+#yh-g7 .choose.trail .gpanel .go .gbtn{background:var(--ink);color:#fff}
+#yh-g7 .choose .note:before{background:currentColor}
+#yh-g7 .gpanel svg{display:block;width:100%;height:auto;margin-top:clamp(22px,2.6vw,30px)}
+#yh-g7 .gpanel .gx{margin-top:8px;font-size:13px;font-weight:600;opacity:.75;text-align:center}
+#yh-g7 .gpanel .prof{width:100%;max-width:640px;justify-self:center;margin-left:auto;margin-right:auto}
+#yh-g7 .gpanel .prof svg{width:100%;height:auto;overflow:visible}
+#yh-g7 .gpanel .prof text{font-family:inherit;font-size:11px;font-weight:600;fill:currentColor;opacity:.7}
+#yh-g7 .gpanel .ct{margin-top:4px;font-size:13px;font-weight:600;line-height:1.6;opacity:.75;text-align:center}
+#yh-g7 .gpanel .ct:empty{display:none}
+#yh-g7 .gpanel .hd{display:flex;align-items:center;gap:clamp(14px,2vw,24px)}
+#yh-g7 .gpanel .rc{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+#yh-g7 .gpanel .rc:empty{display:none}
+#yh-g7 .gpanel .rc .lg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:112px;min-height:46px;padding:10px 12px;border-radius:12px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1;white-space:nowrap}
+#yh-g7 .gpanel .rc img{height:24px;width:auto;display:block}
+
+/* 3 MORE — 한국어 정보가 주인공, 사진 역할을 다르게 */
+#yh-g7 .more{padding:clamp(96px,12vw,170px) 0 0}
+#yh-g7 h2.t.big{font-size:clamp(48px,7.4vw,108px);line-height:1.08}
+#yh-g7 .kg{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+#yh-g7 .kc{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/4;color:#fff;background:#2b2b2b}
+#yh-g7 .kc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+#yh-g7 .kc:hover img{transform:scale(1.05)}
+#yh-g7 .kc .phb{position:absolute;inset:0;background:#2b2b2b;color:#999;justify-content:flex-start;padding-top:26px}
+#yh-g7 .kc .phb small{color:#777}
+#yh-g7 .kc:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.78));pointer-events:none}
+#yh-g7 .kc .tx{position:absolute;left:0;right:0;bottom:0;z-index:1;text-shadow:0 1px 14px rgba(0,0,0,.45);padding:clamp(18px,2.2vw,26px)}
+#yh-g7 .kc>.en{position:absolute;left:clamp(18px,2.2vw,26px);top:clamp(18px,2.2vw,26px);z-index:2;font-size:clamp(30px,2.8vw,42px);letter-spacing:0;line-height:.9;color:var(--orange)}
+#yh-g7 .kc:before{content:'';position:absolute;inset:0 0 auto 0;height:28%;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0));z-index:1;pointer-events:none}
+#yh-g7 .kc b{display:block;margin-top:6px;font-size:clamp(20px,1.75vw,28px);font-weight:900;letter-spacing:-.04em;line-height:1.25}
+#yh-g7 .kc p{margin-top:8px;font-size:15px;font-weight:600;line-height:1.5;opacity:.88}
+#yh-g7 .kc .tag{display:inline-block;margin-top:10px;padding:5px 10px;border-radius:10px;background:var(--orange);color:var(--ink);font-size:12px;font-weight:800;line-height:1.3}
+#yh-g7 .kc .tag.w{background:#fff;letter-spacing:.04em}
+#yh-g7 .kc p.lb{margin:0;font-size:15px;font-weight:800;opacity:1;color:var(--orange)}
+#yh-g7 .kc b em{font-style:normal;color:var(--orange)}
+#yh-g7 .kc p.lb+b{margin-top:2px}
+#yh-g7 .mg{margin-top:14px;display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+#yh-g7 .mg .pv{position:relative;border-radius:24px;overflow:hidden;min-height:clamp(340px,36vw,500px);color:#fff;background:#111}
+#yh-g7 .mg .pv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#yh-g7 .mg .pv:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.7))}
+#yh-g7 .mg .pv .tx{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(24px,3vw,36px)}
+#yh-g7 .mg .pv .en{font-size:clamp(56px,6.4vw,96px)}
+#yh-g7 .mg .pv p{margin-top:12px;font-size:18px;font-weight:800}
+#yh-g7 .mg .pv small{display:block;margin-top:8px;font-size:11px;opacity:.7}
+#yh-g7 .mg .pz{border-radius:24px;background:var(--ink);color:#fff;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column}
+#yh-g7 .mg .pz h3{font-size:clamp(22px,2.2vw,28px);font-weight:900;letter-spacing:-.03em;line-height:1.3}
+#yh-g7 .mg .pz ul{margin-top:auto;list-style:none;display:grid;gap:clamp(10px,1.4vw,16px);padding-top:28px}
+#yh-g7 .mg .pz li{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+#yh-g7 .mg .pz li .en{font-size:clamp(28px,3vw,40px);color:var(--orange)}
+#yh-g7 .mg .pz li b{font-size:clamp(36px,4.2vw,60px);font-weight:900;letter-spacing:-.05em;line-height:1}
+#yh-g7 .mg .pz li b small{font-size:.42em;margin-left:2px}
+
+/* 4 HOW — 세 단계 한눈에, 화면은 보조 */
+#yh-g7 .how{padding-top:clamp(96px,12vw,170px)}
+#yh-g7 .steps{margin-top:clamp(28px,4vw,44px);list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+#yh-g7 .steps li{border-radius:22px;background:var(--bg);padding:clamp(22px,2.6vw,32px)}
+#yh-g7 .steps .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-size:15px;font-weight:800}
+#yh-g7 .steps h3{margin-top:14px;font-size:clamp(24px,2.4vw,30px);font-weight:900;letter-spacing:-.04em;line-height:1.25}
+#yh-g7 .steps p{margin-top:6px;font-size:16px;color:var(--sub);line-height:1.6}
+#yh-g7 .steps li.fin{background:var(--ink);color:#fff}
+#yh-g7 .steps li.fin .n{background:var(--orange);color:var(--ink)}
+#yh-g7 .steps li.fin p{color:rgba(255,255,255,.75)}
+#yh-g7 .chk{margin-top:14px;border-radius:24px;background:#fff;padding:clamp(24px,3vw,40px) 0;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:clamp(20px,3.4vw,48px);align-items:center}
+#yh-g7 .chk .shot{border-radius:28px;background:#111;padding:7px;box-shadow:0 16px 32px rgba(0,0,0,.12)}
+#yh-g7 .chk .shot img,#yh-g7 .shots img{display:block;width:100%;height:auto;border-radius:21px}
+#yh-g7 .chk .k{font-size:15px;font-weight:800;color:var(--blue)}
+#yh-g7 .chk h3{margin-top:6px;font-size:clamp(24px,2.6vw,34px);font-weight:900;letter-spacing:-.04em;line-height:1.3}
+#yh-g7 .chk .zoom{margin-top:18px;border-radius:18px;background:#fff;padding:18px 22px;box-shadow:0 0 0 2px var(--blue) inset}
+#yh-g7 .chk .zoom small{display:block;font-size:13px;font-weight:700;color:var(--sub)}
+#yh-g7 .chk .zoom b{display:block;margin-top:4px;font-family:Archivo,Pretendard,sans-serif;font-stretch:80%;font-weight:900;font-size:clamp(26px,3.2vw,40px);letter-spacing:.02em;color:var(--blue);line-height:1.1}
+#yh-g7 .chk p{margin-top:14px;font-size:15px;color:var(--sub);line-height:1.6}
+#yh-g7 details.scr{margin-top:14px;border-radius:22px;background:var(--bg);padding:0 clamp(22px,2.6vw,32px)}
+#yh-g7 details.scr summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;height:64px;font-size:16px;font-weight:800}
+#yh-g7 details.scr summary::-webkit-details-marker{display:none}
+#yh-g7 details.scr summary:after{content:'+';font-size:22px;color:var(--blue)}
+#yh-g7 details.scr[open] summary:after{content:'−'}
+#yh-g7 .shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding-bottom:clamp(22px,2.6vw,32px)}
+#yh-g7 .shots figure{max-width:260px;width:100%;margin:0 auto}
+#yh-g7 .shots figure .ph{border-radius:28px;background:#111;padding:7px}
+#yh-g7 .shots figcaption{margin-top:14px;text-align:center;font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+#yh-g7 .shots figcaption span{color:var(--blue);margin-right:6px}
+#yh-g7 .warn{margin-top:14px;border-radius:24px;background:var(--otint);padding:clamp(22px,2.8vw,34px) clamp(22px,2.8vw,34px) clamp(22px,2.8vw,34px) clamp(60px,6vw,80px);position:relative}
+#yh-g7 .warn svg{position:absolute;left:clamp(22px,2.6vw,32px);top:clamp(22px,2.8vw,34px);width:clamp(26px,2.6vw,32px);height:auto}
+#yh-g7 .warn b{display:block;font-size:clamp(18px,1.9vw,24px);font-weight:900;letter-spacing:-.035em;line-height:1.4}
+#yh-g7 .warn ul{margin-top:12px;list-style:none;display:grid;gap:6px}
+#yh-g7 .warn li{position:relative;padding-left:14px;font-size:15px;font-weight:600;line-height:1.6}
+#yh-g7 .warn li:before{content:'';position:absolute;left:0;top:.7em;width:5px;height:5px;border-radius:50%;background:var(--ink)}
+#yh-g7 .warn a{text-decoration:underline;text-underline-offset:3px}
+
+/* 5 START */
+#yh-g7 .start{margin-top:clamp(96px,12vw,170px);background:var(--ink);color:#fff;text-align:center;padding:clamp(88px,11vw,160px) var(--m)}
+#yh-g7 .start h2{font-size:clamp(96px,15vw,230px);line-height:.86}
+#yh-g7 .start p.ko{margin-top:clamp(18px,2.4vw,28px);font-size:clamp(22px,2.8vw,36px);font-weight:900;letter-spacing:-.045em;line-height:1.35}
+#yh-g7 .start .bs{margin-top:34px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+#yh-g7 .rv{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .9s var(--ease)}
+#yh-g7 .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){#yh-g7 .rv{opacity:1;transform:none;transition:none}#yh-g7 .choose{transition:none}}
+
+@media (max-width:1024px){#yh-g7 .kg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  /* 모바일: 1.2장 보이는 가로 스와이프 */
+  #yh-g7 .kg{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-left:calc(-1 * var(--m));margin-right:calc(-1 * var(--m));padding:0 var(--m) 4px;scroll-padding:0 var(--m);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  #yh-g7 .kg::-webkit-scrollbar{display:none}
+  #yh-g7 .kc{flex:none;width:78%;scroll-snap-align:start}
+}
+@media (max-width:900px){
+  #yh-g7 .gpanel{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:'info' 'map' 'prof' 'go'}
+  #yh-g7 .gpanel .go{justify-self:stretch;margin-top:clamp(20px,2.4vw,28px)}
+  /* 모바일: 종목 정보 → 고도 → 지도 → 종목 탭 → 버튼 */
+  #yh-g7 .cw{display:flex;flex-direction:column}
+  #yh-g7 .cw .gpanel{display:contents}
+  #yh-g7 .cw .eb{order:0}#yh-g7 .cw h2{order:1}
+  #yh-g7 .cw .info{order:2;margin-top:clamp(24px,5vw,36px)}
+  #yh-g7 .cw .prof{order:3;text-align:center}
+  #yh-g7 .cw .map{order:4;margin-top:clamp(22px,5vw,30px)}
+  #yh-g7 .cw .tabs{order:5;margin-top:clamp(22px,5vw,30px)}
+  #yh-g7 .cw .go{order:6;align-self:stretch}
+  #yh-g7 .cw .go .gbtn{width:100%}
+  #yh-g7 .gpanel .prof{margin-top:clamp(22px,4vw,30px)}
+  #yh-g7 .gpanel .gx,#yh-g7 .gpanel .ct{font-size:12px}
+  #yh-g7 .mg{grid-template-columns:1fr}
+  #yh-g7 .steps{grid-template-columns:1fr;gap:10px}
+  #yh-g7 .steps li{display:grid;grid-template-columns:34px 1fr;column-gap:14px;align-items:start;padding:20px}
+  #yh-g7 .steps h3{margin-top:2px;font-size:22px}
+  #yh-g7 .steps p{grid-column:2;margin-top:2px;font-size:15px}
+  #yh-g7 .chk{grid-template-columns:1fr}
+  #yh-g7 .chk>div:last-child{text-align:center}
+  #yh-g7 .chk .zoom{text-align:left}
+  #yh-g7 .chk .shot{max-width:220px;width:100%;margin:0 auto}
+  #yh-g7 .shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 calc(-1 * clamp(22px,2.6vw,32px));padding:0 clamp(22px,2.6vw,32px) 22px;-webkit-overflow-scrolling:touch}
+  #yh-g7 .shots figure{flex:none;width:62%;scroll-snap-align:center}
+  }
+@media (max-width:560px){
+  #yh-g7 .gbtn{width:100%}
+  #yh-g7 br.mb{display:inline}
+  #yh-g7 .hook .bs,#yh-g7 .start .bs{flex-direction:column}
+  /* 첫 화면 모바일 글자 위계 */
+  #yh-g7 .hook .eb{font-size:13px;font-weight:700}
+  #yh-g7 .hook h1{font-size:clamp(52px,14.5vw,58px)}
+  #yh-g7 .hook .id{font-size:21px;font-weight:800;margin-top:16px}
+  #yh-g7 .hook .loc{font-size:15px;font-weight:600;margin-top:18px;letter-spacing:-.02em}
+  #yh-g7 .hook .dt .en{font-size:19px}
+  #yh-g7 .hook .dt sup{font-size:12px;font-weight:600}
+  #yh-g7 .hook .bs .gbtn{font-size:15px;height:54px}
+    #yh-g7 .tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  #yh-g7 .tab{border-radius:14px;padding:12px 8px 12px;text-align:center}
+  #yh-g7 .tab .en{font-size:clamp(28px,8.6vw,40px)}
+  #yh-g7 .tab .k{font-size:clamp(8px,2.3vw,11px);margin-top:6px;letter-spacing:0}
+  #yh-g7 .kc{border-radius:20px}
+  #yh-g7 .kc .tx{padding:18px}
+}
+
+/* 레이아웃 v8: PC 트레일 = 고저도 좌측(정보 아래) · 버튼 지도 아래 우측 / 모바일 = 제목 다음 코스 탭 */
+@media (min-width:901px){
+#yh-g7 .gpanel:not(.flat){grid-template-areas:'info map' 'prof map' 'prof go' 'prof .';grid-template-rows:auto auto auto 1fr}
+#yh-g7 .gpanel:not(.flat) .prof{align-self:start;justify-self:stretch;max-width:none;margin:0}
+#yh-g7 .gpanel:not(.flat) .go{justify-self:end;align-self:start;margin-top:0}
+}
+@media (max-width:900px){
+#yh-g7 .cw .tabs{order:2}
+#yh-g7 .cw .info{order:3}
+#yh-g7 .cw .prof{order:4}
+#yh-g7 .cw .map{order:5}
+}
+</style>
+
+<div id="yh-g7">
+
+  <section class="hook">
+    <img class="pc" src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/openpc.jpg" alt="" fetchpriority="high"><img class="m" src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/openm.jpg" alt="">
+    <div class="inner">
+      <p class="eb rv">2026 Yonhap News Hanam International Trail Run Festival</p>
+      <h1 class="en rv">More than<br>running<span class="dot"></span></h1>
+      <p class="id rv">This December, in Hanam,<br class="mb"> Korea's <em>running capital</em>.</p>
+      <p class="loc rv">Misa Regatta Park &amp; across Hanam City</p>
+      <div class="dt rv"><span class="en">2026. 12. 12. (SAT) – 13. (SUN)</span><sup>*11 (FRI) EXPO</sup></div>
+      <div class="bs rv">
+        <a class="gbtn w" href="#yhG7Choose">Preview the race ↓</a>
+        <a class="gbtn o" href="/registration">Register now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="choose" id="yhG7Choose">
+    <div class="wrap cw">
+      <p class="eb rv">A first in Korea! A new K-sports festival<br class="mb"> of <em>running &amp; trail running</em></p>
+      <h2 class="t rv">Which race is yours?</h2>
+      <div class="tabs rv" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-k="5"><span class="en">5<small>KM</small></span><span class="k">RUNNING</span></button>
+        <button class="tab" role="tab" aria-selected="false" data-k="10"><span class="en">10<small>KM</small></span><span class="k">RUNNING</span></button>
+        <button class="tab" role="tab" aria-selected="false" data-k="15"><span class="en">15<small>KM</small></span><span class="k">TRAIL RUN</span></button>
+        <button class="tab" role="tab" aria-selected="false" data-k="28"><span class="en">28<small>KM</small></span><span class="k">TRAIL RUN</span></button>
+      </div>
+      <div class="gpanel" role="tabpanel" aria-live="polite">
+        <div class="info">
+          <div class="hd"><div class="nm en" id="yhG7Nm">5KM</div><div class="rc" id="yhG7Rc"></div></div>
+          <div class="ty" id="yhG7Ty">RUNNING</div>
+          <dl id="yhG7Dl"></dl>
+          <p class="rq" id="yhG7Rq"></p>
+        </div>
+        <div class="map" id="yhG7Map" aria-label="Course map"></div>
+        <div class="prof">
+          <svg id="yhG7Sv" aria-label="Elevation profile"></svg>
+          <div class="gx" id="yhG7Gx"></div>
+          <p class="ct" id="yhG7Ct"></p>
+        </div>
+        <div class="go"><a class="gbtn" id="yhG7Go" href="/registration">Register for 5KM →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="more">
+    <div class="wrap">
+      <h2 class="t big rv">More than<br>running<span style="color:var(--orange)">.</span></h2>
+      <div class="kg">
+        <div class="kc rv"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/hwang.jpg" alt="Hwang Young-cho"><span class="en">K-Running</span><div class="tx"><p class="lb">Participant perk</p><b>Running class with<br>Olympic champion<br>Hwang Young-cho — draw!</b><span class="tag">Entries close in Oct · Class details in Nov</span></div></div>
+        <div class="kc rv"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/kpop.jpg" alt=""><span class="en">K-Pop</span><div class="tx"><b>Celebration show by<br>top <em>K&#8209;stars</em>!</b><span class="tag w">LINE-UP COMING SOON</span></div></div>
+        <div class="kc rv"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/expo2.jpg" alt=""><span class="en">Expo</span><div class="tx"><b>Running &amp; Sports Expo</b><p>Fri, Dec 11 · Hands-on zones · Official merch store</p></div></div>
+        <div class="kc rv"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/kfood.jpg" alt=""><span class="en">K-Food</span><div class="tx"><b>Taste of Hanam</b><p>Food &amp; drinks from local shops and young entrepreneurs</p></div></div>
+      </div>
+      <div class="mg">
+        <div class="pv rv"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/pv5.jpg" alt=""><div class="tx"><span class="en">Lucky Draw</span><p>Grand prize: Kia PV5 camper van</p><small>*Image for illustration only; the actual prize may differ.</small></div></div>
+        <div class="pz rv"><h3>Prize money for<br>1st place (men &amp; women)</h3>
+          <ul><li><span class="en">5KM</span><b><small>KRW </small>200K</b></li><li><span class="en">10KM</span><b><small>KRW </small>300K</b></li><li><span class="en">15KM</span><b><small>KRW </small>1M</b></li><li><span class="en">28KM</span><b><small>KRW </small>2M</b></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="wrap">
+      <h2 class="t rv">How to<br>register</h2>
+      <ol class="steps">
+        <li class="rv"><span class="n">1</span><h3>Sign in</h3><p>Sign up or log in to the website.</p></li>
+        <li class="rv"><span class="n">2</span><h3>Fill out the form</h3><p>Complete the registration form.</p></li>
+        <li class="fin rv"><span class="n">3</span><h3>Pay · Order complete</h3><p>After paying, make sure you reach the order complete page.</p></li>
+      </ol>
+
+      <div class="chk rv" style="grid-template-columns:minmax(0,1fr)">
+        <div>
+                    <h3>Your registration is complete<br>once the entry fee is paid.</h3>
+          <div class="zoom"><small>Order number</small><b>202610140000000</b></div>
+          <p>You can also find your order number in MYPAGE &gt; Order History, and use it to look up your registration on <a href="/check-my-entry" style="text-decoration:underline;text-underline-offset:3px">Check My Entry</a>.</p>
+        </div>
+      </div>
+
+
+      <div class="warn rv">
+        <svg viewBox="0 0 32 28" aria-hidden="true"><path d="M16 1.5 31 27H1z" fill="#FF6D07"/><rect x="14.6" y="9.5" width="2.8" height="9.5" rx="1.4" fill="#212121"/><circle cx="16" cy="22.4" r="1.7" fill="#212121"/></svg>
+        <b>After paying, make sure you reach the order complete page.</b>
+        <ul>
+          <li>Filling out the registration form alone, without an order number (202610000000000), does not count as a completed registration.</li>
+          <li>Be sure to check your registration details on <a href="/check-my-entry">Check My Entry</a>. Applicants are responsible for any problems caused by incorrect information.</li>
+          <li>It may take 5–10 minutes after payment for your registration to appear.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="start">
+    <video id="yhG7Vid" data-pc="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/hero_pc.mp4" data-m="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/hero_m.mp4" data-ppc="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/poster.jpg" data-pm="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/posterm.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+    <h2 class="en rv">Start<br>your<br>race<span class="dot"></span></h2>
+    <p class="ko rv">More than running.<br>This December, in Hanam!</p>
+    <div class="bs rv"><a class="gbtn b" id="yhG7Start" href="/registration">Register →</a><a class="gbtn o" href="/check-my-entry">Check My Entry</a></div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('yh-g7'); if(!root) return;
+  try{ sessionStorage.setItem('YHITF_GUIDE_SEEN','1'); }catch(e){}  /* EN 사이트는 도메인이 달라 국문과 따로 저장됨 */
+  var fitW=function(){ var cw=document.documentElement.clientWidth; root.style.setProperty('--yhvw',cw+'px'); root.style.marginLeft='0px'; var l=root.getBoundingClientRect().left; root.style.marginLeft=(-l)+'px'; }; fitW(); window.addEventListener('resize',fitW); window.addEventListener('load',fitW);
+  var $=function(id){return document.getElementById(id);};
+  var P={"5":{"km":5.17,"gain":8,"max":22,"p":[14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,18,18,18,18,18,19,19,19,19,19,19,19,19,19,19,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22]},"10":{"km":9.97,"gain":7,"max":21,"p":[14,14,14,14,14,14,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,16,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,18,18,19,19,19,19,19,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,21,21,21,21,21,21,21,21,21,21,20,19,18,18,18,18,18,18,18,18,18,18,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,16,16,16,16,15,15,15,15,15,15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,13,13,13,13,13]},"15":{"km":14.52,"gain":779,"max":664,"p":[14,15,23,23,23,23,27,20,19,20,20,20,20,20,21,21,22,20,20,19,18,18,18,24,24,26,28,27,28,28,30,34,35,35,36,36,36,36,35,40,53,77,109,132,158,183,205,221,236,255,263,266,270,287,292,310,336,362,386,414,460,482,493,519,551,577,583,584,573,581,587,606,628,648,660,659,664,647,617,576,538,519,500,483,464,448,431,422,412,396,372,349,339,322,299,278,258,241,221,202,188,173,158,145,135,128,123,118,116,104,94,93,82,76,68,61,57,50,41,40,40,42,43,39,40,38,39,38,39,39,36,29,26,24,24,26,26,24,28,29,29,29,30,28,27,27,26,26,25,25,26,25,22,20,32,32,33,33,29,24,23]},"28":{"km":28.08,"gain":1357,"max":508,"p":[12,16,19,21,21,22,22,23,24,24,25,25,26,27,27,27,28,29,30,31,33,34,35,35,35,35,39,45,59,102,124,134,142,177,178,201,198,210,202,203,231,268,288,265,254,234,207,201,223,250,232,232,208,203,231,232,258,276,298,323,348,356,374,402,410,429,459,478,480,500,496,500,503,497,450,434,422,401,408,399,380,403,410,405,419,459,465,437,432,411,371,348,336,304,320,308,299,318,303,291,302,324,303,267,284,241,217,232,236,202,183,188,144,129,103,128,143,192,216,198,181,164,162,164,135,86,98,117,104,110,120,120,87,85,82,81,89,70,54,46,41,41,39,38,37,36,35,35,30,30,29,29,28,27,26,25,25,21,19,15,12]}};
+  var C={
+    '5':{nm:'5KM',ty:'RUNNING',run:true,dl:[['Date','Sat, Dec 12'],['Start','10:00 (wave start)'],['Bib','On-site pickup'],['Entry fee','USD 22.02']],rq:'No age limit'},
+    '10':{nm:'10KM',ty:'RUNNING',run:true,dl:[['Date','Sat, Dec 12 or Sun, Dec 13'],['Start','10:00'],['Bib','On-site pickup'],['Entry fee','USD 36.71']],rq:'No age limit'},
+    '15':{nm:'15KM',ty:'TRAIL RUN',run:false,dl:[['Date','Sat, Dec 12'],['Start','10:00 (wave start)'],['Bib','On-site pickup · mandatory gear check'],['Entry fee','USD 58.73']],rq:'Age 18+ on race day · Mandatory gear required',utmb:1,ct:'Time limit: 4 hours | No intermediate cut-off',up:'+829m',dn:'-828m'},
+    '28':{nm:'28KM',ty:'TRAIL RUN',run:false,dl:[['Date','Sun, Dec 13'],['Start','08:00'],['Bib','On-site pickup · mandatory gear check'],['Entry fee','USD 73.41']],rq:'Age 18+ on race day · Mandatory gear required',utmb:1,itra:'1',ct:'Time limit: 7 hours 30 minutes | Cut-off at CP2: 4 hours 30 minutes',up:'+1,208m',dn:'-1,209m'}
+  };
+  /* 오프닝 영상: PC 가로 / 모바일 세로 */
+  (function(){
+    var v=$('yhG7Vid'); if(!v) return;
+    var mq=window.matchMedia('(max-width:760px)'), cur='';
+    function set(){
+      var k=mq.matches?'m':'pc'; if(k===cur) return; cur=k;
+      v.poster=v.getAttribute(k==='m'?'data-pm':'data-ppc');
+      v.src=v.getAttribute('data-'+k); v.muted=true;
+      var p=v.play(); if(p&&p.catch) p.catch(function(){});
+    }
+    var go=function(){ set(); if(mq.addEventListener) mq.addEventListener('change',set); else if(mq.addListener) mq.addListener(set); };
+    if('IntersectionObserver' in window){ var vo=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ vo.disconnect(); go(); } },{rootMargin:'600px 0px'}); vo.observe(v); } else go();
+  })();
+
+  /* 코스 지도 (메인 섹션과 같은 경로·스타일) */
+  var ROUTES={"5":[[37.5517,127.21568],[37.55175,127.21609],[37.55242,127.21708],[37.55466,127.21476],[37.55634,127.21308],[37.55879,127.21045],[37.56121,127.20786],[37.56279,127.20617],[37.56381,127.20507],[37.5656,127.20316],[37.56905,127.19943],[37.56828,127.19831],[37.56798,127.19817],[37.56625,127.19904],[37.56541,127.19968],[37.56459,127.2006],[37.56372,127.20196],[37.55961,127.20639],[37.55899,127.20707],[37.55739,127.20872],[37.5568,127.20889],[37.5546,127.2112],[37.55368,127.21219],[37.55192,127.2141],[37.55184,127.21432],[37.55169,127.21564]],"10":[[37.5517,127.21585],[37.55176,127.21611],[37.55233,127.21704],[37.55244,127.21705],[37.55277,127.21675],[37.55469,127.21472],[37.55637,127.21304],[37.55884,127.2104],[37.56119,127.20788],[37.56281,127.20616],[37.56381,127.20508],[37.56562,127.20314],[37.569,127.19952],[37.56905,127.19935],[37.56831,127.19826],[37.56796,127.19811],[37.56643,127.1989],[37.56537,127.19968],[37.5646,127.20054],[37.56367,127.20203],[37.5581,127.20805],[37.55739,127.20875],[37.55682,127.20889],[37.55653,127.20912],[37.55456,127.21116],[37.55297,127.21287],[37.55235,127.2136],[37.55235,127.21417],[37.5524,127.21426],[37.55251,127.21435],[37.55286,127.21435],[37.55298,127.21427],[37.55526,127.21184],[37.55716,127.20979],[37.56528,127.20107],[37.56794,127.19819],[37.56826,127.19828],[37.5689,127.19925],[37.5685,127.19975],[37.56541,127.20298],[37.5638,127.2047],[37.56235,127.20624],[37.55873,127.21012],[37.5562,127.21284],[37.55472,127.21442],[37.5536,127.21562],[37.55352,127.21596],[37.55271,127.2168],[37.55244,127.21704],[37.55233,127.21704],[37.55176,127.21611],[37.5517,127.21585]],"15":[[37.55183,127.21637],[37.55248,127.21721],[37.55259,127.21762],[37.55068,127.21821],[37.55016,127.21827],[37.54971,127.21813],[37.54955,127.2183],[37.54914,127.21823],[37.54915,127.2184],[37.54892,127.2185],[37.54875,127.21886],[37.54872,127.21913],[37.54932,127.21981],[37.54953,127.22108],[37.54914,127.22267],[37.54862,127.22364],[37.54864,127.22451],[37.54813,127.22564],[37.54752,127.22645],[37.54683,127.22853],[37.54588,127.23029],[37.54514,127.23198],[37.54482,127.23236],[37.54406,127.23234],[37.54391,127.23265],[37.54391,127.23285],[37.54447,127.23368],[37.54445,127.23408],[37.54418,127.23472],[37.54421,127.23503],[37.54402,127.23552],[37.54379,127.23554],[37.54334,127.23676],[37.543,127.23708],[37.54241,127.23848],[37.54224,127.23796],[37.54189,127.23788],[37.54149,127.23746],[37.54124,127.23649],[37.54066,127.23583],[37.54,127.23434],[37.53885,127.23326],[37.53833,127.23304],[37.53798,127.2333],[37.53794,127.23363],[37.53768,127.23381],[37.53729,127.23445],[37.53748,127.23511],[37.5374,127.23522],[37.53744,127.23584],[37.53683,127.23613],[37.53658,127.23713],[37.53627,127.23729],[37.53567,127.23863],[37.53578,127.23998],[37.53545,127.24052],[37.53501,127.24089],[37.53425,127.24187],[37.53407,127.24269],[37.53321,127.24332],[37.53299,127.24361],[37.53299,127.24387],[37.53272,127.24392],[37.53206,127.24445],[37.53155,127.24438],[37.53052,127.24499],[37.52992,127.24553],[37.52955,127.24628],[37.52902,127.24652],[37.52907,127.24663],[37.52885,127.2467],[37.52858,127.24705],[37.52802,127.24715],[37.52742,127.24772],[37.52723,127.24763],[37.52697,127.248],[37.52673,127.24805],[37.52665,127.24833],[37.52612,127.24868],[37.52593,127.24863],[37.52581,127.24881],[37.52564,127.24871],[37.52534,127.24814],[37.52528,127.24823],[37.5249,127.24795],[37.52376,127.24767],[37.52282,127.24805],[37.52221,127.2481],[37.52171,127.24838],[37.5212,127.24834],[37.52088,127.24811],[37.52006,127.24833],[37.51964,127.24823],[37.51879,127.24871],[37.5185,127.24872],[37.51764,127.2495],[37.51692,127.2488],[37.51694,127.24851],[37.51718,127.24853],[37.51753,127.24805],[37.51756,127.24739],[37.51771,127.24727],[37.51769,127.24713],[37.51809,127.24673],[37.51874,127.2455],[37.51906,127.24531],[37.51939,127.24487],[37.51946,127.24442],[37.51994,127.24347],[37.52048,127.24399],[37.52064,127.24433],[37.52118,127.24454],[37.52143,127.24433],[37.52191,127.24439],[37.52232,127.24412],[37.52221,127.24387],[37.5219,127.244],[37.5219,127.24377],[37.52293,127.24235],[37.52208,127.2426],[37.52203,127.24242],[37.52226,127.24209],[37.52441,127.2401],[37.5247,127.23968],[37.52534,127.23932],[37.52546,127.23907],[37.52624,127.23834],[37.52682,127.23819],[37.52722,127.23764],[37.52768,127.23742],[37.52781,127.23708],[37.52862,127.23636],[37.52899,127.23582],[37.52915,127.2358],[37.52933,127.23614],[37.52955,127.23621],[37.53019,127.2358],[37.53047,127.23605],[37.53088,127.23611],[37.53104,127.23649],[37.53119,127.23643],[37.53141,127.23574],[37.53179,127.2353],[37.53227,127.2351],[37.53281,127.23437],[37.53364,127.23423],[37.53407,127.23372],[37.53474,127.23246],[37.53646,127.2301],[37.53683,127.22905],[37.53731,127.22951],[37.53789,127.23102],[37.53816,127.23287],[37.53886,127.23323],[37.54,127.23434],[37.54068,127.23582],[37.54131,127.23659],[37.54145,127.23734],[37.54193,127.2379],[37.54223,127.23798],[37.54243,127.23851],[37.543,127.23707],[37.54333,127.23675],[37.54379,127.23551],[37.54397,127.23548],[37.54421,127.23491],[37.54417,127.23466],[37.54444,127.23377],[37.54386,127.23271],[37.54409,127.23232],[37.54447,127.2323],[37.54514,127.23005],[37.54552,127.22919],[37.54577,127.22803],[37.5462,127.2277],[37.54702,127.22517],[37.54717,127.22437],[37.54881,127.21953],[37.54891,127.21943],[37.54922,127.2195],[37.54953,127.21921],[37.54919,127.21875],[37.54929,127.21829],[37.54967,127.21814],[37.55067,127.2182],[37.5526,127.2176],[37.55174,127.21621],[37.55171,127.21583]],"28":[[37.5517,127.21581],[37.55169,127.21611],[37.55241,127.21713],[37.5526,127.21759],[37.55027,127.21825],[37.5497,127.21815],[37.54909,127.21826],[37.54915,127.21837],[37.54892,127.21851],[37.54869,127.21894],[37.54736,127.21766],[37.54671,127.21731],[37.54411,127.21694],[37.5416,127.21691],[37.54042,127.21709],[37.53958,127.21693],[37.53862,127.2162],[37.53784,127.21541],[37.53718,127.21424],[37.53688,127.21322],[37.53656,127.21038],[37.53605,127.20887],[37.53532,127.20582],[37.53502,127.20507],[37.53275,127.20274],[37.53085,127.20194],[37.53085,127.20208],[37.53131,127.20238],[37.53123,127.20437],[37.53102,127.20463],[37.5304,127.20459],[37.53015,127.20474],[37.53005,127.20685],[37.5301,127.20737],[37.53066,127.20746],[37.53075,127.20758],[37.53079,127.20893],[37.53101,127.20963],[37.53091,127.21321],[37.53053,127.21483],[37.53013,127.21529],[37.52967,127.21524],[37.52951,127.21568],[37.529,127.21552],[37.5281,127.21594],[37.52775,127.21593],[37.52759,127.21572],[37.52722,127.21565],[37.52663,127.21505],[37.52576,127.21379],[37.52505,127.21382],[37.52472,127.21355],[37.52471,127.21341],[37.52438,127.2133],[37.52335,127.21327],[37.52319,127.21313],[37.52262,127.21321],[37.52145,127.2125],[37.52088,127.21257],[37.52062,127.21283],[37.51987,127.21315],[37.51922,127.21299],[37.51888,127.21258],[37.5184,127.2125],[37.51784,127.21294],[37.5172,127.21283],[37.51671,127.21315],[37.51643,127.21312],[37.516,127.21335],[37.51512,127.21342],[37.5138,127.2132],[37.51344,127.21378],[37.51341,127.2134],[37.51366,127.21223],[37.51345,127.21158],[37.5125,127.21231],[37.51189,127.2124],[37.51152,127.21331],[37.51107,127.2137],[37.51029,127.21337],[37.50996,127.21338],[37.50978,127.21364],[37.50964,127.21429],[37.50915,127.21502],[37.50878,127.21515],[37.50836,127.21554],[37.50773,127.21551],[37.50754,127.21579],[37.50707,127.21594],[37.50652,127.21551],[37.50593,127.21567],[37.50569,127.21605],[37.50523,127.21612],[37.50424,127.21562],[37.50398,127.2144],[37.50356,127.21401],[37.50331,127.21349],[37.50327,127.21263],[37.50279,127.21226],[37.50216,127.21114],[37.50177,127.20955],[37.50195,127.20893],[37.50167,127.2084],[37.50167,127.20799],[37.50064,127.20707],[37.49987,127.20672],[37.49966,127.20632],[37.4994,127.20613],[37.49888,127.20639],[37.49826,127.20628],[37.49775,127.20645],[37.49755,127.20617],[37.49709,127.20625],[37.49649,127.20593],[37.49542,127.20681],[37.49495,127.20634],[37.49491,127.20538],[37.49463,127.20489],[37.49444,127.20476],[37.49418,127.2042],[37.49389,127.20412],[37.4937,127.20388],[37.49302,127.20382],[37.49272,127.20411],[37.49229,127.20411],[37.49187,127.20464],[37.49107,127.20476],[37.48979,127.20416],[37.48915,127.20406],[37.48866,127.20428],[37.4883,127.20395],[37.4882,127.20369],[37.48774,127.20355],[37.48765,127.20336],[37.48737,127.20323],[37.48701,127.20329],[37.48666,127.20365],[37.48634,127.20362],[37.48573,127.20293],[37.48525,127.2029],[37.48504,127.20254],[37.48457,127.20269],[37.48299,127.20233],[37.48245,127.20265],[37.48173,127.20228],[37.48137,127.20232],[37.48117,127.20197],[37.48087,127.20184],[37.48054,127.20118],[37.48041,127.2],[37.48005,127.19942],[37.47974,127.19807],[37.47993,127.19694],[37.47988,127.19657],[37.48018,127.19601],[37.48053,127.19601],[37.48072,127.1958],[37.48078,127.19551],[37.48069,127.19519],[37.48099,127.19465],[37.48133,127.19346],[37.48132,127.1932],[37.48071,127.19221],[37.48064,127.19023],[37.48028,127.18915],[37.48031,127.18829],[37.48099,127.18726],[37.48067,127.18682],[37.48068,127.18651],[37.48099,127.18586],[37.48101,127.18549],[37.48166,127.18473],[37.48264,127.18443],[37.4837,127.18352],[37.48363,127.183],[37.48388,127.18255],[37.48419,127.18121],[37.48409,127.18085],[37.48467,127.17976],[37.48477,127.1787],[37.48513,127.17838],[37.48532,127.17793],[37.48555,127.17775],[37.48568,127.17795],[37.48651,127.17821],[37.48674,127.17777],[37.48733,127.1776],[37.48756,127.17725],[37.48795,127.17705],[37.4881,127.17671],[37.48855,127.1766],[37.48887,127.17635],[37.48959,127.17642],[37.49025,127.17668],[37.49089,127.17633],[37.49193,127.17614],[37.49278,127.17633],[37.49333,127.17629],[37.49434,127.17578],[37.49516,127.17614],[37.49632,127.17608],[37.49689,127.17588],[37.49732,127.17604],[37.49755,127.17586],[37.49779,127.17537],[37.49838,127.17539],[37.4989,127.17498],[37.4993,127.17497],[37.49971,127.17513],[37.50071,127.17618],[37.50106,127.17628],[37.50239,127.17725],[37.50302,127.17707],[37.50332,127.1773],[37.50368,127.17722],[37.50396,127.17732],[37.50402,127.17754],[37.50474,127.17829],[37.50496,127.17879],[37.50533,127.17891],[37.50596,127.1796],[37.50619,127.17948],[37.50663,127.18],[37.50681,127.18001],[37.50742,127.18055],[37.50751,127.18049],[37.50743,127.18001],[37.50754,127.17987],[37.50817,127.18051],[37.50979,127.18053],[37.51048,127.18121],[37.51065,127.18102],[37.51077,127.18116],[37.51106,127.18108],[37.51131,127.18125],[37.51143,127.18115],[37.51161,127.18125],[37.51185,127.18089],[37.51229,127.18089],[37.51264,127.18128],[37.51282,127.18089],[37.51342,127.18021],[37.51443,127.18052],[37.51463,127.18034],[37.51524,127.18026],[37.51614,127.17957],[37.51626,127.1793],[37.51687,127.17879],[37.51765,127.17887],[37.51839,127.1786],[37.51893,127.17899],[37.51941,127.17849],[37.51967,127.17848],[37.51985,127.17827],[37.52051,127.17817],[37.52117,127.17822],[37.52157,127.17872],[37.52186,127.17859],[37.52202,127.17867],[37.52206,127.1781],[37.52262,127.178],[37.52304,127.17875],[37.52311,127.17917],[37.52361,127.17951],[37.52378,127.18052],[37.52399,127.18058],[37.5242,127.18093],[37.52466,127.1813],[37.52558,127.18166],[37.52585,127.18215],[37.52643,127.18215],[37.52695,127.18238],[37.52716,127.18284],[37.52735,127.18288],[37.52746,127.1834],[37.52737,127.18417],[37.52772,127.18491],[37.52807,127.18505],[37.5281,127.18526],[37.52836,127.18552],[37.52886,127.18579],[37.52924,127.18619],[37.53039,127.18667],[37.53127,127.1881],[37.53141,127.18876],[37.53178,127.18951],[37.53199,127.18959],[37.53252,127.18944],[37.53313,127.18902],[37.53321,127.18934],[37.53343,127.18928],[37.53324,127.18971],[37.53411,127.1904],[37.53406,127.19101],[37.53478,127.19139],[37.53533,127.19116],[37.53582,127.19138],[37.53609,127.19125],[37.53699,127.1914],[37.53738,127.19125],[37.5379,127.19132],[37.53822,127.19115],[37.5386,127.19122],[37.53915,127.19163],[37.5401,127.19337],[37.5407,127.19416],[37.54099,127.19546],[37.53982,127.1951],[37.53944,127.19555],[37.53911,127.19557],[37.53865,127.19673],[37.53808,127.19699],[37.53778,127.19785],[37.53728,127.19791],[37.53669,127.19836],[37.53617,127.19851],[37.53552,127.1984],[37.53511,127.19804],[37.53464,127.19847],[37.53467,127.19894],[37.53436,127.19901],[37.53407,127.19888],[37.53364,127.19835],[37.53316,127.19838],[37.53289,127.19804],[37.53279,127.19806],[37.53261,127.19834],[37.53261,127.19937],[37.53221,127.20076],[37.5322,127.20126],[37.53248,127.2021],[37.53312,127.20241],[37.53511,127.20466],[37.53548,127.20536],[37.53626,127.20805],[37.53634,127.2088],[37.53654,127.20909],[37.53702,127.21075],[37.53722,127.21247],[37.53722,127.21341],[37.53752,127.21429],[37.53784,127.21478],[37.53918,127.2162],[37.53988,127.21676],[37.54081,127.21677],[37.54157,127.21658],[37.54515,127.21671],[37.54718,127.21719],[37.54876,127.21851],[37.54918,127.21837],[37.5491,127.21827],[37.5497,127.21818],[37.5504,127.21827],[37.55262,127.21761],[37.55243,127.21712],[37.55171,127.21609],[37.55171,127.21582]]};
+  var CPS={'15':[[37.538441,127.232986,'CP']],'28':[[37.530673,127.214377,'CP1'],[37.485941,127.178144,'CP2'],[37.534689,127.198704,'CP3']]};
+  var gmap=null, lays=[], wantK='5';
+  function drawMap(k){
+    wantK=k; if(!gmap||!window.google) return;
+    var G=google.maps; lays.forEach(function(l){ l.setMap(null); }); lays=[];
+    var path=(ROUTES[k]||[]).map(function(p){ return {lat:p[0],lng:p[1]}; }); if(!path.length) return;
+    lays.push(new G.Polyline({path:path,strokeColor:'#FFFFFF',strokeOpacity:1,strokeWeight:9,map:gmap}));
+    lays.push(new G.Polyline({path:path,strokeColor:'#002ACF',strokeOpacity:1,strokeWeight:5,map:gmap}));
+    var dot=function(pos,fill){ return new G.Marker({position:pos,map:gmap,icon:{path:G.SymbolPath.CIRCLE,scale:7,fillColor:fill,fillOpacity:1,strokeColor:'#FFFFFF',strokeWeight:3}}); };
+    lays.push(dot(path[0],'#FF6D07')); lays.push(dot(path[path.length-1],'#002ACF'));
+    (CPS[k]||[]).forEach(function(c){ lays.push(new G.Marker({position:{lat:c[0],lng:c[1]},map:gmap,zIndex:5,label:{text:c[2],color:'#002ACF',fontSize:'9px',fontWeight:'800'},icon:{path:G.SymbolPath.CIRCLE,scale:12,fillColor:'#FFFFFF',fillOpacity:1,strokeColor:'#002ACF',strokeWeight:2}})); });
+    var b=new G.LatLngBounds(); path.forEach(function(p){ b.extend(p); }); gmap.fitBounds(b,40);
+  }
+  window.yhG7MapInit=function(){
+    var el=$('yhG7Map'); if(!el||gmap) return;
+    gmap=new google.maps.Map(el,{center:{lat:37.553,lng:127.214},zoom:13,mapTypeId:google.maps.MapTypeId.TERRAIN,streetViewControl:false,mapTypeControl:false,fullscreenControl:false,rotateControl:false,zoomControl:true,clickableIcons:false,gestureHandling:'cooperative'});
+    drawMap(wantK);
+  };
+  (function(){
+    var el=$('yhG7Map'); if(!el) return;
+    var load=function(){
+      if(window.google&&google.maps&&google.maps.Map){ window.yhG7MapInit(); return; }
+      var sc=document.createElement('script'); sc.async=true;
+      sc.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyDBkSXWQLfOGT9F0qG93SRHzvcPAgSg&language=en&region=KR&callback=yhG7MapInit';
+      document.head.appendChild(sc);
+    };
+    if('IntersectionObserver' in window){ var mo=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ mo.disconnect(); load(); } },{rootMargin:'400px 0px'}); mo.observe(el); } else load();
+  })();
+
+  var sec=root.querySelector('.choose'), tabs=root.querySelectorAll('.tab'), curK='5';
+  /* 고도 그래프: 실제 픽셀 크기로 그려서 글자 크기 유지 (가로선 100m · 세로 km 눈금) */
+  function drawProf(anim){
+    var p=P[curK], sv=$('yhG7Sv'); if(!p||!sv||C[curK].run) return;
+    var W=Math.round(sv.parentNode.clientWidth)||600, H=Math.max(150,Math.min(210,Math.round(W*.32)));
+    var L=40,R=14,T=10,B=24, w=W-L-R, h=H-T-B;
+    var top=Math.ceil(p.max/100)*100, st=top>500?100:100, n=p.p.length;
+    var X=function(km){ return L+km/p.km*w; }, Y=function(m){ return T+h-m/top*h; };
+    var g='', i, v;
+    for(v=0;v<=top;v+=st){ var y=Y(v).toFixed(1); g+='<line x1="'+L+'" x2="'+(L+w)+'" y1="'+y+'" y2="'+y+'" stroke="currentColor" stroke-opacity="'+(v?'.18':'.45')+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+y+'" text-anchor="end" dominant-baseline="middle">'+v+'</text>'; }
+    var kst=p.km>20?4:2, by=(T+h+16).toFixed(1);
+    for(v=0;X(p.km)-X(v)>48;v+=kst){ g+='<line x1="'+X(v).toFixed(1)+'" x2="'+X(v).toFixed(1)+'" y1="'+(T+h)+'" y2="'+(T+h+4)+'" stroke="currentColor" stroke-opacity=".45"/><text x="'+X(v).toFixed(1)+'" y="'+by+'" text-anchor="middle">'+v+'</text>'; }
+    g+='<text x="'+(L+w)+'" y="'+by+'" text-anchor="end">'+p.km+' km</text>';
+    var d='';
+    for(i=0;i<n;i++){ d+=(i?'L':'M')+X(i/(n-1)*p.km).toFixed(1)+','+Y(p.p[i]).toFixed(1); }
+    g+='<defs><clipPath id="yhG7Clip"><rect id="yhG7ClipR" x="0" y="0" width="'+(anim?0:W)+'" height="'+H+'"/></clipPath></defs><g clip-path="url(#yhG7Clip)"><path d="'+d+'L'+(L+w)+','+(T+h)+'L'+L+','+(T+h)+'Z" fill="currentColor" fill-opacity=".16"/>';
+    g+='<path d="'+d+'" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></g>';
+    sv.setAttribute('viewBox','0 0 '+W+' '+H); sv.setAttribute('width',W); sv.setAttribute('height',H); sv.innerHTML=g;
+ if(anim){ cancelAnimationFrame(window.__yhG7Raf); var cr=document.getElementById('yhG7ClipR'), t0=null; var st=function(ts){ if(!t0) t0=ts; var p=Math.min(1,(ts-t0)/950); cr.setAttribute('width',W*(1-Math.pow(1-p,4))); if(p<1) window.__yhG7Raf=requestAnimationFrame(st); }; window.__yhG7Raf=requestAnimationFrame(st); }
+  }
+  var rzT=null; window.addEventListener('resize',function(){ clearTimeout(rzT); rzT=setTimeout(function(){drawProf(false);},150); });
+  function pick(k){
+    var c=C[k], p=P[k], href='/registration?course='+encodeURIComponent(c.nm);
+    sec.classList.toggle('trail',!c.run); root.querySelector('.gpanel').classList.toggle('flat',c.run);
+    [].forEach.call(tabs,function(t){ t.setAttribute('aria-selected', t.getAttribute('data-k')===k?'true':'false'); });
+    $('yhG7Nm').textContent=c.nm; $('yhG7Ty').textContent=c.ty;
+    curK=k; drawProf(true);
+    drawMap(k);
+    $('yhG7Gx').textContent=c.up?('Elevation gain: '+c.up+' / Loss: '+c.dn):'';
+    $('yhG7Dl').innerHTML=c.dl.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>';}).join('');
+    $('yhG7Rc').innerHTML=(c.utmb?'<span class="lg"><img src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/utmb.png" alt="UTMB Index 20K"></span>':'')+(c.itra?'<span class="lg"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDAwcHQiIGhlaWdodD0iMTUwLjI1cHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDQwMCAxNTAuMjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8ZGVmcz4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDQ0M2gyOC40MDZ2MTQyaC0yOC40MDZ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDQ1MmgyMy40MDZ2MTI4aC0yMy40MDZ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDQ2M2gxOC40MDZ2MTEwaC0xOC40MDZ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDQ4M2g0LjQwNjJ2NjVoLTQuNDA2MnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgNTU5aDMuNDA2MnY0aC0zLjQwNjJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0xMyAwLjMyMDMxaDM2NHY1OTQuOTZoLTM2NHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTU0NSAwLjMyMDMxaDUxNC40MXYzNjAuNjhoLTUxNC40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTI0NSAwLjMyMDMxaDI4OHY1OTQuOTZoLTI4OHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTUwMCAwLjMyMDMxaDgzdjU5NC45NmgtODN6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMzUzLjQxdjMzOC42OGgtMzUzLjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDM2NS40MXYzNjkuNjhoLTM2NS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgyNDUuNDF2MzAxLjY4aC0yNDUuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMjM2LjQxdjI4Ny42OGgtMjM2LjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAyNjRoMi40MDYydjZoLTIuNDA2MnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTIyMyAwLjMyMDMxaDR2Mi42Nzk3aC00eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDIxNC40MXYyNDcuNjhoLTIxNC40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgyMDIuNDF2MjMwLjY4aC0yMDIuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMTg5LjQxdjIxNS42OGgtMTg5LjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDE3NS40MXYyMDIuNjhoLTE3NS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTE1MiAwLjMyMDMxaDExdjEwLjY4aC0xMXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMTc5aDcuNDA2MnYxMGgtNy40MDYyeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDE1MS40MXYxNzUuNjhoLTE1MS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgxNDAuNDF2MTYzLjY4aC0xNDAuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMTMwLjQxdjE1Mi42OGgtMTMwLjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDEyMS40MXYxNDMuNjhoLTEyMS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgxMTIuNDF2MTM0LjY4aC0xMTIuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im05OCAwLjMyMDMxaDZ2Ni42Nzk3aC02eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDk0LjQwNnYxMTguNjhoLTk0LjQwNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWg4Mi40MDZ2MTEwLjY4aC04Mi40MDZ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoNzEuNDA2djEwMS42OGgtNzEuNDA2eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDU5LjQwNnY5MS42OGgtNTkuNDA2eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtNDMgMC4zMjAzMWg2djUuNjc5N2gtNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgzNy40MDZ2NjUuNjhoLTM3LjQwNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgyNi40MDZ2NDYuNjhoLTI2LjQwNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgxNi40MDZ2MjguNjhoLTE2LjQwNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWg2LjQwNjJ2MTAuNjhoLTYuNDA2MnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTEwMzQgNDM5aDI1LjQxdjMyaC0yNS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTEwNTcgMzY0aDIuNDEwMnYzaC0yLjQxMDJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01NTYgMC4zMjAzMWgydjIuNjc5N2gtMnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTM3MCAwLjMyMDMxaDN2Mi42Nzk3aC0zeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMzc4IDAuMzIwMzFoM3YyLjY3OTdoLTN6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01MjQgMC4zMjAzMWgzdjEuNjc5N2gtM3oiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTEwNTggMzMwaDEuNDEwMnYzaC0xLjQxMDJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01NzAgMC4zMjAzMWgydjIuNjc5N2gtMnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTQwNyA1ODVoOHYxMC4yNzdoLTh6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01MzggMC4zMjAzMWgzdjIuNjc5N2gtM3oiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTU1MSA1ODZoOXY5LjI3NzNoLTl6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01NDkgMC4zMjAzMWgydjIuNjc5N2gtMnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMzUzaDIuNDA2MnYzaC0yLjQwNjJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0zNTggMC4zMjAzMWg0djIuNjc5N2gtNHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTEwNTggNDA1aDEuNDEwMnYzaC0xLjQxMDJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0xMDU4IDM5MWgxLjQxMDJ2M2gtMS40MTAyeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAzMTdoMi40MDYydjNoLTIuNDA2MnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTI2NSAwLjMyMDMxaDJ2Mi42Nzk3aC0yeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtNTI3IDAuMzIwMzFoNDcxdjU5NC45NmgtNDcxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtNDMgMC4zMjAzMWgzNDN2NTk0Ljk2aC0zNDN6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0zNCAwLjMyMDMxaDM1MHY1OTQuOTZoLTM1MHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTIwIDAuMzIwMzFoMzU5djU5NC45NmgtMzU5eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtOCAwLjMyMDMxaDM2N3Y1OTQuOTZoLTM2N3oiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTIxMiAwLjMyMDMxaDMwOHY1OTQuOTZoLTMwOHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgzNzAuNDF2NTk0Ljk2aC0zNzAuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01NTYgMC4zMjAzMWg1MDMuNDF2MzQ2LjY4aC01MDMuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0yMTkgMC4zMjAzMWgzMDV2NTk0Ljk2aC0zMDV6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0yNjIgMC4zMjAzMWgyNzR2NTk0Ljk2aC0yNzR6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0yMzQgMC4zMjAzMWgyOTZ2NTk0Ljk2aC0yOTZ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01NzYgMC4zMjAzMWg0ODMuNDF2MzE2LjY4aC00ODMuNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0zNjggMC4zMjAzMWgxNzB2NTk0Ljk2aC0xNzB6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im01MTQgMC4zMjAzMWg5NXY1OTQuOTZoLTk1eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDM0Ni40MXYzMjYuNjhoLTM0Ni40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTU4NCAwLjMyMDMxaDQ3NS40MXYyNzMuNjhoLTQ3NS40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTQ3MyAwLjMyMDMxaDk0djU5NC45NmgtOTR6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMzU1LjQxdjM0My42OGgtMzU1LjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDM1MC40MXYzMzIuNjhoLTM1MC40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTg1OCAyMTVoMjAxLjQxdjIxMGgtMjAxLjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDM2OC40MXYzNzkuNjhoLTM2OC40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgMC4zMjAzMWgzNTguNDF2MzQ5LjY4aC0zNTguNDF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0wLjU5Mzc1IDAuMzIwMzFoMzYzLjQxdjM2Mi42OGgtMzYzLjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSAwLjMyMDMxaDI1Ni40MXYzMTIuNjhoLTI1Ni40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTM0MCAwLjMyMDMxaDExMHYxMzIuNjhoLTExMHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTYzMyA1MDRoMTQzdjkxLjI3N2gtMTQzeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMzQ1IDAuMzIwMzFoOTZ2MTIyLjY4aC05NnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTM1MCAwLjMyMDMxaDgzdjExMi42OGgtODN6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGg+CiAgIDxwYXRoIGQ9Im0zNTcgMC4zMjAzMWg2N3YxMDAuNjhoLTY3eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSA0MTdoMzkuNDA2djE3OC4yOGgtMzkuNDA2eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMC41OTM3NSA0MjdoMzUuNDA2djE2NmgtMzUuNDA2eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMjU2IDAuMzIwMzFoODZ2NzguNjhoLTg2eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMTAwNyA0ODFoNTIuNDF2MTAyaC01Mi40MXoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTAuNTkzNzUgNDM1aDMyLjQwNnYxNTRoLTMyLjQwNnoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTk5MSA0MjhoNjguNDF2NjRoLTY4LjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMjc5IDAuMzIwMzFoNTd2NTIuNjhoLTU3eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtODg4IDU4MGg5MHYxNS4yNzdoLTkweiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtNTc0IDU1OGg1OXYzNy4yNzdoLTU5eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtMTU3IDU4N2g0N3Y4LjI3NzNoLTQ3eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoPgogICA8cGF0aCBkPSJtNDg5IDAuMzIwMzFoMjR2NC42Nzk3aC0yNHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aD4KICAgPHBhdGggZD0ibTMwOCAwLjMyMDMxaDE4djEwLjY4aC0xOHoiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aCBpZD0iY2xpcC05NiI+CiAgIDxyZWN0IHdpZHRoPSIxMDYwIiBoZWlnaHQ9IjU5NiIvPgogIDwvY2xpcFBhdGg+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAtOTYpIj48L2c+CiAgPGNsaXBQYXRoIGlkPSJjbGlwLTk3Ij4KICAgPHBhdGggZD0ibTQ5My42NCA0OTQuMDVoNS44MjgxdjE3LjY4aC01LjgyODF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGggaWQ9ImNsaXAtOTgiPgogICA8cGF0aCBkPSJtNTAxLjUyIDQ4Ni41MmgyMC45MTh2NS4zNjMzaC0yMC45MTh6bTcuNTQzIDUuMzYzM2g1LjgzMnYxOS44NGgtNS44MzJ6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGggaWQ9ImNsaXAtOTkiPgogICA8cGF0aCBkPSJtNTI0IDQ4NmgyMXYyNmgtMjF6Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGggaWQ9ImNsaXAtMTAwIj4KICAgPHBhdGggZD0ibTUyNC4zNiA0ODYuNzd2MjQuOTYxaDUuODI4MXYtOC4yNWMwLjgyMDMxIDAuMDMxMiAxLjMwNDcgMC4wNjY0IDIuMTYwMiAwLjA2NjQgMC4zNDM3NSAwIDAuNjUyMzUgMCAwLjk5MjE5LTAuMDM1Mmw0LjI4OTEgOC4yMTg4aDYuNjE3MmwtNS44OTg0LTkuNzMwNWMyLjcxMDktMS42MTcyIDQuMzI0Mi00LjI5NjkgNC4zMjQyLTcuMjg5MSAwLTQuNjA1NS0zLjA4OTgtOC4zNTU1LTEwLjkwNi04LjM1NTUtMi45NTMxIDAtNS4yODEyIDAuMTcxODgtNy40MDYyIDAuNDE0MDZtNS44MjgxIDExLjkzdi02Ljk0NTNjMC44MjAzMS0wLjEzNjcyIDEuMzcxMS0wLjE3MTg4IDIuMjYxNy0wLjE3MTg4IDIuNTAzOSAwIDQuMTQ4NCAxLjIzODMgNC4xNDg0IDMuMzMyIDAgMi41NDY5LTEuNzgxMiAzLjg4NjctNC41NTg2IDMuODg2Ny0wLjY4NzUgMC0xLjA5NzctMC4wMzUxLTEuODUxNi0wLjEwMTU2Ii8+CiAgPC9jbGlwUGF0aD4KICA8Y2xpcFBhdGggaWQ9ImNsaXAtMTAxIj4KICAgPHBhdGggZD0ibTU0MiA0ODZoMjV2MjZoLTI1eiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoIGlkPSJjbGlwLTEwMiI+CiAgIDxwYXRoIGQ9Im01NTQuMzcgNDg2LjMyLTExLjgzMiAyNS40MWg1Ljg4NjdsNi4yODkxLTE1LjA5NCA2LjIwMzEgMTUuMDk0aDYuMDcwM2wtMTEuODI4LTI1LjQxeiIvPgogIDwvY2xpcFBhdGg+CiAgPGNsaXBQYXRoIGlkPSJjbGlwLTEwMyI+CiAgIDxwYXRoIGQ9Im00OTMgNDg0aDd2N2gtN3oiLz4KICA8L2NsaXBQYXRoPgogIDxjbGlwUGF0aCBpZD0iY2xpcC0xMDQiPgogICA8cGF0aCBkPSJtNDkzLjE3IDQ4Ny4zOWMwIDEuODcxMSAxLjUxMTcgMy4zODY3IDMuMzc4OSAzLjM4NjdzMy4zODI4LTEuNTE1NiAzLjM4MjgtMy4zODY3YzAtMS44NzUtMS41MTU2LTMuMzkwNi0zLjM4MjgtMy4zOTA2cy0zLjM3ODkgMS41MTU2LTMuMzc4OSAzLjM5MDYiLz4KICA8L2NsaXBQYXRoPgogPC9kZWZzPgogPGcgZmlsbD0iIzFiMWIxYiI+CiAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoNS40MTkxIDAgMCA1LjQxOTEgLTI2NzIuNiAtMjYyMi45KSIgY2xpcC1wYXRoPSJ1cmwoI2NsaXAtOTcpIj4KICAgPHBhdGggZD0ibTE5OC41NyA2NTMuNDFoNDQ1LjM0di0zMTQuN2gtNDQ1LjM0eiIvPgogICA8cGF0aCBkPSJtNDkwLjk5IDUxNC4zN2gxMS4xMTd2LTIyLjk2OWgtMTEuMTE3eiIvPgogIDwvZz4KICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCg1LjQxOTEgMCAwIDUuNDE5MSAtMjY3Mi42IC0yNjIyLjkpIiBjbGlwLXBhdGg9InVybCgjY2xpcC05OCkiPgogICA8cGF0aCBkPSJtMTk4LjU3IDY1My40MWg0NDUuMzR2LTMxNC43aC00NDUuMzR6Ii8+CiAgIDxwYXRoIGQ9Im00OTguODggNTE0LjM3aDI2LjIwN3YtMzAuNDkyaC0yNi4yMDd6Ii8+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KDUuNDE5MSAwIDAgNS40MTkxIC0yNjcyLjYgLTI2MjIuOSkiIGNsaXAtcGF0aD0idXJsKCNjbGlwLTk5KSI+CiAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLTEwMCkiIGZpbGw9IiMxYjFiMWIiPgogICAgPHBhdGggZD0ibTE5OC41NyA2NTMuNDFoNDQ1LjM0di0zMTQuN2gtNDQ1LjM0eiIvPgogICAgPHBhdGggZD0ibTUyMS43MiA1MTQuMzdoMjUuMTc2di0zMC42NjRoLTI1LjE3NnoiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KIDxnIHRyYW5zZm9ybT0ibWF0cml4KDUuNDE5MSAwIDAgNS40MTkxIC0yNjcyLjYgLTI2MjIuOSkiIGNsaXAtcGF0aD0idXJsKCNjbGlwLTEwMSkiIGZpbGw9IiM5NmM5NTAiPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLTEwMikiIGZpbGw9IiM5NmM5NTAiPgogICA8cGF0aCBkPSJtNTM5Ljg5IDUxNC4zN2gyOS43Mzh2LTMwLjY5OWgtMjkuNzM4eiIgZmlsbD0iIzk2Yzk1MCIvPgogIDwvZz4KIDwvZz4KIDxnIHRyYW5zZm9ybT0ibWF0cml4KDUuNDE5MSAwIDAgNS40MTkxIC0yNjcyLjYgLTI2MjIuOSkiIGNsaXAtcGF0aD0idXJsKCNjbGlwLTEwMykiIGZpbGw9IiM5NmM5NTAiPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLTEwNCkiIGZpbGw9IiM5NmM5NTAiPgogICA8cGF0aCBkPSJtNDkwLjUzIDQ5My40M2gxMi4wNTF2LTEyLjA3aC0xMi4wNTF6IiBmaWxsPSIjOTZjOTUwIi8+CiAgPC9nPgogPC9nPgo8L3N2Zz4K" alt="ITRA"><span>'+c.itra+' POINT</span></span>':'');
+    $('yhG7Rq').textContent=c.rq;
+    $('yhG7Ct').textContent=c.ct||'';
+    $('yhG7Go').textContent='Register for '+c.nm+' →'; $('yhG7Go').href=href;
+    $('yhG7Start').href=href;
+    try{ sessionStorage.setItem('YHITF_PICKED_COURSE',c.nm); }catch(e){}
+  }
+  [].forEach.call(tabs,function(t){ t.addEventListener('click',function(){ pick(t.getAttribute('data-k')); }); });
+  pick('5');
+
+  function hdH(){ var h=document.getElementById('doz_header_wrap'); if(!h) return 0; var r=h.getBoundingClientRect(); return (r.bottom>0 && getComputedStyle(h).position!=='static')?Math.round(r.height):0; }
+  [].forEach.call(root.querySelectorAll('a[href^="#yhG7"]'),function(a){ a.addEventListener('click',function(e){ var t=document.getElementById(a.getAttribute('href').slice(1)); if(!t) return; e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-hdH(),behavior:'smooth'}); }); });
+
+  var els=root.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){ [].forEach.call(els,function(e){e.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }); },{rootMargin:'0px 0px -8% 0px'});
+  [].forEach.call(els,function(e,i){ e.style.transitionDelay=(i%4)*60+'ms'; io.observe(e); });
+})();
+</script>

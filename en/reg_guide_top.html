@@ -1,0 +1,39 @@
+<style>/* YHITF EN: 가이드 이동 여부가 정해질 때까지 본문 숨김 (2026-10-15) — 스크립트가 실패해도 3초 후 자동 표시 */
+@keyframes yhRegShow{to{visibility:visible}}
+html:not(.yh-reg-ok) .section_wrap,html:not(.yh-reg-ok) #doz_footer_wrap{visibility:hidden;animation:yhRegShow 0s linear 3s forwards}
+</style>
+<script>/* YHITF EN: REGISTRATION 첫 방문 시 신청화면을 보여주지 않고 ENTRY GUIDE로 이동 + 가이드에서 고른 코스 미리 선택 (2026-10-15)
+   - 가이드에서 넘어왔거나(?course=… 또는 referrer), 이번 접속에서 가이드를 봤거나, 작성 중(YHITF_ 저장값)이면 그대로 둠
+   - 10KM는 날짜가 2개라 미리 선택하지 않음 */
+(function(){
+  var GUIDE='/entry-guide';
+  function ok(){ try{ document.documentElement.classList.add('yh-reg-ok'); }catch(_){} }
+  var ss=null; try{ ss=window.sessionStorage; }catch(e){}
+  var q; try{ q=new URLSearchParams(location.search); }catch(e){ q={has:function(){return false;},get:function(){return '';}}; }
+  try{
+    if(!/^\/registration\/?$/.test(location.pathname) || !ss){ ok(); }
+    else {
+      var fromGuide=q.has('course') || new RegExp(GUIDE).test(document.referrer||'');
+      if(fromGuide) ss.setItem('YHITF_GUIDE_SEEN','1');
+      var busy=false;
+      for(var i=0;i<ss.length;i++){ var k=ss.key(i); if(/^YHITF_/.test(k) && !/^YHITF_(PICKED_COURSE|GUIDE_SEEN)$/.test(k)){ busy=true; break; } }
+      if(!fromGuide && !busy && !ss.getItem('YHITF_GUIDE_SEEN')){ setTimeout(ok,4000); location.replace(GUIDE); return; }
+      ok();
+    }
+  }catch(e){ ok(); }
+
+  var course=String(q.get('course')||(ss&&ss.getItem('YHITF_PICKED_COURSE'))||'').toUpperCase().replace(/\s/g,'');
+  var MAP={'5KM':'5KM RUNNING||2026.12.12 SAT','15KM':'15KM TRAIL RUN||2026.12.12 SAT','28KM':'28KM TRAIL RUN||2026.12.13 SUN'};
+  var val=MAP[course]; if(!val) return;
+  var tries=0;
+  (function pick(){
+    var sel=document.querySelector('#yhitf-entry select[name="participant_course"]');
+    if(!sel){ if(++tries<60) setTimeout(pick,150); return; }
+    if(sel.value) return;
+    if(![].some.call(sel.options,function(o){ return o.value===val; })) return;
+    sel.value=val;
+    sel.dispatchEvent(new Event('input',{bubbles:true}));
+    sel.dispatchEvent(new Event('change',{bubbles:true}));
+  })();
+})();
+</script>
