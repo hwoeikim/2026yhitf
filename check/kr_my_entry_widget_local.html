@@ -1,0 +1,222 @@
+<!-- 2026 YHITF · 참가정보 확인 v6 (아임웹 코드 위젯 1개에 통째로 붙여넣기) -->
+<style>
+#yh-chk{--blue:#002ACF;--orange:#FF6D07;--ink:#212121;--sub:#666666;--mute:#999999;--line:#eaeaea;--bg:#f6f6f6;--otint:#FFF3EA;--btint:#EEF2FF;
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;color:var(--ink);
+  word-break:keep-all;-webkit-font-smoothing:antialiased;max-width:760px;margin:0 auto;padding:64px 20px 88px;line-height:1.6}
+#yh-chk *{box-sizing:border-box;margin:0;padding:0}
+#yh-chk h2{font-size:clamp(28px,4.4vw,40px);font-weight:900;letter-spacing:-.04em;line-height:1.25;color:var(--ink)}
+#yh-chk .lead{margin-top:10px;font-size:16px;color:var(--sub);line-height:1.6}
+#yh-chk form.q{margin-top:36px;display:grid;grid-template-columns:1.3fr 1fr auto;gap:12px;align-items:end}
+#yh-chk label{display:block;font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;color:var(--ink)}
+#yh-chk input{width:100%;height:56px;border:1px solid #d4d4d4;border-radius:12px;padding:0 18px;font:inherit;font-size:17px;line-height:1.2;color:var(--ink);background:#fff;transition:border-color .2s}
+#yh-chk input::placeholder{color:var(--mute)}
+#yh-chk input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,42,207,.12)}
+#yh-chk .help{margin-top:12px;font-size:14px;color:var(--sub);line-height:1.6}
+#yh-chk button{height:56px;padding:0 30px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:inherit;font-size:16px;font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s}
+#yh-chk button:hover{transform:translateY(-2px)}
+#yh-chk button:disabled{background:var(--mute);cursor:default;transform:none}
+#yh-chk .msg,#yh-chk .warn{position:relative;padding:16px 20px 16px 42px;border-radius:14px;background:var(--otint);color:var(--ink);font-size:15px;font-weight:600;line-height:1.6}
+#yh-chk .msg:before,#yh-chk .warn:before{content:'';position:absolute;left:20px;top:25px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+#yh-chk .msg{display:none;margin-top:24px}
+#yh-chk .msg.on{display:block}
+#yh-chk .warn{margin-bottom:8px}
+#yh-chk .warn a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+#yh-chk .res{display:none;margin-top:48px}
+#yh-chk .res.on{display:block}
+#yh-chk .sum{display:flex;flex-wrap:wrap;gap:10px 28px;padding:10px 0 18px}
+#yh-chk .sum p{font-size:14px;color:var(--mute);line-height:1.5}
+#yh-chk .sum p b{display:block;font-size:18px;color:var(--ink);font-weight:800}
+#yh-chk .sum p b small{font-size:14px;color:var(--sub);font-weight:600}
+#yh-chk .card{margin-top:14px;border-radius:18px;background:var(--bg);padding:28px 24px}
+#yh-chk .card .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#yh-chk .card .crs{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--blue);line-height:1.25}
+#yh-chk .card .crs small{font-size:16px;font-weight:700;color:var(--ink);margin-left:10px;letter-spacing:0}
+#yh-chk .badge{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;line-height:1}
+#yh-chk .badge.wait{background:var(--orange);color:var(--ink)}
+#yh-chk .badge.off{background:var(--line);color:var(--sub)}
+#yh-chk dl{margin-top:18px;display:grid;grid-template-columns:110px 1fr;gap:10px 16px;font-size:15px;line-height:1.5}
+#yh-chk dt{color:var(--mute)}
+#yh-chk dd{font-weight:600;color:var(--ink)}
+#yh-chk .al{display:inline-flex;align-items:baseline;gap:7px;font-weight:700;color:var(--ink)}
+#yh-chk .al:before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--orange);transform:translateY(-1px)}
+#yh-chk .al.s{display:flex;margin-top:4px;font-size:13px;font-weight:600;color:var(--sub)}
+#yh-chk .lock{margin-top:14px;border-radius:18px;padding:24px;border:1.5px solid var(--blue);background:#fff}
+#yh-chk .lock .lt{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.4;color:var(--ink)}
+#yh-chk .lock .ld{margin-top:6px;font-size:15px;color:var(--sub);line-height:1.6}
+#yh-chk .lock form{margin-top:16px;display:flex;gap:8px}
+#yh-chk .lock input{height:50px;font-size:17px;border-radius:12px;flex:1;min-width:0;letter-spacing:.02em}
+#yh-chk .lock button{height:50px;padding:0 24px;font-size:15px}
+#yh-chk .lock .out{margin-top:10px;font-size:14px;line-height:1.5}
+#yh-chk .lock .out:empty{display:none}
+#yh-chk .lock details{margin-top:14px;font-size:14px;color:var(--sub);line-height:1.6}
+#yh-chk .lock summary{cursor:pointer;font-weight:700;color:var(--ink);list-style:none}
+#yh-chk .lock summary::-webkit-details-marker{display:none}
+#yh-chk .lock summary:after{content:' +';color:var(--blue)}
+#yh-chk .lock details[open] summary:after{content:' −'}
+#yh-chk .lock details ul{margin-top:8px;padding-left:18px}
+#yh-chk .lock details b{color:var(--ink)}
+#yh-chk .lock.done{border-color:transparent;background:var(--btint);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#yh-chk .lock.done .lt{color:var(--blue)}
+#yh-chk .lock.done button{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+#yh-chk .card .other{margin-top:16px;font-size:14px;color:var(--sub);line-height:1.5}
+#yh-chk .notes{margin-top:36px;display:grid;gap:6px;font-size:14px;color:var(--sub);line-height:1.6}
+@media (max-width:640px){
+  #yh-chk{padding:44px 20px 64px}
+  #yh-chk form.q{grid-template-columns:1fr}
+  #yh-chk form.q button{width:100%}
+  #yh-chk dl{grid-template-columns:92px 1fr}
+  #yh-chk .card{padding:24px 20px}
+  #yh-chk .lock{padding:20px}
+  #yh-chk .lock form{flex-wrap:wrap}
+  #yh-chk .lock form button,#yh-chk .lock.done button{width:100%}
+}
+</style>
+
+<section id="yh-chk" aria-label="참가정보 확인">
+  <h2>참가정보 확인</h2>
+  <p class="lead">신청번호 또는 주문번호와 성함으로 참가 신청 내역을 확인할 수 있습니다.</p>
+
+  <form class="q" id="yhChkForm" novalidate>
+    <div>
+      <label for="yhChkApp">신청번호 또는 주문번호</label>
+      <input id="yhChkApp" autocomplete="off" placeholder="YHITF-P-000123 또는 202610081234567" maxlength="24" autocapitalize="characters">
+    </div>
+    <div>
+      <label for="yhChkName">성함</label>
+      <input id="yhChkName" autocomplete="name" placeholder="신청 시 입력한 성함">
+    </div>
+    <button type="submit" id="yhChkBtn">조회하기</button>
+  </form>
+  <p class="help">신청번호(YHITF-…)는 신청서 작성 완료 화면에서, 주문번호(숫자 15자리)는 마이페이지 &gt; 주문내역에서 확인할 수 있습니다.<br>단체는 대표자 성함으로 조회하면 참가자 전체가, 참가자 성함으로 조회하면 본인 정보가 표시됩니다.</p>
+
+  <p class="msg" id="yhChkMsg" role="alert"></p>
+  <div class="res" id="yhChkRes" aria-live="polite"></div>
+
+  <div class="notes">
+    <p>· 주문번호를 입력하지 않으실 시, 개인정보 보호를 위해 연락처·생년월일·주소는 가려서 표시됩니다.</p>
+    <p>· 참가정보 수정은 마이페이지 &gt; 1:1 문의로 신청해 주세요. (2026년 11월 27일(금) 18:00까지)</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var API_URL = 'https://script.google.com/macros/s/AKfycbxb81E5LX2q_HPgQog4gXNpPJERn7dSASLRH9Zaq9VK47tQp5Jb3B2S26QNTvSInOIx/exec';
+
+  var $=function(id){return document.getElementById(id);};
+  var form=$('yhChkForm'), btn=$('yhChkBtn'), msg=$('yhChkMsg'), res=$('yhChkRes');
+  if(!form) return;
+  var last=null;
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function api(body){
+    return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();});
+  }
+  function showMsg(t){ msg.textContent=t; msg.classList.add('on'); res.classList.remove('on'); }
+  var cur=null, full=null;
+  function row(k,v,opt){
+    opt=opt||{};
+    if(!v){
+      if(opt.addr) return '<dt>'+k+'</dt><dd><span class="al">등록된 주소가 없습니다</span></dd>';
+      if(opt.open) return '<dt>'+k+'</dt><dd><span class="al">등록된 정보가 없습니다</span></dd>';
+      return '';
+    }
+    return '<dt>'+k+'</dt><dd>'+esc(v)+'</dd>';
+  }
+  function oddPhone(v){ return v && !/^01[016789]-\d{4}-\d{4}$/.test(v) && !/^0[2-6]\d?-\d{3,4}-\d{4}$/.test(v); }
+  var ODD='<span class="al s">자릿수나 형식이 일반 번호와 달라요. 맞는지 확인해 주세요.</span>';
+  function phoneRow(k,v,on){
+    if(!on) return row(k,v);
+    if(!v) return '<dt>'+k+'</dt><dd><span class="al">등록된 번호가 없습니다</span></dd>';
+    return '<dt>'+k+'</dt><dd>'+esc(v)+(oddPhone(v)?ODD:'')+'</dd>';
+  }
+  function emgRow(f){
+    var n=f.emgName||'', ph=f.emgPhone||'';
+    if(!n&&!ph) return '<dt>비상연락처</dt><dd><span class="al">등록된 비상연락처가 없습니다</span></dd>';
+    return '<dt>비상연락처</dt><dd>'+esc(n||'(성함 없음)')+' '+(ph?esc(ph)+(oddPhone(ph)?ODD:''):'<span class="al s">비상연락처 번호가 없습니다</span>')+'</dd>';
+  }
+  var HOWTO='<details><summary>주문번호는 어디서 보나요?</summary><ul>'
+    +'<li>홈페이지 로그인 → 마이페이지 → 주문내역에서 해당 주문의 <b>주문번호(숫자 15자리)</b></li>'
+    +'<li>단체 참가자는 결제한 단체 대표자에게 주문번호를 받아 주세요.</li>'
+    +'<li>신청번호(YHITF-…)와는 다른 번호입니다.</li></ul></details>';
+  function render(d){
+    var a=d.app, h='', opened=full?full.people.reduce(function(m,x){m[x.idx]=x;return m;},{}):{};
+    var ks={}, canAny=false;
+    d.people.forEach(function(p){ks[p.state]=1; if(p.canUnlock) canAny=true;});
+    var other=[]; d.people.forEach(function(p){ (p.paidElsewhere||[]).forEach(function(n){ if(other.indexOf(n)<0) other.push(n); }); });
+    if(other.length){
+      h+='<p class="warn">같은 분 이름으로 결제가 완료된 다른 신청이 있습니다. <b>'+other.map(esc).join(', ')+'</b><br>결제가 완료된 신청이 유효하며, 결제되지 않은 이 신청은 참가 신청으로 처리되지 않습니다. 위 신청번호로 조회해 주세요.</p>';
+      ks.none=ks.deposit=ks.cancel=0;
+    }
+    if(ks.none) h+='<p class="warn">아직 결제 전 대기 상태입니다. <a href="/registration">참가신청 페이지</a>에서 결제까지 완료하시면 참가 신청이 완료되며, 모든 정보를 확인할 수 있습니다. 결제 후 반영까지 최대 5~10분이 걸릴 수 있습니다.</p>';
+    if(ks.deposit) h+='<p class="warn">무통장입금 확인 전입니다. 입금이 확인되면 결제완료로 바뀝니다. (확인까지 시간이 걸릴 수 있습니다)</p>';
+    if(ks.check) h+='<p class="warn">결제 내역을 확인하고 있습니다. 궁금하신 점은 마이페이지 &gt; 1:1 문의로 남겨 주세요.</p>';
+    var live=d.people.filter(function(p){return p.state!=='cancel';}).length;
+    if(ks.cancel && !live) h+='<p class="warn">취소된 신청입니다. 다시 참가하시려면 <a href="/registration">참가신청 페이지</a>에서 새로 신청해 주세요.</p>';
+    else if(ks.cancel) h+='<p class="warn">취소된 참가자가 있습니다. (회색 \'취소\' 표시) 나머지 참가자의 신청은 그대로 유효합니다.</p>';
+    h+='<div class="sum"><p>신청번호<b>'+esc(a.appNo)+'</b></p><p>신청유형<b>'+esc(a.type||'-')+'</b></p>';
+    if(a.group) h+='<p>단체명<b>'+esc(a.group)+'</b></p>';
+    if(d.scope==='group') h+='<p>참가 인원<b>'+live+'명'+(live<a.count?' <small>(취소 '+(a.count-live)+'명)</small>':'')+'</b></p>';
+    if(full) h+='<p>주문번호<b>'+esc(full.orderNo)+'</b></p>';
+    h+='</div>';
+    if(full){
+      h+='<div class="lock done"><div><p class="lt">본인 확인 완료 · 전체 정보를 보여드리고 있어요</p>'
+        +'<p class="ld">정보가 다르다면 마이페이지 &gt; 1:1 문의에 신청번호와 바른 정보를 남겨 주세요. (2026년 11월 27일(금) 18:00까지)</p></div>'
+        +'<button type="button" id="yhChkHide">다시 가리기</button></div>';
+    } else if(canAny){
+      h+='<div class="lock"><p class="lt">연락처·생년월일이 가려져 있어요</p>'
+        +'<p class="ld">아임웹 주문번호를 입력하면 본인 확인 후 휴대폰 번호, 비상연락처, 생년월일, 주소를 모두 볼 수 있어요.</p>'
+        +'<form id="yhChkUnlock" novalidate><input id="yhChkOrder" inputmode="numeric" autocomplete="off" maxlength="24" placeholder="주문번호 15자리 (예: 202610081234567)" aria-label="주문번호">'
+        +'<button type="submit">전체 보기</button></form><p class="out" role="status"></p>'+HOWTO+'</div>';
+    }
+    d.people.forEach(function(p){
+      var f=opened[p.idx], on=!!f;
+      var road=/(^|[^0-9])(5|10)KM/.test(String(p.course).toUpperCase().replace(/\s/g,''));
+      h+='<div class="card"><div class="top"><p class="crs">'+esc(p.course||'-')+'<small>'+esc(p.name)+'</small></p>'
+        +((p.paidElsewhere||[]).length?'<span class="badge off">다른 신청으로 결제 완료</span>':'<span class="badge'+(p.paid?'':(p.state==='cancel'?' off':' wait'))+'">'+esc(p.status)+'</span>')+'</div><dl>'
+        +row('참가일',p.date)+row('신청일시',p.appliedAt)+row('성별',p.gender)
+        +row('생년월일',on?f.birth:p.birth,{open:on})
+        +phoneRow('연락처',on?f.phone:p.phone,on)
+        +row('티셔츠',p.shirt)
+        +(on?emgRow(f):row('비상연락처',p.emergency))
+        +(road&&p.state!=='cancel'?row('택배 주소',on?f.address:p.address,{addr:true}):'')
+        +'</dl>'
+        +(full&&!on&&p.state!=='cancel'?'<p class="other">'+(p.canUnlock?'다른 주문번호로 결제된 참가자라 가려서 표시합니다.':'결제 전이라 가려서 표시합니다.')+'</p>':'')
+        +'</div>';
+    });
+    res.innerHTML=h; res.classList.add('on'); msg.classList.remove('on');
+
+    var hide=$('yhChkHide');
+    if(hide) hide.addEventListener('click',function(){ full=null; render(cur); });
+    var uf=$('yhChkUnlock');
+    if(uf){
+      var inp=$('yhChkOrder'), ub=uf.querySelector('button'), out=uf.parentNode.querySelector('.out');
+      inp.addEventListener('input',function(){ this.value=this.value.replace(/[^\d\-\s]/g,''); out.textContent=''; });
+      uf.addEventListener('submit',function(e){
+        e.preventDefault();
+        var v=inp.value.replace(/\D/g,'');
+        if(v.length<10){ out.innerHTML='<span class="al">주문번호를 숫자로 정확히 입력해 주세요. (신청번호 YHITF-…와는 다른 번호입니다)</span>'; return; }
+        ub.disabled=true; ub.textContent='확인 중…';
+        api({action:'unlock',appNo:last.appNo,name:last.name,orderNo:v})
+          .then(function(r){ if(r&&r.ok){ full=r; render(cur); } else { out.innerHTML='<span class="al">'+esc((r&&r.message)||'확인에 실패했습니다.')+'</span>'; } })
+          .catch(function(){ out.innerHTML='<span class="al">일시적으로 확인할 수 없습니다. 잠시 후 다시 시도해 주세요.</span>'; })
+          .then(function(){ if(document.body.contains(ub)){ ub.disabled=false; ub.textContent='전체 보기'; } });
+      });
+    }
+  }
+
+  $('yhChkApp').addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var appNo=$('yhChkApp').value.trim(), name=$('yhChkName').value.trim();
+    var isOrd=!/[A-Z]/i.test(appNo) && appNo.replace(/\D/g,'').length>=10;
+    if(isOrd) appNo=appNo.replace(/\D/g,'');
+    else if(!/^(YHITF-?)?[PG]-?\d{1,6}$/i.test(appNo.replace(/\s/g,''))){ showMsg('신청번호(예: YHITF-P-000123) 또는 주문번호(숫자 15자리)를 정확히 입력해 주세요.'); return; }
+    if(!name){ showMsg('성함을 입력해 주세요.'); return; }
+    btn.disabled=true; btn.textContent='조회 중…';
+    api({appNo:appNo,name:name})
+      .then(function(d){ if(d&&d.ok){ last={appNo:d.app.appNo,name:name}; cur=d; full=d.unlocked||null; render(d); } else showMsg((d&&d.message)||'조회에 실패했습니다. 잠시 후 다시 시도해 주세요.'); })
+      .catch(function(){ showMsg('일시적으로 조회할 수 없습니다. 잠시 후 다시 시도해 주세요.'); })
+      .then(function(){ btn.disabled=false; btn.textContent='조회하기'; });
+  });
+})();
+</script>
