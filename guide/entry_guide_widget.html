@@ -10,15 +10,19 @@
 html{overflow-x:clip}
 #yh-g7 *{box-sizing:border-box;margin:0;padding:0}
 #yh-g7 a{color:inherit;text-decoration:none}
+#yh-g7 .gbtn{border:0;background:none;text-shadow:none;box-shadow:none;margin:0;font-family:inherit;letter-spacing:normal;text-transform:none}
+#yh-g7 .gbtn.o{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+#yh-g7 .gpanel{background:transparent;border:0;box-shadow:none;margin-bottom:0;border-radius:0}
+#yh-g7 button.tab{border:0;box-shadow:none;outline-offset:2px}
 #yh-g7 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #yh-g7 .wrap{max-width:1200px;margin:0 auto;padding:0 var(--m)}
 #yh-g7 .en{font-family:Archivo,Pretendard,sans-serif;font-stretch:62%;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:.88}
 #yh-g7 h2.t{font-size:clamp(34px,5vw,68px);font-weight:900;letter-spacing:-.045em;line-height:1.14}
-#yh-g7 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:60px;padding:0 34px;border-radius:999px;font-size:17px;font-weight:700;line-height:1;white-space:nowrap;transition:transform .35s var(--ease)}
-#yh-g7 .btn:hover{transform:translateY(-3px)}
-#yh-g7 .btn.w{background:#fff;color:var(--ink)}
-#yh-g7 .btn.b{background:var(--blue);color:#fff}
-#yh-g7 .btn.o{box-shadow:inset 0 0 0 1.5px currentColor}
+#yh-g7 .gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:60px;padding:0 34px;border-radius:999px;font-size:17px;font-weight:700;line-height:1;white-space:nowrap;transition:transform .35s var(--ease)}
+#yh-g7 .gbtn:hover{transform:translateY(-3px)}
+#yh-g7 .gbtn.w{background:#fff;color:var(--ink)}
+#yh-g7 .gbtn.b{background:var(--blue);color:#fff}
+#yh-g7 .gbtn.o{box-shadow:inset 0 0 0 1.5px currentColor}
 #yh-g7 .note{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:14px;font-weight:700;line-height:1.5}
 #yh-g7 .note:before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--orange);transform:translateY(-1px)}
 #yh-g7 .phb{background:#eaeaea;color:#666;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:700;line-height:1.5;padding:16px}
@@ -66,30 +70,30 @@ html{overflow-x:clip}
 #yh-g7 .tab[aria-selected="true"]{background:#fff !important;color:var(--ink)}
 #yh-g7 .choose:not(.trail) .tab[aria-selected="true"] .k{color:var(--blue)}
 #yh-g7 .choose.trail .tab[aria-selected="true"] .k{color:var(--orange)}
-#yh-g7 .panel{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-areas:'info map' 'go prof';grid-template-rows:auto auto;row-gap:clamp(18px,2.4vw,28px);column-gap:clamp(24px,5vw,80px);align-items:start}
-#yh-g7 .panel .info{grid-area:info}
-#yh-g7 .panel .prof{grid-area:prof;align-self:start;text-align:center}
-#yh-g7 .panel .map{grid-area:map;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.18)}
-#yh-g7 .panel .go{grid-area:go;justify-self:start;align-self:start;margin-top:0}
-#yh-g7 .panel.flat .prof{display:none}
-#yh-g7 .panel .prof svg{margin-top:0}
-#yh-g7 .panel .nm{font-size:clamp(64px,8vw,120px)}
-#yh-g7 .panel .ty{margin-top:10px;font-size:clamp(18px,1.8vw,24px);font-weight:900}
-#yh-g7 .panel dl{margin-top:clamp(16px,2vw,24px);display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:16px}
-#yh-g7 .panel dt{opacity:.7}
-#yh-g7 .panel dd{font-weight:800}
-#yh-g7 .panel .rq{margin-top:12px;font-size:14px;font-weight:700}
-#yh-g7 .panel .go{margin-top:clamp(20px,2.4vw,28px)}
-#yh-g7 .choose:not(.trail) .panel .go .btn{background:#fff;color:var(--blue)}
-#yh-g7 .choose.trail .panel .go .btn{background:var(--ink);color:#fff}
+#yh-g7 .gpanel{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-areas:'info map' 'go prof';grid-template-rows:auto auto;row-gap:clamp(18px,2.4vw,28px);column-gap:clamp(24px,5vw,80px);align-items:start}
+#yh-g7 .gpanel .info{grid-area:info}
+#yh-g7 .gpanel .prof{grid-area:prof;align-self:start;text-align:center}
+#yh-g7 .gpanel .map{grid-area:map;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.18)}
+#yh-g7 .gpanel .go{grid-area:go;justify-self:start;align-self:start;margin-top:0}
+#yh-g7 .gpanel.flat .prof{display:none}
+#yh-g7 .gpanel .prof svg{margin-top:0}
+#yh-g7 .gpanel .nm{font-size:clamp(64px,8vw,120px)}
+#yh-g7 .gpanel .ty{margin-top:10px;font-size:clamp(18px,1.8vw,24px);font-weight:900}
+#yh-g7 .gpanel dl{margin-top:clamp(16px,2vw,24px);display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:16px}
+#yh-g7 .gpanel dt{opacity:.7}
+#yh-g7 .gpanel dd{font-weight:800}
+#yh-g7 .gpanel .rq{margin-top:12px;font-size:14px;font-weight:700}
+#yh-g7 .gpanel .go{margin-top:clamp(20px,2.4vw,28px)}
+#yh-g7 .choose:not(.trail) .gpanel .go .gbtn{background:#fff;color:var(--blue)}
+#yh-g7 .choose.trail .gpanel .go .gbtn{background:var(--ink);color:#fff}
 #yh-g7 .choose .note:before{background:currentColor}
-#yh-g7 .panel svg{display:block;width:100%;height:auto;margin-top:clamp(22px,2.6vw,30px)}
-#yh-g7 .panel .gx{margin-top:6px;font-size:13px;font-weight:600;opacity:.75}
-#yh-g7 .panel .hd{display:flex;align-items:center;gap:clamp(14px,2vw,24px)}
-#yh-g7 .panel .rc{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-#yh-g7 .panel .rc:empty{display:none}
-#yh-g7 .panel .rc .lg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:112px;min-height:46px;padding:10px 12px;border-radius:12px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1;white-space:nowrap}
-#yh-g7 .panel .rc img{height:24px;width:auto;display:block}
+#yh-g7 .gpanel svg{display:block;width:100%;height:auto;margin-top:clamp(22px,2.6vw,30px)}
+#yh-g7 .gpanel .gx{margin-top:6px;font-size:13px;font-weight:600;opacity:.75}
+#yh-g7 .gpanel .hd{display:flex;align-items:center;gap:clamp(14px,2vw,24px)}
+#yh-g7 .gpanel .rc{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+#yh-g7 .gpanel .rc:empty{display:none}
+#yh-g7 .gpanel .rc .lg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:112px;min-height:46px;padding:10px 12px;border-radius:12px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1;white-space:nowrap}
+#yh-g7 .gpanel .rc img{height:24px;width:auto;display:block}
 
 /* 3 MORE — 한국어 정보가 주인공, 사진 역할을 다르게 */
 #yh-g7 .more{padding:clamp(96px,12vw,170px) 0 0}
@@ -182,19 +186,19 @@ html{overflow-x:clip}
   #yh-g7 .kc{flex:none;width:78%;scroll-snap-align:start}
 }
 @media (max-width:900px){
-  #yh-g7 .panel{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:'info' 'map' 'prof' 'go'}
-  #yh-g7 .panel .go{justify-self:stretch;margin-top:clamp(20px,2.4vw,28px)}
+  #yh-g7 .gpanel{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:'info' 'map' 'prof' 'go'}
+  #yh-g7 .gpanel .go{justify-self:stretch;margin-top:clamp(20px,2.4vw,28px)}
   /* 모바일: 선택한 종목 정보 → 고도 → 종목 탭 → 버튼 */
   #yh-g7 .cw{display:flex;flex-direction:column}
-  #yh-g7 .cw .panel{display:contents}
+  #yh-g7 .cw .gpanel{display:contents}
   #yh-g7 .cw .eb{order:0}#yh-g7 .cw h2{order:1}
   #yh-g7 .cw .info{order:2;margin-top:clamp(24px,5vw,36px)}
   #yh-g7 .cw .map{order:3;margin-top:clamp(22px,5vw,30px)}
   #yh-g7 .cw .prof{order:4;text-align:center}
   #yh-g7 .cw .tabs{order:5;margin-top:clamp(22px,5vw,30px)}
   #yh-g7 .cw .go{order:6;align-self:stretch}
-  #yh-g7 .cw .go .btn{width:100%}
-  #yh-g7 .panel .prof{margin-top:clamp(22px,4vw,30px)}
+  #yh-g7 .cw .go .gbtn{width:100%}
+  #yh-g7 .gpanel .prof{margin-top:clamp(22px,4vw,30px)}
   #yh-g7 .mg{grid-template-columns:1fr}
   #yh-g7 .steps{grid-template-columns:1fr;gap:10px}
   #yh-g7 .steps li{display:grid;grid-template-columns:34px 1fr;column-gap:14px;align-items:start;padding:20px}
@@ -208,7 +212,7 @@ html{overflow-x:clip}
   #yh-g7 .shots figure{flex:none;width:62%;scroll-snap-align:center}
   }
 @media (max-width:560px){
-  #yh-g7 .btn{width:100%}
+  #yh-g7 .gbtn{width:100%}
   #yh-g7 br.mb{display:inline}
   #yh-g7 .hook .bs,#yh-g7 .start .bs{flex-direction:column}
   /* 첫 화면 모바일 글자 위계 */
@@ -218,7 +222,7 @@ html{overflow-x:clip}
   #yh-g7 .hook .loc{font-size:15px;font-weight:600;margin-top:18px;letter-spacing:-.02em}
   #yh-g7 .hook .dt .en{font-size:19px}
   #yh-g7 .hook .dt sup{font-size:12px;font-weight:600}
-  #yh-g7 .hook .bs .btn{font-size:15px;height:54px}
+  #yh-g7 .hook .bs .gbtn{font-size:15px;height:54px}
     #yh-g7 .tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
   #yh-g7 .tab{border-radius:14px;padding:12px 8px 12px;text-align:center}
   #yh-g7 .tab .en{font-size:clamp(28px,8.6vw,40px)}
@@ -239,8 +243,8 @@ html{overflow-x:clip}
       <p class="loc rv">미사경정공원 및 하남시 일대</p>
       <div class="dt rv"><span class="en">2026. 12. 12. (SAT) – 13. (SUN)</span><sup>*11 (FRI) EXPO</sup></div>
       <div class="bs rv">
-        <a class="btn w" href="#yhG7Choose">대회 미리보기 ↓</a>
-        <a class="btn o" href="/registration">바로 참가신청</a>
+        <a class="gbtn w" href="#yhG7Choose">대회 미리보기 ↓</a>
+        <a class="gbtn o" href="/registration">바로 참가신청</a>
       </div>
     </div>
   </section>
@@ -255,7 +259,7 @@ html{overflow-x:clip}
         <button class="tab" role="tab" aria-selected="false" data-k="15"><span class="en">15<small>KM</small></span><span class="k">TRAIL RUN</span></button>
         <button class="tab" role="tab" aria-selected="false" data-k="28"><span class="en">28<small>KM</small></span><span class="k">TRAIL RUN</span></button>
       </div>
-      <div class="panel" role="tabpanel" aria-live="polite">
+      <div class="gpanel" role="tabpanel" aria-live="polite">
         <div class="info">
           <div class="hd"><div class="nm en" id="yhG7Nm">5KM</div><div class="rc" id="yhG7Rc"></div></div>
           <div class="ty" id="yhG7Ty">RUNNING</div>
@@ -267,7 +271,7 @@ html{overflow-x:clip}
           <svg viewBox="0 0 600 120" aria-hidden="true"><path id="yhG7A" d="" fill="currentColor" opacity=".16"/><path id="yhG7L" d="" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
           <div class="gx" id="yhG7Gx"></div>
         </div>
-        <div class="go"><a class="btn" id="yhG7Go" href="/registration">5KM 참가신청 →</a></div>
+        <div class="go"><a class="gbtn" id="yhG7Go" href="/registration">5KM 참가신청 →</a></div>
       </div>
     </div>
   </section>
@@ -333,7 +337,7 @@ html{overflow-x:clip}
     <video id="yhG7Vid" data-pc="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/hero_pc.mp4" data-m="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/hero_m.mp4" data-ppc="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/poster.jpg" data-pm="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/guide/posterm.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
     <h2 class="en rv">Start<br>your<br>race<span class="dot"></span></h2>
     <p class="ko rv">달리는 것 그 이상.<br>12월, 러닝 수도 하남에서!</p>
-    <div class="bs rv"><a class="btn b" id="yhG7Start" href="/registration">참가신청 →</a><a class="btn o" href="/my-entry">참가정보 확인</a></div>
+    <div class="bs rv"><a class="gbtn b" id="yhG7Start" href="/registration">참가신청 →</a><a class="gbtn o" href="/my-entry">참가정보 확인</a></div>
   </section>
 </div>
 
@@ -398,7 +402,7 @@ html{overflow-x:clip}
   var sec=root.querySelector('.choose'), tabs=root.querySelectorAll('.tab');
   function pick(k){
     var c=C[k], p=P[k], href='/registration?course='+encodeURIComponent(c.nm);
-    sec.classList.toggle('trail',!c.run); root.querySelector('.panel').classList.toggle('flat',c.run);
+    sec.classList.toggle('trail',!c.run); root.querySelector('.gpanel').classList.toggle('flat',c.run);
     [].forEach.call(tabs,function(t){ t.setAttribute('aria-selected', t.getAttribute('data-k')===k?'true':'false'); });
     $('yhG7Nm').textContent=c.nm; $('yhG7Ty').textContent=c.ty;
     $('yhG7L').setAttribute('d',p.d); $('yhG7A').setAttribute('d',p.a);
