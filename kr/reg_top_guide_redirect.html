@@ -1,0 +1,19 @@
+<style>/* YHITF: 가이드 이동 여부가 정해질 때까지 본문 숨김 (2026-10-15) — 스크립트가 실패해도 3초 후 자동 표시 */
+@keyframes yhRegShow{to{visibility:visible}}
+html:not(.yh-reg-ok) .section_wrap,html:not(.yh-reg-ok) #doz_footer_wrap{visibility:hidden;animation:yhRegShow 0s linear 3s forwards}
+</style>
+<script>/* YHITF: 참가신청(/registration) 첫 방문 시 신청화면을 보여주지 않고 가이드로 이동 (2026-10-15) */
+(function(){
+  function ok(){ try{ document.documentElement.classList.add('yh-reg-ok'); }catch(_){} }
+  try{
+    if(!/^\/registration\/?$/.test(location.pathname)) return ok();
+    var ss=window.sessionStorage; if(!ss) return ok();
+    var q=new URLSearchParams(location.search);
+    if(q.has('course') || /\/entry-guide/.test(document.referrer||'')){ ss.setItem('YHITF_GUIDE_SEEN','1'); return ok(); }
+    if(ss.getItem('YHITF_GUIDE_SEEN')) return ok();
+    for(var i=0;i<ss.length;i++){ var k=ss.key(i); if(/^YHITF_/.test(k) && !/^YHITF_(PICKED_COURSE|GUIDE_SEEN)$/.test(k)) return ok(); }
+    setTimeout(ok,4000);
+    location.replace('/entry-guide');
+  }catch(e){ ok(); }
+})();
+</script>
