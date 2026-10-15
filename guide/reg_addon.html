@@ -1,0 +1,35 @@
+
+<!-- ===== YHITF 참가신청 · 가이드 거쳐오기 + 코스 미리 선택 (2026-10-15 추가) =====
+     기존 신청서 코드 맨 아래에 추가. 기존 코드는 수정하지 않음.
+     1) 이번 접속에서 가이드(/entry-guide)를 아직 안 봤으면 가이드로 한 번 보냄
+        (가이드에서 넘어왔거나, 작성 중/신청번호 발급 상태가 있으면 그대로 둠)
+     2) 가이드에서 고른 코스(?course=15KM 등)를 첫 참가자 종목에 미리 선택 (10KM는 날짜가 2개라 선택하지 않음)
+-->
+<script>
+(function(){
+  'use strict';
+  var ss=null; try{ ss=window.sessionStorage; }catch(e){}
+  var q=new URLSearchParams(location.search);
+  var course=(q.get('course')||(ss&&ss.getItem('YHITF_PICKED_COURSE'))||'').toUpperCase().replace(/\s/g,'');
+  var fromGuide=/\/entry-guide/.test(document.referrer||'') || q.has('course');
+  var busy=false;
+  try{ if(ss){ for(var i=0;i<ss.length;i++){ var k=ss.key(i); if(/^YHITF_/.test(k) && !/^YHITF_(PICKED_COURSE|GUIDE_SEEN)$/.test(k)){ busy=true; break; } } } }catch(e){}
+  if(fromGuide && ss){ try{ ss.setItem('YHITF_GUIDE_SEEN','1'); }catch(e){} }
+  var seen=false; try{ seen=!!(ss&&ss.getItem('YHITF_GUIDE_SEEN')); }catch(e){}
+  var inEditor=/imweb\.me$/.test(location.hostname) && /admin/.test(location.pathname);
+  if(!seen && !fromGuide && !busy && !inEditor && ss){ location.replace('/entry-guide'); return; }
+
+  var MAP={'5KM':'5KM RUNNING||2026.12.12 SAT','15KM':'15KM TRAIL RUN||2026.12.12 SAT','28KM':'28KM TRAIL RUN||2026.12.13 SUN'};
+  var val=MAP[course]; if(!val) return;
+  var tries=0;
+  (function pick(){
+    var sel=document.querySelector('#yhitf-entry select[name="participant_course"]');
+    if(!sel){ if(++tries<40) setTimeout(pick,150); return; }
+    if(sel.value) return;
+    if(![].some.call(sel.options,function(o){ return o.value===val; })) return;
+    sel.value=val;
+    sel.dispatchEvent(new Event('input',{bubbles:true}));
+    sel.dispatchEvent(new Event('change',{bubbles:true}));
+  })();
+})();
+</script>
