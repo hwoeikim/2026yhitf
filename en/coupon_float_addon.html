@@ -1,0 +1,18 @@
+
+<!-- ===== YHITF EN · 28KM 50% coupon floating badge (2026-10-15) =====
+     마감 시: 아래 YH_COUPON_OPEN 값을 false 로 바꾸고 저장·게시하면 배지가 사라집니다.
+-->
+<script>window.YH_COUPON_OPEN = true;</script>
+<style>
+#yhitf-coupon{position:fixed;left:16px;bottom:84px;z-index:99999;display:none;align-items:center;gap:8px;height:38px;padding:0 14px 0 12px;border-radius:999px;background:#fff;color:#FF6D07 !important;text-decoration:none !important;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.01em;line-height:1;white-space:nowrap;box-shadow:0 5px 16px rgba(0,20,80,.16),0 2px 5px rgba(0,0,0,.10);border:1.5px solid #FF6D07;transition:transform .18s ease,box-shadow .18s ease;-webkit-font-smoothing:antialiased}
+#yhitf-coupon.on{display:inline-flex}
+#yhitf-coupon b{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:#FF6D07;color:#fff;font-size:12px;font-weight:900}
+#yhitf-coupon small{font-size:11px;font-weight:700;color:#7a7a7a}
+#yhitf-coupon:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,20,80,.2),0 2px 5px rgba(0,0,0,.10)}
+@media(max-width:768px){#yhitf-coupon{left:10px;bottom:138px;height:34px;padding:0 12px 0 10px;font-size:12px}#yhitf-coupon b{height:20px;font-size:11px}#yhitf-coupon small{display:none}}
+@media(max-width:360px){#yhitf-coupon{left:8px;bottom:125px}}
+</style>
+<a id="yhitf-coupon" href="https://en.yhitf.co.kr/registration" aria-label="Get the 50% off coupon for 28KM, first 300 international runners"><b>50% OFF</b>28KM COUPON<small>· First 300</small></a>
+<script>
+(function(){ var c=document.getElementById('yhitf-coupon'); if(c && window.YH_COUPON_OPEN) c.classList.add('on'); })();
+</script>
