@@ -1,0 +1,28 @@
+<!-- ===== YHITF EN · coupon issued toast (2026-10-15) =====
+     배지 링크(/entry-guide?coupon=...)로 들어오면 쿠폰은 아임웹이 조용히 발급하므로, 받았다는 안내를 띄웁니다.
+-->
+<style>
+#yhitf-ctoast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);opacity:0;z-index:100000;display:flex;align-items:flex-start;gap:10px;width:min(440px,calc(100vw - 32px));padding:14px 40px 14px 16px;border-radius:14px;background:#fff;border:1.5px solid #FF6D07;box-shadow:0 10px 28px rgba(0,20,80,.18);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.45;color:#212121;transition:opacity .25s ease,transform .25s ease;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+#yhitf-ctoast.on{opacity:1;transform:translate(-50%,0)}
+#yhitf-ctoast i{flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#FF6D07;color:#fff;font-style:normal;font-weight:900;font-size:13px}
+#yhitf-ctoast b{color:#FF6D07}
+#yhitf-ctoast small{display:block;margin-top:2px;font-size:12.5px;color:#666}
+#yhitf-ctoast button{position:absolute;right:8px;top:8px;width:28px;height:28px;border:0;background:transparent;font-size:20px;line-height:1;color:#999;cursor:pointer;padding:0}
+</style>
+<script>
+(function(){
+  try{
+    var q=new URLSearchParams(location.search); if(!q.get('coupon')) return;
+    var outSt=!document.body.classList.contains('loggedin');
+    var t=document.createElement('div'); t.id='yhitf-ctoast'; t.setAttribute('role','status');
+    t.innerHTML = outSt
+      ? '<i>!</i><div><b>Log in to get your coupon.</b><small>After logging in, tap the 50% OFF badge again to receive the 28KM coupon.</small></div>'
+      : '<i>✓</i><div><b>28KM 50% coupon added to your account.</b><small>Apply it at checkout. Valid for 3 days from issue.</small></div>';
+    var x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label','Close'); x.innerHTML='&times;';
+    x.onclick=function(){ t.classList.remove('on'); };
+    t.appendChild(x); document.body.appendChild(t);
+    setTimeout(function(){ t.classList.add('on'); }, 600);
+    setTimeout(function(){ t.classList.remove('on'); }, 9000);
+  }catch(e){}
+})();
+</script>
