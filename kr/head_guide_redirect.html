@@ -1,0 +1,13 @@
+<script>/* YHITF: 참가신청(/registration) 첫 방문 시 화면이 그려지기 전에 가이드로 이동 (2026-10-15) */
+(function(){try{
+  if(!/^\/registration\/?$/.test(location.pathname)) return;
+  var ss=window.sessionStorage; if(!ss) return;
+  var q=new URLSearchParams(location.search);
+  if(q.has('course') || /\/entry-guide/.test(document.referrer||'')){ ss.setItem('YHITF_GUIDE_SEEN','1'); return; }
+  if(ss.getItem('YHITF_GUIDE_SEEN')) return;
+  for(var i=0;i<ss.length;i++){ var k=ss.key(i); if(/^YHITF_/.test(k) && !/^YHITF_(PICKED_COURSE|GUIDE_SEEN)$/.test(k)) return; }
+  var de=document.documentElement; de.style.visibility='hidden';
+  setTimeout(function(){ de.style.visibility=''; },4000);
+  location.replace('/entry-guide');
+}catch(e){ try{ document.documentElement.style.visibility=''; }catch(_){} }})();
+</script>
