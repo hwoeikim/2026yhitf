@@ -1,0 +1,14 @@
+<!-- ===== 2026 YHITF · 마이페이지 '참가정보 보기'에서 넘어온 주문번호 자동 입력 (참가정보 확인 위젯 맨 아래) ===== -->
+<script>
+(function(){
+  var no=''; try{ no=sessionStorage.getItem('YHITF_ENTRY_ORDER')||''; sessionStorage.removeItem('YHITF_ENTRY_ORDER'); }catch(e){}
+  if(!/^\d{12,20}$/.test(no)) return;
+  var tries=0;
+  (function fill(){
+    var a=document.getElementById('yhChkApp'), n=document.getElementById('yhChkName');
+    if(!a){ if(++tries<40) setTimeout(fill,150); return; }
+    a.value=no; a.dispatchEvent(new Event('input',{bubbles:true}));
+    if(n){ n.focus(); try{ n.scrollIntoView({block:'center'}); }catch(e){} }
+  })();
+})();
+</script>

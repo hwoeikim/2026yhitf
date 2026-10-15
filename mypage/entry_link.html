@@ -1,9 +1,9 @@
-<!-- 2026 YHITF · 마이페이지 '참가정보 확인' 바로가기 v3 (한 줄 띠형 · 진한 파랑) -->
+<!-- 2026 YHITF · 마이페이지 '참가정보 확인' 바로가기 v4 (한 줄 띠형 · 신청 건별 참가정보 보기 버튼) -->
 <style>
 #yh-entry-link{max-width:1216px;margin:0 auto;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;word-break:keep-all;-webkit-font-smoothing:antialiased}
 #yh-entry-link *{box-sizing:border-box;margin:0;padding:0}
-#yh-entry-link a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 16px 16px 22px;border-radius:12px;background:#002ACF;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(0,42,207,.18);transition:background .2s}
-#yh-entry-link a:hover{background:#0022A8}
+#yh-entry-link a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 16px 16px 22px;border-radius:12px;background:#002ACF;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(0,42,207,.18);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+#yh-entry-link a:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,42,207,.26)}
 #yh-entry-link .t{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.35}
 #yh-entry-link .d{margin-top:3px;font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.82)}
 #yh-entry-link .b{flex:none;display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;background:#fff;color:#002ACF;font-size:14px;font-weight:700;line-height:1;white-space:nowrap}
@@ -13,6 +13,9 @@
   #yh-entry-link .d{font-size:13px}
   #yh-entry-link .b{height:36px;padding:0 14px;font-size:13px}
 }
+.yh-ord-chk{display:inline-flex;align-items:center;height:28px;margin-left:12px;padding:0 12px;border:1px solid #002ACF;border-radius:999px;background:#fff;color:#002ACF !important;font-size:13px;font-weight:700;line-height:1;text-decoration:none !important;white-space:nowrap;vertical-align:middle;cursor:pointer}
+.yh-ord-chk:hover{background:#002ACF;color:#fff !important}
+.yh-ord-chk.m{margin:0 10px 0 0;height:26px;padding:0 10px;font-size:12px}
 </style>
 <div id="yh-entry-link">
   <a href="/my-entry">
@@ -23,3 +26,27 @@
     <span class="b">확인하기 →</span>
   </a>
 </div>
+<script>
+/* 신청 건마다 '참가정보 보기' 버튼: 주문번호를 브라우저 임시저장소로 넘기고 /my-entry 에서 자동 입력 */
+(function(){
+  function ordOf(a){ var m=(a.getAttribute('href')||'').match(/order_no=(\d{12,20})/); return m?m[1]:''; }
+  function go(no){ try{ sessionStorage.setItem('YHITF_ENTRY_ORDER',no); }catch(e){} location.href='/my-entry'; }
+  function mk(no,mob){
+    var b=document.createElement('a'); b.href='/my-entry'; b.className='yh-ord-chk'+(mob?' m':''); b.textContent='참가정보 보기';
+    b.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); go(no); });
+    return b;
+  }
+  function run(){
+    document.querySelectorAll('a.text-primary[href*="order_no="]').forEach(function(a){
+      if(a.getAttribute('data-yh')) return; var no=ordOf(a); if(!no) return; a.setAttribute('data-yh','1');
+      a.parentNode.insertBefore(mk(no,false),a.nextSibling);
+    });
+    document.querySelectorAll('a.text-brand.hidden-lg[href*="order_no="]').forEach(function(a){
+      if(a.getAttribute('data-yh')) return; var no=ordOf(a); if(!no) return; a.setAttribute('data-yh','1');
+      var b=mk(no,true); b.classList.add('hidden-lg','hidden-md'); a.parentNode.insertBefore(b,a);
+    });
+  }
+  run(); var t=null;
+  new MutationObserver(function(){ clearTimeout(t); t=setTimeout(run,200); }).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
