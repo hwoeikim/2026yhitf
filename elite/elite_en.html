@@ -1,0 +1,118 @@
+<!-- 2026 YHITF · INVITED ATHLETE PROGRAM (EN, /elite) — 해외 엘리트 초청 안내 (2026-10-16)
+     아임웹 코드 위젯 1개에 통째로 붙여넣기. 바로 아래에 아임웹 입력폼 위젯(회원 전용)을 둔다. -->
+<style>
+#yh-elite{--blue:#002ACF;--blue2:#1d3fe0;--orange:#FF6D07;--ink:#14181f;--sub:#5b6270;--line:#e6e8ee;--bg:#f5f7fb;--otint:#FFF3EA;--btint:#EEF2FF;--gtint:#E8F6F2;--green:#0E9E86;
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;color:var(--ink);word-break:keep-all;-webkit-font-smoothing:antialiased;line-height:1.6}
+#yh-elite *{box-sizing:border-box;margin:0;padding:0}
+#yh-elite .hero{background:linear-gradient(160deg,#2f55ff 0%,#1c3be0 55%,#1430b8 100%);color:#fff;padding:72px 20px 64px;position:relative;overflow:hidden}
+#yh-elite .hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(170deg,transparent 49%,rgba(255,109,7,.9) 50%,rgba(255,109,7,.9) 56%,transparent 57%)}
+#yh-elite .wrap{max-width:880px;margin:0 auto;position:relative;z-index:1}
+#yh-elite .kicker{display:inline-block;background:var(--orange);color:#fff;font-size:13px;font-weight:800;letter-spacing:.12em;padding:8px 16px;border-radius:999px}
+#yh-elite h1{margin-top:22px;font-size:clamp(36px,7vw,64px);font-weight:900;line-height:1.02;letter-spacing:-.02em}
+#yh-elite h1 em{font-style:normal;color:#FFB27A}
+#yh-elite .hero p{margin-top:20px;font-size:clamp(16px,2.2vw,19px);color:rgba(255,255,255,.88);max-width:620px;line-height:1.65}
+#yh-elite .meta{margin-top:28px;display:inline-flex;gap:18px;flex-wrap:wrap;background:#fff;color:var(--ink);border-radius:14px;padding:14px 22px;font-size:15px;font-weight:700}
+#yh-elite .meta span{color:var(--sub);font-weight:600}
+#yh-elite .sec{padding:64px 20px 0}
+#yh-elite .eyebrow{font-size:13px;font-weight:800;letter-spacing:.14em;color:var(--blue)}
+#yh-elite h2{margin-top:8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.02em;line-height:1.2}
+#yh-elite h2 em{font-style:normal;color:var(--orange)}
+#yh-elite .desc{margin-top:8px;font-size:15px;color:var(--sub)}
+#yh-elite .tiers{margin-top:28px;display:grid;gap:16px}
+#yh-elite .tier{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(20,40,120,.06)}
+#yh-elite .th{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 22px;color:#fff;font-weight:800}
+#yh-elite .th b{font-size:20px;letter-spacing:.02em}
+#yh-elite .th small{font-size:14px;font-weight:700;opacity:.95}
+#yh-elite .t1 .th{background:var(--orange)} #yh-elite .t2 .th{background:var(--blue2)} #yh-elite .t3 .th{background:var(--green)}
+#yh-elite .tb{padding:18px 22px 20px}
+#yh-elite .sc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#yh-elite .sc div{border-radius:12px;padding:12px 16px;background:var(--btint)}
+#yh-elite .sc div.f{background:var(--otint)}
+#yh-elite .sc label{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--sub)}
+#yh-elite .sc strong{font-size:28px;font-weight:900;color:#122a8a;line-height:1.2}
+#yh-elite .sc .f strong{color:#c2540a}
+#yh-elite .sc strong i{font-style:normal;font-size:18px;margin-left:2px}
+#yh-elite .bn{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+#yh-elite .bn span{font-size:14px;font-weight:700;border-radius:999px;padding:6px 14px;border:1.5px solid}
+#yh-elite .t1 .bn span{color:#c2540a;border-color:#f3a46c;background:var(--otint)}
+#yh-elite .t2 .bn span{color:var(--blue2);border-color:#9fb0f5;background:var(--btint)}
+#yh-elite .t3 .bn span{color:var(--green);border-color:#8fd3c6;background:var(--gtint)}
+#yh-elite .steps{margin-top:24px;display:grid;gap:12px;counter-reset:s}
+#yh-elite .step{display:flex;gap:16px;align-items:flex-start;background:var(--bg);border-radius:14px;padding:18px 20px}
+#yh-elite .step:before{counter-increment:s;content:counter(s);flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+#yh-elite .step b{display:block;font-size:16px}
+#yh-elite .step p{font-size:14.5px;color:var(--sub);margin-top:2px}
+#yh-elite .notes{margin-top:22px;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:6px}
+#yh-elite .notes p{font-size:14px;color:var(--sub);padding-left:14px;position:relative}
+#yh-elite .notes p:before{content:"·";position:absolute;left:2px}
+#yh-elite .cta{margin:44px auto 72px;max-width:880px;padding:0 20px;text-align:center}
+#yh-elite .cta .btn{display:inline-flex;align-items:center;gap:8px;height:58px;padding:0 34px;border-radius:999px;background:var(--orange);color:#fff !important;text-decoration:none !important;font-size:17px;font-weight:800;box-shadow:0 8px 22px rgba(255,109,7,.32);transition:transform .15s}
+#yh-elite .cta .btn:hover{transform:translateY(-2px)}
+#yh-elite .cta p{margin-top:12px;font-size:14px;color:var(--sub)}
+#yh-elite .cta p a{color:var(--blue) !important;font-weight:700;text-decoration:underline !important}
+@media(max-width:600px){#yh-elite .hero{padding:56px 20px 56px}#yh-elite .th{padding:12px 18px}#yh-elite .tb{padding:16px 18px}#yh-elite .sc strong{font-size:24px}#yh-elite .sec{padding-top:52px}}
+</style>
+<div id="yh-elite">
+  <section class="hero"><div class="wrap">
+    <span class="kicker">INVITED ATHLETE PROGRAM</span>
+    <h1>ELITE ATHLETE<br><em>INVITATION</em></h1>
+    <p>The 2026 Yonhap News Hanam International Trail Run Festival warmly invites the world's finest trail runners to race with us in Hanam, Korea. Qualifying athletes join us as our guests — with entry fees waived and, for our top tiers, travel and accommodation support.</p>
+    <div class="meta">Dec 12 – 13, 2026 <span>Hanam, Korea · All races eligible</span></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="eyebrow">INVITED ATHLETE TIERS</div>
+    <h2>Invitation <em>tiers</em></h2>
+    <p class="desc">Based on your current ITRA Performance Index</p>
+    <div class="tiers">
+      <div class="tier t1"><div class="th"><b>TIER 1</b><small>1 male + 1 female</small></div><div class="tb">
+        <div class="sc"><div><label>MALE</label><strong>900<i>+</i></strong></div><div class="f"><label>FEMALE</label><strong>800<i>+</i></strong></div></div>
+        <div class="bn"><span>Entry fee waived</span><span>Airfare</span><span>Accommodation · 2 nights</span></div></div></div>
+      <div class="tier t2"><div class="th"><b>TIER 2</b><small>5 males + 5 females</small></div><div class="tb">
+        <div class="sc"><div><label>MALE</label><strong>870<i>+</i></strong></div><div class="f"><label>FEMALE</label><strong>750<i>+</i></strong></div></div>
+        <div class="bn"><span>Entry fee waived</span><span>Accommodation · 2 nights</span></div></div></div>
+      <div class="tier t3"><div class="th"><b>TIER 3</b><small>15 males + 15 females</small></div><div class="tb">
+        <div class="sc"><div><label>MALE</label><strong>850<i>+</i></strong></div><div class="f"><label>FEMALE</label><strong>710<i>+</i></strong></div></div>
+        <div class="bn"><span>Entry fee waived</span></div></div></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="eyebrow">HOW IT WORKS</div>
+    <h2>How to <em>apply</em></h2>
+    <div class="steps">
+      <div class="step"><div><b>Create your account</b><p>Sign up on this website and log in.</p></div></div>
+      <div class="step"><div><b>Submit the Elite Athlete Application</b><p>Complete the form below, including the link to your ITRA profile.</p></div></div>
+      <div class="step"><div><b>Profile review</b><p>Our team personally reviews your ITRA profile and confirms your tier.</p></div></div>
+      <div class="step"><div><b>Personal invitation</b><p>Approved athletes receive a personal invitation and an entry code. Register for your race with the code — no entry fee required.</p></div></div>
+      <div class="step"><div><b>Your athlete manager</b><p>For Tier 1 and Tier 2, a dedicated athlete manager will contact you by email to arrange your travel and accommodation.</p></div></div>
+    </div>
+    <div class="notes">
+      <p>Invitations are offered on a first-come, first-served basis. Each tier closes once all places are filled.</p>
+      <p>ITRA scores are verified at the time of application.</p>
+      <p>Airfare is booked by the organizer within a set budget. Accommodation is provided for 2 nights (single room). Approved support costs are settled after the event.</p>
+      <p>Already registered? You are welcome to apply — once approved, your entry fee will be refunded.</p>
+    </div>
+  </div></section>
+
+  <div class="cta">
+    <a href="#" class="btn" data-yh-apply>Apply for an Invitation →</a>
+    <p>The application is for members only. <a href="/login">Log in or sign up</a> first.</p>
+  </div>
+</div>
+<script>
+(function(){
+  try{
+    var root=document.getElementById('yh-elite'); if(!root) return;
+    var btn=root.querySelector('[data-yh-apply]');
+    btn.addEventListener('click',function(e){
+      e.preventDefault();
+      var sec=root.closest('.section_wrap')||root.closest('[class*="section"]');
+      var next=sec&&sec.nextElementSibling;
+      var form=document.querySelector('form[name*="form"], .doz_form, [class*="widget_form"], [class*="form_wrap"]');
+      var target=form||next;
+      if(target){ window.scrollTo({top:target.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'}); }
+    });
+  }catch(e){}
+})();
+</script>
