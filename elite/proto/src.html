@@ -273,7 +273,7 @@ var T={
   quote:"세계 무대에서 실력을 증명한 선수들을<br><em>러닝 수도 하남</em>으로 <em>초대</em>합니다.",quoteEn:false,pin:"하남",
   critH:"초청 기준",critD:"현재 ITRA 퍼포먼스 인덱스 기준<br>15KM · 28KM 종목 중 선택 가능",
   hd:["","남성","여성"],tiers:[{m:720,f:620}],
-  benH:"초청 혜택",benBig:"참가비 <em>면제</em>",benP:"담당 매니저가 연결되어 초청 참가 전용 참가권을 발급해 드리고, 참가 신청까지 도와드립니다.",
+  benH:"초청 혜택",benBig:"참가비 <em>면제</em>",benP:"초청 적격 심사 승인이 되면<br>담당 매니저가 초청 참가 전용 참가권을 전달드립니다.",
   procH:"신청부터<br>출발선까지,",procEn:false,procP:"하남에서의 여정을 함께합니다.",
   steps:[["회원가입","홈페이지에 회원가입 후 로그인합니다."],["초청 신청서 제출","ITRA 프로필 링크와 희망 종목을 입력합니다."],["자격 심사","사무국이 현재 ITRA 점수를 직접 확인합니다."],["심사 승인 및 개별 연락","승인되면 담당 매니저가 개별로 연락드립니다."],["초청권 및 링크 발급","초청 참가 전용 참가권과 신청 링크를 보내드립니다."],["초청 참가 신청 완료","전용 링크에서 참가 신청을 마칩니다. 참가비는 면제됩니다."]],
   hook:"12월,<br>하남에서",hookEn:false,finTop:"달리는 것,<br>그 이상<i>.</i>",finEn:false,finCta:"초청 신청하기",
@@ -339,7 +339,7 @@ function prep(m){var n=m.W*m.H;m.L=bits(m.b,n);m.K=new Uint8Array(n);m.k.forEach
 var W0=prep(MAPS.world),R0=prep(MAPS.region);
 var cv=$('globe'),cx=cv.getContext('2d'),dpr=1,cw=0,ch=0,prog=0;
 var HAN={lon:127.2148,lat:37.5392},BOX={l:124,r:131,t:39,b:33},
-    ISL=[{lon:130.87,lat:37.49,kr:'울릉도',en:'Ulleungdo',up:1},{lon:131.87,lat:37.24,kr:'독도',en:'Dokdo'}];
+    ISL=[];
 function clamp(x){return x<0?0:x>1?1:x}
 function eio(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
 function size(){dpr=Math.min(2,devicePixelRatio||1);cw=cv.clientWidth;ch=cv.clientHeight;cv.width=cw*dpr;cv.height=ch*dpr;draw()}
@@ -362,9 +362,9 @@ function draw(){
     var land=new Path2D(),kor=new Path2D();
     for(var y=0;y<m.H;y++){var sy=Y(m.lat1-(y+.5)*dLat);if(sy<-6||sy>ch+6)continue;
       for(var x=x0;x<x1;x++){var i=y*m.W+x,k=m.K[i];if(!k&&!m.L[i])continue;var sx=X(m.lon0+(x+.5)*dLon);
-        var P=k?kor:land;P.moveTo(sx+r,sy);P.arc(sx,sy,k?Math.min(cap,r*1.2):r,0,6.2832)}}
+        var P=k?kor:land;P.moveTo(sx+r,sy);P.arc(sx,sy,r,0,6.2832)}}
     cx.globalAlpha=alpha*.5;cx.fillStyle='#999999';cx.fill(land);
-    cx.globalAlpha=alpha;cx.fillStyle='#002ACF';cx.fill(kor);cx.globalAlpha=1;
+    cx.fill(kor);cx.globalAlpha=1;
   }
   layer(W0,1-mix,6);layer(R0,mix,3.4);
   /* frame on Korea grows with the camera, then fades */
@@ -373,9 +373,6 @@ function draw(){
     cx.strokeStyle='rgba(255,109,7,'+fa+')';cx.lineWidth=1.5;cx.beginPath();
     [[x1,y1,1,1],[x2,y1,-1,1],[x1,y2,1,-1],[x2,y2,-1,-1]].forEach(function(c){cx.moveTo(c[0]+c[2]*L,c[1]);cx.lineTo(c[0],c[1]);cx.lineTo(c[0],c[1]+c[3]*L)});cx.stroke()}
   var la=clamp((zp-.72)/.2),fs=Math.round(Math.max(13,Math.min(16,cw/90)));
-  /* Ulleungdo · Dokdo */
-  if(la>0){cx.globalAlpha=la;cx.textBaseline='middle';cx.font='500 '+fs+'px "Noto Sans KR","Noto Sans CJK KR",sans-serif';
-    ISL.forEach(function(p){var ix=X(p.lon),iy=Y(p.lat);cx.fillStyle='#002ACF';cx.beginPath();cx.arc(ix,iy,3.4,0,6.2832);cx.fill();cx.fillStyle='#212121';cx.lineWidth=4;cx.strokeStyle='#FFFFFF';var t=lang==='kr'?p.kr:p.en,up=p.up,tx=up?ix-cx.measureText(t).width/2:ix+9,ty=up?iy-14:iy;cx.strokeText(t,tx,ty);cx.fillText(t,tx,ty)});cx.globalAlpha=1}
   /* Hanam pin */
   var px=X(HAN.lon),py=Y(HAN.lat),pr=4+zp*3;
   cx.strokeStyle='rgba(255,109,7,'+(.25+.35*zp)+')';cx.lineWidth=1;cx.beginPath();cx.arc(px,py,pr+8+zp*20,0,6.2832);cx.stroke();
