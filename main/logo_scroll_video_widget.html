@@ -1,0 +1,249 @@
+<div id="yhitf-logo-scroll-video">
+  <div id="yhitf-logo-video-sticky">
+
+    <video
+      id="yhitf-logo-video"
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source
+        src="https://raw.githubusercontent.com/hwoeikim/2026yhitf/main/main_logo.mp4"
+        type="video/mp4"
+      >
+    </video>
+
+  </div>
+</div>
+
+<style>
+
+#yhitf-logo-scroll-video {
+  position: relative;
+  width: 100%;
+  height: 350vh;
+  background: #000;
+}
+
+#yhitf-logo-video-sticky {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+  background: #000;
+}
+
+#yhitf-logo-video {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translate(-50%, -50%);
+
+  object-fit: cover;
+
+  background: #000;
+
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  #yhitf-logo-scroll-video {
+    height: auto;
+    background: transparent;
+  }
+  #yhitf-logo-video-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: transparent;
+  }
+  #yhitf-logo-video {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+</style>
+
+<script>
+
+(function () {
+
+  const section =
+    document.getElementById("yhitf-logo-scroll-video");
+
+  const video =
+    document.getElementById("yhitf-logo-video");
+
+  if (!section || !video) return;
+
+
+  let duration = 0;
+  let ready = false;
+  let ticking = false;
+
+  /* 마지막으로 요청한 시간 */
+  let lastTime = -1;
+
+
+  /* ================================
+     VIDEO READY
+  ================================= */
+
+  function initVideo() {
+
+    duration = video.duration;
+
+    if (
+      !duration ||
+      !isFinite(duration)
+    ) {
+      return;
+    }
+
+    ready = true;
+
+    video.pause();
+
+    updateVideo();
+
+  }
+
+
+  video.addEventListener(
+    "loadedmetadata",
+    initVideo
+  );
+
+
+  if (video.readyState >= 1) {
+    initVideo();
+  }
+
+
+  /* ================================
+     SCROLL → VIDEO
+  ================================= */
+
+  function updateVideo() {
+
+    ticking = false;
+
+    if (!ready) return;
+
+
+    const rect =
+      section.getBoundingClientRect();
+
+
+    let progress;
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const viewportHeight = window.innerHeight;
+      const startTop = viewportHeight - rect.height;
+      const endTop = Math.min(viewportHeight * 0.2, Math.max(0, startTop * 0.25));
+      const scrollDistance = Math.max(startTop - endTop, viewportHeight * 0.25);
+      progress = (startTop - rect.top) / scrollDistance;
+    } else {
+      const scrollDistance = section.offsetHeight - video.parentElement.clientHeight;
+      if (scrollDistance <= 0) return;
+      progress = (-rect.top) / scrollDistance;
+    }
+
+
+    progress =
+      Math.max(
+        0,
+        Math.min(1, progress)
+      );
+
+
+    const usableDuration =
+      Math.max(
+        0,
+        duration - 0.04
+      );
+
+
+    const targetTime =
+      progress *
+      usableDuration;
+
+
+    /*
+      너무 작은 시간 차이는 무시
+    */
+
+    if (
+      Math.abs(
+        targetTime -
+        lastTime
+      ) < 0.025
+    ) {
+
+      return;
+
+    }
+
+
+    lastTime =
+      targetTime;
+
+
+    /* 핵심 */
+
+    try {
+
+      video.currentTime =
+        targetTime;
+
+    }
+
+    catch (e) {}
+
+  }
+
+
+  /* ================================
+     SCROLL
+  ================================= */
+
+  function onScroll() {
+
+    if (ticking) return;
+
+    ticking = true;
+
+    requestAnimationFrame(
+      updateVideo
+    );
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    onScroll,
+    { passive:true }
+  );
+
+
+  window.addEventListener(
+    "resize",
+    updateVideo
+  );
+
+
+  video.load();
+
+})();
+
+</script>
