@@ -1,0 +1,62 @@
+<!-- ===== YHITF · 초청 신청서 페이지 꾸밈 (코드 위젯 1개, 입력폼 위젯 바로 위에 두기) =====
+     국문·영문 공용(사이트 언어 자동). 이 페이지의 아임웹 입력폼만 다시 칠합니다. 폼 항목·설정은 아임웹에서 그대로 관리. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+#yh-apply{--blue:#002ACF;--orange:#FF6D07;--ink:#212121;--gray:#999999;--line:#EAEAEA;
+  --kr:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+  background:var(--blue);color:#fff;font-family:var(--kr);letter-spacing:-.03em;word-break:keep-all;
+  padding:clamp(56px,9vw,120px) max(20px,4vw) clamp(48px,7vw,88px)}
+#yh-apply *{box-sizing:border-box;margin:0;padding:0}
+#yh-apply .in{max-width:760px;margin:0 auto}
+#yh-apply h1{font-family:"Archivo","Noto Sans KR",sans-serif;font-stretch:62%;font-variation-settings:"wdth" 62;font-weight:900;
+  text-transform:uppercase;font-size:clamp(64px,11vw,148px);line-height:.88;letter-spacing:-.01em}
+#yh-apply h1.ko{font-family:var(--kr);font-stretch:100%;font-variation-settings:normal;font-size:clamp(44px,7vw,88px);line-height:1.12;letter-spacing:-.07em}
+#yh-apply h1 i{display:inline-block;width:.15em;height:.15em;margin-left:.05em;border-radius:50%;background:var(--orange);vertical-align:baseline}
+#yh-apply p{margin-top:clamp(20px,2.4vw,28px);font-size:clamp(16px,1.4vw,19px);line-height:1.7;color:rgba(255,255,255,.86);max-width:36em}
+#yh-apply p b{color:#fff;font-weight:700}
+
+/* --- the imweb form below: one calm column, clear fields, brand button --- */
+._form-widget{max-width:760px;margin:0 auto;padding:clamp(48px,6vw,80px) 0 clamp(64px,8vw,120px);font-family:var(--yh-kr,"Pretendard","Noto Sans KR",sans-serif)}
+._form-widget .form-group{margin:0 0 30px!important}
+._form-widget .control-label{display:block;margin:0 0 10px!important;font-size:15px!important;font-weight:700!important;color:#212121!important;letter-spacing:-.03em;line-height:1.4}
+._form-widget .icon-required{display:inline-block;width:6px;height:6px;margin:0 0 3px 6px;border-radius:50%;background:#FF6D07;vertical-align:middle}
+._form-widget .icon-required:before{display:none!important}
+._form-widget .form-control{height:54px!important;width:100%!important;padding:0 18px!important;border:1px solid #CFCFCF!important;border-radius:12px!important;
+  background:#fff!important;color:#212121!important;font-size:16px!important;box-shadow:none!important;transition:border-color .2s,box-shadow .2s}
+._form-widget textarea.form-control{height:auto!important;min-height:132px;padding:14px 18px!important;line-height:1.6;resize:vertical}
+._form-widget .form-control:focus{border-color:#002ACF!important;box-shadow:0 0 0 3px rgba(0,42,207,.14)!important;outline:none}
+._form-widget .form-control::placeholder{color:#999}
+/* phone: three boxes in one row */
+._form-widget .phonenumber_wrap{display:flex!important;align-items:center;gap:8px}
+._form-widget .phonenumber_wrap .form-control{flex:1 1 0;min-width:0;width:auto!important;text-align:center;padding:0 8px!important}
+._form-widget .phonenumber_wrap .line{color:#999}
+._form-widget .datetime_wrap,._form-widget .form-select-wrap,._form-widget .email_wrap{display:block!important;width:100%!important}
+/* single choice / consent: pills you can tap */
+._form-widget .radio-styled,._form-widget .checkbox-styled{display:inline-block!important;margin:0 8px 8px 0!important;padding:0!important}
+._form-widget .radio-styled label,._form-widget .checkbox-styled label{position:relative;display:inline-flex!important;align-items:center;gap:10px;min-height:50px;margin:0!important;
+  padding:12px 22px!important;border:1px solid #CFCFCF;border-radius:999px;background:#fff;color:#212121;font-size:15px;font-weight:500;line-height:1.45;cursor:pointer;transition:all .2s}
+._form-widget .radio-styled input,._form-widget .checkbox-styled input{position:absolute!important;opacity:0!important;width:1px;height:1px;pointer-events:none}
+._form-widget .radio-styled span:before,._form-widget .radio-styled span:after,._form-widget .checkbox-styled span:before,._form-widget .checkbox-styled span:after{display:none!important}
+._form-widget .radio-styled span,._form-widget .checkbox-styled span{padding:0!important;margin:0!important}
+._form-widget .radio-styled label:has(input:checked){border-color:#002ACF;background:#002ACF;color:#fff}
+._form-widget .checkbox-styled label{border-radius:14px;align-items:flex-start;padding-left:52px!important}
+._form-widget .checkbox-styled label:before{content:"";position:absolute;left:20px;top:15px;width:20px;height:20px;border:1.5px solid #999;border-radius:6px;background:#fff}
+._form-widget .checkbox-styled label:has(input:checked){border-color:#002ACF}
+._form-widget .checkbox-styled label:has(input:checked):before{border-color:#002ACF;background:#002ACF url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+._form-widget .radio-styled label:focus-within,._form-widget .checkbox-styled label:focus-within{box-shadow:0 0 0 3px rgba(0,42,207,.18)}
+/* submit */
+._form-widget ._input_form_submit{display:flex!important;align-items:center;justify-content:center;width:100%;height:62px;margin-top:12px;border:0!important;border-radius:999px!important;
+  background:#FF6D07!important;color:#fff!important;font-size:17px!important;font-weight:800!important;letter-spacing:-.02em;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+._form-widget ._input_form_submit:hover{transform:translateY(-2px)}
+@media (max-width:640px){._form-widget{padding-left:20px;padding-right:20px}._form-widget .radio-styled{display:block!important}._form-widget .radio-styled label{display:flex!important}}
+</style>
+<section id="yh-apply"><div class="in"><h1 id="yhApT"></h1><p id="yhApP"></p></div></section>
+<script>
+(function(){var en=/^en/i.test(document.documentElement.lang||'')||/^en\.|yhitfeng/.test(location.hostname);
+  var t=document.getElementById('yhApT'),p=document.getElementById('yhApP');if(!t)return;
+  if(en){t.innerHTML='Apply for<br>your invitation<i aria-label="."></i>';
+    p.innerHTML='Share your ITRA profile so we can verify your current Performance Index. <b>Your athlete manager will contact you by email</b> once the review is complete.';}
+  else{t.className='ko';t.innerHTML='초청 신청서<i aria-label="."></i>';
+    p.innerHTML='현재 ITRA 퍼포먼스 인덱스를 확인할 수 있도록 프로필 링크를 정확히 입력해 주세요. <b>심사가 끝나면 담당 매니저가 개별로 연락드립니다.</b>';}
+})();
+</script>
