@@ -78,7 +78,7 @@ js = js.replace("__MAPS__", maps)
 # header offset (fixed/sticky imweb header)
 js = js.replace("function onScroll(){", """function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header,#doz_header_wrap .inline-section-wrap,#doz_header_wrap .section_wrap');
   for(var i=0;i<hs.length;i++){var e=hs[i];if(root.contains(e))continue;var r=e.getBoundingClientRect();
-    if(r.height>0&&r.height<innerHeight*.35&&r.top<=1&&r.bottom>0){var cs=getComputedStyle(e),fx=/(fixed|sticky)/.test(cs.position);
+    if(r.height>0&&r.height<innerHeight*.35&&r.top<innerHeight*.2&&r.bottom>0){var cs=getComputedStyle(e),fx=/(fixed|sticky)/.test(cs.position);
       for(var q=e.parentElement;!fx&&q&&q!==document.body;q=q.parentElement){if(/(fixed|sticky)/.test(getComputedStyle(q).position))fx=true}
       if(fx)m=Math.max(m,r.bottom)}}
   root.style.setProperty('--hd',Math.round(Math.min(m,innerHeight*.3))+'px')}
