@@ -83,7 +83,8 @@ js = js.replace("function onScroll(){", """function hd(){var m=0,hs=document.que
       if(fx)m=Math.max(m,r.bottom)}}
   root.style.setProperty('--hd',Math.round(Math.min(m,innerHeight*.3))+'px')}
 var hdN=0;
-function onScroll(){if(hdN++%15===0)hd();""", 1)
+addEventListener('load',function(){hd();onScroll()});setTimeout(hd,1500);
+function onScroll(){hd();""", 1)
 
 roll = open('/home/claude/2026yhitf/main/logo_roll_widget.html').read()
 keen = re.search(r'name:\'KEEN\',\s*src:"([^"]+)"', roll).group(1)

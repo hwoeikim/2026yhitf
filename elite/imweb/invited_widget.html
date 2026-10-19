@@ -417,7 +417,8 @@ function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header
       if(fx)m=Math.max(m,r.bottom)}}
   root.style.setProperty('--hd',Math.round(Math.min(m,innerHeight*.3))+'px')}
 var hdN=0;
-function onScroll(){if(hdN++%15===0)hd();
+addEventListener('load',function(){hd();onScroll()});setTimeout(hd,1500);
+function onScroll(){hd();
   if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;
     var r=letter.getBoundingClientRect();prog=reduce?1:clamp(-r.top/(r.height-innerHeight));draw();
     var st=$('steps'),steps=st.querySelectorAll('.step'),mid=innerHeight*.55,on=0;
