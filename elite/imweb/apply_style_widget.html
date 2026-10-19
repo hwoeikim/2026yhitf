@@ -16,8 +16,9 @@
 #yh-apply p b{color:#fff;font-weight:700}
 
 /* --- the imweb form below: one calm column, clear fields, brand button --- */
-._form-widget{max-width:760px;margin:0 auto;padding:clamp(48px,6vw,80px) 0 clamp(64px,8vw,120px);font-family:var(--yh-kr,"Pretendard","Noto Sans KR",sans-serif)}
-._form-widget .form-group{margin:0 0 30px!important}
+._form-widget{width:100%!important;max-width:none!important;margin:0!important;padding:clamp(48px,6vw,80px) 0 clamp(64px,8vw,120px);font-family:var(--yh-kr,"Pretendard","Noto Sans KR",sans-serif)}
+._form-widget form{display:block;width:100%;max-width:760px;margin:0 auto!important}
+._form-widget .form-group{margin:0 0 30px!important;width:100%!important;float:none!important}
 ._form-widget .control-label{display:block;margin:0 0 10px!important;font-size:15px!important;font-weight:700!important;color:#212121!important;letter-spacing:-.03em;line-height:1.4}
 ._form-widget .icon-required{display:inline-block;width:6px;height:6px;margin:0 0 3px 6px;border-radius:50%;background:#FF6D07;vertical-align:middle}
 ._form-widget .icon-required:before{display:none!important}
@@ -37,7 +38,7 @@
   padding:12px 22px!important;border:1px solid #CFCFCF;border-radius:999px;background:#fff;color:#212121;font-size:15px;font-weight:500;line-height:1.45;cursor:pointer;transition:all .2s}
 ._form-widget .radio-styled input,._form-widget .checkbox-styled input{position:absolute!important;opacity:0!important;width:1px;height:1px;pointer-events:none}
 ._form-widget .radio-styled span:before,._form-widget .radio-styled span:after,._form-widget .checkbox-styled span:before,._form-widget .checkbox-styled span:after{display:none!important}
-._form-widget .radio-styled span,._form-widget .checkbox-styled span{padding:0!important;margin:0!important}
+._form-widget .radio-styled span,._form-widget .checkbox-styled span{padding:0!important;margin:0!important;color:inherit!important;font-size:15px!important;opacity:1!important}
 ._form-widget .radio-styled label:has(input:checked){border-color:#002ACF;background:#002ACF;color:#fff}
 ._form-widget .checkbox-styled label{border-radius:14px;align-items:flex-start;padding-left:52px!important}
 ._form-widget .checkbox-styled label:before{content:"";position:absolute;left:20px;top:15px;width:20px;height:20px;border:1.5px solid #999;border-radius:6px;background:#fff}
