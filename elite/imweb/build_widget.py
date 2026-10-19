@@ -76,7 +76,7 @@ js = re.sub(r"\n\s*\[\]\.forEach\.call\(document\.querySelectorAll\('\.lang butt
 js = js.replace("document.querySelector(", "root.querySelector(").replace("document.querySelectorAll(", "root.querySelectorAll(")
 js = js.replace("__MAPS__", maps)
 # header offset (fixed/sticky imweb header)
-js = js.replace("function onScroll(){", """function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header');
+js = js.replace("function onScroll(){", """function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header,#doz_header_wrap .inline-section-wrap,#doz_header_wrap .section_wrap');
   for(var i=0;i<hs.length;i++){var e=hs[i];if(root.contains(e))continue;var r=e.getBoundingClientRect();
     if(r.height>0&&r.height<innerHeight*.35&&r.top<=1&&r.bottom>0){var cs=getComputedStyle(e),fx=/(fixed|sticky)/.test(cs.position);
       for(var q=e.parentElement;!fx&&q&&q!==document.body;q=q.parentElement){if(/(fixed|sticky)/.test(getComputedStyle(q).position))fx=true}
@@ -85,6 +85,9 @@ js = js.replace("function onScroll(){", """function hd(){var m=0,hs=document.que
 var hdN=0;
 function onScroll(){if(hdN++%15===0)hd();""", 1)
 
+roll = open('/home/claude/2026yhitf/main/logo_roll_widget.html').read()
+keen = re.search(r'name:\'KEEN\',\s*src:"([^"]+)"', roll).group(1)
+js = js.replace("src:'img/logos/keen.svg'", 'src:"' + keen + '"')
 page = html + js
 def cdn(s): return re.sub(r'(?<=["\'(])img/', BASE, s)
 css, html, js = cdn(css), cdn(html), cdn(js)
