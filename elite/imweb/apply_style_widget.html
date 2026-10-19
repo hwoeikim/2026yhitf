@@ -31,6 +31,18 @@
 ._form-widget .phonenumber_wrap{display:flex!important;align-items:center;gap:8px}
 ._form-widget .phonenumber_wrap .form-control{flex:1 1 0;min-width:0;width:auto!important;text-align:center;padding:0 8px!important}
 ._form-widget .phonenumber_wrap .line{color:#999}
+/* international phone (EN): country picker + number */
+._form-widget .phonenumber_wrap .chosen-container{flex:0 0 200px;width:200px!important;font-size:16px}
+._form-widget .phonenumber_wrap .chosen-single{display:flex!important;align-items:center;height:54px!important;line-height:1.4!important;padding:0 40px 0 18px!important;border:1px solid #CFCFCF!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;color:#212121!important}
+._form-widget .phonenumber_wrap .chosen-single.chosen-default{color:#999!important}
+._form-widget .phonenumber_wrap .chosen-single span{display:block!important;margin:0!important;line-height:1.4!important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+._form-widget .phonenumber_wrap .chosen-single div{position:absolute!important;right:18px!important;top:50%!important;width:auto!important;height:auto!important;transform:translateY(-50%);display:block!important}
+._form-widget .phonenumber_wrap .chosen-single div b{display:none!important}
+._form-widget .phonenumber_wrap .chosen-single div:after{content:"";display:block;width:8px;height:8px;border-right:1.5px solid #999;border-bottom:1.5px solid #999;transform:translateY(-2px) rotate(45deg)}
+._form-widget .phonenumber_wrap .chosen-with-drop .chosen-single,._form-widget .phonenumber_wrap .chosen-container-active .chosen-single{border-color:#002ACF!important;box-shadow:0 0 0 3px rgba(0,42,207,.14)!important}
+._form-widget .phonenumber_wrap .chosen-drop{border:1px solid #CFCFCF!important;border-radius:12px!important;margin-top:6px!important;box-shadow:0 12px 32px rgba(33,33,33,.12)!important;overflow:hidden;width:280px!important}
+._form-widget .phonenumber_wrap .chosen-results li.highlighted{background:#002ACF!important;color:#fff!important}
+._form-widget .phonenumber_wrap ._international_tel_input{flex:1 1 0!important;min-width:0;max-width:none!important;width:auto!important;text-align:left!important;padding:0 18px!important}
 ._form-widget .datetime_wrap,._form-widget .form-select-wrap,._form-widget .email_wrap{display:block!important;width:100%!important}
 /* single choice / consent: pills you can tap */
 ._form-widget .radio-styled,._form-widget .checkbox-styled{display:inline-block!important;margin:0 8px 8px 0!important;padding:0!important}
@@ -49,7 +61,7 @@
 ._form-widget ._input_form_submit{display:flex!important;align-items:center;justify-content:center;width:100%;max-width:760px;margin-left:auto!important;margin-right:auto!important;height:62px;margin-top:12px;border:0!important;border-radius:999px!important;
   background:#FF6D07!important;color:#fff!important;font-size:17px!important;font-weight:800!important;letter-spacing:-.02em;transition:transform .25s cubic-bezier(.16,1,.3,1)}
 ._form-widget ._input_form_submit:hover{transform:translateY(-2px)}
-@media (max-width:640px){._form-widget{padding-left:20px;padding-right:20px}._form-widget .radio-styled{display:block!important}._form-widget .radio-styled label{display:flex!important}}
+@media (max-width:640px){._form-widget{padding-left:20px;padding-right:20px}._form-widget .radio-styled{display:block!important}._form-widget .radio-styled label{display:flex!important}._form-widget .phonenumber_wrap .chosen-container{flex-basis:136px;width:136px!important}}
 </style>
 <section id="yh-apply"><div class="in"><h1 id="yhApT"></h1><p id="yhApP"></p></div></section>
 <script>
