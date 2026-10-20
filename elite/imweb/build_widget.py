@@ -94,6 +94,29 @@ def cdn(s): return re.sub(r'(?<=["\'(])img/', BASE, s)
 css, html, js = cdn(css), cdn(html), cdn(js)
 assert 'img/' not in re.sub(re.escape(BASE), '', css + html + js)
 
+# ---- floating "apply" button (lives on <body> so imweb section transforms can't break position:fixed)
+FAB = """<style>
+#yh-inv-fab{position:fixed;right:24px;bottom:24px;z-index:9990;display:inline-flex;align-items:center;justify-content:center;height:58px;padding:0 30px;border-radius:999px;
+  background:#FF6D07;color:#fff!important;text-decoration:none!important;font:800 17px/1 "Pretendard","Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;letter-spacing:-.02em;
+  box-shadow:0 10px 28px rgba(33,33,33,.22);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .35s cubic-bezier(.16,1,.3,1)}
+#yh-inv-fab.on{opacity:1;transform:none;pointer-events:auto}
+#yh-inv-fab:hover{background:#ff7d22}
+#yh-inv-fab:focus-visible{outline:3px solid #002ACF;outline-offset:3px}
+@media (max-width:640px){#yh-inv-fab{right:16px;bottom:16px;height:50px;padding:0 22px;font-size:15px}}
+@media (prefers-reduced-motion:reduce){#yh-inv-fab{transition:none}}
+</style>
+<script>
+(function(){var root=document.getElementById('yh-inv');if(!root||document.getElementById('yh-inv-fab'))return;
+  var en=/^en/i.test(document.documentElement.lang||'')||/^en\\.|yhitfeng/.test(location.hostname);
+  var a=document.createElement('a');a.id='yh-inv-fab';a.href='__APPLY__';a.textContent=en?'Apply for an invitation':'초청 신청하기';document.body.appendChild(a);
+  var fin=root.querySelector('.fin .cta');
+  function upd(){var r=root.getBoundingClientRect(),past=r.top<-innerHeight*.5&&r.bottom>innerHeight*.6,hideFin=false;
+    if(fin){var f=fin.getBoundingClientRect();hideFin=f.top<innerHeight&&f.bottom>0}
+    a.classList.toggle('on',past&&!hideFin)}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+</script>""".replace('__APPLY__', APPLY)
+
 out = f"""<!-- ===== YHITF · THE INVITED (엘리트 초청 페이지, 코드 위젯 1개) =====
      국문·영문 사이트 공용: 사이트 언어(html lang)를 보고 KR/EN 문구를 자동으로 고릅니다.
      이미지: GitHub(jsDelivr CDN) {SHA[:7]} 버전. 섹션 설정: 상하·좌우 여백 0, 기본 그리드 간격 끔, 가로 100% 확장. -->
@@ -101,6 +124,7 @@ out = f"""<!-- ===== YHITF · THE INVITED (엘리트 초청 페이지, 코드 �
 <style>{css}</style>
 <div id="yh-inv">{html}</div>
 <script>{js}</script>
+{FAB}
 """
 open('/home/claude/2026yhitf/elite/imweb/invited_widget.html', 'w').write(out)
 print(len(out), 'keyframes:', KF)
