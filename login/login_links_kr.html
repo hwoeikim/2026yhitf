@@ -1,10 +1,27 @@
 <style id="yh-login-links">
-/* YHITF · 로그인 팝업의 회원가입 / 비밀번호 찾기 링크를 큰 버튼으로 (CSS만 사용 - 아임웹 기본 동작 그대로) */
-.modal_site_login .modal_article.login .over_h{display:flex!important;flex-direction:column;gap:8px;margin-top:16px;overflow:visible}
-.modal_site_login .modal_article.login .over_h>a{float:none!important;position:relative;display:flex!important;align-items:center;width:100%;min-height:50px;padding:0 44px 0 18px;border:1px solid #EAEAEA;border-radius:10px;background:#fff;font-size:0!important;line-height:1.3;text-decoration:none!important;transition:border-color .2s,background .2s}
-.modal_site_login .modal_article.login .over_h>a::before{font-size:15px;font-weight:700;color:#212121;letter-spacing:-.02em}
-.modal_site_login .modal_article.login .over_h>a::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;border-top:2px solid #002ACF;border-right:2px solid #002ACF;transform:translateY(-50%) rotate(45deg)}
-.modal_site_login .modal_article.login .over_h>a:hover,.modal_site_login .modal_article.login .over_h>a:focus-visible{border-color:#002ACF;background:#F5F7FF;outline:none}
-.modal_site_login .modal_article.login .over_h>a.float_l::before{content:"처음이신가요?  회원가입"}
-.modal_site_login .modal_article.login .over_h>a.float_r::before{content:"비밀번호가 기억나지 않으시나요?"}
+.modal_site_login .modal_article.login .over_h,.widget.login .over_h{display:flex!important;flex-direction:column;gap:8px;margin-top:16px;overflow:visible}
+.modal_site_login .modal_article.login .over_h>a,.widget.login .over_h>a{float:none!important;position:relative;display:flex!important;align-items:center;width:100%;min-height:50px;padding:0 44px 0 18px;border:1px solid #EAEAEA;border-radius:10px;background:#fff;font-size:0!important;line-height:1.3;text-decoration:none!important;transition:border-color .2s,background .2s}
+.modal_site_login .modal_article.login .over_h>a::before,.widget.login .over_h>a::before{font-size:15px;font-weight:700;color:#212121;letter-spacing:-.02em}
+.modal_site_login .modal_article.login .over_h>a::after,.widget.login .over_h>a::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;border-top:2px solid #002ACF;border-right:2px solid #002ACF;transform:translateY(-50%) rotate(45deg)}
+.modal_site_login .modal_article.login .over_h>a:hover,.widget.login .over_h>a:hover,.modal_site_login .modal_article.login .over_h>a:focus-visible,.widget.login .over_h>a:focus-visible{border-color:#002ACF;background:#F5F7FF;outline:none}
+.modal_site_login .modal_article.login .over_h>a.float_l::before,.widget.login .over_h>a.float_l::before{content:"처음이신가요?  회원가입"}
+.modal_site_login .modal_article.login .over_h>a.float_r::before,.widget.login .over_h>a.float_r::before{content:"비밀번호가 기억나지 않으시나요?"}
+.widget.login::before{content:"참가신청과 1:1 문의는 로그인 후 이용할 수 있어요.\A처음이시면 아래 회원가입부터 진행해 주세요.";display:block;white-space:pre-line;margin:0 0 18px;padding:16px 18px;border-radius:10px;background:#F5F7FF;color:#212121;font-size:15px;font-weight:500;line-height:1.6;letter-spacing:-.02em}
+.widget.login .over_h{max-width:none}
 </style>
+<script>
+(function(){
+  if(window.__yhGuideGate)return;window.__yhGuideGate=1;
+  function guest(){return typeof window.MEMBER_HASH==='string'&&window.MEMBER_HASH==='';}
+  document.addEventListener('click',function(e){
+    try{
+      if(!guest()||/^\/entry-guide/.test(location.pathname))return;
+      var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;if(!a)return;
+      var u=new URL(a.getAttribute('href'),location.href);
+      if(!(u.hostname===location.hostname||/(^|\.)yhitf\.co\.kr$/.test(u.hostname)))return;
+      if(!/^\/registration\/?$/.test(u.pathname)||u.search)return;
+      e.preventDefault();e.stopPropagation();location.href='/entry-guide';
+    }catch(_){}
+  },true);
+})();
+</script>
