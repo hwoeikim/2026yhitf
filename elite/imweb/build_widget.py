@@ -5,7 +5,7 @@ APPLY = sys.argv[2] if len(sys.argv) > 2 else '#apply'
 BASE = f'https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@{SHA}/elite/proto/img/'
 P = '/home/claude/2026yhitf/elite/proto/'
 src = open(P + 'src.html').read()
-maps = open('/tmp/claude-0/geo/maps3.json').read()
+maps = open(P + '../imweb/maps3.json').read()
 
 css = src[src.index('<style>') + 7: src.index('</style>')]
 html = src[src.index('</style>') + 8: src.index('<script>')]
