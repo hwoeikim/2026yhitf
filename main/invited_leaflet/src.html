@@ -93,7 +93,7 @@ var EN=/^en/i.test(document.documentElement.lang||'')||/^en\.|yhitfeng/.test(loc
 var T=EN?{
   q:'We invite athletes proven on the world stage<br>to <em>Hanam, the running capital</em>.',
   cq:'We invite athletes proven<br>on the world stage to <em>Hanam</em>.',
-  i1:['BENEFIT','Entry fee waived'],i2:['15KM · 28KM TRAIL RUN','ITRA Performance Index M 720 · W 620 or higher'],i3:['5KM · 10KM RUNNING','Official records and results, reviewed one by one'],
+  i1:['BENEFIT','Entry fee waived'],i2:['15KM · 28KM TRAIL RUN','ITRA Performance Index M&nbsp;720+ · W&nbsp;620+'],i3:['5KM · 10KM RUNNING','Reviewed on official records and results'],
   cta:'Official elite athlete invitation<span>Criteria and how to apply</span>',btn:'View invitation details',aria:'Elite athlete invitation'
 }:{
   q:'세계 무대에서 실력을 증명한 선수들을<br><em>러닝 수도 하남</em>으로 <em>초대</em>합니다.',
@@ -124,7 +124,7 @@ function sheetHTML(){
     '<div class="mp ink">'+pmapSVG()+'<p class="lb">HANAM, KOREA<small>DEC. 12–13, 2026</small></p></div>';}
 
 /* ---------- build the leaflet for the current layout ---------- */
-var mode='',N=4,P=[],cv,c2,pw,ph,SMAX,vw,vh,dpr;
+var mode='',N=4,P=[],cv,c2,pw,ph,SMAX,vw,vh,dpr,FIT=1;
 function build(){
   N=mode==='h'?4:2;var h='',close='';
   for(var i=0;i<N;i++){
@@ -185,8 +185,10 @@ var lastHd=-1;
 function layout(){
   hd();vw=stick.clientWidth;vh=stick.clientHeight;dpr=Math.min(devicePixelRatio||1,2);
   var m=vw<760?'v':'h';if(m!==mode){mode=m;root.classList.remove('h','v');root.classList.add(m);build()}
-  if(mode==='h'){pw=Math.min(300,(vw-80)/4);ph=Math.min(pw*1.8,vh*.66)}
-  else{pw=Math.min(vw-32,440);ph=Math.min(pw*.95,(vh-190)/2)}
+  if(mode==='h'){pw=Math.min(300,(vw-80)/4,vh*.66/1.8);ph=pw*1.8}
+  else{pw=Math.min(vw-32,440);ph=pw}
+  /* the open sheet must fit above the button: shrink the whole leaflet if the screen is short */
+  FIT=Math.min(1,mode==='h'?(vh-150)/ph:(vh-190)/(ph*2));
   root.style.setProperty('--pw',pw+'px');root.style.setProperty('--ph',ph+'px');root.style.setProperty('--rows',mode==='h'?1:2);
   SMAX=Math.max(vw/pw,vh/ph)*1.02;
   cv.width=Math.round(pw*SMAX*dpr);cv.height=Math.round(ph*SMAX*dpr);
@@ -197,15 +199,15 @@ function update(){
   /* world → Korea (hold) → Hanam · pull back to the folded cover · flip and unfold · CTA */
   var zp=p<.17?.4*eio(p/.17):p<.24?.4:.4+.6*eio(clamp((p-.24)/.11)),
       back=eio(clamp((p-.36)/.14)),open=eio(clamp((p-.56)/.3)),fin=eo(clamp((p-.86)/.08));
-  var S=SMAX+(1-SMAX)*back,k=cv.width/pw,visW=Math.min(pw,vw/S)*k,visH=Math.min(ph,vh/S)*k;
+  var S=SMAX+(FIT-SMAX)*back,k=cv.width/pw,visW=Math.min(pw,vw/S)*k,visH=Math.min(ph,vh/S)*k;
   drawMap(c2,cv.width,cv.height,zp,{vx:(cv.width-visW)/2,vy:(cv.height-visH)/2,vw:visW,vh:visH,endSpan:.42-.17*back,u:k/S,lab:Math.max(18,Math.min(30,vw/50)),labelA:1-clamp(back*3)});
   hud.style.opacity=1-clamp((p-.34)/.06);hud.style.visibility=p>.41?'hidden':'visible';
   var f=1-open,a=180*f*.985,ax=mode==='h'?'rotateY':'rotateX';
   var sg=mode==='h'?1:-1;for(var i=1;i<P.length;i++)P[i].style.transform=ax+'('+(sg*(i%2?-1:1)*a)+'deg)';
   var cvr=lf.querySelectorAll('.cover .ct,.cover .cq,.cover .cl');for(var c=0;c<cvr.length;c++)cvr[c].style.opacity=clamp((back-.35)/.45);
   var flip=180*(1-open),tilt=(1-open)*back*-12,lift=back*(1-open)*-8,cy=fin*Math.min(vh*.06,40);
-  if(mode==='h'){var w=pw*(1+3*open);lf.style.transform='translate('+(-w/2)+'px,'+(-ph/2-cy)+'px) scale('+S+') rotateY('+(flip+tilt)+'deg) rotateX('+lift+'deg)'}
-  else{var hh=ph*(1+open);lf.style.transform='translate('+(-pw/2)+'px,'+(-hh/2-cy*1.6)+'px) scale('+S+') rotateX('+(-flip)+'deg) rotateZ('+(tilt*.4)+'deg)'}
+  if(mode==='h'){var w=pw*(1+3*open);lf.style.transform='translate('+(-pw/2-(w-pw)/2*S)+'px,'+(-ph/2-cy)+'px) scale('+S+') rotateY('+(flip+tilt)+'deg) rotateX('+lift+'deg)'}
+  else{var hh=ph*(1+open);lf.style.transform='translate('+(-pw/2)+'px,'+(-ph/2-(hh-ph)/2*S-cy*1.6)+'px) scale('+S+') rotateX('+(-flip)+'deg) rotateZ('+(tilt*.4)+'deg)'}
   var sh=lf.querySelectorAll('.shade'),dir=mode==='h'?'90deg':'180deg';
   for(var j=0;j<sh.length;j++){var on=f*.55;sh[j].style.background=j%2?'linear-gradient('+dir+',rgba(33,33,33,'+on+'),rgba(33,33,33,'+(on*.2)+'))':'linear-gradient('+dir+',rgba(255,255,255,0),rgba(33,33,33,'+(on*.35+.04)+'))'}
   cta.style.opacity=fin;cta.style.visibility=fin>0?'visible':'hidden';cta.style.transform='translateX(-50%) translateY('+((1-fin)*16)+'px)';
