@@ -195,7 +195,7 @@ function layout(){
   if(reduce)root.classList.add('rm');
   update();}
 function update(){
-  var r=root.getBoundingClientRect(),p=reduce?1:clamp(-r.top/(r.height-vh));
+  var r=root.getBoundingClientRect(),p=reduce?1:clamp((Math.max(lastHd,0)-r.top)/(r.height-vh));
   /* world → Korea (hold) → Hanam · pull back to the folded cover · flip and unfold · CTA */
   var zp=p<.17?.4*eio(p/.17):p<.24?.4:.4+.6*eio(clamp((p-.24)/.11)),
       back=eio(clamp((p-.36)/.14)),open=eio(clamp((p-.56)/.3)),fin=eo(clamp((p-.86)/.08));
