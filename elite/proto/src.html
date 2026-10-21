@@ -356,7 +356,9 @@ var SP = [
     { name:'대한트레일러닝협회', src:'img/logos/ktra.png',   ratio:4.99, size:1 },
     { name:'문화체육관광부',     src:'img/logos/mcst.png',   ratio:4.85, size:1 },
     { name:'하남시체육회',       src:'img/logos/hsc.png',    ratio:3.35, size:1 },
-    { name:'KEEN',               src:'img/logos/keen.svg',   ratio:2.64, size:0.8 }
+    { name:'KEEN',               src:'img/logos/keen.svg',   ratio:2.64, size:0.8 },
+    { name:'네이처밸리',         src:'img/logos/naturevalley.png', ratio:3.52, size:0.9 },
+    { name:'진안홍삼',           src:'img/logos/jinan.png',  ratio:2.28, size:1 }
 ];
 var h='';for(var k=0;k<4;k++)SP.forEach(function(s){var hh=Math.sqrt(4/s.ratio)*(s.size||1);h+='<div class="logo" style="--h:'+hh.toFixed(3)+';--r:'+s.ratio+'"><img src="'+s.src+'" alt="'+(k?'':s.name)+'"'+(k?' aria-hidden="true"':'')+'></div>'});$('logos').innerHTML=h;
 
