@@ -177,7 +177,7 @@ function drawMap(cx,w,h,zp,o){
 }
 
 /* ---------- layout + header offset (imweb fixed header) ---------- */
-function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header');
+function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header,#doz_header_wrap .inline-section-wrap,#doz_header_wrap .section_wrap,.inline-section-wrap.fixed_transf');
   for(var i=0;i<hs.length;i++){var e=hs[i];if(root.contains(e))continue;var r=e.getBoundingClientRect();
     if(r.height>0&&r.height<innerHeight*.35&&r.top<innerHeight*.2&&r.bottom>0){var fx=false;for(var q=e;q&&q!==document.body;q=q.parentElement){if(/(fixed|sticky)/.test(getComputedStyle(q).position)){fx=true;break}}if(fx)m=Math.max(m,r.bottom)}}
   root.style.setProperty('--hd',Math.round(Math.min(m,innerHeight*.3))+'px')}
