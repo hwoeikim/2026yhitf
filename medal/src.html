@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YHITF Finisher Medal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+:root{--blue:#002ACF;--orange:#FF6D07;--white:#FFFFFF;--ink:#212121;--gray:#999999;--line:#EAEAEA}
+html,body{margin:0;background:var(--ink)}
+#yh-medal{position:relative;height:max(720px,100vh);min-height:640px;overflow:hidden;background:var(--ink);color:var(--white);
+  font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;letter-spacing:-.03em;word-break:keep-all}
+#yh-medal canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#yh-medal canvas.fg{touch-action:pan-y;cursor:grab}
+#yh-medal canvas.fg:active{cursor:grabbing}
+#yh-medal .ttl{position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);margin:0;display:flex;flex-direction:column;align-items:center;pointer-events:none;
+  font-family:"Archivo","Noto Sans KR",sans-serif;font-stretch:62%;font-variation-settings:"wdth" 62;font-weight:900;text-transform:uppercase;
+  font-size:clamp(96px,17vw,300px);line-height:.82;letter-spacing:-.01em;color:var(--white);white-space:nowrap}
+#yh-medal .sub{margin:0;font-size:clamp(15px,1.3vw,18px);font-weight:700;color:var(--white)}
+#yh-medal .ft{position:absolute;left:0;right:0;bottom:clamp(28px,5vh,56px);display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2vh,22px);padding:0 20px}
+#yh-medal .km{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(33,33,33,.38);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#yh-medal .km button{appearance:none;border:0;margin:0;cursor:pointer;height:40px;padding:0 18px;border-radius:999px;background:transparent;color:rgba(255,255,255,.78);
+  font:800 15px/1 "Archivo","Pretendard",sans-serif;letter-spacing:.01em;transition:background .35s cubic-bezier(.16,1,.3,1),color .35s}
+#yh-medal .km button[aria-pressed="true"]{background:var(--orange);color:var(--white)}
+#yh-medal .km button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
+#yh-medal .note{margin:0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.78);text-align:center;text-shadow:0 1px 8px rgba(33,33,33,.6)}
+@media (max-width:640px){#yh-medal .km button{height:36px;padding:0 13px;font-size:14px}#yh-medal .note{font-size:12px}}
+</style>
+</head>
+<body>
+<section id="yh-medal" aria-label="완주 메달">
+  <canvas class="bg" aria-hidden="true"></canvas>
+  <h2 class="ttl" aria-label="Finisher Medal"><span>Finisher</span><span>Medal</span></h2>
+  <canvas class="fg" aria-hidden="true"></canvas>
+  <div class="ft">
+    <p class="sub" id="yhMdSub">지름 80mm · 종목별 메달끈 4종</p>
+    <div class="km" role="group" aria-label="메달끈 종목">
+      <button type="button" aria-pressed="true" data-i="0">5KM</button><button type="button" aria-pressed="false" data-i="1">10KM</button><button type="button" aria-pressed="false" data-i="2">15KM</button><button type="button" aria-pressed="false" data-i="3">28KM</button>
+    </div>
+    <p class="note" id="yhMdNote">*예상 비주얼 이미지로 실물과 다를 수 있으며, 실물 촬영 사진은 홈페이지에 공개될 예정입니다.</p>
+  </div>
+</section>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const TEX = __TEX__;
+const root = document.getElementById('yh-medal'), cv = root.querySelector('canvas.fg'), cvb = root.querySelector('canvas.bg');
+const en = /^en/i.test(document.documentElement.lang||'') || /^en\.|yhitfeng/.test(location.hostname);
+if (en) {
+  document.getElementById('yhMdSub').textContent = '80mm · Four ribbons, one for each distance';
+  document.getElementById('yhMdNote').textContent = '*Rendered preview. The final medal may differ; photos of the actual medal will be posted on this site.';
+  root.querySelector('.km').setAttribute('aria-label','Ribbon by distance');
+}
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const renderer = new THREE.WebGLRenderer({canvas:cv, antialias:true, alpha:true, powerPreference:'high-performance'});
+renderer.setClearColor(0x000000,0);
+const bgR = new THREE.WebGLRenderer({canvas:cvb, antialias:false}); bgR.setPixelRatio(1);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.autoClear = false;
+
+/* ---------- background: key-colour streaks with motion blur ---------- */
+const bgScene = new THREE.Scene(), bgCam = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+const bgMat = new THREE.ShaderMaterial({
+  uniforms:{t:{value:0}, res:{value:new THREE.Vector2(1,1)}},
+  vertexShader:`varying vec2 v;void main(){v=uv;gl_Position=vec4(position.xy,0.,1.);}`,
+  fragmentShader:`
+  precision highp float; varying vec2 v; uniform float t; uniform vec2 res;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  float fb(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*n(p);p*=2.03;a*=.5;}return s;}
+  vec3 lin(vec3 c){return pow(c,vec3(2.2));}
+  void main(){
+    vec2 p=(v-.5)*vec2(res.x/res.y,1.);
+    float an=.62; mat2 R=mat2(cos(an),-sin(an),sin(an),cos(an));
+    vec2 q=R*p;                       /* q.x along the streak (up-right), q.y across */
+    float sp=fb(vec2(q.x*.3-t*1.1, q.y*3.2));                       /* long streaks */
+    float fine=n(vec2(q.x*.25-t*1.7+5., q.y*16.));                     /* thin fast lines */
+    float k=clamp(sp*1.15-.12+ (fine-.5)*.1 + .2*(q.x+.3*q.y),0.,1.);
+    vec3 navy=lin(vec3(.0,.04,.26)), blue=lin(vec3(0.,.165,.812)), wh=lin(vec3(1.)), org=lin(vec3(1.,.427,.027)), ink=lin(vec3(.13));
+    /* ink → navy → blue → white → orange → ink : neighbours only, so blue and orange never mix into purple */
+    vec3 c=ink;
+    c=mix(c,navy,smoothstep(.12,.3,k));
+    c=mix(c,blue,smoothstep(.3,.46,k));
+    c=mix(c,wh,smoothstep(.53,.6,k)*.6);
+    c=mix(c,org,smoothstep(.58,.68,k));
+    c=mix(c,ink,smoothstep(.84,.98,k)*.7);
+    
+    c*=mix(.82,1.,smoothstep(-.5,.1,p.y));                           /* bottom scrim for the note */
+    c*=mix(.55,1.,smoothstep(1.25,.25,length(p*vec2(.8,1.))));      /* vignette */
+    c+= (h(floor(v*res)+floor(t*30.))-.5)*.004;                                        /* grain */
+    gl_FragColor=vec4(pow(max(c,0.),vec3(1./2.2)),1.);
+  }`,
+  depthWrite:false, depthTest:false
+});
+bgScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), bgMat));
+
+/* ---------- medal scene ---------- */
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(28,1,.1,100);
+
+/* environment: brand-coloured softboxes so the metal reflects orange and blue */
+(function(){
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.SphereGeometry(20,32,16), new THREE.MeshBasicMaterial({color:0x30333d, side:THREE.BackSide})));
+  const box=(c,i,w,hh,x,y,z)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,hh),new THREE.MeshBasicMaterial({color:new THREE.Color(c).multiplyScalar(i),side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);env.add(m);};
+  box(0xffffff,4.5,14,4,0,9,4);      /* top softbox */
+  box(0xffffff,3.0,2,12,-6,2,7);     /* left strip */
+  box(0xffffff,2.2,2,12,6,2,7);      /* right strip */
+  box(0xFF6D07,0.9,6,10,-9,1,2);     /* orange left */
+  box(0x002ACF,0.9,6,10,9,0,1);
+  box(0xffffff,1.4,8,8,-7,-2,-6);    /* neutral back fill */      /* blue right */
+  box(0xffffff,1.6,4,8,2,2,10);      /* front fill */
+  box(0xFF6D07,1.4,10,2,0,-8,-3);    /* warm bounce */
+  const pm=new THREE.PMREMGenerator(renderer); scene.environment=pm.fromScene(env,.02).texture; pm.dispose();
+})();
+const key=new THREE.DirectionalLight(0xffffff,1.6); key.position.set(-3,4,6); scene.add(key);
+const rim=new THREE.DirectionalLight(0xFF6D07,2.2); rim.position.set(4,1,-5); scene.add(rim);
+
+const L = new THREE.TextureLoader();
+const tx = (u,srgb)=>{const t=L.load(u); if(srgb) t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; return t;};
+const F={c:tx(TEX.front_col,1),n:tx(TEX.front_nrm),r:tx(TEX.front_rm)}, B={c:tx(TEX.back_col,1),n:tx(TEX.back_nrm),r:tx(TEX.back_rm)};
+/* ribbons are vector (logo paths + type as outlines) → drawn sharp into a canvas at the size the screen needs */
+const RIB=[0,1,2,3].map(i=>{
+  const c=document.createElement('canvas'), A=Math.min(1024,Math.round(256*Math.min(devicePixelRatio,2))), LEN=A*6;
+  c.width=A; c.height=LEN; const t=new THREE.CanvasTexture(c);
+  t.colorSpace=THREE.SRGBColorSpace; t.wrapS=THREE.ClampToEdgeWrapping; t.wrapT=THREE.RepeatWrapping; t.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  const img=new Image(); img.onload=()=>{const g=c.getContext('2d'); g.translate(0,LEN); g.rotate(-Math.PI/2); g.drawImage(img,0,0,LEN,A); t.needsUpdate=true;};
+  img.src=TEX['rib'+i]; return t;});
+
+const P=2.5, T=.11, cy=(0.5-0.537)*P;          /* plane size, thickness, disc centre in plane space */
+const spin=new THREE.Group(); scene.add(spin);
+const medal=new THREE.Group(); medal.position.y=-cy; spin.add(medal);   /* disc centre at origin */
+const face=(S,z,ry)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(P,P),new THREE.MeshStandardMaterial({map:S.c,normalMap:S.n,normalScale:new THREE.Vector2(1.1,1.1),roughnessMap:S.r,metalnessMap:S.r,metalness:1,roughness:1,alphaTest:.5}));m.position.z=z;m.rotation.y=ry;medal.add(m);};
+face(F,T/2,0); face(B,-T/2,Math.PI);
+const edgeMat=new THREE.MeshStandardMaterial({map:F.c,color:0x8d8580,metalness:1,roughness:.32,alphaTest:.5,side:THREE.DoubleSide});
+for(let i=1;i<14;i++){const m=new THREE.Mesh(new THREE.PlaneGeometry(P,P),edgeMat);m.position.z=T/2-T*i/14;medal.add(m);}
+
+/* ribbon: one strip that comes down in front, wraps under the loop bar, and goes back up behind */
+const barY=(0.5-0.0625)*P+cy*-1+cy, W=.76;      /* bar centre (disc-centred space) */
+const yBar=(0.5-0.0625)*P - (-cy) ;               /* plane-space bar y shifted by medal offset */
+const Y0=(0.5-0.0625)*P - cy;                     /* = bar y in spin space */
+const ribMat=new THREE.MeshStandardMaterial({map:RIB[0],metalness:0,roughness:.62,side:THREE.DoubleSide});
+(function(){
+  const z=.085, sl=Y0+.42;
+  const pts=[[-.55,Y0+6,.9],[-.12,Y0+2.2,.28],[0,sl+.2,z],[0,sl,z],[0,Y0+.06,z],[0,Y0-.07,.04],[0,Y0-.09,0],[0,Y0-.07,-.04],[0,Y0+.06,-z],[0,sl,-z],[0,sl+.2,-z],[.12,Y0+2.2,-.28],[.55,Y0+6,-.9]].map(a=>new THREE.Vector3(...a));
+  const curve=new THREE.CatmullRomCurve3(pts,false,'centripetal'); const len=curve.getLength(), seg=220;
+  const g=new THREE.PlaneGeometry(W,1,1,seg), pos=g.attributes.position, uv=g.attributes.uv;
+  for(let i=0;i<pos.count;i++){const sx=pos.getX(i), tt=1-(pos.getY(i)+.5); const p=curve.getPointAt(tt);
+    pos.setXYZ(i,p.x+sx,p.y,p.z); uv.setY(i,(1-tt)*len/(W*6));}
+  g.computeVertexNormals();
+  spin.add(new THREE.Mesh(g,ribMat));
+  /* metal slider that holds both strands together */
+  const sm=new THREE.MeshStandardMaterial({color:0xe0e0e0,metalness:1,roughness:.36});
+  const s=new THREE.Mesh(new THREE.BoxGeometry(W+.12,.2,z*2+.09,1,1,1),sm); s.position.y=sl; spin.add(s);
+})();
+
+/* ---------- motion: eased half turns with a hold, never constant speed ---------- */
+let rib=0, target=0, ang=0, vel=0, drag=null, lastFlip=performance.now(), pendingRib=null;
+const btns=[...root.querySelectorAll('.km button')];
+function setRib(i){ if(i===rib) return; pendingRib=i; target=Math.round(ang/Math.PI)*Math.PI+Math.PI*2; lastFlip=performance.now(); btns.forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i)); }
+btns.forEach(b=>b.addEventListener('click',()=>setRib(+b.dataset.i)));
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,a:ang};cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drag)return; ang=drag.a+(e.clientX-drag.x)*.012; target=ang; vel=0;});
+const up=()=>{if(!drag)return; drag=null; target=Math.round(ang/Math.PI)*Math.PI; lastFlip=performance.now();};
+cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
+
+function size(){const w=root.clientWidth,h=root.clientHeight; renderer.setSize(w,h,false); bgR.setSize(w,h,false); cam.aspect=w/h;
+  const mob=w<700; cam.fov=mob?40:28; cam.position.set(0,.15,mob?11.5:8.6); cam.lookAt(0,.1,0); cam.updateProjectionMatrix();
+  bgMat.uniforms.res.value.set(w,h);}
+addEventListener('resize',size); size();
+
+let visible=true;
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;}).observe(root);
+const clock=new THREE.Clock(); let bt=0;
+function frame(now){
+  requestAnimationFrame(frame); if(!visible) return;
+  const dt=Math.min(clock.getDelta(),.05);
+  if(!drag && !reduce && now-lastFlip>2600){ target+=Math.PI; lastFlip=now; }      /* half turn every ~2.6s */
+  if(!drag){ const k=reduce?1:1; const f=(target-ang)*14*k - vel*7.5; vel+=f*dt; ang+=vel*dt; }  /* spring: fast in the middle, soft landing */
+  if(pendingRib!==null && Math.abs(((ang%(Math.PI))+Math.PI)%Math.PI-Math.PI/2)<.35){ ribMat.map=RIB[pendingRib]; rib=pendingRib; pendingRib=null; }
+  spin.rotation.y=ang;
+  spin.rotation.z=Math.sin(now*.0007)*.025; spin.position.y=Math.sin(now*.0009)*.04;   /* hanging sway */
+  const burst=Math.min(Math.abs(vel)*.22,1.2);                                          /* background speeds up with the spin */
+  bt+= dt*(reduce?0:(.12+burst*.9)); bgMat.uniforms.t.value=bt;
+  bgR.render(bgScene,bgCam); renderer.clear(); renderer.render(scene,cam);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
