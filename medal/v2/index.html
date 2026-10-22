@@ -1,39 +1,34 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YHITF Medal</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&display=swap">
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YHITF 기념품 시안</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
 <style>
-:root{--blue:#002ACF;--orange:#FF6D07;--white:#FFFFFF;--ink:#212121;--gray:#999999;--line:#EAEAEA;--mint:#A6CDB9}
-html,body{margin:0;background:#0d0d0f;color:#fff;font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
-#yh-rw{position:relative;height:300vh;background:#0d0d0f}
-#yh-rw .stage{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden}
+:root{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
+#yh-rw{position:relative;height:280vh;background:var(--bg)}
+#yh-rw .stage{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;
+  background:radial-gradient(60% 55% at 50% 52%,#18181b 0%,#0b0b0c 70%)}
 #yh-rw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #yh-rw canvas.fg{touch-action:pan-y;cursor:grab}
 #yh-rw canvas.fg:active{cursor:grabbing}
-#yh-rw .word{position:absolute;left:0;right:0;top:50%;transform:translateY(-52%);margin:0;text-align:center;pointer-events:none;
-  font-family:"Archivo",sans-serif;font-stretch:62%;font-variation-settings:"wdth" 62;font-weight:900;
-  font-size:clamp(96px,17vw,320px);line-height:.8;letter-spacing:-.01em;color:rgba(255,255,255,.07);white-space:nowrap}
 #yh-rw .meta{position:absolute;left:clamp(20px,4vw,64px);top:clamp(24px,6vh,64px);pointer-events:none}
 #yh-rw .meta b{display:block;font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.02em}
-#yh-rw .meta span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.66)}
+#yh-rw .meta span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.6)}
 #yh-rw .chips{position:absolute;left:50%;bottom:clamp(28px,6vh,60px);transform:translateX(-50%);display:flex;gap:6px;padding:5px;border-radius:999px;
-  background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #yh-rw .chips button{appearance:none;border:0;cursor:pointer;height:40px;min-width:64px;padding:0 16px;border-radius:999px;background:transparent;color:#fff;
-  font:800 15px/1 "Archivo",sans-serif;letter-spacing:.01em}
+  font:800 15px/1 "Archivo",sans-serif}
 #yh-rw .chips button[aria-pressed="true"]{background:#fff;color:#111}
 #yh-rw .chips button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-#yh-rw .note{position:absolute;right:clamp(20px,4vw,64px);bottom:clamp(30px,6vh,64px);max-width:340px;margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.5);text-align:right}
+#yh-rw .note{position:absolute;right:clamp(20px,4vw,64px);bottom:clamp(30px,6vh,64px);max-width:340px;margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.45);text-align:right}
 @media (max-width:720px){#yh-rw .note{left:20px;right:20px;bottom:96px;text-align:center;max-width:none}#yh-rw .chips button{min-width:56px;padding:0 12px}}
-
 /* ---------- T-shirt (KEEN × YHITF) ---------- */
 #yh-tee{--mint:#A9CDB7;background:#0d0d0f;color:#fff;padding:clamp(72px,12vh,140px) clamp(20px,5vw,80px) clamp(80px,12vh,140px)}
 #yh-tee .wrap{max-width:1240px;margin:0 auto}
 #yh-tee .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(40px,6vh,72px)}
 #yh-tee h2{margin:0;font-size:clamp(30px,3.6vw,52px);line-height:1.1;letter-spacing:-.035em;font-weight:800}
-#yh-tee h2 .x{display:inline-flex;align-items:center;gap:.3em}
+#yh-tee h2{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(10px,1.4vw,18px)}
+#yh-tee .keen.big{width:clamp(150px,15vw,230px)}
+#yh-tee .amp{font-family:"Archivo",sans-serif;font-weight:500;font-size:.8em;line-height:1;color:var(--mint)}
+#yh-tee .ev{display:block;line-height:1.15}
 #yh-tee .keen{display:inline-block;width:2.3em;aspect-ratio:386/146;background:var(--mint);-webkit-mask:url(keen.svg) center/contain no-repeat;mask:url(keen.svg) center/contain no-repeat;vertical-align:middle}
 #yh-tee .lead{margin:14px 0 0;color:rgba(255,255,255,.66);font-size:16px;line-height:1.6}
 #yh-tee .spec{display:flex;gap:8px;flex-wrap:wrap}
@@ -55,13 +50,10 @@ html,body{margin:0;background:#0d0d0f;color:#fff;font-family:"Pretendard","Noto 
 #yh-tee tr:last-child td{border-bottom:0}
 #yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
 @media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee th,#yh-tee td{padding:12px 12px;font-size:14px}}
+
 </style>
-</head>
-<body>
 <section id="yh-rw" aria-label="완주 메달">
   <div class="stage">
-    <canvas class="bg" aria-hidden="true"></canvas>
-    <p class="word" aria-hidden="true">FINISHER</p>
     <canvas class="fg" aria-label="3D 완주 메달. 드래그해서 돌려볼 수 있어요"></canvas>
     <div class="meta"><b>완주 메달</b><span>80mm · 실버 &amp; 로즈골드 투톤</span></div>
     <div class="chips" role="group" aria-label="종목별 메달끈">
@@ -73,12 +65,11 @@ html,body{margin:0;background:#0d0d0f;color:#fff;font-family:"Pretendard","Noto 
     <p class="note">모델 이미지는 실물과 다를 수 있으며 실제 색상과 디자인은 샘플 촬영 사진을 참고하시기 바랍니다.</p>
   </div>
 </section>
-
 <section id="yh-tee" aria-labelledby="yh-tee-t">
  <div class="wrap">
   <div class="head">
    <div>
-    <h2 id="yh-tee-t"><span class="x"><span class="keen" role="img" aria-label="KEEN"></span>× YHITF</span><br>기념 티셔츠</h2>
+    <h2 id="yh-tee-t"><span class="keen big" role="img" aria-label="KEEN"></span><span class="amp">&amp;</span><span class="ev">2026 연합뉴스 하남<br>국제 트레일런 페스티벌</span></h2>
     <p class="lead">공식 협찬사 KEEN과 함께 만든 블랙 롱슬리브.<br>화이트·민트 2도 인쇄로 앞·뒤·소매에 새겼어요.</p>
    </div>
    <div class="spec"><span>블랙 롱슬리브</span><span>화이트 · 민트 2도</span><span>XS – 3XL</span></div>
@@ -128,175 +119,5 @@ html,body{margin:0;background:#0d0d0f;color:#fff;font-family:"Pretendard","Noto 
  </div>
 </section>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
-<script type="module">
-import * as THREE from 'three';
-const ROOT=document.getElementById('yh-rw');
-const ASSET=(window.YH_ASSET_BASE||'./');
-const Q=new URLSearchParams(location.search);
-const FIX_P=Q.has('p')?+Q.get('p'):null, FIX_A=Q.has('a')?+Q.get('a'):null;
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- background: soft light beams, palette follows scroll ---------- */
-const bg=ROOT.querySelector('canvas.bg'); const gl=bg.getContext('webgl',{premultipliedAlpha:false});
-const vs='attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
-const fs=`precision highp float;varying vec2 v;uniform float t,prog;uniform vec2 res;
-float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-vec3 L(vec3 c){return pow(c,vec3(2.2));}
-vec3 pal(float x,float m){ /* x along the fan, m = 0 brand / 1 mint */
-  vec3 blue=L(vec3(0.,.165,.812)),org=L(vec3(1.,.427,.027)),sky=L(vec3(.45,.62,1.)),peach=L(vec3(1.,.72,.5)),
-       mint=L(vec3(.65,.80,.72)),deep=L(vec3(.02,.05,.12)),moss=L(vec3(.20,.32,.27));
-  vec3 a=mix(mix(blue,sky,smoothstep(.2,.45,x)),mix(peach,org,smoothstep(.55,.85,x)),smoothstep(.4,.6,x));
-  vec3 b=mix(mix(deep,moss,smoothstep(.1,.5,x)),mix(mint,moss,smoothstep(.6,1.,x)),smoothstep(.35,.65,x));
-  return mix(a,b,m);
-}
-void main(){
-  vec2 q=(v-.5)*vec2(res.x/res.y,1.);
-  float m=smoothstep(.35,.75,prog), dim=1.-smoothstep(.72,.98,prog);
-  vec2 o=vec2(-.9,-.75); vec2 d=q-o; float ang=atan(d.y,d.x); float r=length(d);
-  float sweep=t*.05+prog*.9;
-  float x=fract((ang+sweep)*1.9);
-  float beams=0.;
-  for(int i=0;i<5;i++){ float fi=float(i); float c=fract(.13+fi*.217+sweep*.35); float w=.035+.03*fi/5.;
-    beams+=exp(-pow((fract((ang+sweep)*.9)-c)/w,2.))*(.55+.45*sin(fi*2.1+t*.4)); }
-  vec3 col=pal(fract((ang+sweep)*.9),m)*(.18+.9*beams);
-  col*=smoothstep(2.4,.2,r)*1.15;
-  vec3 base=L(vec3(.05,.05,.06));
-  col=mix(base,col+base,dim);
-  col*=1.-.55*smoothstep(.25,.95,length(q*vec2(.8,1.1)));     /* vignette keeps centre calm */
-  col+=(h(floor(v*res)+floor(t*24.))-.5)*.012;
-  gl_FragColor=vec4(pow(max(col,0.),vec3(1./2.2)),1.);
-}`;
-function sh(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(s));return s}
-const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
-const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-const al=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
-const uT=gl.getUniformLocation(pr,'t'),uR=gl.getUniformLocation(pr,'res'),uP=gl.getUniformLocation(pr,'prog');
-
-/* ---------- 3D medal ---------- */
-const fg=ROOT.querySelector('canvas.fg');
-const R=new THREE.WebGLRenderer({canvas:fg,antialias:true,alpha:true});
-R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.05;R.outputColorSpace=THREE.SRGBColorSpace;
-const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(24,1,1,2000);
-const pmrem=new THREE.PMREMGenerator(R);
-
-/* environment: a light tent (bright front hemisphere with soft falloff) + accent strips whose colour follows the scroll */
-const envScene=new THREE.Scene();
-const domeMat=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,uniforms:{dim:{value:1}},
-  vertexShader:'varying vec3 d;void main(){d=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-  fragmentShader:`varying vec3 d;uniform float dim;
-  float box(float az,float el,float caz,float cel,float w,float h,float s){
-    float dx=abs(az-caz),dy=abs(el-cel); return (1.-smoothstep(w-s,w+s,dx))*(1.-smoothstep(h-s,h+s,dy));}
-  void main(){
-    float az=atan(d.x,d.z), el=asin(clamp(d.y,-1.,1.));      // az 0 = toward camera
-    float v=.06+.10*smoothstep(-.4,.9,d.y);
-    v+=1.9*box(az,el,-1.15,.35,.32,.55,.12);    // big softbox left
-    v+=1.6*box(az,el, 1.05,.15,.30,.62,.14);    // big softbox right
-    v+=1.4*box(az,el,-.30,.70,.42,.18,.10);     // overhead strip, front-left
-    v+=.95*box(az,el, .38,-.05,.18,.48,.12);    // tall narrow card front-right
-    v+=.55*box(az,el,-.55,-.45,.35,.16,.15);    // low bounce
-    v+=.9*box(az,el,3.0,.2,.5,.6,.2)+.9*box(az,el,-3.0,.2,.5,.6,.2);  // behind (for the reverse side)
-    gl_FragColor=vec4(vec3(v*dim),1.);}`});
-envScene.add(new THREE.Mesh(new THREE.SphereGeometry(90,64,32),domeMat));
-const accents=[];
-function strip(w,h,pos,color,int,tint){const m=new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(int),side:THREE.DoubleSide});
-  const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);p.position.set(...pos);p.lookAt(0,0,0);envScene.add(p);accents.push({m,base:new THREE.Color(color),int,tint});return p}
-strip(50,10,[0,55,45],0xffffff,3.2,false);      // top key bar -> crisp highlight on bevels
-strip(10,90,[-65,0,30],0x2a5cff,2.6,true);     // brand blue strip (→ mint)
-strip(10,90,[65,0,22],0xff7a1a,2.4,true);      // brand orange strip (→ mint)
-strip(50,50,[0,0,-80],0xffffff,1.0,false);     // back fill for the reverse side
-let envRT=null, envKey=-1;
-function updateEnv(p){
-  const k=Math.round(p*24); if(k===envKey) return; envKey=k;
-  const m=THREE.MathUtils.smoothstep(p,.35,.75), dim=1-THREE.MathUtils.smoothstep(p,.72,.98)*.5;
-  const mint=new THREE.Color(0xA6CDB9);
-  domeMat.uniforms.dim.value=dim;
-  accents.forEach(A=>{const c=A.base.clone(); if(A.tint) c.lerp(mint,m); A.m.color.copy(c.multiplyScalar(A.int))});
-  if(envRT) envRT.dispose(); envRT=pmrem.fromScene(envScene,0.015); scene.environment=envRT.texture;
-}
-
-const TL=new THREE.TextureLoader();
-function tex(n,srgb){const t=TL.load(ASSET+n);t.colorSpace=srgb?THREE.SRGBColorSpace:THREE.NoColorSpace;t.anisotropy=8;return t}
-const medal=new THREE.Group(); scene.add(medal);
-const T=1.8; // half thickness (mm)
-fetch(ASSET+'shape.json').then(r=>r.json()).then(S=>{
-  const mm=S.mm_per_px, N=S.N;
-  const toShape=(o,flip)=>{const sh=new THREE.Shape(o.outer.map(([x,y])=>new THREE.Vector2((x-N/2)*mm*(flip?-1:1),-(y-N/2)*mm)));
-    o.holes.forEach(hh=>sh.holes.push(new THREE.Path(hh.map(([x,y])=>new THREE.Vector2((x-N/2)*mm*(flip?-1:1),-(y-N/2)*mm)))));return sh};
-  const shapeF=toShape(S.front[0],false);
-  // body with bevelled edge
-  const body=new THREE.ExtrudeGeometry(shapeF,{depth:T*2-0.8,bevelEnabled:true,bevelThickness:0.4,bevelSize:0.35,bevelSegments:4,curveSegments:2});
-  body.translate(0,0,-(T-0.4));
-  const edgeMat=new THREE.MeshStandardMaterial({color:0xd6d7da,metalness:1,roughness:.28});
-  medal.add(new THREE.Mesh(body,[edgeMat,edgeMat]));
-  // textured faces
-  const uvFix=(g,flip)=>{const p=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<p.count;i++){const x=p.getX(i)*(flip?-1:1),y=p.getY(i);uv.setXY(i,(x/mm+N/2)/N,1-(-y/mm+N/2)/N)}};
-  const face=(side)=>{const g=new THREE.ShapeGeometry(side==='front'?shapeF:toShape(S.back[0],false),1);uvFix(g,false);
-    const mat=new THREE.MeshStandardMaterial({map:tex(`tex_${side}_col.png`,true),normalMap:tex(`tex_${side}_nrm.webp`),normalScale:new THREE.Vector2(.55,.55),
-      roughnessMap:tex(`tex_${side}_orm.jpg`),metalnessMap:tex(`tex_${side}_orm.jpg`),aoMap:tex(`tex_${side}_orm.jpg`),aoMapIntensity:.9,
-      metalness:1,roughness:1,alphaTest:.5,transparent:false});
-    const m=new THREE.Mesh(g,mat); if(side==='front'){m.position.z=T+0.02}else{m.rotation.y=Math.PI;m.position.z=-T-0.02}
-    return m};
-  medal.add(face('front')); medal.add(face('back'));
-  buildRibbon();
-  setCourse('28k');
-});
-
-/* ribbon: rises from the slot, through a silver slide, out of frame */
-const RW=35, ribbonMats={};
-let ribF,ribB;
-function buildRibbon(){
-  const slotY=39.2, len=150;
-  const g=new THREE.PlaneGeometry(RW,len,1,40); g.translate(0,len/2,0);
-  const pos=g.attributes.position;
-  for(let i=0;i<pos.count;i++){const y=pos.getY(i);pos.setZ(i,-Math.pow(Math.max(0,y-14)/len,1.6)*26)}   // leans back softly
-  g.computeVertexNormals();
-  ribF=new THREE.Mesh(g,new THREE.MeshStandardMaterial({roughness:.55,metalness:0,side:THREE.FrontSide}));
-  ribB=new THREE.Mesh(g.clone(),new THREE.MeshStandardMaterial({roughness:.55,metalness:0,side:THREE.BackSide}));
-  [ribF,ribB].forEach(m=>{m.position.set(0,slotY,0.0)}); ribB.position.z=-0.15;
-  medal.add(ribF,ribB);
-  // silver slide
-  const slide=new THREE.Mesh(roundedBox(41,9.5,4.2,1.4),new THREE.MeshStandardMaterial({color:0xdcdde0,metalness:1,roughness:.22}));
-  slide.position.set(0,slotY+15,-0.4); medal.add(slide);
-}
-function roundedBox(w,h,d,r){const s=new THREE.Shape();const x=-w/2,y=-h/2;
-  s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);
-  const g=new THREE.ExtrudeGeometry(s,{depth:d-1,bevelEnabled:true,bevelThickness:.5,bevelSize:.5,bevelSegments:3});g.translate(0,0,-(d-1)/2);return g}
-function setCourse(k){
-  if(!ribF) return;
-  const get=(f)=>ribbonMats[k+f]||(ribbonMats[k+f]=(()=>{const t=tex(`rib_${k}_${f}.jpg`,true);t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;
-    t.repeat.set(1,150/(2953/256*35));t.offset.set(0,0);return t})());
-  ribF.material.map=get('out');ribF.material.needsUpdate=true;
-  ribB.material.map=get('in');ribB.material.needsUpdate=true;
-  ROOT.querySelectorAll('.chips button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
-}
-ROOT.querySelectorAll('.chips button').forEach(b=>b.addEventListener('click',()=>setCourse(b.dataset.k)));
-
-/* interaction + scroll */
-let rotY=FIX_A!==null?FIX_A*Math.PI/180:-0.35, vel=0, drag=false, lx=0, autoSpin=!reduce&&FIX_A===null;
-fg.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;fg.setPointerCapture(e.pointerId)});
-fg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;rotY+=dx*.008;vel=dx*.008});
-fg.addEventListener('pointerup',()=>{drag=false});
-function progress(){if(FIX_P!==null)return FIX_P;const r=ROOT.getBoundingClientRect();const span=r.height-innerHeight;return Math.min(1,Math.max(0,-r.top/span))}
-function size(){const dpr=Math.min(devicePixelRatio||1,2);const w=ROOT.clientWidth,h=innerHeight;
-  [bg].forEach(c=>{c.width=w*dpr;c.height=h*dpr});gl.viewport(0,0,bg.width,bg.height);
-  R.setPixelRatio(dpr);R.setSize(w,h,false);cam.aspect=w/h;
-  const fit=w/h<0.8?1.55:1.0; cam.position.set(0,24,480*fit);cam.lookAt(0,24,0);cam.updateProjectionMatrix()}
-addEventListener('resize',size);size();
-const t0=performance.now();
-function frame(now){
-  const t=(now-t0)/1000, p=progress();
-  gl.uniform1f(uT,reduce?2:t);gl.uniform1f(uP,p);gl.uniform2f(uR,bg.width,bg.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-  updateEnv(p);
-  if(!drag){ if(autoSpin) rotY+=0.0045+vel; vel*=0.94 }
-  medal.rotation.y=rotY+p*Math.PI*1.0;
-  medal.rotation.x=-0.06+Math.sin(t*.6)*.015;
-  medal.position.y=Math.sin(t*.8)*1.2+2 - p*8;
-  R.render(scene,cam);
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-window.__ready=()=>!!ribF;
-</script>
-</body>
+<script type="module" src="medal.js"></script>
 </html>

@@ -1,0 +1,122 @@
+<title>YHITF 기념품 시안</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
+<style>
+:root{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
+#yh-rw{position:relative;height:280vh;background:var(--bg)}
+#yh-rw .stage{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;
+  background:radial-gradient(60% 55% at 50% 52%,#18181b 0%,#0b0b0c 70%)}
+#yh-rw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#yh-rw canvas.fg{touch-action:pan-y;cursor:grab}
+#yh-rw canvas.fg:active{cursor:grabbing}
+#yh-rw .meta{position:absolute;left:clamp(20px,4vw,64px);top:clamp(24px,6vh,64px);pointer-events:none}
+#yh-rw .meta b{display:block;font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.02em}
+#yh-rw .meta span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.6)}
+#yh-rw .chips{position:absolute;left:50%;bottom:clamp(28px,6vh,60px);transform:translateX(-50%);display:flex;gap:6px;padding:5px;border-radius:999px;
+  background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#yh-rw .chips button{appearance:none;border:0;cursor:pointer;height:40px;min-width:64px;padding:0 16px;border-radius:999px;background:transparent;color:#fff;
+  font:800 15px/1 "Archivo",sans-serif}
+#yh-rw .chips button[aria-pressed="true"]{background:#fff;color:#111}
+#yh-rw .chips button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-rw .note{position:absolute;right:clamp(20px,4vw,64px);bottom:clamp(30px,6vh,64px);max-width:340px;margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.45);text-align:right}
+@media (max-width:720px){#yh-rw .note{left:20px;right:20px;bottom:96px;text-align:center;max-width:none}#yh-rw .chips button{min-width:56px;padding:0 12px}}
+/* ---------- T-shirt (KEEN × YHITF) ---------- */
+#yh-tee{--mint:#A9CDB7;background:#0d0d0f;color:#fff;padding:clamp(72px,12vh,140px) clamp(20px,5vw,80px) clamp(80px,12vh,140px)}
+#yh-tee .wrap{max-width:1240px;margin:0 auto}
+#yh-tee .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(40px,6vh,72px)}
+#yh-tee h2{margin:0;font-size:clamp(30px,3.6vw,52px);line-height:1.1;letter-spacing:-.035em;font-weight:800}
+#yh-tee h2{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(10px,1.4vw,18px)}
+#yh-tee .keen.big{width:clamp(150px,15vw,230px)}
+#yh-tee .amp{font-family:"Archivo",sans-serif;font-weight:500;font-size:.8em;line-height:1;color:var(--mint)}
+#yh-tee .ev{display:block;line-height:1.15}
+#yh-tee .keen{display:inline-block;width:2.3em;aspect-ratio:386/146;background:var(--mint);-webkit-mask:url(keen.svg) center/contain no-repeat;mask:url(keen.svg) center/contain no-repeat;vertical-align:middle}
+#yh-tee .lead{margin:14px 0 0;color:rgba(255,255,255,.66);font-size:16px;line-height:1.6}
+#yh-tee .spec{display:flex;gap:8px;flex-wrap:wrap}
+#yh-tee .spec span{border:1px solid rgba(169,205,183,.45);color:var(--mint);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+#yh-tee .flats{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px)}
+#yh-tee figure{margin:0;background:#141416;border-radius:20px;padding:clamp(18px,3vw,36px) clamp(12px,2vw,24px) 20px;position:relative}
+#yh-tee figcaption{margin-top:10px;text-align:center;font:800 13px/1 "Archivo",sans-serif;letter-spacing:.08em;color:rgba(255,255,255,.5)}
+#yh-tee svg{width:100%;height:auto;display:block}
+#yh-tee .dim{stroke:var(--mint);stroke-width:1;stroke-dasharray:3 3;fill:none;opacity:.75}
+#yh-tee .dimt{fill:var(--mint);font:700 10px "Archivo",sans-serif}
+#yh-tee .size{margin-top:clamp(40px,6vh,64px);border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden}
+#yh-tee .size .cap{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.12);font-weight:800}
+#yh-tee .size .cap small{font-weight:500;color:rgba(255,255,255,.5);font-size:13px}
+#yh-tee table{width:100%;border-collapse:collapse;font-size:15px}
+#yh-tee th,#yh-tee td{padding:14px 24px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07)}
+#yh-tee th{color:rgba(255,255,255,.5);font-weight:600;font-size:13px}
+#yh-tee th:first-child,#yh-tee td:first-child{text-align:left}
+#yh-tee td:first-child{font-weight:800}
+#yh-tee tr:last-child td{border-bottom:0}
+#yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
+@media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee th,#yh-tee td{padding:12px 12px;font-size:14px}}
+
+</style>
+<section id="yh-rw" aria-label="완주 메달">
+  <div class="stage">
+    <canvas class="fg" aria-label="3D 완주 메달. 드래그해서 돌려볼 수 있어요"></canvas>
+    <div class="meta"><b>완주 메달</b><span>80mm · 실버 &amp; 로즈골드 투톤</span></div>
+    <div class="chips" role="group" aria-label="종목별 메달끈">
+      <button type="button" data-k="5k" aria-pressed="false">5K</button>
+      <button type="button" data-k="10k" aria-pressed="false">10K</button>
+      <button type="button" data-k="15k" aria-pressed="false">15K</button>
+      <button type="button" data-k="28k" aria-pressed="true">28K</button>
+    </div>
+    <p class="note">모델 이미지는 실물과 다를 수 있으며 실제 색상과 디자인은 샘플 촬영 사진을 참고하시기 바랍니다.</p>
+  </div>
+</section>
+<section id="yh-tee" aria-labelledby="yh-tee-t">
+ <div class="wrap">
+  <div class="head">
+   <div>
+    <h2 id="yh-tee-t"><span class="keen big" role="img" aria-label="KEEN"></span><span class="amp">&amp;</span><span class="ev">2026 연합뉴스 하남<br>국제 트레일런 페스티벌</span></h2>
+    <p class="lead">공식 협찬사 KEEN과 함께 만든 블랙 롱슬리브.<br>화이트·민트 2도 인쇄로 앞·뒤·소매에 새겼어요.</p>
+   </div>
+   <div class="spec"><span>블랙 롱슬리브</span><span>화이트 · 민트 2도</span><span>XS – 3XL</span></div>
+  </div>
+  <div class="flats">
+   <figure>
+    <svg viewBox="0 0 400 470" role="img" aria-label="앞면 도안: 가슴에 KEEN 로고">
+     <path d="M160,42 Q200,66 240,42 L300,58 Q336,70 350,120 L378,328 L342,338 L300,170 L294,442 L106,442 L100,170 L58,338 L22,328 L50,120 Q64,70 100,58 Z" fill="#1c1c1f" stroke="#2c2c30" stroke-width="1.5"/>
+     <path d="M160,42 Q200,66 240,42" fill="none" stroke="#38383d" stroke-width="5"/>
+     <foreignObject x="175" y="98" width="50" height="19"><div xmlns="http://www.w3.org/1999/xhtml" class="keen" style="width:50px;display:block"></div></foreignObject>
+     <path class="dim" d="M175,90 H225 M175,86 V94 M225,86 V94"/><text class="dimt" x="200" y="84" text-anchor="middle">145</text>
+     <path class="dim" d="M233,98 V117 M229,98 H237 M229,117 H237"/><text class="dimt" x="240" y="111">60</text>
+     <rect x="347" y="262" width="16" height="36" rx="2" fill="none" stroke="var(--mint)" stroke-width="1" stroke-dasharray="2 2" transform="rotate(-8 355 280)"/><text class="dimt" x="368" y="258">105</text>
+    </svg>
+    <figcaption>FRONT</figcaption>
+   </figure>
+   <figure>
+    <svg viewBox="0 0 400 470" role="img" aria-label="뒷면 도안: 등에 YHITF 로고, 아래에 Keen for the Trails">
+     <path d="M160,42 Q200,52 240,42 L300,58 Q336,70 350,120 L378,328 L342,338 L300,170 L294,442 L106,442 L100,170 L58,338 L22,328 L50,120 Q64,70 100,58 Z" fill="#1c1c1f" stroke="#2c2c30" stroke-width="1.5"/>
+     <foreignObject x="165" y="86" width="70" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+       <div style="width:22px;aspect-ratio:66.5/64.5;background:#fff;-webkit-mask:url(symbol_white.svg) center/contain no-repeat;mask:url(symbol_white.svg) center/contain no-repeat"></div>
+       <div style="width:68px;aspect-ratio:3.2/1;background:#fff;-webkit-mask:url(wordmark_white.svg) center/contain no-repeat;mask:url(wordmark_white.svg) center/contain no-repeat"></div></div></foreignObject>
+     <path class="dim" d="M165,146 H235 M165,142 V150 M235,142 V150"/><text class="dimt" x="200" y="160" text-anchor="middle">200</text>
+     <path class="dim" d="M243,86 V134 M239,86 H247 M239,134 H247"/><text class="dimt" x="250" y="114">140</text>
+     <text x="200" y="352" text-anchor="middle" fill="var(--mint)" style="font:800 11px Archivo,sans-serif;letter-spacing:-.02em">Keen for the Trails</text>
+     <foreignObject x="183" y="360" width="34" height="13"><div xmlns="http://www.w3.org/1999/xhtml" class="keen" style="width:34px;display:block"></div></foreignObject>
+     <path class="dim" d="M173,384 H227 M173,380 V388 M227,380 V388"/><text class="dimt" x="200" y="398" text-anchor="middle">155</text>
+    </svg>
+    <figcaption>BACK</figcaption>
+   </figure>
+  </div>
+  <div class="size">
+   <div class="cap">사이즈표 <small>단위: cm</small></div>
+   <table>
+    <thead><tr><th scope="col">사이즈</th><th scope="col">기장</th><th scope="col">가슴단면</th><th scope="col">어깨너비</th><th scope="col">소매길이</th></tr></thead>
+    <tbody>
+     <tr><td>XS(85)</td><td>65</td><td>45</td><td>41</td><td>59</td></tr>
+     <tr><td>S(90)</td><td>67</td><td>48</td><td>43</td><td>60</td></tr>
+     <tr><td>M(95)</td><td>69</td><td>51</td><td>45</td><td>61</td></tr>
+     <tr><td>L(100)</td><td>71</td><td>54</td><td>47</td><td>62</td></tr>
+     <tr><td>XL(105)</td><td>73</td><td>58</td><td>49</td><td>63</td></tr>
+     <tr><td>2XL(110)</td><td>75</td><td>61</td><td>51</td><td>64</td></tr>
+     <tr><td>3XL(115)</td><td>77</td><td>64</td><td>53</td><td>65</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</section>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module" src="medal.js"></script>
