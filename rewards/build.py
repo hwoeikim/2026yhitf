@@ -38,6 +38,8 @@ addEventListener('scroll',hd,{passive:true});addEventListener('resize',hd);hd();
 </script>'''
 css,prize,strip=open('/home/claude/2026yhitf/rewards/prize_src.txt').read().split('\n=====\n')
 s=s.replace('</style>',css+'</style>',1)
+# main: breathing room under the section above (elite invitation banner)
+if VAR=='main': s=s.replace('</style>','#yh-rewards{margin-top:clamp(56px,9vh,112px)}</style>',1)
 add=strip if VAR=='main' else prize
 k=s.index('<script>window.YH_ASSET_BASE')
 s=s[:k]+add+'\n'+s[k:]
