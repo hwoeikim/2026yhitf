@@ -33,3 +33,7 @@ make('bar1.png',D+'t_bar_choc.jpg','white',w=860,rot=34,bottom=960,sh=(50,70,26,
 make('/home/claude/work/hat/hat_three.png',D+'t_hat.jpg','orange',h=560,rot=-4,bottom=840)
 # coming soon: blank bg
 Image.fromarray(bg(PAL['blue']).astype(np.uint8)).save(D+'t_soon.jpg',quality=88)
+# 2026-10-23 added goods (sources in /home/claude/work/jk)
+# make('bag_front.png',D+'t_bag.jpg','blue',h=880,rot=-5,bottom=1000)
+# make('gaiter3.png',D+'t_gaiter.jpg','white',w=1300,rot=0,bottom=930,sh=(40,60,28,.6))
+# make('jk_men.png',D+'t_jacket.jpg','orange',h=880,rot=-4,bottom=1010)
