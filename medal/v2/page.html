@@ -235,7 +235,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-goods .cta{position:relative;margin-top:clamp(40px,6vh,64px);border-radius:24px;overflow:hidden;background:#141416;isolation:isolate}
 #yh-goods .cta img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transform:scale(1.06);transition:transform 1.6s cubic-bezier(.22,.8,.16,1)}
 #yh-goods .cta.in img{transform:scale(1)}
-@media (max-width:720px){#yh-goods .cta{border-radius:18px}#yh-goods .cta img{aspect-ratio:4/5}}
+@media (max-width:720px){#yh-goods .cta{border-radius:18px}#yh-goods .cta img{aspect-ratio:1/1}}
 @media (prefers-reduced-motion:reduce){#yh-goods .cta img{transform:none;transition:none}}
 #yh-goods .note{margin:clamp(48px,8vh,72px) 0 0;font-size:12px;color:rgba(255,255,255,.42);text-align:center}
 @media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr;gap:40px}#yh-goods .specs .art{height:84px}#yh-goods .specs .no{display:block;margin-bottom:6px}#yh-goods .specs .only{margin-left:0}#yh-goods .row{height:210px;gap:8px}#yh-goods .row.r2{height:auto;flex-direction:column}#yh-goods .sub{display:flex;gap:8px;height:200px}#yh-goods .it.on{flex-grow:4.2}#yh-goods .r1 .it.on{flex-grow:4.2}#yh-goods .it:not(.on) .cap{opacity:0}#yh-goods .it .cap{transition:opacity .5s}#yh-goods .row:not(.act) .it .nm{display:none}#yh-goods .it .cap{gap:8px}}
@@ -452,7 +452,7 @@ function q(){if(!t)t=requestAnimationFrame(upd)}addEventListener('scroll',q,{pas
    </div>
   </div>
   <div class="cta">
-   <picture><source media="(max-width:720px)" srcset="cta_box_m.webp" width="1080" height="1350"><img src="cta_box.webp" alt="바위 위에 놓인 '달리는 것, 그 이상.' 문구의 2026 YHITF 키트 박스 세 개, 흰색·오렌지·블루" width="2200" height="1467" loading="lazy"></picture>
+   <picture><source media="(max-width:720px)" srcset="cta_box_m.webp" width="1080" height="1080"><img src="cta_box.webp" alt="바위 위에 놓인 '달리는 것, 그 이상.' 문구의 2026 YHITF 키트 박스 세 개, 흰색·오렌지·블루" width="2200" height="1467" loading="lazy"></picture>
   </div>
   <p class="note">이미지는 연출된 것으로 실제 제품과 차이가 있을 수 있습니다.</p>
  </div>
