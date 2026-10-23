@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
 const ROOT = document.getElementById('yh-rw');
 const ASSET = (window.YH_ASSET_BASE || './');
@@ -255,11 +255,11 @@ fg.addEventListener('pointermove', e => { if (!drag) return; const dx = e.client
 fg.addEventListener('pointerup', () => { drag = false });
 function progress() { if (FIX_P !== null) return FIX_P; const r = ROOT.getBoundingClientRect(); const span = r.height - innerHeight; return Math.min(1, Math.max(0, -r.top / span)) }
 function size() {
-  const dpr = Math.min(devicePixelRatio || 1, 2); const w = ROOT.clientWidth, h = innerHeight;
+  const dpr = Math.min(devicePixelRatio || 1, 2); const st = ROOT.querySelector('.stage'); const w = ROOT.clientWidth, h = (st && st.clientHeight) || innerHeight;
   R.setPixelRatio(dpr); R.setSize(w, h, false); cam.aspect = w / h;
   const fit = w / h < 0.8 ? 1.7 : 1.0; cam.position.set(0, 30, 560 * fit); cam.lookAt(0, 30, 0); cam.updateProjectionMatrix();
 }
-addEventListener('resize', size); size();
+addEventListener('resize', size); size(); setTimeout(size, 900);
 const t0 = performance.now();
 function frame(now) {
   const t = (now - t0) / 1000, p = progress();
