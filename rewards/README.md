@@ -17,3 +17,8 @@
   - 위젯 코드 자체는 raw.githubusercontent.com/<SHA>/rewards/widget_*.html 에서 받아 붙여넣기 (응답 길이·id 확인 후 교체)
 - 해결(2026-10-23 저녁): 자산 전용 가벼운 브랜치 `goods-assets`(medal/v2만, 약 4.5MB)를 만들어 jsDelivr가 이 브랜치 커밋에서 이미지를 받도록 함
   - 자산 바꾼 뒤: `sh rewards/sync_assets.sh` → 나온 SHA로 `python3 rewards/build.py <SHA> main|rewards`
+
+
+## Live (2026-10-24 02:2x KST)
+- widget commit 7b06829316c5e7e5f19f65403c30ce8c352a2c8c, assets cacf7b5a49ab36c29793fe9a7aa1f3d8de0dcf40 (main + /rewards)
+- previous live: widget 3c071d4…, assets b36ee1b…
