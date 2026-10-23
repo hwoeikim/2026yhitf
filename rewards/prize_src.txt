@@ -66,15 +66,15 @@
    <div class="col m"><h3>남자부</h3><div class="first"><div class="rk"><b>1위</b></div><div class="amt"></div></div><ol></ol></div>
    <div class="col w"><h3>여자부</h3><div class="first"><div class="rk"><b>1위</b></div><div class="amt"></div></div><ol></ol></div>
   </div>
-  <div class="foot"><span class="nt"></span><span>2위 이하 상금은 확정되는 대로 공개됩니다.</span></div>
+  <div class="foot"><span class="nt"></span><span></span></div>
  </div>
 </section>
 <script>
 (function(){
-  var P={"5k":{"label":"5KM","m":[200000,null,null,null,null],"w":[200000,null,null,null,null],"note":""},
-"10k":{"label":"10KM","m":[300000,null,null,null,null],"w":[300000,null,null,null,null],"note":"토·일 각 회차별 시상"},
-"15k":{"label":"15KM","m":[1000000,null,null,null,null],"w":[1000000,null,null,null,null],"note":""},
-"28k":{"label":"28KM","m":[2000000,null,null,null,null],"w":[2000000,null,null,null,null],"note":""}};
+  var P={"5k":{"label":"5KM","m":[200000,150000,100000,50000,30000],"w":[200000,150000,100000,50000,30000],"note":""},
+"10k":{"label":"10KM","m":[300000,200000,100000,80000,30000],"w":[300000,200000,100000,80000,30000],"note":"토·일 각 회차별 시상"},
+"15k":{"label":"15KM","m":[1000000,800000,500000,200000,100000],"w":[1000000,800000,500000,200000,100000],"note":""},
+"28k":{"label":"28KM","m":[2000000,1000000,500000,300000,100000],"w":[2000000,1000000,500000,300000,100000],"note":""}};
   var S=document.getElementById('yh-money'),seg=S.querySelector('.seg'),tabs=[].slice.call(seg.querySelectorAll('button')),board=S.querySelector('.board');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,seen=false;
   function won(n){return n.toLocaleString('ko-KR')}
