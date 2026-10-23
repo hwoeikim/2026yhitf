@@ -1,10 +1,10 @@
 import numpy as np, cv2, sys
 from PIL import Image
 from scipy import ndimage as ndi
-def lineart(src, out, H=900, lo=30, hi=90, minlen=60, blur=1.6, stroke=2.2, inner=True, alpha_thr=40, dark_fill=False, seal=False):
+def lineart(src, out, H=900, lo=30, hi=90, minlen=60, blur=1.6, stroke=2.2, inner=True, alpha_thr=40, dark_fill=False, seal=False, fill=True):
     im=Image.open(src).convert('RGBA'); s=H/im.height; im=im.resize((int(im.width*s),H),Image.LANCZOS)
     a=np.asarray(im).astype(np.float32); al=a[...,3]>alpha_thr
-    al=ndi.binary_opening(ndi.binary_fill_holes(al),iterations=2)
+    al=ndi.binary_opening(ndi.binary_fill_holes(al) if fill else al,iterations=2)
     pad=20; al=np.pad(al,pad); rgb=np.pad(a[...,:3],((pad,pad),(pad,pad),(0,0)),constant_values=255)
     edges=np.zeros(al.shape,bool)
     # outline
