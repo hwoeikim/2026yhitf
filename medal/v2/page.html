@@ -144,8 +144,8 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-jk .hero img{display:block;width:100%;height:auto}
 #yh-jk .hero figcaption{position:relative;height:22px;margin-top:10px;font-size:14px;font-weight:700;color:var(--jk-mute)}
 #yh-jk .hero figcaption span{position:absolute;top:0;transform:translateX(-50%)}#yh-jk .hero figcaption span:first-child{left:27%}#yh-jk .hero figcaption span:last-child{left:72.3%}
-#yh-jk .det{display:grid;grid-template-columns:3.2fr 1fr;gap:clamp(16px,2.4vw,32px);align-items:end;margin-top:clamp(40px,6vh,72px)}
-#yh-jk .det figure{margin:0}
+#yh-jk .det{display:grid;grid-template-columns:7fr 3fr;gap:clamp(16px,2.4vw,32px);row-gap:clamp(40px,6vh,72px);align-items:end;margin-top:clamp(40px,6vh,72px)}
+#yh-jk .det figure{margin:0}#yh-jk .det .bk{grid-column:1/-1}#yh-jk .det .md img{border-radius:18px;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}#yh-jk .det .sl{max-width:300px}
 #yh-jk .det img{display:block;width:100%;height:auto}
 #yh-jk .det .sl img{border-radius:18px;aspect-ratio:1197/1180;object-fit:cover}
 #yh-jk .det figcaption{margin-top:10px;font-size:14px;font-weight:700;color:var(--jk-mute)}
@@ -192,18 +192,10 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-goods .lb .l1{grid-column:span 7}#yh-goods .lb .l1 img,#yh-goods .lb .l2 img{height:clamp(300px,34vw,480px)}
 #yh-goods .lb .l2{grid-column:span 5}
 #yh-goods .lb .s{grid-column:span 3}#yh-goods .lb .s img{aspect-ratio:1/1}#yh-goods .lb .hat img{object-position:62% 50%}
-#yh-goods .lb .jm{grid-column:span 7}#yh-goods .lb .jm img{aspect-ratio:4/5;object-position:50% 30%}
-#yh-goods .lb .jx{grid-column:9/span 4;align-self:stretch;display:flex;flex-direction:column;padding-top:clamp(8px,2vw,32px)}
-#yh-goods .lb .jt{margin:0;font-size:clamp(22px,2.2vw,30px);font-weight:800;letter-spacing:-.03em}
-#yh-goods .lb .jt .no{display:block;margin-bottom:14px;color:#FF6D07;font-size:13px}
-#yh-goods .lb .jd{margin:12px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.6)}
-#yh-goods .lb .sl{margin-top:auto;width:62%}#yh-goods .lb .sl img{aspect-ratio:1/1;object-position:50% 40%}
-#yh-goods .lb figure.jm figcaption{display:none}
 #yh-goods .lb.rv>*{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s cubic-bezier(.32,.72,0,1)}
 #yh-goods .lb.rv>.in{opacity:1;transform:none}
 #yh-goods .note{margin:clamp(48px,8vh,72px) 0 0;font-size:12px;color:rgba(255,255,255,.42);text-align:center}
-@media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr;gap:40px}#yh-goods .specs .art{height:84px}#yh-goods .lb{grid-template-columns:1fr 1fr;gap:28px 10px}#yh-goods .lb>*{grid-column:span 2!important}#yh-goods .lb .s{grid-column:span 1!important}#yh-goods .lb .l1 img,#yh-goods .lb .l2 img{height:auto;aspect-ratio:3/2}#yh-goods .lb figcaption .no{min-width:0;margin-right:10px}#yh-goods .lb figcaption{font-size:13px}#yh-goods .lb .jx{padding-top:0}#yh-goods .lb .sl{width:48%;margin-top:20px}}
-@media (prefers-reduced-motion:reduce){#yh-goods .lb>*{transition:none}}
+@media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr;gap:40px}#yh-goods .specs .art{height:84px}#yh-goods .lb{grid-template-columns:1fr 1fr;gap:28px 10px}#yh-goods .lb>*{grid-column:span 2!important}#yh-goods .lb .s{grid-column:span 1!important}#yh-goods .lb .l1 img,#yh-goods .lb .l2 img{height:auto;aspect-ratio:3/2}#yh-goods .lb figcaption .no{min-width:0;margin-right:10px}#yh-goods .lb figcaption{font-size:13px}@media (prefers-reduced-motion:reduce){#yh-goods .lb>*{transition:none}}
 </style>
 <script>
 /* a CDN hiccup on first load shouldn't leave a broken picture: try again twice */
@@ -368,6 +360,7 @@ document.addEventListener('error',function(e){var i=e.target;if(!i||i.tagName!==
   <figure class="hero"><img src="jk_mock.webp" alt="네이비 후드 자켓 여성용과 남성용. 왼쪽 가슴에 YHITF 로고, 오른쪽 소매에 FINISHER 프린트" width="1774" height="887" loading="lazy"><figcaption><span>여성</span><span>남성</span></figcaption></figure>
   <div class="det">
    <figure class="bk"><img src="jk_back_mock.webp" alt="자켓 뒷면 여성용과 남성용. 등 하단에 YHITF 로고, 소매에 FINISHER 프린트" width="1774" height="887" loading="lazy"><figcaption><span>여성 뒷면</span><span>남성 뒷면</span></figcaption></figure>
+   <figure class="md"><img src="e_jkmodel.webp" alt="완주 기념 자켓을 입은 모델, 왼쪽 가슴에 YHITF 로고" width="1300" height="1575" loading="lazy"><figcaption>착용 컷</figcaption></figure>
    <figure class="sl"><img src="jk_sleeve.webp" alt="자켓 소매 끝을 손으로 정리하는 모습. 소매 끝단 스티치 디테일" width="1197" height="1314" loading="lazy"><figcaption>소매 디테일</figcaption></figure>
   </div>
   <div class="size">
@@ -396,9 +389,6 @@ tabs.forEach(function(b,i){b.addEventListener('click',function(){pick(b)});b.add
    <figure class="s"><img src="e_bars.webp" alt="네이처밸리 에너지바 두 종류" width="1400" height="1400" loading="lazy"><figcaption><span class="no">04–05</span>네이처밸리 에너지바 2종</figcaption></figure>
    <figure class="s"><img src="e_bag.webp" alt="타포린백 앞면과 뒷면" width="1536" height="1024" loading="lazy"><figcaption><span class="no">06</span>타포린백</figcaption></figure>
    <figure class="s"><img src="e_mask.webp" alt="베이지, 스트라이프, 블랙 기능성 마스크" width="1536" height="1024" loading="lazy"><figcaption><span class="no">07</span>기능성 마스크</figcaption></figure>
-   <figure class="jm"><img src="e_jkmodel.webp" alt="완주 기념 자켓을 입은 모델, 가슴에 YHITF 로고" width="1300" height="1575" loading="lazy"><figcaption><span class="no">08</span>완주 기념 자켓</figcaption></figure>
-   <div class="jx"><p class="jt"><span class="no">08</span>완주 기념 자켓</p><p class="jd">15KM · 28KM 트레일런 참가자 대상<br>완주 시 증정</p>
-    <figure class="sl"><img src="jk_sleeve.webp" alt="자켓 소매 끝 스티치 디테일" width="1197" height="1314" loading="lazy"><figcaption>소매 디테일</figcaption></figure></div>
   </div>
   <p class="note">이미지는 연출된 것으로 실제 제품과 차이가 있을 수 있습니다.</p>
  </div>
