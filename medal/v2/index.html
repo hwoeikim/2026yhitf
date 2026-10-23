@@ -1,0 +1,338 @@
+<title>YHITF 기념품 시안</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
+<style>
+:root{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
+#yh-rw{position:relative;height:190vh;background:var(--bg)}
+#yh-rw .stage{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;
+  background:radial-gradient(60% 55% at 50% 52%,#18181b 0%,#0b0b0c 70%)}
+#yh-rw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#yh-rw canvas.fg{touch-action:pan-y;cursor:grab}
+#yh-rw canvas.fg:active{cursor:grabbing}
+#yh-rw .meta{position:absolute;left:clamp(20px,4vw,64px);top:clamp(24px,6vh,64px);pointer-events:none}
+#yh-rw .meta b{display:block;font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.02em}
+#yh-rw .meta span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.6)}
+#yh-rw .chips{position:absolute;left:50%;bottom:clamp(64px,10vh,100px);transform:translateX(-50%);display:flex;gap:6px;padding:5px;border-radius:999px;
+  background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#yh-rw .chips button{appearance:none;border:0;cursor:pointer;height:40px;min-width:64px;padding:0 16px;border-radius:999px;background:transparent;color:#fff;
+  font:800 15px/1 "Archivo",sans-serif}
+#yh-rw .chips button[aria-pressed="true"]{background:#fff;color:#111}
+#yh-rw .chips button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-rw .note{position:absolute;left:50%;transform:translateX(-50%);bottom:clamp(22px,4vh,40px);width:min(560px,calc(100% - 40px));margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.42);text-align:center}
+@media (max-width:720px){#yh-rw .chips button{min-width:56px;padding:0 12px}}
+/* ---------- T-shirt (KEEN × YHITF) ---------- */
+#yh-tee{--mint:#A9CDB7;background:#0d0d0f;color:#fff;padding:clamp(72px,12vh,140px) clamp(20px,5vw,80px) clamp(80px,12vh,140px)}
+#yh-tee .wrap{max-width:1240px;margin:0 auto}
+#yh-tee .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(40px,6vh,72px)}
+#yh-tee h2{margin:0;font-size:clamp(30px,3.6vw,52px);line-height:1.1;letter-spacing:-.035em;font-weight:800}
+#yh-tee h2{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(10px,1.4vw,18px)}
+#yh-tee .keen.big{width:clamp(150px,15vw,230px)}
+#yh-tee .amp{font-family:"Archivo",sans-serif;font-weight:500;font-size:.8em;line-height:1;color:var(--mint)}
+#yh-tee .ev{display:block;line-height:1.15}
+#yh-tee .keen{display:inline-block;width:2.3em;aspect-ratio:386/146;background:var(--mint);-webkit-mask:url(keen.svg) center/contain no-repeat;mask:url(keen.svg) center/contain no-repeat;vertical-align:middle}
+#yh-tee .lead strong{color:#fff;font-weight:700}
+#yh-tee .lead{margin:14px 0 0;color:rgba(255,255,255,.66);font-size:16px;line-height:1.6}
+#yh-tee .spec{display:flex;gap:8px;flex-wrap:wrap}
+#yh-tee .spec span{border:1px solid rgba(169,205,183,.45);color:var(--mint);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+#yh-tee .flats{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px)}
+#yh-tee figure{margin:0;background:#141416;border-radius:20px;padding:clamp(18px,3vw,36px) clamp(12px,2vw,24px) 20px;position:relative}
+#yh-tee figcaption{margin-top:10px;text-align:center;font:800 13px/1 "Archivo",sans-serif;letter-spacing:.08em;color:rgba(255,255,255,.5)}
+#yh-tee figure img{display:block;width:100%;max-width:440px;height:auto;margin:0 auto}
+#yh-tee .dim{stroke:var(--mint);stroke-width:1;stroke-dasharray:3 3;fill:none;opacity:.75}
+#yh-tee .dimt{fill:var(--mint);font:700 10px "Archivo",sans-serif}
+#yh-tee .size{margin-top:clamp(40px,6vh,64px);border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden}
+#yh-tee .size .cap{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.12);font-weight:800}
+#yh-tee .size .cap small{font-weight:500;color:rgba(255,255,255,.5);font-size:13px}
+#yh-tee table{width:100%;border-collapse:collapse;font-size:15px}
+#yh-tee th,#yh-tee td{padding:14px 24px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07)}
+#yh-tee th{color:rgba(255,255,255,.5);font-weight:600;font-size:13px}
+#yh-tee th:first-child,#yh-tee td:first-child{text-align:left}
+#yh-tee td:first-child{font-weight:800}
+#yh-tee tr:last-child td{border-bottom:0}
+#yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
+@media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee th,#yh-tee td{padding:12px 12px;font-size:14px}}
+
+
+/* ---------- medal spec sheet ---------- */
+#yh-spec{background:var(--bg);color:#fff;padding-block:clamp(56px,9vh,110px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-top:1px solid rgba(255,255,255,.06)}
+#yh-spec .wrap{max-width:1240px;margin:0 auto}
+#yh-spec .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(28px,5vh,48px)}
+#yh-spec h2{margin:0;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.03em;font-weight:800}
+#yh-spec .top p{margin:8px 0 0;color:rgba(255,255,255,.6);font-size:15px}
+#yh-spec .tabs{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(255,255,255,.07)}
+#yh-spec .tabs button{appearance:none;border:0;cursor:pointer;height:36px;min-width:58px;padding:0 14px;border-radius:999px;background:transparent;color:#fff;font:800 14px/1 "Archivo",sans-serif}
+#yh-spec .tabs button[aria-pressed="true"]{background:#fff;color:#111}
+#yh-spec .tabs button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-spec .sheet{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:clamp(12px,2vw,28px);align-items:end}
+#yh-spec .v{margin:0;position:relative}
+#yh-spec .v svg{display:block;width:100%;height:auto}
+#yh-spec .v figcaption,#yh-spec .big figcaption{font:700 13px/1 "Archivo",sans-serif;color:rgba(255,255,255,.55);letter-spacing:.04em;text-align:center;margin-top:12px}
+#yh-spec .big{margin:0;display:grid;gap:10px}
+#yh-spec .big img{display:block;width:100%;height:auto}
+#yh-spec .big .h{writing-mode:vertical-rl;transform:rotate(180deg);font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-left:1px solid rgba(255,255,255,.35);padding-left:8px;height:62%;display:flex;align-items:center;justify-content:center}
+#yh-spec .big .w{grid-column:1;text-align:center;font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.35);padding-top:8px}
+#yh-spec .strip{margin-top:clamp(36px,6vh,64px);display:grid;gap:10px}
+#yh-spec .strip .row{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
+#yh-spec .strip .row span{font-size:13px;color:rgba(255,255,255,.6)}
+#yh-spec .strip img{display:block;width:100%;height:auto;border-radius:2px}
+#yh-spec .strip .cap{display:flex;justify-content:space-between;color:rgba(255,255,255,.55);font-size:13px;margin-left:86px}
+@media (max-width:860px){#yh-spec .sheet{grid-template-columns:1fr 1fr}#yh-spec .big{grid-column:1/-1;max-width:420px;margin:12px auto 0}}
+@media (max-width:520px){#yh-spec .strip .row{grid-template-columns:1fr;gap:6px}#yh-spec .strip .cap{margin-left:0}}
+
+
+/* ---------- lookbook ---------- */
+#yh-model{background:var(--bg);color:#fff;padding:0}
+#yh-model .lb-hero{position:relative;height:230vh}
+#yh-model .pin{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden}
+#yh-model .frame{position:absolute;inset:0;--ix:20%;--iy:16%;--r:28px;clip-path:inset(var(--iy) var(--ix) round var(--r));will-change:clip-path}
+#yh-model .frame picture,#yh-model .frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+#yh-model .frame img{transform:scale(var(--s,1.14));transform-origin:50% 55%;will-change:transform}
+#yh-model .cap{position:absolute;left:max(24px,4.5vw);top:clamp(36px,9vh,96px);color:#212121;margin:0;opacity:var(--o,0);transform:translateY(calc((1 - var(--o,0)) * 16px))}
+#yh-model .cap .k{display:block;width:clamp(96px,9vw,140px);aspect-ratio:386/146;background:#212121;-webkit-mask:url(keen.svg) center/contain no-repeat;mask:url(keen.svg) center/contain no-repeat;margin-bottom:14px}
+#yh-model .cap strong{display:block;font-size:clamp(30px,4.2vw,60px);line-height:1.08;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+#yh-model .detail{max-width:1240px;margin:0 auto;padding-block:clamp(72px,12vh,140px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+#yh-model .shot{position:relative;margin:0;border-radius:22px;overflow:hidden}
+#yh-model .shot img{display:block;width:100%;height:auto}
+#yh-model .hs{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border:0;padding:0;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#yh-model .hs::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#fff;transition:transform .3s}
+#yh-model .hs::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);animation:yhping 2.4s ease-out infinite}
+@keyframes yhping{from{transform:scale(.7);opacity:1}to{transform:scale(1.8);opacity:0}}
+#yh-model .hs[aria-pressed="true"]::before{background:var(--mint);transform:scale(1.25)}
+#yh-model .hs:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#yh-model .tip{position:absolute;transform:translate(22px,-50%);white-space:nowrap;padding:9px 13px;border-radius:12px;background:rgba(18,18,20,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-size:13px;font-weight:700;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s}
+#yh-model .tip.on{opacity:1;transform:translate(26px,-50%)}
+#yh-model .side h3{margin:0;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.03em;font-weight:800}
+#yh-model .side>p{margin:12px 0 28px;color:rgba(255,255,255,.6);font-size:15px;line-height:1.6}
+#yh-model .face{display:inline-flex;gap:4px;padding:4px;margin:20px 0 18px;border-radius:999px;background:rgba(255,255,255,.07)}
+#yh-model .face button{appearance:none;border:0;cursor:pointer;height:36px;padding:0 18px;border-radius:999px;background:transparent;color:rgba(255,255,255,.7);font:700 14px/1 "Pretendard","Noto Sans KR",sans-serif;transition:background .3s,color .3s}
+#yh-model .face button[aria-pressed="true"]{background:var(--mint);color:#111}
+#yh-model .face button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-model .art{position:relative;margin:0;border-radius:18px;background:#19191b;aspect-ratio:1200/840;overflow:hidden}
+#yh-model .art img{position:absolute;left:0;top:0;width:100%;height:auto;opacity:0;transform:scale(.97);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1)}
+#yh-model .art img.on{opacity:1;transform:none}
+#yh-model .art figcaption{position:absolute;left:20px;bottom:16px;font-size:13px;color:rgba(255,255,255,.55)}
+#yh-model .art figcaption span{display:none}#yh-model .art figcaption span.on{display:inline}
+#yh-model .art em{font-style:normal;color:var(--mint);font-weight:700}#yh-model .art em.w{color:#fff}
+@media (max-width:820px){#yh-model .detail{grid-template-columns:1fr}#yh-model .lb-hero{height:auto}#yh-model .pin{position:relative;height:auto;min-height:0}#yh-model .frame{position:relative;clip-path:none}#yh-model .frame img{transform:none;height:auto}#yh-model .cap{position:static;opacity:1;transform:none;color:#fff;padding:24px 20px 0}#yh-model .cap .k{background:var(--mint)}}
+@media (prefers-reduced-motion:reduce){#yh-model .lb-hero{height:auto}#yh-model .pin{position:relative;height:auto;min-height:0}
+  #yh-model .frame{position:relative;clip-path:none;--o:1}#yh-model .frame img{transform:none;height:auto}#yh-model .hs::after{animation:none}}
+
+/* ---------- goods ---------- */
+#yh-goods{--g-white:#FFFFFF;--g-orange:#FF6D07;--g-blue:#002ACF;--g-ink:#212121;background:var(--bg);color:#fff;padding-block:clamp(72px,12vh,140px) clamp(48px,8vh,96px);overflow:hidden}
+#yh-goods .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#yh-goods h2{margin:0;font-size:clamp(32px,4.6vw,64px);line-height:1.12;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+#yh-goods h2 b{color:var(--g-orange);font-weight:800}
+#yh-goods .sub{margin:16px 0 0;font-size:16px;color:rgba(255,255,255,.62)}
+/* kit: line drawings rolling beside the list */
+#yh-goods .kit{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center;margin:clamp(40px,7vh,72px) 0 clamp(56px,9vh,96px)}
+#yh-goods .belt{position:relative;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+#yh-goods .track{display:flex;align-items:center;width:max-content;animation:yhbelt 48s linear infinite}
+#yh-goods .belt:hover .track{animation-play-state:paused}
+@keyframes yhbelt{to{transform:translateX(-50%)}}
+#yh-goods .it{flex:none;height:clamp(140px,14vw,200px);margin-right:clamp(32px,4vw,64px);display:flex;align-items:center}
+#yh-goods .it img{height:100%;width:auto;opacity:.85}
+#yh-goods .it:has(img[src*="l_bar"]) img{height:50%}
+#yh-goods .it:has(img[src*="l_hat"]) img{height:72%}
+#yh-goods .tbl{position:relative}
+#yh-goods table{width:100%;border-collapse:collapse;font-size:15px}
+#yh-goods th,#yh-goods td{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+#yh-goods th{font-size:13px;color:rgba(255,255,255,.5);font-weight:600}
+#yh-goods td:last-child,#yh-goods th:last-child{text-align:right;font-variant-numeric:tabular-nums;width:120px;white-space:nowrap}
+#yh-goods tr.soon td{color:rgba(255,255,255,.42);border-bottom:0}
+#yh-goods .more{color:#FF6D07;font-weight:900;letter-spacing:.04em;margin-right:10px}
+#yh-goods .dots{display:block;margin:14px 0 0 2px;width:4px;height:44px;background:radial-gradient(circle,#FF6D07 1.8px,transparent 2.2px) 0 0/4px 14px repeat-y;opacity:.85}
+/* tiles: studio shots, colour rhythm white / orange / blue */
+#yh-goods .tiles{display:flex;flex-wrap:wrap;gap:12px}
+#yh-goods .tile{appearance:none;border:0;cursor:pointer;position:relative;flex:1 1 26%;min-width:0;height:clamp(260px,30vw,420px);border-radius:22px;padding:0;overflow:hidden;background:#eee;
+  transition:flex-basis .6s cubic-bezier(.2,.8,.2,1),flex-grow .6s cubic-bezier(.2,.8,.2,1);font:inherit;text-align:left}
+#yh-goods .tile[aria-expanded="true"]{flex-basis:46%;flex-grow:1.6}
+#yh-goods .tile .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+#yh-goods .tile:hover .ph{transform:scale(1.035)}
+#yh-goods .tile:nth-child(3n+1){color:#212121}
+#yh-goods .tile:nth-child(3n+2),#yh-goods .tile:nth-child(3n){color:#fff}
+#yh-goods .tile .nm{position:absolute;left:18px;bottom:18px;max-width:calc(100% - 36px);padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.88);color:#212121;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:clamp(14px,1.2vw,17px);font-weight:800;letter-spacing:-.02em;line-height:1.35;opacity:0;transform:translateY(8px);transition:opacity .35s .2s,transform .35s .2s}
+#yh-goods .tile[aria-expanded="true"] .nm{opacity:1;transform:none}
+#yh-goods .tile .meta{position:absolute;right:22px;top:20px;text-align:right;font-size:13px;line-height:1.55;font-weight:600;color:#EAEAEA;opacity:0;transform:translateY(-6px);transition:opacity .35s .2s,transform .35s .2s}
+#yh-goods .tile[aria-expanded="true"] .meta{opacity:1;transform:none}
+#yh-goods .tile:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#yh-goods .tile.soon{cursor:default}
+#yh-goods .tile.soon .nm{opacity:1;transform:none;font-size:14px;letter-spacing:.08em;left:50%;top:50%;bottom:auto;transform:translate(-50%,-50%);background:none;color:#fff;white-space:nowrap}
+html.yh-vt #yh-goods .tile{transition:none}
+::view-transition-group(*){animation-duration:.55s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(*),::view-transition-new(*){height:100%;width:100%;object-fit:cover}
+#yh-goods .note{margin:clamp(48px,8vh,72px) 0 0;font-size:12px;color:rgba(255,255,255,.42);text-align:center}
+@media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr}#yh-goods .tile{flex-basis:38%;height:clamp(210px,54vw,300px)}#yh-goods .tile[aria-expanded="true"]{flex-basis:100%}}
+@media (prefers-reduced-motion:reduce){#yh-goods .track{animation:none}#yh-goods .tile{transition:none}}
+</style>
+<section id="yh-rw" aria-label="완주 메달">
+  <div class="stage">
+    <canvas class="fg" aria-label="3D 완주 메달. 드래그해서 돌려볼 수 있어요"></canvas>
+    <div class="meta"><b>완주 메달</b><span>80mm · 실버 &amp; 로즈골드 투톤</span></div>
+    <div class="chips" role="group" aria-label="종목별 메달끈">
+      <button type="button" data-k="5k" aria-pressed="false">5K</button>
+      <button type="button" data-k="10k" aria-pressed="false">10K</button>
+      <button type="button" data-k="15k" aria-pressed="false">15K</button>
+      <button type="button" data-k="28k" aria-pressed="true">28K</button>
+    </div>
+    <p class="note">모델 이미지는 실물과 다를 수 있으며 실제 색상과 디자인은 샘플 촬영 사진을 참고하시기 바랍니다.</p>
+  </div>
+</section>
+
+<section id="yh-spec" aria-labelledby="yh-spec-t">
+ <div class="wrap">
+  <div class="top">
+   <div><h2 id="yh-spec-t">메달 · 메달끈 도안</h2></div>
+   <div class="tabs" role="group" aria-label="종목별 메달끈">
+    <button type="button" data-k="5k" aria-pressed="false">5K</button><button type="button" data-k="10k" aria-pressed="false">10K</button><button type="button" data-k="15k" aria-pressed="false">15K</button><button type="button" data-k="28k" aria-pressed="true">28K</button>
+   </div>
+  </div>
+  <div class="sheet">
+   <figure class="v">
+     <svg viewBox="0 0 360 620" role="img" aria-label="앞면 메달끈을 건 모습">
+      <g transform="translate(180,412) rotate(19)"><image class="rib" data-face="out" href="rib_28k_out.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <g transform="translate(180,412) rotate(-19)"><image class="rib" data-face="out" href="rib_28k_out.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <image href="shaded_front.webp" x="105" y="404" width="150" height="197"/>
+      <text x="180" y="120" text-anchor="middle" fill="rgba(255,255,255,.75)" style="font:700 15px Archivo,sans-serif">Front</text>
+     </svg>
+    </figure>
+   <figure class="v">
+     <svg viewBox="0 0 360 620" role="img" aria-label="뒷면 메달끈을 건 모습">
+      <g transform="translate(180,412) rotate(19)"><image class="rib" data-face="in" href="rib_28k_in.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <g transform="translate(180,412) rotate(-19)"><image class="rib" data-face="in" href="rib_28k_in.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <image href="shaded_back.webp" x="105" y="404" width="150" height="197"/>
+      <text x="180" y="120" text-anchor="middle" fill="rgba(255,255,255,.75)" style="font:700 15px Archivo,sans-serif">Back</text>
+     </svg>
+    </figure>
+   <figure class="big">
+    <img src="shaded_front.webp" alt="메달 앞면 도안: 은색과 로즈골드 띠가 바람개비처럼 얽힌 투각 메달, 둘레에 2026 YONHAP NEWS HANAM INTERNATIONAL TRAIL RUN FESTIVAL" width="900" height="1180" loading="lazy">
+    <span class="w">80mm</span>
+   </figure>
+  </div>
+  <div class="strip">
+   <div class="row"><span>걸면</span><img class="flat" data-face="out" src="strip_28k_out.jpg" alt="메달끈 걸면: 물결 그래픽, 2026 YHITF 로고, 2026 연합뉴스 하남 국제 트레일런 페스티벌" width="2400" height="207" loading="lazy"></div>
+   <div class="row"><span>안쪽면</span><img class="flat" data-face="in" src="strip_28k_in.jpg" alt="메달끈 안쪽면: 2026 YHITF와 종목 FINISHER 문구" width="2400" height="207" loading="lazy"></div>
+   <div class="cap"><span>폭 35mm</span><span>5K · 10K · 15K · 28K 4종</span></div>
+  </div>
+ </div>
+</section>
+<script>
+(function(){
+  var S=document.getElementById('yh-spec');
+  function show(k){
+    S.querySelectorAll('image.rib').forEach(function(i){i.setAttribute('href','rib_'+k+'_'+i.dataset.face+'.jpg')});
+    S.querySelectorAll('img.flat').forEach(function(i){i.src='strip_'+k+'_'+i.dataset.face+'.jpg'});
+    S.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k)});
+  }
+  S.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){ if(window.YH_setCourse) window.YH_setCourse(b.dataset.k); else show(b.dataset.k); })});
+  document.addEventListener('yh-course',function(e){show(e.detail)});
+})();
+</script>
+<section id="yh-tee" aria-labelledby="yh-tee-t">
+ <div class="wrap">
+  <div class="head">
+   <div>
+    <h2 id="yh-tee-t"><span class="keen big" role="img" aria-label="KEEN"></span><span class="ev">2026 연합뉴스 하남<br>국제 트레일런 페스티벌</span></h2>
+    <p class="lead">2026 YHITF 공식 협찬사 KEEN 콜라보 기념 티셔츠<br><strong>일상부터 대회까지, 미국 포틀랜드 아웃도어의 기능성과 활동성을 선사합니다.</strong></p>
+   </div>
+  </div>
+  <div class="flats">
+   <figure><img src="tee_front.webp" alt="앞면: 가슴 중앙에 민트 KEEN 로고, 왼쪽 소매에 KEEN for the Trails" width="837" height="1100" loading="lazy"><figcaption>FRONT</figcaption></figure>
+   <figure><img src="tee_back.webp" alt="뒷면: 등 상단에 흰색 YHITF 로고, 아래에 민트 Keen for the Trails와 KEEN 로고" width="836" height="1100" loading="lazy"><figcaption>BACK</figcaption></figure>
+  </div>
+  <div class="size">
+   <div class="cap">사이즈표 <small>단위: cm</small></div>
+   <table>
+    <thead><tr><th scope="col">사이즈</th><th scope="col">기장</th><th scope="col">가슴단면</th><th scope="col">어깨너비</th><th scope="col">소매길이</th></tr></thead>
+    <tbody>
+     <tr><td>XS(85)</td><td>65</td><td>45</td><td>41</td><td>59</td></tr>
+     <tr><td>S(90)</td><td>67</td><td>48</td><td>43</td><td>60</td></tr>
+     <tr><td>M(95)</td><td>69</td><td>51</td><td>45</td><td>61</td></tr>
+     <tr><td>L(100)</td><td>71</td><td>54</td><td>47</td><td>62</td></tr>
+     <tr><td>XL(105)</td><td>73</td><td>58</td><td>49</td><td>63</td></tr>
+     <tr><td>2XL(110)</td><td>75</td><td>61</td><td>51</td><td>64</td></tr>
+     <tr><td>3XL(115)</td><td>77</td><td>64</td><td>53</td><td>65</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section id="yh-model" aria-label="기념 티셔츠 착용 컷">
+ <div class="lb-hero">
+  <div class="pin">
+   <div class="frame">
+    <picture><source media="(max-width:820px)" srcset="lb_wide_m.webp"><img src="lb_wide.webp" alt="블랙 롱슬리브 기념 티셔츠를 입은 두 러너가 콘크리트 벽 앞에 앉아 있다. 남성 가슴에 KEEN 로고, 여성 등에 YHITF 로고" width="2200" height="1476"></picture>
+   </div>
+   <p class="cap"><span class="k" role="img" aria-label="KEEN"></span><strong>일상부터 대회까지,<br>달리는 것 그 이상.</strong></p>
+  </div>
+ </div>
+ <div class="detail">
+  <figure class="shot"><img src="lb_close.webp" alt="두 러너가 마주 앉아 있다. 남성 앞면에 KEEN 로고, 여성 뒷면에 YHITF 로고와 Keen for the Trails" width="1728" height="1152" loading="lazy"><button type="button" class="hs" data-k="chest" style="left:30.9%;top:46.0%" aria-pressed="true" aria-label="앞면 도안"></button><button type="button" class="hs" data-k="back" style="left:68.5%;top:41.5%" aria-pressed="false" aria-label="뒷면 도안"></button><span class="tip" aria-hidden="true"></span></figure>
+  <div class="side">
+   <h3>프린트 도안 보기</h3>
+   <div class="face" role="group" aria-label="도안 면 선택"><button type="button" data-k="chest" aria-pressed="true">앞면</button><button type="button" data-k="back" aria-pressed="false">뒷면</button></div>
+   <figure class="art">
+    <img data-k="chest" class="on" src="pa_front.webp" alt="앞면 도안: 가슴 KEEN 로고, 소매 KEEN for the Trails 그래픽" width="1200" height="760">
+    <img data-k="back" src="pa_back.webp" alt="뒷면 도안: 등 YHITF 로고와 대회명, 하단 Keen for the Trails와 KEEN 로고" width="1200" height="760" loading="lazy">
+   </figure>
+  </div>
+ </div>
+</section>
+<script>
+(function(){
+  var M=document.getElementById('yh-model'),hero=M.querySelector('.lb-hero'),fr=M.querySelector('.frame'),cap=M.querySelector('.cap');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ease(t){return 1-Math.pow(1-t,3)}
+  function upd(){
+    if(reduce||innerWidth<=820) return;
+    var r=hero.getBoundingClientRect(),span=r.height-innerHeight,p=Math.min(1,Math.max(0,-r.top/span));
+    var e=ease(Math.min(1,p/.7)),mob=innerWidth<=820;
+    var ix=(mob?6:20)*(1-e),iy=(mob?22:16)*(1-e);
+    fr.style.setProperty('--ix',ix+'%');fr.style.setProperty('--iy',iy+'%');fr.style.setProperty('--r',(28*(1-e))+'px');
+    fr.style.setProperty('--s',1.14-.14*e);
+    var o=Math.min(1,Math.max(0,(p-.62)/.25));fr.style.setProperty('--o',o);cap.style.setProperty('--o',o);
+  }
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  var tip=M.querySelector('.tip'),hsb=[].slice.call(M.querySelectorAll('.hs')),fb=[].slice.call(M.querySelectorAll('.face button')),arts=[].slice.call(M.querySelectorAll('.art [data-k]'));
+  function act(k){
+    hsb.concat(fb).forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k)});
+    arts.forEach(function(e){e.classList.toggle('on',e.dataset.k===k)});
+    var h=hsb.filter(function(b){return b.dataset.k===k})[0];
+    tip.textContent=h.getAttribute('aria-label');tip.style.left=h.style.left;tip.style.top=h.style.top;tip.classList.add('on');
+  }
+  hsb.concat(fb).forEach(function(b){b.addEventListener('click',function(){act(b.dataset.k)})});
+  hsb.forEach(function(b){b.addEventListener('mouseenter',function(){act(b.dataset.k)})});
+  act('chest');
+})();
+</script>
+
+<section id="yh-goods" aria-labelledby="yh-goods-t">
+ <div class="wrap">
+  <h2 id="yh-goods-t"><b>10만원 상당</b> 러닝 키트,<br>참가자 전원 증정</h2>
+  <div class="kit">
+   <div class="belt" aria-label="러닝 키트 구성품 라인 일러스트"><div class="track"><div class="it"><img src="l_tee_front.svg" alt="티셔츠 앞 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_front.svg" alt="모자 앞 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_bar.svg" alt="에너지바 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_tee_back.svg" alt="티셔츠 뒤 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_side.svg" alt="모자 옆 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_medal.svg" alt="완주 메달 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_back.svg" alt="모자 뒤 라인 일러스트" loading="lazy"></div><div style="display:contents" aria-hidden="true"><div class="it"><img src="l_tee_front.svg" alt="" data-a="티셔츠 앞 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_front.svg" alt="" data-a="모자 앞 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_bar.svg" alt="" data-a="에너지바 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_tee_back.svg" alt="" data-a="티셔츠 뒤 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_side.svg" alt="" data-a="모자 옆 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_medal.svg" alt="" data-a="완주 메달 라인 일러스트" loading="lazy"></div><div class="it"><img src="l_hat_back.svg" alt="" data-a="모자 뒤 라인 일러스트" loading="lazy"></div></div></div></div>
+   <div class="tbl"><table><thead><tr><th scope="col">구성품</th><th scope="col">수량</th></tr></thead><tbody><tr><td>2026 YHITF 완주 메달</td><td>1ea</td></tr><tr><td>KEEN 콜라보 기념 티셔츠</td><td>1ea</td></tr><tr><td>92 바르셀로나 기념 황영조 감독 사인 모자</td><td>1ea</td></tr><tr><td>네이처밸리 오츠 앤 다크 초콜릿</td><td>1ea</td></tr><tr><td>네이처밸리 크런치 초콜릿칩</td><td>1ea</td></tr><tr class="soon"><td><b class="more">MORE</b></td><td>COMING SOON</td></tr></tbody></table><span class="dots" aria-hidden="true"></span></div>
+  </div>
+  <div class="tiles"><button type="button" class="tile" aria-expanded="true" aria-label="KEEN 콜라보 기념 티셔츠"><img class="ph" src="t_tee.jpg" alt="" loading="lazy"><span class="nm">KEEN 콜라보 기념 티셔츠</span></button><button type="button" class="tile" aria-expanded="false" aria-label="네이처밸리 오츠 앤 다크 초콜릿"><img class="ph" src="t_bar_oats.jpg" alt="" loading="lazy"><span class="nm">네이처밸리 오츠 앤 다크 초콜릿</span></button><button type="button" class="tile" aria-expanded="false" aria-label="2026 YHITF 완주 메달"><img class="ph" src="t_medal.jpg" alt="" loading="lazy"><span class="nm">2026 YHITF 완주 메달</span></button><button type="button" class="tile" aria-expanded="false" aria-label="네이처밸리 크런치 초콜릿칩"><img class="ph" src="t_bar_choc.jpg" alt="" loading="lazy"><span class="nm">네이처밸리 크런치 초콜릿칩</span></button><button type="button" class="tile" aria-expanded="false" aria-label="92 바르셀로나 기념 황영조 감독 사인 모자"><img class="ph" src="t_hat.jpg" alt="" loading="lazy"><span class="nm">92 바르셀로나 기념 황영조 감독 사인 모자</span><span class="meta">FREE (뒷 스트랩 조절)<br>머리둘레 56–60cm</span></button></div>
+  <p class="note">이미지는 연출된 것으로 실제 제품과 차이가 있을 수 있습니다.</p>
+ </div>
+</section>
+<script>
+(function(){
+  var G=document.getElementById('yh-goods'); var tiles=[].slice.call(G.querySelectorAll('button.tile'));
+  var vt=!!document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(vt){document.documentElement.classList.add('yh-vt');tiles.forEach(function(t,i){t.style.viewTransitionName='yhtile'+i})}
+  function set(t){tiles.forEach(function(o){o.setAttribute('aria-expanded',o===t)})}
+  tiles.forEach(function(t){
+    t.addEventListener('click',function(){
+      if(t.getAttribute('aria-expanded')==='true') return;
+      if(vt){var tr=document.startViewTransition(function(){set(t)});tr.finished.then(function(){ if(innerWidth<=720) t.scrollIntoView({block:'nearest',behavior:'smooth'})})}
+      else set(t);
+    });
+  });
+})();
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module" src="medal.js"></script>
