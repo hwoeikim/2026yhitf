@@ -25,3 +25,4 @@
 
 - 2026-10-24 ~02:55 KST: widget f5c902de (yx- class prefix, medal line art), assets af634b23
 - 2026-10-24 ~03:30 KST: widget 5f1f0a3f (mobile: 3D width, caption order, swipe lookbook), assets 37982c15
+- 2026-10-24 ~03:40 KST: widget 09f55a19 (3D medal removed for now; full prize table on main), assets 0043497e. 3D code kept in medal.js for later.
