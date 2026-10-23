@@ -18,6 +18,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-hero .yx-meta span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.65)}
 @media (max-width:720px){#yh-hero .yx-meta{top:auto;bottom:28px}}
 @media (prefers-reduced-motion:reduce){#yh-hero .yx-ph img{transform:none;transition:none}#yh-hero .yx-sweep{display:none}}
+#yh-spec .yx-ph3{margin:0}#yh-spec .yx-ph3 img{display:block;width:100%;height:auto;border-radius:16px}
 #yh-rw{position:relative;margin:0}
 #yh-rw .stage{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:radial-gradient(70% 60% at 50% 50%,#1c1c20 0%,#0f0f11 75%)}
 #yh-rw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -70,7 +71,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-spec .yx-tabs button{appearance:none;border:0;cursor:pointer;height:36px;min-width:58px;padding:0 14px;border-radius:999px;background:transparent;color:#fff;font:800 14px/1 "Archivo",sans-serif}
 #yh-spec .yx-tabs button[aria-pressed="true"]{background:#fff;color:#111}
 #yh-spec .yx-tabs button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-#yh-spec .yx-sheet{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:clamp(12px,2vw,28px);align-items:end}
+#yh-spec .yx-sheet{display:grid;grid-template-columns:1fr 1fr;max-width:860px;margin:0 auto;gap:clamp(12px,2vw,28px);align-items:end}
 #yh-spec .yx-v{margin:0;position:relative}
 #yh-spec .yx-v svg{display:block;width:100%;height:auto}
 #yh-spec .yx-v figcaption,#yh-spec .yx-big figcaption{font:700 13px/1 "Archivo",sans-serif;color:rgba(255,255,255,.55);letter-spacing:.04em;text-align:center;margin-top:12px}
@@ -281,10 +282,6 @@ addEventListener('scroll',on,{passive:true});})();
       <text x="180" y="120" text-anchor="middle" fill="rgba(255,255,255,.75)" style="font:700 15px Archivo,sans-serif">Back</text>
      </svg>
     </figure>
-   <div id="yh-rw" class="yx-big" data-inline="1">
-    <div class="stage"><canvas class="fg" aria-label="3D 완주 메달. 드래그해서 돌려볼 수 있어요"></canvas><p class="yx-hint">드래그해서 돌려보세요</p></div>
-    <p class="yx-note">모델 이미지는 실물과 다를 수 있으며<br>실제 색상과 디자인은 샘플 촬영 사진을 참고하시기 바랍니다.</p>
-   </div>
   </div>
  </div>
 </section>
@@ -479,5 +476,4 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserv
 var C=document.querySelector('#yh-goods .yx-cta');if(C&&'IntersectionObserver' in window){var ic=new IntersectionObserver(function(es){if(es[0].isIntersecting){C.classList.add('yx-in');ic.disconnect()}},{threshold:.3});ic.observe(C)}
 L.classList.add('rv');var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){L.classList.add('yx-in');io.disconnect()}},{rootMargin:'0px 0px -10% 0px'});io.observe(L);})();
 </script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
-<script type="module" src="medal.js"></script>
+
