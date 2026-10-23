@@ -8,7 +8,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const fg = ROOT.querySelector('canvas.fg');
 const R = new THREE.WebGLRenderer({ canvas: fg, antialias: true, alpha: true });
-R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = .92; R.outputColorSpace = THREE.SRGBColorSpace;
+R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.05; R.outputColorSpace = THREE.SRGBColorSpace;
 R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(22, 1, 1, 3000);
@@ -36,7 +36,7 @@ const domeMat = new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: fal
     v+=.0;     // left card fills the gap when the medal looks left
     v+=.5*box(az,el,-.55,-.48,.35,.14,.14);    // low bounce
     v+=1.2*box(az,el,3.0,.2,.5,.6,.2)+1.2*box(az,el,-3.0,.2,.5,.6,.2);
-    gl_FragColor=vec4(vec3(v*dim*.55),1.);}` });
+    gl_FragColor=vec4(vec3(v*dim*.85),1.);}` });
 envScene.add(new THREE.Mesh(new THREE.SphereGeometry(90, 64, 32), domeMat));
 const boxes = [];
 function box(w, h, pos, color, int, tint) {
@@ -44,8 +44,8 @@ function box(w, h, pos, color, int, tint) {
   const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m); p.position.set(...pos); p.lookAt(0, 0, 0);
   envScene.add(p); boxes.push({ m, base: new THREE.Color(color), int, tint }); return p;
 }
-box(7, 80, [-62, 4, 28], 0x2f5bff, 2.6, true);    // brand blue glint strip (left)
-box(7, 80, [60, 0, 22], 0xff7a1a, 3.2, true);   // brand orange glint strip (right)
+box(7, 80, [-62, 4, 28], 0xeef2ff, 1.4, true);    // brand blue glint strip (left)
+box(7, 80, [60, 0, 22], 0xffe6d2, 1.8, true);   // brand orange glint strip (right)
 let envRT = null, envKey = -1;
 function updateEnv(p) {
   const k = Math.round(p * 24); if (k === envKey) return; envKey = k;
@@ -57,10 +57,10 @@ function updateEnv(p) {
 }
 
 /* ---------- materials ---------- */
-const silver = new THREE.MeshPhysicalMaterial({ color: 0xbfc3ca, metalness: 1, roughness: .1, envMapIntensity: 1.15 });
-const rose = new THREE.MeshPhysicalMaterial({ color: 0xd68866, metalness: 1, roughness: .12, envMapIntensity: 1.1 });
-const recess = new THREE.MeshPhysicalMaterial({ color: 0x3e3a37, metalness: 1, roughness: .55 });   // antique, sand-blasted floor
-const edge = new THREE.MeshPhysicalMaterial({ color: 0xd7d9dd, metalness: 1, roughness: .14 });
+const silver = new THREE.MeshPhysicalMaterial({ color: 0xe9ebef, metalness: 1, roughness: .12, envMapIntensity: 1.15 });
+const rose = new THREE.MeshPhysicalMaterial({ color: 0xf2a581, metalness: 1, roughness: .14, envMapIntensity: 1.1 });
+const recess = new THREE.MeshPhysicalMaterial({ color: 0x8a8580, metalness: 1, roughness: .5 });   // antique, sand-blasted floor
+const edge = new THREE.MeshPhysicalMaterial({ color: 0xeceef1, metalness: 1, roughness: .12 });
 
 const medal = new THREE.Group(); scene.add(medal);
 const BASE = 1.7;   // half thickness of the base plate (mm)
@@ -270,7 +270,8 @@ function frame(now) {
   const theta = base + off;
   medal.rotation.y = theta;
   deformRibbon(theta);
-  rig.rotation.x = -0.04 + Math.sin(t * .6) * .01;
+  rig.rotation.x = Q.has('rx') ? +Q.get('rx') * Math.PI / 180 : 0.10 + Math.sin(t * .6) * .015;
+  rig.rotation.z = Q.has('rz') ? +Q.get('rz') * Math.PI / 180 : -0.08 + Math.sin(t * .42 + .6) * .03;
   rig.position.y = Math.sin(t * .8) * 1.0 + 4 - p * 10;
   R.render(scene, cam);
   requestAnimationFrame(frame);
