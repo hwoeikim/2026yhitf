@@ -57,7 +57,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-tee td:first-child{font-weight:800}
 #yh-tee tr:last-child td{border-bottom:0}
 #yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
-@media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee th,#yh-tee td{padding:12px 12px;font-size:14px}}
+@media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee .size{overflow-x:auto}#yh-tee .size .cap{padding:16px}#yh-tee table{table-layout:fixed}#yh-tee th,#yh-tee td{padding:11px 4px;font-size:13px;white-space:nowrap}#yh-tee th{font-size:11.5px;letter-spacing:-.05em}#yh-tee th:first-child,#yh-tee td:first-child{padding-left:14px;width:27%}#yh-tee th:last-child,#yh-tee td:last-child{padding-right:14px}}
 
 
 /* ---------- medal spec sheet ---------- */
@@ -210,8 +210,8 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-goods .specs li.tr{box-shadow:inset 0 2px 0 #FF6D07}
 #yh-goods .specs li.tr .no{color:#FF6D07}#yh-goods .specs .art.two{gap:8%}#yh-goods .specs .art.two img{max-width:40%}#yh-goods .specs .only{display:block;margin:6px 0 0 2.2em;font-size:12px;font-weight:700;color:#FF6D07}
 #yh-goods .lb{display:grid;gap:clamp(10px,1.2vw,16px)}
-#yh-goods .row{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(300px,36vw,520px)}
-#yh-goods .row.r2{height:clamp(260px,27vw,400px)}#yh-goods .sub{display:contents}
+#yh-goods .lr{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(300px,36vw,520px)}
+#yh-goods .lr.r2{height:clamp(260px,27vw,400px)}#yh-goods .sub{display:contents}
 #yh-goods .it{appearance:none;border:0;padding:0;margin:0;font:inherit;color:#fff;text-align:left;cursor:pointer;position:relative;flex:1 1 0;min-width:0;border-radius:6px;overflow:hidden;background:#101012;
   transition:flex-grow .9s cubic-bezier(.22,.8,.16,1)}
 #yh-goods .it img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos);
@@ -228,7 +228,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-goods .it.on::before{opacity:.35}
 #yh-goods .it.on .nm{opacity:1;transform:none}
 #yh-goods .it.on .cap .no{color:#FF6D07}
-#yh-goods .row:not(.act) .it .nm{opacity:.85;transform:none}
+#yh-goods .lr:not(.act) .it .nm{opacity:.85;transform:none}
 #yh-goods .it:focus-visible{outline:2px solid #fff;outline-offset:3px}
 #yh-goods .lb.rv{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1.2s cubic-bezier(.22,.8,.16,1)}
 #yh-goods .lb.rv.in{opacity:1;transform:none}
@@ -238,7 +238,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 @media (max-width:720px){#yh-goods .cta{border-radius:18px}#yh-goods .cta img{aspect-ratio:1/1}}
 @media (prefers-reduced-motion:reduce){#yh-goods .cta img{transform:none;transition:none}}
 #yh-goods .note{margin:clamp(48px,8vh,72px) 0 0;font-size:12px;color:rgba(255,255,255,.42);text-align:center}
-@media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr;gap:40px}#yh-goods .specs .art{height:84px}#yh-goods .specs .no{display:block;margin-bottom:6px}#yh-goods .specs .only{margin-left:0}#yh-goods .row{height:210px;gap:8px}#yh-goods .row.r2{height:auto;flex-direction:column}#yh-goods .sub{display:flex;gap:8px;height:200px}#yh-goods .it.on{flex-grow:4.2}#yh-goods .r1 .it.on{flex-grow:4.2}#yh-goods .it:not(.on) .cap{opacity:0}#yh-goods .it .cap{transition:opacity .5s}#yh-goods .row:not(.act) .it .nm{display:none}#yh-goods .it .cap{gap:8px}}
+@media (max-width:720px){#yh-goods .kit{grid-template-columns:1fr;gap:40px}#yh-goods .specs .art{height:84px}#yh-goods .specs .no{display:block;margin-bottom:6px}#yh-goods .specs .only{margin-left:0}#yh-goods .lr{height:210px;gap:8px}#yh-goods .lr.r2{height:auto;flex-direction:column}#yh-goods .sub{display:flex;gap:8px;height:200px}#yh-goods .it.on{flex-grow:4.2}#yh-goods .r1 .it.on{flex-grow:4.2}#yh-goods .it:not(.on) .cap{opacity:0}#yh-goods .it .cap{transition:opacity .5s}#yh-goods .lr:not(.act) .it .nm{display:none}#yh-goods .it .cap{gap:8px}}
 </style>
 <script>
 /* a CDN hiccup on first load shouldn't leave a broken picture: try again twice */
@@ -436,11 +436,11 @@ function q(){if(!t)t=requestAnimationFrame(upd)}addEventListener('scroll',q,{pas
    <ul class="specs" aria-label="러닝 키트 구성품 일러스트"><li class=""><div class="art"><img src="l_medal.svg" alt="" decoding="async"></div><span class="no">01</span><span class="nm">2026 YHITF 완주 메달</span></li><li class=""><div class="art"><img src="l_tee_front.svg" alt="" decoding="async"></div><span class="no">02</span><span class="nm">KEEN 콜라보 기념 티셔츠</span></li><li class=""><div class="art"><img src="l_hat_side.svg" alt="" decoding="async"></div><span class="no">03</span><span class="nm">92 바르셀로나 기념 황영조 감독 사인 모자</span></li><li class="bar"><div class="art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="no">04</span><span class="nm">네이처밸리 오츠 앤 다크 초콜릿</span></li><li class="bar"><div class="art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="no">05</span><span class="nm">네이처밸리 크런치 초콜릿칩</span></li><li class=""><div class="art"><img src="l_bag.svg" alt="" decoding="async"></div><span class="no">06</span><span class="nm">타포린백</span></li><li class=""><div class="art"><img src="l_gaiter.svg" alt="" decoding="async"></div><span class="no">07</span><span class="nm">기능성 마스크</span></li><li class="tr"><div class="art two"><img src="l_jk_front.svg" alt="" decoding="async"><img src="l_jk_back.svg" alt="" decoding="async"></div><span class="no">08</span><span class="nm">완주 기념 자켓</span><span class="only">15KM · 28KM 트레일런만 해당</span></li></ul>
   </div>
   <div class="lb" aria-label="러닝 키트 연출 사진">
-   <div class="row r1">
+   <div class="lr r1">
     <button type="button" class="it" aria-label="01 2026 YHITF 완주 메달" style="--pos:50% 60%"><img src="e_medal3.webp" alt="종목별 메달끈을 단 완주 메달 세 개" width="1672" height="940" loading="lazy" draggable="false"><span class="cap"><span class="no">01</span><span class="nm">2026 YHITF 완주 메달</span></span></button>
     <button type="button" class="it" aria-label="02 KEEN 콜라보 기념 티셔츠" style="--pos:50% 50%"><img src="e_tee.webp" alt="KEEN 콜라보 기념 티셔츠 앞면과 뒷면" width="1536" height="1024" loading="lazy" draggable="false"><span class="cap"><span class="no">02</span><span class="nm">KEEN 콜라보 기념 티셔츠</span></span></button>
    </div>
-   <div class="row r2">
+   <div class="lr r2">
     <div class="sub">
     <button type="button" class="it" aria-label="03 황영조 감독 사인 모자" style="--pos:45% 50%"><img src="e_hat.webp" alt="흰색 92 BCN 자수 모자, 옆면에 황영조 감독 사인" width="1300" height="984" loading="lazy" draggable="false"><span class="cap"><span class="no">03</span><span class="nm">황영조 감독 사인 모자</span></span></button>
     <button type="button" class="it" aria-label="04–05 네이처밸리 에너지바 2종" style="--pos:55% 50%"><img src="e_bars.webp" alt="네이처밸리 에너지바 두 종류" width="1400" height="1400" loading="lazy" draggable="false"><span class="cap"><span class="no">04–05</span><span class="nm">네이처밸리 에너지바 2종</span></span></button>
@@ -460,10 +460,10 @@ function q(){if(!t)t=requestAnimationFrame(upd)}addEventListener('scroll',q,{pas
 <script>
 (function(){var L=document.querySelector('#yh-goods .lb');if(!L)return;
 var fine=matchMedia('(hover:hover) and (pointer:fine)'),mob=matchMedia('(max-width:720px)'),groups=[];
-function set(g,el){g.forEach(function(c){c.classList.toggle('on',c===el);c.setAttribute('aria-pressed',c===el)});var row=g[0].closest('.row');if(row)row.classList.toggle('act',L.querySelectorAll('.it.on').length>0&&row.querySelector('.it.on')!==null)}
+function set(g,el){g.forEach(function(c){c.classList.toggle('on',c===el);c.setAttribute('aria-pressed',c===el)});var row=g[0].closest('.lr');if(row)row.classList.toggle('act',L.querySelectorAll('.it.on').length>0&&row.querySelector('.it.on')!==null)}
 function build(){
-  groups=[].map.call(L.querySelectorAll(mob.matches?'.r1, .sub':'.row'),function(r){return [].slice.call(r.querySelectorAll('.it'))});
-  L.querySelectorAll('.it').forEach(function(c){c.classList.remove('on')});L.querySelectorAll('.row').forEach(function(r){r.classList.remove('act')});
+  groups=[].map.call(L.querySelectorAll(mob.matches?'.r1, .sub':'.lr'),function(r){return [].slice.call(r.querySelectorAll('.it'))});
+  L.querySelectorAll('.it').forEach(function(c){c.classList.remove('on')});L.querySelectorAll('.lr').forEach(function(r){r.classList.remove('act')});
   if(!fine.matches)groups.forEach(function(g){set(g,g[0])});                // touch: one picture open per group
 }
 function gOf(el){for(var i=0;i<groups.length;i++)if(groups[i].indexOf(el)>-1)return groups[i]}
@@ -472,7 +472,7 @@ L.querySelectorAll('.it').forEach(function(el){
   el.addEventListener('focus',function(){if(el.matches(':focus-visible'))set(gOf(el),el)});
   el.addEventListener('click',function(){set(gOf(el),el)});
 });
-L.querySelectorAll('.row').forEach(function(row){row.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){var g=gOf(row.querySelector('.it'));if(g)set(g,null)}})});
+L.querySelectorAll('.lr').forEach(function(row){row.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){var g=gOf(row.querySelector('.it'));if(g)set(g,null)}})});
 build();if(mob.addEventListener)mob.addEventListener('change',build);
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
 var C=document.querySelector('#yh-goods .cta');if(C&&'IntersectionObserver' in window){var ic=new IntersectionObserver(function(es){if(es[0].isIntersecting){C.classList.add('in');ic.disconnect()}},{threshold:.3});ic.observe(C)}
