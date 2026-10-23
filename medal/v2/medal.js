@@ -9,7 +9,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fg = ROOT.querySelector('canvas.fg');
 const R = new THREE.WebGLRenderer({ canvas: fg, antialias: true, alpha: true });
 R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.0; R.outputColorSpace = THREE.SRGBColorSpace;
-R.shadowMap.enabled = false;
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(22, 1, 1, 3000);
 const pmrem = new THREE.PMREMGenerator(R);
@@ -31,6 +31,7 @@ const domeMat = new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: fal
     v+=1.1*box(az,el, .34,-.02,.16,.50,.10);   // tall card front-right
     v+=1.05*box(az,el,-.14,.20,.24,.28,.20);    // soft front card (keeps the face from going black)
     v+=.6*box(az,el,.55,.55,.25,.18,.15);       // upper right fill
+    v+=1.0*box(az,el,-.62,.10,.18,.34,.16);     // left card fills the gap when the medal looks left
     v+=.5*box(az,el,-.55,-.48,.35,.14,.14);    // low bounce
     v+=1.2*box(az,el,3.0,.2,.5,.6,.2)+1.2*box(az,el,-3.0,.2,.5,.6,.2);
     gl_FragColor=vec4(vec3(v*dim),1.);}` });
@@ -46,7 +47,7 @@ box(7, 80, [60, 0, 22], 0xff7a1a, 5.5, true);   // brand orange glint strip (rig
 let envRT = null, envKey = -1;
 function updateEnv(p) {
   const k = Math.round(p * 24); if (k === envKey) return; envKey = k;
-  const m = THREE.MathUtils.smoothstep(p, .30, .70), dim = 1 - THREE.MathUtils.smoothstep(p, .70, .98) * .45;
+  const m = 0, dim = 1 - THREE.MathUtils.smoothstep(p, .70, .98) * .45;
   const mint = new THREE.Color(0xA9CDB7);
   domeMat.uniforms.dim.value = dim;
   boxes.forEach(B => { const c = B.base.clone(); if (B.tint) c.lerp(mint, m); B.m.color.copy(c.multiplyScalar(B.int)) });
@@ -88,7 +89,7 @@ fetch(ASSET + 'shape.json').then(r => r.json()).then(json => {
   const b = new THREE.Group();
   if (!Q.has('lite')) b.add(relief(S.back_silver, silver, mm, N), relief(S.back_copper, rose, mm, N));
   b.rotation.y = Math.PI; b.position.z = -(BASE - .02); medal.add(b);
-  buildRibbon(); setCourse('28k');
+  buildRibbon(); setCourse('28k'); shadowsOn();
 });
 
 /* ---------- ribbon: one continuous satin lanyard ----------
@@ -98,6 +99,16 @@ fetch(ASSET + 'shape.json').then(r => r.json()).then(json => {
 const RW = 35, slotTop = 40.5, R0 = 2.05, slideY = 49, L = 250;
 const rig = new THREE.Group(); scene.add(rig);           // bobbing parent; medal + ribbon live here
 scene.remove(medal); rig.add(medal);
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-70, 130, 150); key.target = rig;
+key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 5; key.shadow.bias = -.0004; key.shadow.normalBias = .03;
+Object.assign(key.shadow.camera, { left: -80, right: 80, top: 130, bottom: -70, near: 40, far: 420 }); key.shadow.camera.updateProjectionMatrix();
+scene.add(key, key.target);
+const poolTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d');
+  const g = x.createRadialGradient(128, 128, 0, 128, 128, 128); g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(.45, 'rgba(255,255,255,.12)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 256, 256); return new THREE.CanvasTexture(c) })();
+const pool = new THREE.Mesh(new THREE.PlaneGeometry(260, 160), new THREE.MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, opacity: .28 }));
+pool.rotation.x = -Math.PI / 2; pool.position.set(0, -66, 0); scene.add(pool);
+function shadowsOn() { rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true } }) }
 function clothNormal() {          // low-frequency cloth unevenness + faint rib
   const W = 128, H = 128, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); const img = x.createImageData(W, H);
   const hgt = new Float32Array(W * H);
@@ -176,7 +187,7 @@ function buildHalf(side) {
   return { side, gO, gI, gE, rest };
 }
 function fabric(dbl) {
-  return new THREE.MeshPhysicalMaterial({ color: 0xeeeeee, vertexColors: true, roughness: .62, metalness: 0, sheen: 1, sheenRoughness: .32, sheenColor: new THREE.Color(0xdfe6ff),
+  return new THREE.MeshPhysicalMaterial({ color: 0xe4e4e4, vertexColors: true, roughness: .66, metalness: 0, sheen: 1, sheenRoughness: .32, sheenColor: new THREE.Color(0xdfe6ff),
     normalMap: cloth, normalScale: new THREE.Vector2(.45, .45), side: dbl ? THREE.DoubleSide : THREE.FrontSide, envMapIntensity: .85 });
 }
 let slide = null;
@@ -227,7 +238,9 @@ function setCourse(k) {
     h.mO.material.needsUpdate = h.mI.material.needsUpdate = true;
   });
   ROOT.querySelectorAll('.chips button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k));
+  document.dispatchEvent(new CustomEvent('yh-course', { detail: k }));
 }
+window.YH_setCourse = setCourse;
 ROOT.querySelectorAll('.chips button').forEach(b => b.addEventListener('click', () => setCourse(b.dataset.k)));
 
 /* ---------- interaction + scroll ----------
@@ -249,8 +262,9 @@ const t0 = performance.now();
 function frame(now) {
   const t = (now - t0) / 1000, p = progress();
   updateEnv(p);
-  if (!drag) { off += vel; vel *= .92; off *= .985 }
-  const base = FIX_A !== null ? FIX_A * Math.PI / 180 : (swing ? 1.55 - 1.9 * Math.cos(t * .33) : -.35);
+  if (!drag) { off += vel; vel *= .9; off *= .965 }
+  // a calm look left and right (about ±22°), like someone turning their head, never spinning
+  const base = FIX_A !== null ? FIX_A * Math.PI / 180 : (swing ? -.06 + .34 * Math.sin(t * .42) + .05 * Math.sin(t * 1.07 + 1) : -.2);
   const theta = base + off;
   medal.rotation.y = theta;
   deformRibbon(theta);

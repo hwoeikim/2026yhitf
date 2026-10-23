@@ -3,7 +3,7 @@
 <style>
 :root{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark}
 html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
-#yh-rw{position:relative;height:280vh;background:var(--bg)}
+#yh-rw{position:relative;height:190vh;background:var(--bg)}
 #yh-rw .stage{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;
   background:radial-gradient(60% 55% at 50% 52%,#18181b 0%,#0b0b0c 70%)}
 #yh-rw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -36,7 +36,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-tee .flats{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px)}
 #yh-tee figure{margin:0;background:#141416;border-radius:20px;padding:clamp(18px,3vw,36px) clamp(12px,2vw,24px) 20px;position:relative}
 #yh-tee figcaption{margin-top:10px;text-align:center;font:800 13px/1 "Archivo",sans-serif;letter-spacing:.08em;color:rgba(255,255,255,.5)}
-#yh-tee svg{width:100%;height:auto;display:block}
+#yh-tee figure img{display:block;width:100%;max-width:440px;height:auto;margin:0 auto}
 #yh-tee .dim{stroke:var(--mint);stroke-width:1;stroke-dasharray:3 3;fill:none;opacity:.75}
 #yh-tee .dimt{fill:var(--mint);font:700 10px "Archivo",sans-serif}
 #yh-tee .size{margin-top:clamp(40px,6vh,64px);border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden}
@@ -51,6 +51,32 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
 @media (max-width:720px){#yh-tee .flats{grid-template-columns:1fr}#yh-tee th,#yh-tee td{padding:12px 12px;font-size:14px}}
 
+
+/* ---------- medal spec sheet ---------- */
+#yh-spec{background:var(--bg);color:#fff;padding-block:clamp(56px,9vh,110px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-top:1px solid rgba(255,255,255,.06)}
+#yh-spec .wrap{max-width:1240px;margin:0 auto}
+#yh-spec .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(28px,5vh,48px)}
+#yh-spec h2{margin:0;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.03em;font-weight:800}
+#yh-spec .top p{margin:8px 0 0;color:rgba(255,255,255,.6);font-size:15px}
+#yh-spec .tabs{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(255,255,255,.07)}
+#yh-spec .tabs button{appearance:none;border:0;cursor:pointer;height:36px;min-width:58px;padding:0 14px;border-radius:999px;background:transparent;color:#fff;font:800 14px/1 "Archivo",sans-serif}
+#yh-spec .tabs button[aria-pressed="true"]{background:#fff;color:#111}
+#yh-spec .tabs button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-spec .sheet{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:clamp(12px,2vw,28px);align-items:end}
+#yh-spec .v{margin:0;position:relative}
+#yh-spec .v svg{display:block;width:100%;height:auto}
+#yh-spec .v figcaption,#yh-spec .big figcaption{font:700 13px/1 "Archivo",sans-serif;color:rgba(255,255,255,.55);letter-spacing:.04em;text-align:center;margin-top:12px}
+#yh-spec .big{margin:0;display:grid;gap:10px}
+#yh-spec .big img{display:block;width:100%;height:auto}
+#yh-spec .big .h{writing-mode:vertical-rl;transform:rotate(180deg);font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-left:1px solid rgba(255,255,255,.35);padding-left:8px;height:62%;display:flex;align-items:center;justify-content:center}
+#yh-spec .big .w{grid-column:1;text-align:center;font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.35);padding-top:8px}
+#yh-spec .strip{margin-top:clamp(36px,6vh,64px);display:grid;gap:10px}
+#yh-spec .strip .row{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
+#yh-spec .strip .row span{font-size:13px;color:rgba(255,255,255,.6)}
+#yh-spec .strip img{display:block;width:100%;height:auto;border-radius:2px}
+#yh-spec .strip .cap{display:flex;justify-content:space-between;color:rgba(255,255,255,.55);font-size:13px;margin-left:86px}
+@media (max-width:860px){#yh-spec .sheet{grid-template-columns:1fr 1fr}#yh-spec .big{grid-column:1/-1;max-width:420px;margin:12px auto 0}}
+@media (max-width:520px){#yh-spec .strip .row{grid-template-columns:1fr;gap:6px}#yh-spec .strip .cap{margin-left:0}}
 </style>
 <section id="yh-rw" aria-label="완주 메달">
   <div class="stage">
@@ -65,6 +91,56 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
     <p class="note">모델 이미지는 실물과 다를 수 있으며 실제 색상과 디자인은 샘플 촬영 사진을 참고하시기 바랍니다.</p>
   </div>
 </section>
+
+<section id="yh-spec" aria-labelledby="yh-spec-t">
+ <div class="wrap">
+  <div class="top">
+   <div><h2 id="yh-spec-t">메달 · 메달끈 도안</h2><p>메달 80mm 실버·로즈골드 투톤, 메달끈은 종목마다 색이 달라요.</p></div>
+   <div class="tabs" role="group" aria-label="종목별 메달끈">
+    <button type="button" data-k="5k" aria-pressed="false">5K</button><button type="button" data-k="10k" aria-pressed="false">10K</button><button type="button" data-k="15k" aria-pressed="false">15K</button><button type="button" data-k="28k" aria-pressed="true">28K</button>
+   </div>
+  </div>
+  <div class="sheet">
+   <figure class="v">
+     <svg viewBox="0 0 360 620" role="img" aria-label="앞면 메달끈을 건 모습">
+      <g transform="translate(180,412) rotate(19)"><image class="rib" data-face="out" href="rib_28k_out.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <g transform="translate(180,412) rotate(-19)"><image class="rib" data-face="out" href="rib_28k_out.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <image href="shaded_front.webp" x="105" y="404" width="150" height="197"/>
+      <text x="180" y="120" text-anchor="middle" fill="rgba(255,255,255,.75)" style="font:700 15px Archivo,sans-serif">Front</text>
+     </svg>
+    </figure>
+   <figure class="v">
+     <svg viewBox="0 0 360 620" role="img" aria-label="뒷면 메달끈을 건 모습">
+      <g transform="translate(180,412) rotate(19)"><image class="rib" data-face="in" href="rib_28k_in.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <g transform="translate(180,412) rotate(-19)"><image class="rib" data-face="in" href="rib_28k_in.jpg" x="-33" y="-761" width="66" height="761" preserveAspectRatio="none"/></g>
+      <image href="shaded_back.webp" x="105" y="404" width="150" height="197"/>
+      <text x="180" y="120" text-anchor="middle" fill="rgba(255,255,255,.75)" style="font:700 15px Archivo,sans-serif">Back</text>
+     </svg>
+    </figure>
+   <figure class="big">
+    <img src="shaded_front.webp" alt="메달 앞면 도안: 은색과 로즈골드 띠가 바람개비처럼 얽힌 투각 메달, 둘레에 2026 YONHAP NEWS HANAM INTERNATIONAL TRAIL RUN FESTIVAL" width="900" height="1180" loading="lazy">
+    <span class="w">80mm</span>
+   </figure>
+  </div>
+  <div class="strip">
+   <div class="row"><span>걸면</span><img class="flat" data-face="out" src="strip_28k_out.jpg" alt="메달끈 걸면: 물결 그래픽, 2026 YHITF 로고, 2026 연합뉴스 하남 국제 트레일런 페스티벌" width="2400" height="207" loading="lazy"></div>
+   <div class="row"><span>안쪽면</span><img class="flat" data-face="in" src="strip_28k_in.jpg" alt="메달끈 안쪽면: 2026 YHITF와 종목 FINISHER 문구" width="2400" height="207" loading="lazy"></div>
+   <div class="cap"><span>폭 35mm</span><span>5K · 10K · 15K · 28K 4종</span></div>
+  </div>
+ </div>
+</section>
+<script>
+(function(){
+  var S=document.getElementById('yh-spec');
+  function show(k){
+    S.querySelectorAll('image.rib').forEach(function(i){i.setAttribute('href','rib_'+k+'_'+i.dataset.face+'.jpg')});
+    S.querySelectorAll('img.flat').forEach(function(i){i.src='strip_'+k+'_'+i.dataset.face+'.jpg'});
+    S.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k)});
+  }
+  S.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){ if(window.YH_setCourse) window.YH_setCourse(b.dataset.k); else show(b.dataset.k); })});
+  document.addEventListener('yh-course',function(e){show(e.detail)});
+})();
+</script>
 <section id="yh-tee" aria-labelledby="yh-tee-t">
  <div class="wrap">
   <div class="head">
@@ -75,31 +151,8 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
    <div class="spec"><span>블랙 롱슬리브</span><span>화이트 · 민트 2도</span><span>XS – 3XL</span></div>
   </div>
   <div class="flats">
-   <figure>
-    <svg viewBox="0 0 400 470" role="img" aria-label="앞면 도안: 가슴에 KEEN 로고">
-     <path d="M160,42 Q200,66 240,42 L300,58 Q336,70 350,120 L378,328 L342,338 L300,170 L294,442 L106,442 L100,170 L58,338 L22,328 L50,120 Q64,70 100,58 Z" fill="#1c1c1f" stroke="#2c2c30" stroke-width="1.5"/>
-     <path d="M160,42 Q200,66 240,42" fill="none" stroke="#38383d" stroke-width="5"/>
-     <foreignObject x="175" y="98" width="50" height="19"><div xmlns="http://www.w3.org/1999/xhtml" class="keen" style="width:50px;display:block"></div></foreignObject>
-     <path class="dim" d="M175,90 H225 M175,86 V94 M225,86 V94"/><text class="dimt" x="200" y="84" text-anchor="middle">145</text>
-     <path class="dim" d="M233,98 V117 M229,98 H237 M229,117 H237"/><text class="dimt" x="240" y="111">60</text>
-     <rect x="347" y="262" width="16" height="36" rx="2" fill="none" stroke="var(--mint)" stroke-width="1" stroke-dasharray="2 2" transform="rotate(-8 355 280)"/><text class="dimt" x="368" y="258">105</text>
-    </svg>
-    <figcaption>FRONT</figcaption>
-   </figure>
-   <figure>
-    <svg viewBox="0 0 400 470" role="img" aria-label="뒷면 도안: 등에 YHITF 로고, 아래에 Keen for the Trails">
-     <path d="M160,42 Q200,52 240,42 L300,58 Q336,70 350,120 L378,328 L342,338 L300,170 L294,442 L106,442 L100,170 L58,338 L22,328 L50,120 Q64,70 100,58 Z" fill="#1c1c1f" stroke="#2c2c30" stroke-width="1.5"/>
-     <foreignObject x="165" y="86" width="70" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;flex-direction:column;align-items:center;gap:4px">
-       <div style="width:22px;aspect-ratio:66.5/64.5;background:#fff;-webkit-mask:url(symbol_white.svg) center/contain no-repeat;mask:url(symbol_white.svg) center/contain no-repeat"></div>
-       <div style="width:68px;aspect-ratio:3.2/1;background:#fff;-webkit-mask:url(wordmark_white.svg) center/contain no-repeat;mask:url(wordmark_white.svg) center/contain no-repeat"></div></div></foreignObject>
-     <path class="dim" d="M165,146 H235 M165,142 V150 M235,142 V150"/><text class="dimt" x="200" y="160" text-anchor="middle">200</text>
-     <path class="dim" d="M243,86 V134 M239,86 H247 M239,134 H247"/><text class="dimt" x="250" y="114">140</text>
-     <text x="200" y="352" text-anchor="middle" fill="var(--mint)" style="font:800 11px Archivo,sans-serif;letter-spacing:-.02em">Keen for the Trails</text>
-     <foreignObject x="183" y="360" width="34" height="13"><div xmlns="http://www.w3.org/1999/xhtml" class="keen" style="width:34px;display:block"></div></foreignObject>
-     <path class="dim" d="M173,384 H227 M173,380 V388 M227,380 V388"/><text class="dimt" x="200" y="398" text-anchor="middle">155</text>
-    </svg>
-    <figcaption>BACK</figcaption>
-   </figure>
+   <figure><img src="tee_front.webp" alt="앞면: 가슴 중앙에 민트 KEEN 로고, 왼쪽 소매에 KEEN for the Trails" width="837" height="1100" loading="lazy"><figcaption>FRONT</figcaption></figure>
+   <figure><img src="tee_back.webp" alt="뒷면: 등 상단에 흰색 YHITF 로고, 아래에 민트 Keen for the Trails와 KEEN 로고" width="836" height="1100" loading="lazy"><figcaption>BACK</figcaption></figure>
   </div>
   <div class="size">
    <div class="cap">사이즈표 <small>단위: cm</small></div>
