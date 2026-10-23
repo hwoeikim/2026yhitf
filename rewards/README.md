@@ -24,3 +24,4 @@
 - previous live: widget 3c071d4…, assets b36ee1b…
 
 - 2026-10-24 ~02:55 KST: widget f5c902de (yx- class prefix, medal line art), assets af634b23
+- 2026-10-24 ~03:30 KST: widget 5f1f0a3f (mobile: 3D width, caption order, swipe lookbook), assets 37982c15
