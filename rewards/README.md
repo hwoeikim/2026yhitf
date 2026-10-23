@@ -12,3 +12,6 @@
   - /rewards는 섹션 좌우 여백 때문에 `#yh-rewards{width:100vw;margin-left:calc(50% - 50vw)}` 추가
 - 수정 절차: medal/v2 수정 → 커밋·push → build.py로 widget.html 생성·커밋 → 아임웹 위젯 코드에서 첫 줄 <style>은 남기고 나머지를 새 widget.html로 교체 → 저장·게시
 - 영문 사이트는 아직 (국문 확인 후 번역해서 넣기로 함)
+- 주의(2026-10-23): 저장소가 jsDelivr 한도(50MB)를 넘어서 새 커밋은 CDN이 403("Package size exceeded")을 줄 때가 있음
+  - 이미지·medal.js가 안 바뀌었으면 build.py에 예전에 잘 뜨던 커밋 SHA(현재 c1129c1…)를 넣어 자산 주소를 고정
+  - 위젯 코드 자체는 raw.githubusercontent.com/<SHA>/rewards/widget_*.html 에서 받아 붙여넣기 (응답 길이·id 확인 후 교체)
