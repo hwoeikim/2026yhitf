@@ -229,7 +229,7 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
   function show(k){
     S.querySelectorAll('image.rib').forEach(function(i){i.setAttribute('href','rib_'+k+'_'+i.dataset.face+'.jpg')});
     cur=k;
-    S.querySelectorAll('img.flat').forEach(function(i){var src='strip_'+k+'_'+i.dataset.face+'.jpg';if(i.getAttribute('src')===src)return;var n=new Image();i.classList.add('fade');n.onload=n.onerror=function(){i.src=src;requestAnimationFrame(function(){i.classList.remove('fade')})};n.src=src});
+    S.querySelectorAll('img.flat').forEach(function(i){var src=(window.YH_ASSET_BASE||'')+'strip_'+k+'_'+i.dataset.face+'.jpg';if(i.getAttribute('src')===src)return;var n=new Image();i.classList.add('fade');n.onload=n.onerror=function(){i.src=src;requestAnimationFrame(function(){i.classList.remove('fade')})};n.src=src});
     S.querySelectorAll('.cl b').forEach(function(b){b.classList.toggle('on',b.dataset.k===k)});
     S.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k)});
   }
