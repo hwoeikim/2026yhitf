@@ -1,0 +1,111 @@
+
+/* ---------- prize money ---------- */
+#yh-prize{--o:#FF6D07;--b:#2E5BFF;background:var(--bg);color:#fff;padding-block:clamp(72px,12vh,140px);border-top:1px solid rgba(255,255,255,.06)}
+#yh-prize .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#yh-prize .hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(28px,5vh,48px)}
+#yh-prize h2{margin:0;font-size:clamp(32px,4.6vw,64px);line-height:1.12;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+#yh-prize h2 b{color:var(--o)}
+#yh-prize .seg{position:relative;display:inline-grid;grid-template-columns:repeat(4,1fr);padding:5px;border-radius:999px;background:rgba(255,255,255,.07)}
+#yh-prize .seg i{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/4);border-radius:999px;background:#fff;transform:translateX(calc(var(--k,3)*100%));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#yh-prize .seg button{position:relative;appearance:none;border:0;background:none;cursor:pointer;height:42px;min-width:72px;padding:0 18px;border-radius:999px;color:#fff;font:800 15px/1 "Archivo",sans-serif;transition:color .3s}
+#yh-prize .seg button[aria-selected="true"]{color:#111}
+#yh-prize .seg button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-prize .board{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px)}
+#yh-prize .col{border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:clamp(20px,2.6vw,32px);overflow:hidden}
+#yh-prize .col h3{margin:0 0 18px;font-size:15px;font-weight:700;color:rgba(255,255,255,.62)}
+#yh-prize .first{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:clamp(20px,2.4vw,28px);border-radius:18px;background:var(--o);color:#fff;margin-bottom:10px;overflow:hidden}
+#yh-prize .col.w .first{background:var(--b)}
+#yh-prize .first::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.28),transparent 55%);pointer-events:none}
+#yh-prize .first .rk{font:800 13px/1 "Archivo",sans-serif;letter-spacing:.06em;opacity:.85}
+#yh-prize .first .rk b{display:block;font-size:clamp(36px,4vw,54px);line-height:.9;letter-spacing:-.02em}
+#yh-prize .amt{font:800 clamp(34px,4.2vw,58px)/1 "Archivo",sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+#yh-prize .amt small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:.42em;font-weight:700;margin-left:4px;letter-spacing:0}
+#yh-prize ol{list-style:none;margin:0;padding:0}
+#yh-prize li{display:flex;justify-content:space-between;align-items:center;padding:15px 6px;border-bottom:1px solid rgba(255,255,255,.08)}
+#yh-prize li:last-child{border-bottom:0}
+#yh-prize li .r{font:800 18px/1 "Archivo",sans-serif;color:rgba(255,255,255,.75)}
+#yh-prize li .r span{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:13px;font-weight:600;margin-left:2px;color:rgba(255,255,255,.45)}
+#yh-prize li .v{font:800 18px/1 "Archivo",sans-serif;font-variant-numeric:tabular-nums}
+#yh-prize .lock{display:inline-flex;align-items:center;gap:10px;color:rgba(255,255,255,.4);font:700 12px/1 "Archivo",sans-serif;letter-spacing:.08em}
+#yh-prize .lock::before{content:"0,000,000";font:800 18px/1 "Archivo",sans-serif;letter-spacing:0;color:#fff;filter:blur(7px);opacity:.55}
+#yh-prize .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:18px;font-size:13px;color:rgba(255,255,255,.45)}
+#yh-prize .board.swap .col{animation:yhswap .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes yhswap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:760px){#yh-prize .board{grid-template-columns:1fr}#yh-prize .seg{width:100%}#yh-prize .seg button{min-width:0;padding:0}}
+@media (prefers-reduced-motion:reduce){#yh-prize .seg i{transition:none}#yh-prize .board.swap .col{animation:none}}
+
+/* ---------- prize strip (main page) ---------- */
+#yh-pstrip{background:var(--bg);color:#fff;padding-block:clamp(56px,9vh,100px)}
+#yh-pstrip .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#yh-pstrip .t{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+#yh-pstrip h2{margin:0;font-size:clamp(26px,3vw,40px);letter-spacing:-.035em;font-weight:800}
+#yh-pstrip h2 span{display:block;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:-.01em;margin-bottom:8px}
+#yh-pstrip a.go{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#111;font-weight:800;font-size:15px;text-decoration:none;transition:transform .25s}
+#yh-pstrip a.go:hover{transform:translateY(-2px)}
+#yh-pstrip a.go:focus-visible{outline:2px solid #FF6D07;outline-offset:3px}
+#yh-pstrip .cells{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);border-radius:22px;overflow:hidden}
+#yh-pstrip .c{background:#121214;padding:clamp(20px,2.4vw,30px);transition:background .3s}
+#yh-pstrip .c:hover{background:#18181b}
+#yh-pstrip .c em{font-style:normal;display:block;font:800 14px/1 "Archivo",sans-serif;color:rgba(255,255,255,.6);margin-bottom:clamp(16px,3vh,30px)}
+#yh-pstrip .c strong{display:block;white-space:nowrap;font:800 clamp(26px,3.2vw,48px)/1 "Archivo",sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#yh-pstrip .c strong small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:.4em;margin-left:3px;letter-spacing:0}
+#yh-pstrip .c:last-child strong{color:#FF6D07}
+@media (max-width:760px){#yh-pstrip .cells{grid-template-columns:1fr 1fr}}
+
+=====
+
+<section id="yh-prize" aria-labelledby="yh-prize-t">
+ <div class="wrap">
+  <div class="hd">
+   <h2 id="yh-prize-t">종목별 <b>상금</b></h2>
+   <div class="seg" role="tablist" aria-label="종목 선택"><i aria-hidden="true"></i>
+    <button type="button" role="tab" data-k="5k" aria-selected="false">5K</button><button type="button" role="tab" data-k="10k" aria-selected="false">10K</button><button type="button" role="tab" data-k="15k" aria-selected="false">15K</button><button type="button" role="tab" data-k="28k" aria-selected="true">28K</button>
+   </div>
+  </div>
+  <div class="board" role="tabpanel" aria-live="polite">
+   <div class="col m"><h3>남자부</h3><div class="first"><div class="rk"><b>1위</b></div><div class="amt"></div></div><ol></ol></div>
+   <div class="col w"><h3>여자부</h3><div class="first"><div class="rk"><b>1위</b></div><div class="amt"></div></div><ol></ol></div>
+  </div>
+  <div class="foot"><span class="nt"></span><span>2위 이하 상금은 확정되는 대로 공개됩니다.</span></div>
+ </div>
+</section>
+<script>
+(function(){
+  var P={"5k":{"label":"5KM","m":[200000,null,null,null,null],"w":[200000,null,null,null,null],"note":""},
+"10k":{"label":"10KM","m":[300000,null,null,null,null],"w":[300000,null,null,null,null],"note":"토·일 각 회차별 시상"},
+"15k":{"label":"15KM","m":[1000000,null,null,null,null],"w":[1000000,null,null,null,null],"note":""},
+"28k":{"label":"28KM","m":[2000000,null,null,null,null],"w":[2000000,null,null,null,null],"note":""}};
+  var S=document.getElementById('yh-prize'),seg=S.querySelector('.seg'),tabs=[].slice.call(seg.querySelectorAll('button')),board=S.querySelector('.board');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,seen=false;
+  function won(n){return n.toLocaleString('ko-KR')}
+  function count(el,n){ if(reduce||seen){el.innerHTML=won(n)+'<small>원</small>';return} var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/900),e=1-Math.pow(1-p,3);el.innerHTML=won(Math.round(n*e/1000)*1000)+'<small>원</small>';if(p<1)requestAnimationFrame(f)})(t0) }
+  function show(k){
+    var d=P[k],i=tabs.findIndex(function(b){return b.dataset.k===k});
+    seg.style.setProperty('--k',i); tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.k===k)});
+    ['m','w'].forEach(function(g){
+      var col=S.querySelector('.col.'+g),v=d[g];
+      count(col.querySelector('.amt'),v[0]);
+      col.querySelector('ol').innerHTML=v.slice(1).map(function(x,j){return '<li><span class="r">'+(j+2)+'<span>위</span></span>'+(x==null?'<span class="lock">COMING SOON</span>':'<span class="v">'+won(x)+'원</span>')+'</li>'}).join('');
+    });
+    S.querySelector('.nt').textContent=d.note? d.label+' · '+d.note : '';
+    board.classList.remove('swap'); void board.offsetWidth; board.classList.add('swap');
+  }
+  tabs.forEach(function(b,i){b.addEventListener('click',function(){show(b.dataset.k)});b.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(n){var t=tabs[(i+n+4)%4];t.focus();show(t.dataset.k)}})});
+  show('28k');
+  if('IntersectionObserver' in window&&!reduce){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){show(tabs.filter(function(b){return b.getAttribute('aria-selected')==='true'})[0].dataset.k);seen=true;io.disconnect()}},{threshold:.35});io.observe(board)} else seen=true;
+})();
+</script>
+
+=====
+
+<section id="yh-pstrip" aria-labelledby="yh-pstrip-t">
+ <div class="wrap">
+  <div class="t"><h2 id="yh-pstrip-t"><span>남녀 종목별</span>1위 상금</h2><a class="go" href="/rewards">전체 시상 보기</a></div>
+  <div class="cells">
+   <div class="c"><em>5KM</em><strong>200,000<small>원</small></strong></div>
+   <div class="c"><em>10KM</em><strong>300,000<small>원</small></strong></div>
+   <div class="c"><em>15KM</em><strong>1,000,000<small>원</small></strong></div>
+   <div class="c"><em>28KM</em><strong>2,000,000<small>원</small></strong></div>
+  </div>
+ </div>
+</section>
