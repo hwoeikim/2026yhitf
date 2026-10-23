@@ -96,7 +96,7 @@ fetch(ASSET + 'shape.json').then(r => r.json()).then(json => {
    it comes down in front of the tab, wraps under the bar through the slot and goes back up
    behind; a silver slide gathers both straps. The top of the lanyard stays put while the
    medal turns, so the fabric twists along its length like a real hanging medal. */
-const RW = 35, slotTop = 40.5, R0 = 2.05, slideY = 49, L = 250;
+const RW = 35, slotTop = 40.5, R0 = 2.4, slideY = 49, L = 250;
 const rig = new THREE.Group(); scene.add(rig);           // bobbing parent; medal + ribbon live here
 scene.remove(medal); rig.add(medal);
 const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-70, 130, 150); key.target = rig;
@@ -166,7 +166,7 @@ function buildHalf(side) {
       const u = k / NU, off = (u - .5) * RW, bow = 1 - Math.pow(2 * u - 1, 2);
       const wr = (P.wrinkle || 0) * .7 * Math.sin(u * Math.PI * 5 + side * 1.3);
       const c = P.p.clone().add(W.clone().multiplyScalar(off)).add(N.clone().multiplyScalar(P.cup * bow + wr));
-      const o = c.clone().add(N.clone().multiplyScalar(.16)), n = c.clone().add(N.clone().multiplyScalar(-.16));
+      const o = c.clone().add(N.clone().multiplyScalar(.5)), n = c.clone().add(N.clone().multiplyScalar(-.5));
       const j = i * (NU + 1) + k;
       rest.outer.set([o.x, o.y, o.z], j * 3); rest.inner.set([n.x, n.y, n.z], j * 3);
       // printed faces: outer = 'out' artwork, inner = 'in' artwork; flip u where the face is seen from behind
@@ -196,10 +196,10 @@ function buildRibbon() {
   [-1, 1].forEach(side => {
     const h = buildHalf(side);
     h.mO = new THREE.Mesh(h.gO, fabric()); h.mI = new THREE.Mesh(h.gI, fabric());
-    h.mE = new THREE.Mesh(h.gE, new THREE.MeshPhysicalMaterial({ color: 0x1b2a6b, roughness: .7, side: THREE.DoubleSide }));
+    h.mE = new THREE.Mesh(h.gE, new THREE.MeshPhysicalMaterial({ color: 0x24357f, roughness: .8, sheen: .6, sheenColor: new THREE.Color(0x8899cc), normalMap: cloth, side: THREE.DoubleSide }));
     rig.add(h.mO, h.mI, h.mE); ribbon.halves.push(h);
   });
-  slide = new THREE.Mesh(roundedBox(42, 9, 6.6, 1.8), new THREE.MeshPhysicalMaterial({ color: 0xf0f1f3, metalness: 1, roughness: .12 }));
+  slide = new THREE.Mesh(roundedBox(42, 9, 7.6, 1.8), new THREE.MeshPhysicalMaterial({ color: 0xf0f1f3, metalness: 1, roughness: .12 }));
   rig.add(slide);
 }
 // twist the lanyard: points near the medal turn fully with it, the top stays still
