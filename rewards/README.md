@@ -15,3 +15,5 @@
 - 주의(2026-10-23): 저장소가 jsDelivr 한도(50MB)를 넘어서 새 커밋은 CDN이 403("Package size exceeded")을 줄 때가 있음
   - 이미지·medal.js가 안 바뀌었으면 build.py에 예전에 잘 뜨던 커밋 SHA(현재 c1129c1…)를 넣어 자산 주소를 고정
   - 위젯 코드 자체는 raw.githubusercontent.com/<SHA>/rewards/widget_*.html 에서 받아 붙여넣기 (응답 길이·id 확인 후 교체)
+- 해결(2026-10-23 저녁): 자산 전용 가벼운 브랜치 `goods-assets`(medal/v2만, 약 4.5MB)를 만들어 jsDelivr가 이 브랜치 커밋에서 이미지를 받도록 함
+  - 자산 바꾼 뒤: `sh rewards/sync_assets.sh` → 나온 SHA로 `python3 rewards/build.py <SHA> main|rewards`
