@@ -267,18 +267,22 @@ ROOT.querySelectorAll('.chips button').forEach(b => b.addEventListener('click', 
    dragging turns it by hand and it eases back into the swing. */
 let off = 0, vel = 0, drag = false, lx = 0;
 const swing = !reduce && FIX_A === null;
-fg.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; fg.setPointerCapture(e.pointerId) });
+fg.addEventListener('pointerdown', e => { ROOT.classList.add('used'); drag = true; lx = e.clientX; fg.setPointerCapture(e.pointerId) });
 fg.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - lx; lx = e.clientX; off += dx * .008; vel = dx * .008 });
 fg.addEventListener('pointerup', () => { drag = false });
-function progress() { if (FIX_P !== null) return FIX_P; const r = ROOT.getBoundingClientRect(); const span = r.height - innerHeight; return Math.min(1, Math.max(0, -r.top / span)) }
+const INLINE = !!ROOT.dataset.inline;
+function progress() { if (FIX_P !== null) return FIX_P; if (INLINE) return 0; const r = ROOT.getBoundingClientRect(); const span = r.height - innerHeight; return Math.min(1, Math.max(0, -r.top / span)) }
 function size() {
   const dpr = Math.min(devicePixelRatio || 1, 2); const st = ROOT.querySelector('.stage'); const w = ROOT.clientWidth, h = (st && st.clientHeight) || innerHeight;
   R.setPixelRatio(dpr); R.setSize(w, h, false); cam.aspect = w / h;
-  const fit = w / h < 0.8 ? 1.7 : 1.0; cam.position.set(0, 30, 560 * fit); cam.lookAt(0, 30, 0); cam.updateProjectionMatrix();
+  const fit = INLINE ? (+(Q.get('fit')) || 0.86) * Math.max(1, 0.8 / (w / h)) : (w / h < 0.8 ? 1.7 : 1.0); const ty = INLINE ? 8 : 30; cam.position.set(0, ty, 560 * fit); cam.lookAt(0, ty, 0); cam.updateProjectionMatrix();
 }
 addEventListener('resize', size); size(); setTimeout(size, 900);
 const t0 = performance.now();
+let vis = true;
+if ('IntersectionObserver' in window) new IntersectionObserver(es => { const was = vis; vis = es[0].isIntersecting; if (vis && !was) requestAnimationFrame(frame) }, { rootMargin: '200px' }).observe(ROOT);
 function frame(now) {
+  if (!vis) return;
   const t = (now - t0) / 1000, p = progress();
   updateEnv(p);
   if (!drag) { off += vel; vel *= .9; off *= .965 }
