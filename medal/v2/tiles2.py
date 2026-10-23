@@ -39,5 +39,5 @@ Image.fromarray(bg(PAL['blue']).astype(np.uint8)).save(D+'t_soon.jpg',quality=88
 # make('jk_men.png',D+'t_jacket.jpg','orange',h=880,rot=-4,bottom=1010)
 # 2026-10-23 rhythm pass (alternating tilt), run from /home/claude/work/goods:
 # tee(hi_front from tee2.ai) white h930 rot4 b1030 | bar2 orange w900 rot20 b900 | medal3d_hi blue h1180 rot3 b1040
-# bar1 white w760 rot-24 b1000 | hat_three orange h600 rot6 b860 | bag_front blue h840 rot-3 b990
+# bar1 white w760 rot-24 b800 (centred) | hat_three orange h600 rot6 b860 | bag_front blue h840 rot-3 b990
 # gaiter3 white w1200 rot0 b900 | jk_men orange h900 rot5 b1020 | hat_signpair(h4 side+back) orange w1420 rot0 b880 -> t_hat_sign.jpg
