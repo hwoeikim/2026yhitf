@@ -1,7 +1,7 @@
 # 기념품 섹션 (메달·도안·티셔츠·룩북·키트)
 
 - 원본: medal/v2/page.html + medal/v2/medal.js
-- 빌드: `python3 rewards/build.py <커밋SHA>` → rewards/widget.html (이미지·3D는 jsDelivr 해당 커밋에서 불러옴)
+- 빌드: `python3 rewards/build.py <커밋SHA>` → rewards/widget_main.html (메인) · widget_rewards.html (/rewards) (이미지·3D는 jsDelivr 해당 커밋에서 불러옴)
 - 붙인 곳 (2026-10-23, 국문):
   - 메인: 섹션 s20261012ec9e33c637142(KIA) 맨 위 코드 위젯, 메모 "기념품 섹션 메달·티셔츠·키트"
   - /rewards: 섹션 s202609213dd8d2b3bdf4c(럭키드로우) 맨 위 코드 위젯, 같은 메모

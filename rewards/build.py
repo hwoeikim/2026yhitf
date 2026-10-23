@@ -2,6 +2,7 @@
 Assets load from jsDelivr at a fixed commit. Usage: python3 build.py <commitSHA>"""
 import re, sys
 SHA=sys.argv[1]
+VAR=sys.argv[2] if len(sys.argv)>2 else 'main'
 V='/home/claude/2026yhitf/medal/v2/'
 CDN=f'https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@{SHA}/medal/v2/'
 s=open(V+'page.html').read()
@@ -28,5 +29,10 @@ function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header
   m=Math.round(Math.min(m,innerHeight*.3));if(m!==last){last=m;root.style.setProperty('--hd',m+'px')}}
 addEventListener('scroll',hd,{passive:true});addEventListener('resize',hd);hd();setTimeout(hd,800);})();
 </script>'''
+css,prize,strip=open('/home/claude/2026yhitf/rewards/prize_src.txt').read().split('\n=====\n')
+s=s.replace('</style>',css+'</style>',1)
+add=strip if VAR=='main' else prize
+k=s.index('<script>window.YH_ASSET_BASE')
+s=s[:k]+add+'\n'+s[k:]
 out=f'<div id="yh-rewards">\n{s}\n{hd}\n</div>'
-open('/home/claude/2026yhitf/rewards/widget.html','w').write(out); print(len(out))
+open(f'/home/claude/2026yhitf/rewards/widget_{VAR}.html','w').write(out); print(len(out))
