@@ -22,3 +22,5 @@
 ## Live (2026-10-24 02:2x KST)
 - widget commit 7b06829316c5e7e5f19f65403c30ce8c352a2c8c, assets cacf7b5a49ab36c29793fe9a7aa1f3d8de0dcf40 (main + /rewards)
 - previous live: widget 3c071d4…, assets b36ee1b…
+
+- 2026-10-24 ~02:55 KST: widget f5c902de (yx- class prefix, medal line art), assets af634b23
