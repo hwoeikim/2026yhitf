@@ -107,7 +107,7 @@ const poolTex = (() => { const c = document.createElement('canvas'); c.width = c
   const g = x.createRadialGradient(128, 128, 0, 128, 128, 128); g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(.45, 'rgba(255,255,255,.12)'); g.addColorStop(1, 'rgba(255,255,255,0)');
   x.fillStyle = g; x.fillRect(0, 0, 256, 256); return new THREE.CanvasTexture(c) })();
 const pool = new THREE.Mesh(new THREE.PlaneGeometry(260, 160), new THREE.MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, opacity: .28 }));
-pool.rotation.x = -Math.PI / 2; pool.position.set(0, -66, 0); scene.add(pool);
+pool.rotation.x = -Math.PI / 2; pool.position.set(0, -66, 0); scene.add(pool); window.YH_bare = () => { pool.visible = false };
 function shadowsOn() { rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true } }) }
 function clothNormal() {          // low-frequency cloth unevenness + faint rib
   const W = 128, H = 128, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); const img = x.createImageData(W, H);
