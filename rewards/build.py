@@ -20,6 +20,13 @@ s=re.sub(r'url\(([a-z_0-9]+\.svg)\)',lambda m:f'url({CDN}{m.group(1)})',s)
 s=s.replace("i.setAttribute('href','rib_'+k","i.setAttribute('href','"+CDN+"rib_'+k").replace("i.src='strip_'+k","i.src='"+CDN+"strip_'+k")
 # module: no importmap, direct import
 s=s.replace('<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>\n','')
+# start the heavy downloads at once (3D engine, medal shape, first lanyard art)
+PRE=('<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js">'
+     f'<link rel="modulepreload" href="{CDN}medal.js">'
+     f'<link rel="preload" as="fetch" crossorigin="anonymous" href="{CDN}shape.json">'
+     f'<link rel="preload" as="image" crossorigin="anonymous" href="{CDN}rib_28k_out.jpg">'
+     f'<link rel="preload" as="image" crossorigin="anonymous" href="{CDN}rib_28k_in.jpg">\n')
+s=PRE+s
 s=s.replace('<script type="module" src="medal.js"></script>',f'<script>window.YH_ASSET_BASE="{CDN}";</script>\n<script type="module" src="{CDN}medal.js"></script>')
 hd='''<script>
 (function(){var root=document.getElementById('yh-rewards'),last=-1;

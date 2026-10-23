@@ -13,6 +13,16 @@ R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(22, 1, 1, 3000);
 const pmrem = new THREE.PMREMGenerator(R);
+const TL = new THREE.TextureLoader();
+const texP = {};
+function ribTexP(k, f) {
+  const key = k + f; if (texP[key]) return texP[key];
+  return texP[key] = TL.loadAsync(ASSET + `rib_${k}_${f}.jpg`).then(t => {
+    t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+    const full = 2953 / 256 * 35; t.repeat.set(1, 1 / full); t.offset.set(0, 0); return t;
+  }).catch(() => { delete texP[key]; return null });
+}
+const first = Promise.all([ribTexP('28k', 'out'), ribTexP('28k', 'in')]);
 
 /* ---------- studio environment: black room, a few very bright soft boxes (HDR) ----------
    the brand blue / orange live only in two thin edge strips, which show up as coloured
@@ -91,8 +101,20 @@ fetch(ASSET + 'shape.json').then(r => r.json()).then(json => {
   const b = new THREE.Group();
   if (!Q.has('lite')) b.add(relief(S.back_silver, silver, mm, N), relief(S.back_copper, rose, mm, N));
   b.rotation.y = Math.PI; b.position.z = -(BASE - .02); medal.add(b);
-  buildRibbon(); setCourse('28k'); shadowsOn();
-});
+  buildRibbon(); shadowsOn();
+  // show the medal only once the lanyard artwork is on it: no black straps flashing in
+  return Promise.race([first, new Promise(r => setTimeout(r, 6000))]).then(() => {
+    setCourse(want);
+    return first.then(() => { try { R.compile(scene, cam) } catch (e) {} });
+  });
+}).then(reveal, reveal);
+let shown = false;
+function reveal() {
+  if (shown) return; shown = true;
+  requestAnimationFrame(() => requestAnimationFrame(() => fg.classList.add('on')));
+  setTimeout(() => ['5k', '10k', '15k'].forEach(k => { ribTexP(k, 'out'); ribTexP(k, 'in') }), 1200);
+}
+setTimeout(reveal, 12000);
 
 /* ---------- ribbon: one continuous satin lanyard ----------
    it comes down in front of the tab, wraps under the bar through the slot and goes back up
@@ -223,24 +245,19 @@ function roundedBox(w, h, d, r) {
   s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
   const g = new THREE.ExtrudeGeometry(s, { depth: d - 1.2, bevelEnabled: true, bevelThickness: .6, bevelSize: .6, bevelSegments: 4 }); g.translate(0, 0, -(d - 1.2) / 2); return g;
 }
-const texCache = {};
-const TL = new THREE.TextureLoader();
-function ribTex(k, f, len) {
-  const key = k + f; if (texCache[key]) return texCache[key];
-  const t = TL.load(ASSET + `rib_${k}_${f}.jpg`); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
-  t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
-  const full = 2953 / 256 * RW;                 // printed length (mm) of the strip artwork
-  t.repeat.set(1, 1 / full); t.offset.set(0, 0);
-  return texCache[key] = t;
-}
+let want = '28k';
 function setCourse(k) {
-  if (!ribbon) return;
-  ribbon.halves.forEach(h => {
-    h.mO.material.map = ribTex(k, 'out'); h.mI.material.map = ribTex(k, 'in');
-    h.mO.material.needsUpdate = h.mI.material.needsUpdate = true;
-  });
+  want = k;
   ROOT.querySelectorAll('.chips button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k));
   document.dispatchEvent(new CustomEvent('yh-course', { detail: k }));
+  if (!ribbon) return;
+  Promise.all([ribTexP(k, 'out'), ribTexP(k, 'in')]).then(([o, i]) => {
+    if (want !== k || !o || !i) return;      // a newer choice won, or the image failed
+    ribbon.halves.forEach(h => {
+      h.mO.material.map = o; h.mI.material.map = i;
+      h.mO.material.needsUpdate = h.mI.material.needsUpdate = true;
+    });
+  });
 }
 window.YH_setCourse = setCourse;
 ROOT.querySelectorAll('.chips button').forEach(b => b.addEventListener('click', () => setCourse(b.dataset.k)));
