@@ -72,12 +72,12 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-spec .big .h{writing-mode:vertical-rl;transform:rotate(180deg);font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-left:1px solid rgba(255,255,255,.35);padding-left:8px;height:62%;display:flex;align-items:center;justify-content:center}
 #yh-spec .big .w{grid-column:1;text-align:center;font:700 13px "Archivo",sans-serif;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.35);padding-top:8px}
 #yh-spec .strip{margin-top:clamp(36px,6vh,64px);display:grid;gap:10px}
-#yh-spec .strip .row{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
-#yh-spec .strip .row span{font-size:13px;color:rgba(255,255,255,.6)}
+#yh-spec .strip .srow{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
+#yh-spec .strip .srow span{font-size:13px;color:rgba(255,255,255,.6)}
 #yh-spec .strip img{display:block;width:100%;height:auto;border-radius:2px}
 #yh-spec .strip .cap{display:flex;justify-content:space-between;color:rgba(255,255,255,.55);font-size:13px;margin-left:86px}
 @media (max-width:860px){#yh-spec .sheet{grid-template-columns:1fr 1fr}#yh-spec .big{grid-column:1/-1;max-width:420px;margin:12px auto 0}}
-@media (max-width:520px){#yh-spec .strip .row{grid-template-columns:1fr;gap:6px}#yh-spec .strip .cap{margin-left:0}}
+@media (max-width:520px){#yh-spec .strip .srow{grid-template-columns:1fr;gap:6px}#yh-spec .strip .cap{margin-left:0}}
 
 
 /* ---------- lookbook ---------- */
@@ -211,8 +211,8 @@ html.yh-vt #yh-goods .tile{transition:none}
    </figure>
   </div>
   <div class="strip">
-   <div class="row"><span>걸면</span><img class="flat" data-face="out" src="strip_28k_out.jpg" alt="메달끈 걸면: 물결 그래픽, 2026 YHITF 로고, 2026 연합뉴스 하남 국제 트레일런 페스티벌" width="2400" height="207" loading="lazy"></div>
-   <div class="row"><span>안쪽면</span><img class="flat" data-face="in" src="strip_28k_in.jpg" alt="메달끈 안쪽면: 2026 YHITF와 종목 FINISHER 문구" width="2400" height="207" loading="lazy"></div>
+   <div class="srow"><span>걸면</span><img class="flat" data-face="out" src="strip_28k_out.jpg" alt="메달끈 걸면: 물결 그래픽, 2026 YHITF 로고, 2026 연합뉴스 하남 국제 트레일런 페스티벌" width="2400" height="207" loading="lazy"></div>
+   <div class="srow"><span>안쪽면</span><img class="flat" data-face="in" src="strip_28k_in.jpg" alt="메달끈 안쪽면: 2026 YHITF와 종목 FINISHER 문구" width="2400" height="207" loading="lazy"></div>
    <div class="cap"><span>폭 35mm</span><span>5K · 10K · 15K · 28K 4종</span></div>
   </div>
  </div>
@@ -271,7 +271,7 @@ html.yh-vt #yh-goods .tile{transition:none}
  <div class="detail">
   <figure class="shot"><img src="lb_close.webp" alt="두 러너가 마주 앉아 있다. 남성 앞면에 KEEN 로고, 여성 뒷면에 YHITF 로고와 Keen for the Trails" width="1728" height="1152" loading="lazy"><button type="button" class="hs" data-k="chest" style="left:30.9%;top:46.0%" aria-pressed="true" aria-label="앞면 도안"></button><button type="button" class="hs" data-k="back" style="left:68.5%;top:41.5%" aria-pressed="false" aria-label="뒷면 도안"></button><span class="tip" aria-hidden="true"></span></figure>
   <div class="side">
-   <h3>프린트 도안 보기</h3>
+   <h3>프린트 도안</h3>
    <div class="face" role="group" aria-label="도안 면 선택"><button type="button" data-k="chest" aria-pressed="true">앞면</button><button type="button" data-k="back" aria-pressed="false">뒷면</button></div>
    <figure class="art">
     <img data-k="chest" class="on" src="pa_front.webp" alt="앞면 도안: 가슴 KEEN 로고, 소매 KEEN for the Trails 그래픽" width="1200" height="760">
