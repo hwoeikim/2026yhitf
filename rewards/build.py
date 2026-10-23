@@ -13,7 +13,7 @@ s=re.sub(r'\nhtml,body\{[^}]*\}','\n#yh-rewards *,#yh-rewards *::before,#yh-rewa
 s=s.replace('::view-transition-group(*)','::view-transition-group(*)')
 # header offset for sticky stages
 s=s.replace('#yh-rw .stage{position:sticky;top:0;height:100vh;','#yh-rw .stage{position:sticky;top:var(--hd,0px);height:calc(100vh - var(--hd,0px));')
-s=s.replace('#yh-model .pin{position:sticky;top:0;height:100vh;','#yh-model .pin{position:sticky;top:var(--hd,0px);height:calc(100vh - var(--hd,0px));')
+s=s.replace('#yh-model .yx-pin{position:sticky;top:0;height:100vh;','#yh-model .yx-pin{position:sticky;top:var(--hd,0px);height:calc(100vh - var(--hd,0px));')
 # assets -> CDN
 s=re.sub(r'(src|srcset|href)="((?:[a-z_0-9]+)\.(?:webp|jpg|png|svg))"',lambda m:f'{m.group(1)}="{CDN}{m.group(2)}"',s)
 s=re.sub(r'url\(([a-z_0-9]+\.svg)\)',lambda m:f'url({CDN}{m.group(1)})',s)
