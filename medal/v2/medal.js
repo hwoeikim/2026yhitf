@@ -8,7 +8,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const fg = ROOT.querySelector('canvas.fg');
 const R = new THREE.WebGLRenderer({ canvas: fg, antialias: true, alpha: true });
-R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.0; R.outputColorSpace = THREE.SRGBColorSpace;
+R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = .92; R.outputColorSpace = THREE.SRGBColorSpace;
 R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(22, 1, 1, 3000);
@@ -24,17 +24,19 @@ const domeMat = new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: fal
   float box(float az,float el,float caz,float cel,float w,float h,float s){float dx=abs(az-caz),dy=abs(el-cel);return (1.-smoothstep(w-s,w+s,dx))*(1.-smoothstep(h-s,h+s,dy));}
   void main(){
     float az=atan(d.x,d.z), el=asin(clamp(d.y,-1.,1.));
-    float v=.05+.08*smoothstep(-.4,.9,d.y);
-    v+=2.2*box(az,el,-1.10,.30,.30,.55,.10);   // big softbox left
+    float v=.02+.05*smoothstep(-.4,.9,d.y);
+    float gl=smoothstep(-.05,.05,el+.06-.9*(az+.70));
+    v+=(.3+1.15*gl)*box(az,el,-.95,.15,.55,.70,.10);   // big left softbox, steep diagonal falloff -> gradient across the face
     v+=1.8*box(az,el, 1.00,.12,.28,.62,.12);   // big softbox right
-    v+=4.0*box(az,el,-.25,.72,.40,.10,.05);    // hard overhead strip
+    v+=7.0*box(az,el,-.25,.72,.40,.10,.05);    // hard overhead strip
     v+=1.1*box(az,el, .34,-.02,.16,.50,.10);   // tall card front-right
-    v+=1.05*box(az,el,-.14,.20,.24,.28,.20);    // soft front card (keeps the face from going black)
+    float diag=clamp(.5+(el*1.6-az*1.1)*7.,0.,1.);
+    v+=.15*box(az,el,-.04,.04,.30,.30,.10)+1.5*box(az,el,-.04,.04,.30,.30,.10)*pow(diag,3.);   // gradient card behind camera: bright top-left -> dark bottom-right across the face
     v+=.6*box(az,el,.55,.55,.25,.18,.15);       // upper right fill
-    v+=1.0*box(az,el,-.62,.10,.18,.34,.16);     // left card fills the gap when the medal looks left
+    v+=.0;     // left card fills the gap when the medal looks left
     v+=.5*box(az,el,-.55,-.48,.35,.14,.14);    // low bounce
     v+=1.2*box(az,el,3.0,.2,.5,.6,.2)+1.2*box(az,el,-3.0,.2,.5,.6,.2);
-    gl_FragColor=vec4(vec3(v*dim),1.);}` });
+    gl_FragColor=vec4(vec3(v*dim*.55),1.);}` });
 envScene.add(new THREE.Mesh(new THREE.SphereGeometry(90, 64, 32), domeMat));
 const boxes = [];
 function box(w, h, pos, color, int, tint) {
@@ -42,8 +44,8 @@ function box(w, h, pos, color, int, tint) {
   const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m); p.position.set(...pos); p.lookAt(0, 0, 0);
   envScene.add(p); boxes.push({ m, base: new THREE.Color(color), int, tint }); return p;
 }
-box(7, 80, [-62, 4, 28], 0x2f5bff, 6, true);    // brand blue glint strip (left)
-box(7, 80, [60, 0, 22], 0xff7a1a, 5.5, true);   // brand orange glint strip (right)
+box(7, 80, [-62, 4, 28], 0x2f5bff, 2.6, true);    // brand blue glint strip (left)
+box(7, 80, [60, 0, 22], 0xff7a1a, 3.2, true);   // brand orange glint strip (right)
 let envRT = null, envKey = -1;
 function updateEnv(p) {
   const k = Math.round(p * 24); if (k === envKey) return; envKey = k;
@@ -55,14 +57,14 @@ function updateEnv(p) {
 }
 
 /* ---------- materials ---------- */
-const silver = new THREE.MeshPhysicalMaterial({ color: 0xf2f3f5, metalness: 1, roughness: .13, envMapIntensity: 1.15 });
-const rose = new THREE.MeshPhysicalMaterial({ color: 0xf7a27f, metalness: 1, roughness: .15, envMapIntensity: 1.1 });
-const recess = new THREE.MeshPhysicalMaterial({ color: 0x5b5754, metalness: 1, roughness: .52 });   // antique, sand-blasted floor
-const edge = new THREE.MeshPhysicalMaterial({ color: 0xe9eaec, metalness: 1, roughness: .2 });
+const silver = new THREE.MeshPhysicalMaterial({ color: 0xbfc3ca, metalness: 1, roughness: .1, envMapIntensity: 1.15 });
+const rose = new THREE.MeshPhysicalMaterial({ color: 0xd68866, metalness: 1, roughness: .12, envMapIntensity: 1.1 });
+const recess = new THREE.MeshPhysicalMaterial({ color: 0x3e3a37, metalness: 1, roughness: .55 });   // antique, sand-blasted floor
+const edge = new THREE.MeshPhysicalMaterial({ color: 0xd7d9dd, metalness: 1, roughness: .14 });
 
 const medal = new THREE.Group(); scene.add(medal);
-const BASE = 1.25;   // half thickness of the base plate (mm)
-const RAISE = 0.42;  // relief height
+const BASE = 1.7;   // half thickness of the base plate (mm)
+const RAISE = 0.85;  // relief height
 let S = null, ribbon = null;
 
 function shapesFrom(list, mm, N) {
@@ -70,7 +72,7 @@ function shapesFrom(list, mm, N) {
   return list.map(o => { const sh = new THREE.Shape(o.outer.map(pt)); o.holes.forEach(h => sh.holes.push(new THREE.Path(h.map(pt)))); return sh });
 }
 function relief(list, mat, mm, N) {
-  const g = new THREE.ExtrudeGeometry(shapesFrom(list, mm, N), { depth: RAISE - .14, bevelEnabled: true, bevelThickness: .14, bevelSize: .14, bevelOffset: -.14, bevelSegments: 3, curveSegments: 1 });
+  const g = new THREE.ExtrudeGeometry(shapesFrom(list, mm, N), { depth: RAISE - .3, bevelEnabled: true, bevelThickness: .3, bevelSize: .22, bevelOffset: -.22, bevelSegments: 4, curveSegments: 1 });
   return new THREE.Mesh(g, mat);
 }
 
@@ -264,7 +266,7 @@ function frame(now) {
   updateEnv(p);
   if (!drag) { off += vel; vel *= .9; off *= .965 }
   // a calm look left and right (about ±22°), like someone turning their head, never spinning
-  const base = FIX_A !== null ? FIX_A * Math.PI / 180 : (swing ? -.06 + .34 * Math.sin(t * .42) + .05 * Math.sin(t * 1.07 + 1) : -.2);
+  const base = FIX_A !== null ? FIX_A * Math.PI / 180 : (swing ? -.3 + .26 * Math.sin(t * .42) + .05 * Math.sin(t * 1.07 + 1) : -.36);
   const theta = base + off;
   medal.rotation.y = theta;
   deformRibbon(theta);
