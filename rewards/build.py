@@ -21,13 +21,11 @@ s=s.replace("i.setAttribute('href','rib_'+k","i.setAttribute('href','"+CDN+"rib_
 # module: no importmap, direct import
 s=s.replace('<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>\n','')
 # start the heavy downloads at once (3D engine, medal shape, first lanyard art)
-PRE=('<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js">'
-     f'<link rel="modulepreload" href="{CDN}medal.js">'
-     f'<link rel="preload" as="fetch" crossorigin="anonymous" href="{CDN}shape.json">'
-     f'<link rel="preload" as="image" crossorigin="anonymous" href="{CDN}rib_28k_out.jpg">'
+PRE=(f'<link rel="preload" as="image" crossorigin="anonymous" href="{CDN}rib_28k_out.jpg">'
      f'<link rel="preload" as="image" crossorigin="anonymous" href="{CDN}rib_28k_in.jpg">\n')
 s=PRE+s
-s=s.replace('<script type="module" src="medal.js"></script>',f'<script>window.YH_ASSET_BASE="{CDN}";</script>\n<script type="module" src="{CDN}medal.js"></script>')
+s=s.replace('<script type="module" src="medal.js"></script>','')
+s=s+f'\n<script>window.YH_ASSET_BASE="{CDN}";</script>'   # 3D medal paused for now; spec lanyard swap still reads this
 hd='''<script>
 (function(){var root=document.getElementById('yh-rewards'),last=-1;
 function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header,header,#doz_header_wrap .inline-section-wrap,#doz_header_wrap .section_wrap,.inline-section-wrap.fixed_transf');
@@ -40,7 +38,7 @@ css,prize,strip=open('/home/claude/2026yhitf/rewards/prize_src.txt').read().spli
 s=s.replace('</style>',css+'</style>',1)
 # main: breathing room under the section above (elite invitation banner)
 if VAR=='main': s=s.replace('</style>','#yh-rewards{margin-top:clamp(56px,9vh,112px)}</style>',1)
-add=strip if VAR=='main' else prize
+add=prize   # full prize table on main too
 k=s.index('<script>window.YH_ASSET_BASE')
 s=s[:k]+add+'\n'+s[k:]
 out=f'<div id="yh-rewards">\n{s}\n{hd}\n</div>'
