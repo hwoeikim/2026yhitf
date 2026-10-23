@@ -280,9 +280,9 @@ function size() {
 addEventListener('resize', size); size(); setTimeout(size, 900);
 const t0 = performance.now();
 let vis = true;
-if ('IntersectionObserver' in window) new IntersectionObserver(es => { const was = vis; vis = es[0].isIntersecting; if (vis && !was) requestAnimationFrame(frame) }, { rootMargin: '200px' }).observe(ROOT);
+if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[es.length - 1].isIntersecting }, { rootMargin: '200px' }).observe(ROOT);
 function frame(now) {
-  if (!vis) return;
+  if (!vis) { requestAnimationFrame(frame); return; }
   const t = (now - t0) / 1000, p = progress();
   updateEnv(p);
   if (!drag) { off += vel; vel *= .9; off *= .965 }
