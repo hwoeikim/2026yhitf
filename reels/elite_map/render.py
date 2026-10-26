@@ -2,7 +2,7 @@ import asyncio, sys, math, os
 from playwright.async_api import async_playwright
 
 FPS = 30
-DUR = 15.0
+DUR = 10.5
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'frames'
 ONLY = [float(x) for x in sys.argv[2].split(',')] if len(sys.argv) > 2 else None
 os.makedirs(OUT, exist_ok=True)
@@ -14,16 +14,15 @@ def expo_o(x): x = clamp(x); return 1 if x >= 1 else 1-2**(-10*x)
 def seg(t, a, b): return clamp((t-a)/(b-a))
 
 # time -> scroll progress p (widget timeline), all segments eased (no linear motion)
-KEYS = [  # (t0, t1, p0, p1, ease)
-    (0.0, 0.7, 0.0, 0.0, eio),
-    (0.7, 2.0, 0.0, 0.17, eio),     # world -> Korea
-    (2.0, 2.15, 0.17, 0.24, eio),   # (static hold range in the widget)
-    (2.15, 3.5, 0.24, 0.35, eio),   # Korea -> Hanam
-    (3.5, 3.8, 0.35, 0.36, eio),
-    (3.8, 5.4, 0.36, 0.56, eio),    # pull back to the folded cover
-    (5.4, 5.9, 0.56, 0.56, eio),
-    (5.9, 8.3, 0.56, 0.86, eio),    # unfold
-    (8.3, 15.0, 0.86, 0.86, eio),
+KEYS = [  # (t0, t1, p0, p1, ease)  -- v3: faster cut
+    (0.0, 0.35, 0.0, 0.0, eio),
+    (0.35, 1.3, 0.0, 0.17, eio),    # world -> Korea
+    (1.3, 1.36, 0.17, 0.24, eio),
+    (1.36, 2.3, 0.24, 0.35, eio),   # Korea -> Hanam
+    (2.3, 3.5, 0.35, 0.56, eio),    # pull back to the folded cover
+    (3.5, 3.8, 0.56, 0.56, eio),
+    (3.8, 5.3, 0.56, 0.86, eio),    # unfold on the hit
+    (5.3, 10.5, 0.86, 0.86, eio),
 ]
 def p_at(t):
     for t0, t1, p0, p1, e in KEYS:
@@ -31,7 +30,7 @@ def p_at(t):
     return KEYS[-1][3]
 
 JS_STATE = """([t,p,cam,camx,camy,tx,ty,hudIn,hudP,endA,endKr,endUrl,fade,swap,creep])=>new Promise(res=>{
-  const E=document.getElementById('end');E.querySelector('.bg').style.opacity=Math.max(0,Math.min(1,(fade-.85)/.15));const HL=E.querySelector('.hl');HL.style.opacity=swap;HL.style.transform='translate('+(camx+tx-270)+'px,'+(camy+ty-400)+'px) scale('+(cam/window.ZOOM*creep)+')';document.querySelectorAll('#yh-lf .txt h3').forEach(x=>x.style.opacity=swap>=1?0:1);
+  const E=document.getElementById('end');E.querySelector('.bg').style.opacity=Math.max(0,Math.min(1,(fade-.85)/.15));const HL=E.querySelector('.hl');HL.style.opacity=swap;HL.style.transform='translate('+(camx+tx-270)+'px,'+(camy+ty-375)+'px) scale('+(cam/window.ZOOM*creep)+')';document.querySelectorAll('#yh-lf .txt h3').forEach(x=>x.style.opacity=swap>=1?0:1);
   document.querySelectorAll('#yh-lf .items,#yh-lf .lg,#yh-lf .mp,#yh-lf .shade').forEach(x=>x.style.opacity=1-fade);
   if(fade>0)document.querySelectorAll('#yh-lf .lf .face,#yh-lf .lf .sheet,#yh-lf .lf .txt').forEach(x=>{x.style.background='#fff';x.style.boxShadow='none'});
   const r=document.getElementById('yh-lf');
@@ -48,7 +47,7 @@ JS_STATE = """([t,p,cam,camx,camy,tx,ty,hudIn,hudP,endA,endKr,endUrl,fade,swap,c
   const e=document.getElementById('end');
   e.querySelector('.lk').style.opacity=endA; e.querySelector('.lk').style.transform='translateX(-50%) translateY('+((1-endA)*4)+'vh)';
   e.querySelector('.kr').style.opacity=endKr; e.querySelector('.kr').style.transform='translateY('+((1-endKr)*3)+'vh)';
-  e.querySelector('.url').style.opacity=endUrl; e.querySelector('.url').style.transform='translateY('+((1-endUrl)*3)+'vh)';
+  e.querySelector('.url').style.opacity=endUrl; e.querySelector('.url').style.transform='translateX(-50%) translateY('+((1-endUrl)*3)+'vh)';
   requestAnimationFrame(()=>requestAnimationFrame(()=>res(1)));
 })"""
 
@@ -69,7 +68,7 @@ async def main():
           const rg=document.createRange();rg.selectNodeContents(o);const rs=[...rg.getClientRects()];const l=Math.min(...rs.map(r=>r.left)),r=Math.max(...rs.map(r=>r.right)),t=Math.min(...rs.map(r=>r.top)),b=Math.max(...rs.map(r=>r.bottom));
           const want=z*hw;const k=want/(r-l);o.style.fontSize=(parseFloat(o.style.fontSize)*k)+'px';o.style.lineHeight=(parseFloat(o.style.lineHeight)*k)+'px';if(o.style.letterSpacing!=='normal')o.style.letterSpacing=(parseFloat(o.style.letterSpacing)*k)+'px';
           {const rs2=[...(()=>{const g=document.createRange();g.selectNodeContents(o);return g.getClientRects()})()];const l2=Math.min(...rs2.map(r=>r.left)),r2=Math.max(...rs2.map(r=>r.right)),t2=Math.min(...rs2.map(r=>r.top)),b2=Math.max(...rs2.map(r=>r.bottom));
-          const L=cx-(l2+r2)/2,T=cy-(t2+b2)/2;o.style.left=L+'px';o.style.top=T+'px';o.style.transformOrigin=(cx-L)+'px '+(cy-T)+'px';return [l2,t2,r2-l2,b2-t2]}}""", [zoom_to, 270, 400, hb[2]])
+          const L=cx-(l2+r2)/2,T=cy-(t2+b2)/2;o.style.left=L+'px';o.style.top=T+'px';o.style.transformOrigin=(cx-L)+'px '+(cy-T)+'px';return [l2,t2,r2-l2,b2-t2]}}""", [zoom_to, 270, 375, hb[2]])
         print('overlay', ov, flush=True)
         await pg.evaluate(f'window.ZOOM={zoom_to}')
         n = int(DUR*FPS)
@@ -77,16 +76,16 @@ async def main():
         for i, t in enumerate(times):
             p = p_at(t)
             # living camera on the open sheet, then push into the headline
-            drift = 1+0.06*eio(seg(t, 7.6, 10.4))
-            push = eio(seg(t, 10.4, 12.4))
+            drift = 1+0.06*eio(seg(t, 5.0, 6.4))
+            push = eio(seg(t, 6.3, 7.6))
             cam = drift+(zoom_to*1.0-drift)*push
-            creep = 1+0.03*eio(seg(t, 12.4, 15.0))
+            creep = 1+0.03*eio(seg(t, 7.6, 10.5))
             # move headline up toward the visual center (slightly above middle)
             camx, camy = hx, hy
             # Origin-based scaling keeps the headline fixed; add a translate by shifting origin over time
-            hudIn = expo_o(seg(t, 0.05, 0.6)); hudP = eo(seg(t, 0.35, 0.9))
-            endKr = eo(seg(t, 12.3, 12.9)); endA = eo(seg(t, 12.6, 13.3)); endUrl = eo(seg(t, 12.9, 13.6))
-            await pg.evaluate(JS_STATE, [t, p, cam, camx, camy, (270-hx)*push, (400-hy)*push, hudIn, hudP, endA, endKr, endUrl, eio(seg(t, 10.2, 11.4)), eio(seg(t, 10.3, 10.55)), creep])
+            hudIn = expo_o(seg(t, 0.0, 0.4)); hudP = eo(seg(t, 0.2, 0.6))
+            endKr = eo(seg(t, 7.5, 7.95)); endA = eo(seg(t, 7.95, 8.5)); endUrl = eo(seg(t, 7.7, 8.2))
+            await pg.evaluate(JS_STATE, [t, p, cam, camx, camy, (270-hx)*push, (375-hy)*push, hudIn, hudP, endA, endKr, endUrl, eio(seg(t, 6.2, 7.0)), eio(seg(t, 6.25, 6.45)), creep])
             name = f'{OUT}/f_{i:04d}.png' if not ONLY else f'{OUT}/t_{t:05.2f}.png'
             await pg.screenshot(path=name)
             if i % 30 == 0: print(i, flush=True)
