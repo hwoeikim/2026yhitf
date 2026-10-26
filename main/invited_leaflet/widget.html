@@ -208,6 +208,10 @@ function update(){
   var flip=180*(1-open),tilt=(1-open)*back*-12,lift=back*(1-open)*-8,cy=fin*Math.min(vh*.06,40);
   if(mode==='h'){var w=pw*(1+3*open);lf.style.transform='translate('+(-pw/2-(w-pw)/2*S)+'px,'+(-ph/2-cy)+'px) scale('+S+') rotateY('+(flip+tilt)+'deg) rotateX('+lift+'deg)'}
   else{var hh=ph*(1+open);lf.style.transform='translate('+(-pw/2)+'px,'+(-ph/2-(hh-ph)/2*S-cy*1.6)+'px) scale('+S+') rotateX('+(-flip)+'deg) rotateZ('+(tilt*.4)+'deg)'}
+  /* manual backface culling: some GPUs/browsers ignore backface-visibility inside this 3D stack */
+  var acc=mode==='h'?(flip+tilt):(-flip);
+  for(var q=0;q<P.length;q++){if(q>0)acc+=sg*(q%2?-1:1)*a;var cs=Math.cos(acc*Math.PI/180),kids=P[q].children;
+    for(var z=0;z<kids.length;z++){var k=kids[z];if(!k.classList.contains('face'))continue;k.style.visibility=(k.classList.contains('back')?cs<.02:cs>-.02)?'visible':'hidden'}}
   var sh=lf.querySelectorAll('.shade'),dir=mode==='h'?'90deg':'180deg';
   for(var j=0;j<sh.length;j++){var on=f*.55;sh[j].style.background=j%2?'linear-gradient('+dir+',rgba(33,33,33,'+on+'),rgba(33,33,33,'+(on*.2)+'))':'linear-gradient('+dir+',rgba(255,255,255,0),rgba(33,33,33,'+(on*.35+.04)+'))'}
   cta.style.opacity=fin;cta.style.visibility=fin>0?'visible':'hidden';cta.style.transform='translateX(-50%) translateY('+((1-fin)*16)+'px)';
