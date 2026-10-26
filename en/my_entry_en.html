@@ -182,6 +182,7 @@
         +row('Date of birth',on?f.birth:p.birth,{open:on})
         +phoneRow('Phone',on?f.phone:p.phone,on)
         +row('T-shirt',p.shirt)
+        +(/(15|28)\s*KM|TRAIL/i.test(p.course||'')&&p.state!=='cancel'&&p.shirt?row('Finisher jacket',p.shirt+(/^(F|W|여)/i.test(p.gender||'')&&/XL/.test(p.shirt)?" (men's jacket)":'')+' · same size as your T-shirt, given at the finish'):'')
         +(on?emgRow(f):row('Emergency contact',p.emergency))
         +(p.state!=='cancel'&&!(d.scope==='group'&&!(on?f.address:p.address))?row('Address',on?f.address:p.address,{addr:true}):'')  /* 단체는 대표자 주소만 받으므로 빈 참가자 주소는 숨김 */
         +'</dl>'

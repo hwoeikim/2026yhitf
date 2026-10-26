@@ -31,3 +31,4 @@
 - 2026-10-26 PM: women's jacket chart + XL/2XL (men's values) + note; widget 075a0e2 on main & /rewards; KR /registration updated; published
 - 2026-10-26 PM: EN /registration jacket notice + charts (record en/registration_jacket_size_addon.html); published
 - 2026-10-26 16:40: 3XL added (men; women = men's 3XL) on main, /rewards (widget a20f243), KR & EN /registration; all published
+- 2026-10-26 17:50: my-entry (KR/EN) shows finisher jacket row for trail entries; published

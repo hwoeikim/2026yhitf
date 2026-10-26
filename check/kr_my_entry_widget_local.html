@@ -177,6 +177,7 @@
         +row('생년월일',on?f.birth:p.birth,{open:on})
         +phoneRow('연락처',on?f.phone:p.phone,on)
         +row('티셔츠',p.shirt)
+        +(!road&&p.state!=='cancel'&&p.shirt?row('완주 자켓',p.shirt+(/여/.test(p.gender||'')&&/XL/.test(p.shirt)?' 남성 자켓':'')+' (티셔츠와 같은 사이즈 · 완주 시 지급)'):'')
         +(on?emgRow(f):row('비상연락처',p.emergency))
         +(road&&p.state!=='cancel'?row('택배 주소',on?f.address:p.address,{addr:true}):'')
         +'</dl>'
