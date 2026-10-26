@@ -72,7 +72,7 @@
 <script>
 (function(){
   var P={"5k":{"label":"5KM","m":[200000,150000,100000,50000,30000],"w":[200000,150000,100000,50000,30000],"note":""},
-"10k":{"label":"10KM","m":[300000,200000,100000,80000,30000],"w":[300000,200000,100000,80000,30000],"note":"Awarded in each Saturday and Sunday wave"},
+"10k":{"label":"10KM","m":[300000,200000,100000,80000,30000],"w":[300000,200000,100000,80000,30000],"note":"Awarded separately for the Saturday and Sunday races"},
 "15k":{"label":"15KM","m":[1000000,800000,500000,200000,100000],"w":[1000000,800000,500000,200000,100000],"note":""},
 "28k":{"label":"28KM","m":[2000000,1000000,500000,300000,100000],"w":[2000000,1000000,500000,300000,100000],"note":""}};
   var S=document.getElementById('yh-money'),seg=S.querySelector('.seg'),tabs=[].slice.call(seg.querySelectorAll('button')),board=S.querySelector('.board');

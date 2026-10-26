@@ -10,11 +10,11 @@ T = {
  '<p class="yx-lead">15KM · 28KM 트레일런 완주 시,<br><strong>완주를 기념하는 자켓</strong>을 받으실 수 있습니다.</p>':
    '<p class="yx-lead">Finish the 15KM or 28KM Trail Run<br><strong>and the finisher jacket is yours.</strong></p>',
  '<b>10만원 상당</b> 러닝 키트,<br>참가자 전원 증정': 'A running kit <b>worth KRW 100,000</b>,<br>for every runner',
- '2026 YHITF 공식 협찬사 KEEN 콜라보 기념 티셔츠': 'Commemorative T-shirt with KEEN, official partner of 2026 YHITF',
- '일상부터 대회까지, 미국 포틀랜드 아웃도어의 기능성과 활동성을 선사합니다.': 'From everyday runs to race day — the function and freedom of Portland outdoor gear.',
+ '2026 YHITF 공식 협찬사 KEEN 콜라보 기념 티셔츠': 'Event tee made with KEEN, official sponsor of 2026 YHITF',
+ '일상부터 대회까지, 미국 포틀랜드 아웃도어의 기능성과 활동성을 선사합니다.': 'From daily runs to race day, with the comfort and performance of Portland-born outdoor gear.',
  '일상부터 대회까지,<br>달리는 것 그 이상.': 'From everyday to race day,<br>more than running.',
  '이미지는 연출된 것으로 실제 제품과 차이가 있을 수 있습니다.': 'Images are for illustration only. Actual products may differ.',
- 'XL 이상은 남성 자켓으로 지급됩니다.': "Sizes XL and above are provided as men's jackets.",
+ 'XL 이상은 남성 자켓으로 지급됩니다.': "Women's XL and above receive a men's jacket.",
  # alt / aria text
  '어두운 네이비 배경에 세워 둔 2026 YHITF 완주 메달. 은색과 로즈골드 띠가 얽힌 투각 디자인, 위로 메달끈': '2026 YHITF finisher medal standing on a dark navy background: an openwork design of interlaced silver and rose gold bands, lanyard above',
  '앞면: 가슴 중앙에 민트 KEEN 로고, 왼쪽 소매에 KEEN for the Trails': 'Front: mint KEEN logo at the center of the chest, KEEN for the Trails on the left sleeve',
@@ -42,9 +42,9 @@ T = {
  '92 바르셀로나 기념 황영조 감독 사인 모자': "Hwang Young-cho Signed Cap ('92 Barcelona)",
  '네이처밸리 오츠 앤 다크 초콜릿': "Nature Valley Oats 'n Dark Chocolate",
  '네이처밸리 크런치 초콜릿칩': 'Nature Valley Crunchy Chocolate Chip',
- '색상 3종 중 랜덤 1': '1 of 3 colors, random',
- '15KM · 28KM 트레일런 참가자 대상': '15KM · 28KM Trail Run runners',
- '완주 기념 자켓 (완주 시)': 'Finisher Jacket (on finishing)',
+ '색상 3종 중 랜덤 1': 'Color assigned at random (1 of 3)',
+ '15KM · 28KM 트레일런 참가자 대상': '15KM · 28KM Trail Run entrants',
+ '완주 기념 자켓 (완주 시)': 'Finisher Jacket (given at the finish)',
  '러닝 키트 구성품 일러스트': 'Running kit line art',
  '15KM · 28KM 트레일런만 해당': '15KM · 28KM Trail Run only',
  '15KM · 28KM 트레일런 한정': '15KM · 28KM Trail Run only',
@@ -107,7 +107,7 @@ P = {
  'aria-label="종목 선택"': 'aria-label="Choose race"',
  '<h3>남자부</h3>': '<h3>Men</h3>', '<h3>여자부</h3>': '<h3>Women</h3>',
  '<b>1위</b>': '<b>1ST</b>',
- '"note":"토·일 각 회차별 시상"': '"note":"Awarded in each Saturday and Sunday wave"',
+ '"note":"토·일 각 회차별 시상"': '"note":"Awarded separately for the Saturday and Sunday races"',
  "el.innerHTML=won(n)+'<small>원</small>'": "el.innerHTML=won(n)+'<small>KRW</small>'",
  "el.innerHTML=won(Math.round(n*e/1000)*1000)+'<small>원</small>'": "el.innerHTML=won(Math.round(n*e/1000)*1000)+'<small>KRW</small>'",
  "(j+2)+'<span>위</span>": "(j+2)+'<span>'+['ND','RD','TH','TH'][j]+'</span>",
@@ -128,7 +128,7 @@ def left(s):
     return sorted(set(m.strip() for m in re.findall(r'[^<>"\'\n]*[가-힣][^<>"\'\n]*', body)))
 
 src = open(V+'page.html').read()
-en = tr(src, T)
+en = tr(src, T).replace('<td>1ea</td>','<td>1</td>')
 en = en.replace('<html lang="ko">', '<html lang="en">')
 open(V+'page_en.html', 'w').write(en)
 p = open(R+'prize_src.txt').read()
