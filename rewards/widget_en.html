@@ -542,8 +542,8 @@ L.classList.add('rv');var io=new IntersectionObserver(function(es){if(es[0].isIn
    </div>
   </div>
   <div class="board" role="tabpanel" aria-live="polite">
-   <div class="col m"><h3>Men</h3><div class="first"><div class="rk"><b>1ST</b></div><div class="amt"></div></div><ol></ol></div>
-   <div class="col w"><h3>Women</h3><div class="first"><div class="rk"><b>1ST</b></div><div class="amt"></div></div><ol></ol></div>
+   <div class="col m"><h3>Men</h3><div class="first"><div class="rk"><b>1st</b></div><div class="amt"></div></div><ol></ol></div>
+   <div class="col w"><h3>Women</h3><div class="first"><div class="rk"><b>1st</b></div><div class="amt"></div></div><ol></ol></div>
   </div>
   <div class="foot"><span class="nt"></span><span></span></div>
  </div>
@@ -564,7 +564,7 @@ L.classList.add('rv');var io=new IntersectionObserver(function(es){if(es[0].isIn
     ['m','w'].forEach(function(g){
       var col=S.querySelector('.col.'+g),v=d[g];
       count(col.querySelector('.amt'),v[0]);
-      col.querySelector('ol').innerHTML=v.slice(1).map(function(x,j){return '<li><span class="r">'+(j+2)+'<span>'+['ND','RD','TH','TH'][j]+'</span></span>'+(x==null?'<span class="lock">COMING SOON</span>':'<span class="v">'+won(x)+' KRW</span>')+'</li>'}).join('');
+      col.querySelector('ol').innerHTML=v.slice(1).map(function(x,j){return '<li><span class="r">'+(j+2)+'<span>'+['nd','rd','th','th'][j]+'</span></span>'+(x==null?'<span class="lock">COMING SOON</span>':'<span class="v">'+won(x)+' KRW</span>')+'</li>'}).join('');
     });
     S.querySelector('.nt').textContent=d.note? d.label+' · '+d.note : '';
     board.classList.remove('swap'); void board.offsetWidth; board.classList.add('swap');
