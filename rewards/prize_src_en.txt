@@ -1,0 +1,111 @@
+
+/* ---------- prize money ---------- */
+#yh-money{--o:#FF6D07;--b:#2E5BFF;background:var(--bg);color:#fff;padding-block:clamp(72px,12vh,140px);border-top:1px solid rgba(255,255,255,.06)}
+#yh-money .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#yh-money .hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(28px,5vh,48px)}
+#yh-money h2{margin:0;font-size:clamp(32px,4.6vw,64px);line-height:1.12;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+#yh-money h2 b{color:var(--o)}
+#yh-money .seg{position:relative;display:inline-grid;grid-template-columns:repeat(4,1fr);padding:5px;border-radius:999px;background:rgba(255,255,255,.07)}
+#yh-money .seg i{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/4);border-radius:999px;background:#fff;transform:translateX(calc(var(--k,3)*100%));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#yh-money .seg button{position:relative;appearance:none;border:0;background:none;cursor:pointer;height:42px;min-width:72px;padding:0 18px;border-radius:999px;color:#fff;font:800 15px/1 "Archivo",sans-serif;transition:color .3s}
+#yh-money .seg button[aria-selected="true"]{color:#111}
+#yh-money .seg button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#yh-money .board{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px)}
+#yh-money .col{border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:clamp(20px,2.6vw,32px);overflow:hidden}
+#yh-money .col h3{margin:0 0 18px;font-size:15px;font-weight:700;color:rgba(255,255,255,.62)}
+#yh-money .first{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:clamp(20px,2.4vw,28px);border-radius:18px;background:var(--o);color:#fff;margin-bottom:10px;overflow:hidden}
+#yh-money .col.w .first{background:var(--b)}
+#yh-money .first::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.28),transparent 55%);pointer-events:none}
+#yh-money .first .rk{font:800 13px/1 "Archivo",sans-serif;letter-spacing:.06em;opacity:.85}
+#yh-money .first .rk b{display:block;font-size:clamp(36px,4vw,54px);line-height:.9;letter-spacing:-.02em}
+#yh-money .amt{font:800 clamp(34px,4.2vw,58px)/1 "Archivo",sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+#yh-money .amt small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:.42em;font-weight:700;margin-left:4px;letter-spacing:0}
+#yh-money ol{list-style:none;margin:0;padding:0}
+#yh-money li{display:flex;justify-content:space-between;align-items:center;padding:15px 6px;border-bottom:1px solid rgba(255,255,255,.08)}
+#yh-money li:last-child{border-bottom:0}
+#yh-money li .r{font:800 18px/1 "Archivo",sans-serif;color:rgba(255,255,255,.75)}
+#yh-money li .r span{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:13px;font-weight:600;margin-left:2px;color:rgba(255,255,255,.45)}
+#yh-money li .v{font:800 18px/1 "Archivo",sans-serif;font-variant-numeric:tabular-nums}
+#yh-money .lock{display:inline-flex;align-items:center;gap:10px;color:rgba(255,255,255,.4);font:700 12px/1 "Archivo",sans-serif;letter-spacing:.08em}
+#yh-money .lock::before{content:"0,000,000";font:800 18px/1 "Archivo",sans-serif;letter-spacing:0;color:#fff;filter:blur(7px);opacity:.55}
+#yh-money .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:18px;font-size:13px;color:rgba(255,255,255,.45)}
+#yh-money .board.swap .col{animation:yhswap .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes yhswap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:760px){#yh-money .board{grid-template-columns:1fr}#yh-money .seg{width:100%}#yh-money .seg button{min-width:0;padding:0}}
+@media (prefers-reduced-motion:reduce){#yh-money .seg i{transition:none}#yh-money .board.swap .col{animation:none}}
+
+/* ---------- prize strip (main page) ---------- */
+#yh-mstrip{background:var(--bg);color:#fff;padding-block:clamp(56px,9vh,100px)}
+#yh-mstrip .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#yh-mstrip .t{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+#yh-mstrip h2{margin:0;font-size:clamp(26px,3vw,40px);letter-spacing:-.035em;font-weight:800}
+#yh-mstrip h2 span{display:block;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:-.01em;margin-bottom:8px}
+#yh-mstrip a.go{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#111;font-weight:800;font-size:15px;text-decoration:none;transition:transform .25s}
+#yh-mstrip a.go:hover{transform:translateY(-2px)}
+#yh-mstrip a.go:focus-visible{outline:2px solid #FF6D07;outline-offset:3px}
+#yh-mstrip .cells{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);border-radius:22px;overflow:hidden}
+#yh-mstrip .c{background:#121214;padding:clamp(20px,2.4vw,30px);transition:background .3s}
+#yh-mstrip .c:hover{background:#18181b}
+#yh-mstrip .c em{font-style:normal;display:block;font:800 14px/1 "Archivo",sans-serif;color:rgba(255,255,255,.6);margin-bottom:clamp(16px,3vh,30px)}
+#yh-mstrip .c strong{display:block;white-space:nowrap;font:800 clamp(26px,3.2vw,48px)/1 "Archivo",sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#yh-mstrip .c strong small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:.4em;margin-left:3px;letter-spacing:0}
+#yh-mstrip .c:last-child strong{color:#FF6D07}
+@media (max-width:760px){#yh-mstrip .cells{grid-template-columns:1fr 1fr}}
+
+=====
+
+<section id="yh-money" aria-labelledby="yh-money-t">
+ <div class="wrap">
+  <div class="hd">
+   <h2 id="yh-money-t"><b>Prize money</b> by race</h2>
+   <div class="seg" role="tablist" aria-label="Choose race"><i aria-hidden="true"></i>
+    <button type="button" role="tab" data-k="5k" aria-selected="false">5K</button><button type="button" role="tab" data-k="10k" aria-selected="false">10K</button><button type="button" role="tab" data-k="15k" aria-selected="false">15K</button><button type="button" role="tab" data-k="28k" aria-selected="true">28K</button>
+   </div>
+  </div>
+  <div class="board" role="tabpanel" aria-live="polite">
+   <div class="col m"><h3>Men</h3><div class="first"><div class="rk"><b>1ST</b></div><div class="amt"></div></div><ol></ol></div>
+   <div class="col w"><h3>Women</h3><div class="first"><div class="rk"><b>1ST</b></div><div class="amt"></div></div><ol></ol></div>
+  </div>
+  <div class="foot"><span class="nt"></span><span></span></div>
+ </div>
+</section>
+<script>
+(function(){
+  var P={"5k":{"label":"5KM","m":[200000,150000,100000,50000,30000],"w":[200000,150000,100000,50000,30000],"note":""},
+"10k":{"label":"10KM","m":[300000,200000,100000,80000,30000],"w":[300000,200000,100000,80000,30000],"note":"Awarded in each Saturday and Sunday wave"},
+"15k":{"label":"15KM","m":[1000000,800000,500000,200000,100000],"w":[1000000,800000,500000,200000,100000],"note":""},
+"28k":{"label":"28KM","m":[2000000,1000000,500000,300000,100000],"w":[2000000,1000000,500000,300000,100000],"note":""}};
+  var S=document.getElementById('yh-money'),seg=S.querySelector('.seg'),tabs=[].slice.call(seg.querySelectorAll('button')),board=S.querySelector('.board');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,seen=false;
+  function won(n){return n.toLocaleString('en-US')}
+  function count(el,n){ if(reduce||seen){el.innerHTML=won(n)+'<small>KRW</small>';return} var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/900),e=1-Math.pow(1-p,3);el.innerHTML=won(Math.round(n*e/1000)*1000)+'<small>KRW</small>';if(p<1)requestAnimationFrame(f)})(t0) }
+  function show(k){
+    var d=P[k],i=tabs.findIndex(function(b){return b.dataset.k===k});
+    seg.style.setProperty('--k',i); tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.k===k)});
+    ['m','w'].forEach(function(g){
+      var col=S.querySelector('.col.'+g),v=d[g];
+      count(col.querySelector('.amt'),v[0]);
+      col.querySelector('ol').innerHTML=v.slice(1).map(function(x,j){return '<li><span class="r">'+(j+2)+'<span>'+['ND','RD','TH','TH'][j]+'</span></span>'+(x==null?'<span class="lock">COMING SOON</span>':'<span class="v">'+won(x)+' KRW</span>')+'</li>'}).join('');
+    });
+    S.querySelector('.nt').textContent=d.note? d.label+' · '+d.note : '';
+    board.classList.remove('swap'); void board.offsetWidth; board.classList.add('swap');
+  }
+  tabs.forEach(function(b,i){b.addEventListener('click',function(){show(b.dataset.k)});b.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(n){var t=tabs[(i+n+4)%4];t.focus();show(t.dataset.k)}})});
+  show('28k');
+  if('IntersectionObserver' in window&&!reduce){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){show(tabs.filter(function(b){return b.getAttribute('aria-selected')==='true'})[0].dataset.k);seen=true;io.disconnect()}},{threshold:.35});io.observe(board)} else seen=true;
+})();
+</script>
+
+=====
+
+<section id="yh-mstrip" aria-labelledby="yh-mstrip-t">
+ <div class="wrap">
+  <div class="t"><h2 id="yh-mstrip-t"><span>Men and women, by race</span>1st place prize</h2><a class="go" href="/rewards">All prizes</a></div>
+  <div class="cells">
+   <div class="c"><em>5KM</em><strong>200,000<small>KRW</small></strong></div>
+   <div class="c"><em>10KM</em><strong>300,000<small>KRW</small></strong></div>
+   <div class="c"><em>15KM</em><strong>1,000,000<small>KRW</small></strong></div>
+   <div class="c"><em>28KM</em><strong>2,000,000<small>KRW</small></strong></div>
+  </div>
+ </div>
+</section>

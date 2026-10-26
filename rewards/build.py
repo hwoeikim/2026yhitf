@@ -5,7 +5,7 @@ SHA=sys.argv[1]
 VAR=sys.argv[2] if len(sys.argv)>2 else 'main'
 V='/home/claude/2026yhitf/medal/v2/'
 CDN=f'https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@{SHA}/medal/v2/'
-s=open(V+'page.html').read()
+s=open(V+('page_en.html' if VAR=='en' else 'page.html')).read()
 s=re.sub(r'<title>.*?</title>\n','',s)
 # scope page-level rules to the wrapper
 s=s.replace(':root{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark}','#yh-rewards{--bg:#0b0b0c;--fg:#ffffff;--mint:#A9CDB7;color-scheme:dark;background:var(--bg);color:var(--fg);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;letter-spacing:-.02em;word-break:keep-all}')
@@ -34,7 +34,7 @@ function hd(){var m=0,hs=document.querySelectorAll('#doz_header_wrap,#doz_header
   m=Math.round(Math.min(m,innerHeight*.3));if(m!==last){last=m;root.style.setProperty('--hd',m+'px')}}
 addEventListener('scroll',hd,{passive:true});addEventListener('resize',hd);hd();setTimeout(hd,800);})();
 </script>'''
-css,prize,strip=open('/home/claude/2026yhitf/rewards/prize_src.txt').read().split('\n=====\n')
+css,prize,strip=open('/home/claude/2026yhitf/rewards/prize_src'+('_en' if VAR=='en' else '')+'.txt').read().split('\n=====\n')
 s=s.replace('</style>',css+'</style>',1)
 # main: breathing room under the section above (elite invitation banner)
 if VAR=='main': s=s.replace('</style>','#yh-rewards{margin-top:clamp(56px,9vh,112px)}</style>',1)
