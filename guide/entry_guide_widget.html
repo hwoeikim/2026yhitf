@@ -403,7 +403,13 @@ html{overflow-x:clip}
       sc.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyDBkSXWQLfOGT9F0qG93SRHzvcPAgSg&callback=yhG7MapInit';
       document.head.appendChild(sc);
     };
-    if('IntersectionObserver' in window){ var mo=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ mo.disconnect(); load(); } },{rootMargin:'400px 0px'}); mo.observe(el); } else load();
+    if(getComputedStyle(el).position==='static') el.style.position='relative';
+  el.style.background='#EAEAEA';
+  var go=document.createElement('button'); go.type='button'; go.textContent='코스 지도 보기';
+  go.setAttribute('style','position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;height:48px;padding:0 26px;border:0;border-radius:999px;background:#002ACF;color:#fff;font-family:inherit;font-size:15px;font-weight:800;letter-spacing:-.02em;cursor:pointer;box-shadow:0 6px 18px rgba(0,42,207,.25)');
+  el.appendChild(go);
+  var initMap=window.yhG7MapInit; window.yhG7MapInit=function(){ if(go.parentNode) go.parentNode.removeChild(go); initMap(); };
+  go.addEventListener('click',function(){ go.disabled=true; go.textContent='지도 불러오는 중…'; load(); });
   })();
 
   var sec=root.querySelector('.choose'), tabs=root.querySelectorAll('.tab'), curK='5';
