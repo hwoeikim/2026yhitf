@@ -104,7 +104,7 @@ var T=EN?{
 root.setAttribute('aria-label',T.aria);
 [].forEach.call(root.querySelectorAll('[data-t]'),function(e){e.innerHTML=T[e.dataset.t]});
 var LOGO_W='__LOGO_W__',LOGO_C='__LOGO_C__',PMAP=__PMAP__,MAPS=__MAPS__;
-var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;var FF=/firefox/i.test(navigator.userAgent)||/[?&]yhff=1/.test(location.search);
 var stick=root.querySelector('.stick'),lf=document.getElementById('yhLf'),hud=document.getElementById('yhLfHud'),cta=document.getElementById('yhLfCta');
 function clamp(x){return x<0?0:x>1?1:x}
 function eio(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
@@ -212,6 +212,13 @@ function update(){
   var acc=mode==='h'?(flip+tilt):(-flip);
   for(var q=0;q<P.length;q++){if(q>0)acc+=sg*(q%2?-1:1)*a;var cs=Math.cos(acc*Math.PI/180),kids=P[q].children;
     for(var z=0;z<kids.length;z++){var k=kids[z];if(!k.classList.contains('face'))continue;var vis=k.classList.contains('back')?cs<.02:cs>-.02;if(open<.002)vis=(q===0&&k.classList.contains('back'));/* fully folded: only the cover (Firefox can flatten the 3D stack and draw inner panels on top) */k.style.visibility=vis?'visible':'hidden';k.style.backfaceVisibility=k.style.webkitBackfaceVisibility=vis?'visible':'hidden'}}
+  /* Firefox: its 3D stack is unreliable here, so swap the fold for a flat crossfade (cover -> open sheet) */
+  if(FF){var co=1-clamp(open*2.2),fo=clamp(open*2.2-1.2);
+    for(var q2=0;q2<P.length;q2++){if(q2>0)P[q2].style.transform='none';var kd=P[q2].children;
+      for(var z2=0;z2<kd.length;z2++){var k2=kd[z2];if(!k2.classList.contains('face'))continue;var isB=k2.classList.contains('back'),cov=(q2===0&&isB),op=cov?co:(isB?0:fo);
+        k2.style.visibility=op>0?'visible':'hidden';k2.style.opacity=op;k2.style.backfaceVisibility='visible';if(isB)k2.style.transform='none'}}
+    if(mode==='h'){var W2=co>0?pw:pw*4;lf.style.transform='translate('+(-pw/2-(W2-pw)/2*S)+'px,'+(-ph/2-cy)+'px) scale('+S+')'}
+    else{var H2=co>0?ph:ph*2;lf.style.transform='translate('+(-pw/2)+'px,'+(-ph/2-(H2-ph)/2*S-cy*1.6)+'px) scale('+S+')'}}
   var sh=lf.querySelectorAll('.shade'),dir=mode==='h'?'90deg':'180deg';
   for(var j=0;j<sh.length;j++){var on=f*.55;sh[j].style.background=j%2?'linear-gradient('+dir+',rgba(33,33,33,'+on+'),rgba(33,33,33,'+(on*.2)+'))':'linear-gradient('+dir+',rgba(255,255,255,0),rgba(33,33,33,'+(on*.35+.04)+'))'}
   cta.style.opacity=fin;cta.style.visibility=fin>0?'visible':'hidden';cta.style.transform='translateX(-50%) translateY('+((1-fin)*16)+'px)';
