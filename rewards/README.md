@@ -27,3 +27,4 @@
 - 2026-10-24 ~03:30 KST: widget 5f1f0a3f (mobile: 3D width, caption order, swipe lookbook), assets 37982c15
 - 2026-10-24 ~03:40 KST: widget 09f55a19 (3D medal removed for now; full prize table on main), assets 0043497e. 3D code kept in medal.js for later.
 - 2026-10-24 ~03:50 KST: widget 0535ac0e (mobile caption back under photo), assets 77f1bec9
+- 2026-10-26 ~15:50 KST: widget 42a5043e (jacket size chart men XS-2XL, women XS-L), assets 9cd10aa9; /registration: jacket notice + size tables inserted (kr/registration_jacket_size_addon.html)
