@@ -29,3 +29,4 @@
 - 2026-10-24 ~03:50 KST: widget 0535ac0e (mobile caption back under photo), assets 77f1bec9
 - 2026-10-26 ~15:50 KST: widget 42a5043e (jacket size chart men XS-2XL, women XS-L), assets 9cd10aa9; /registration: jacket notice + size tables inserted (kr/registration_jacket_size_addon.html)
 - 2026-10-26 PM: women's jacket chart + XL/2XL (men's values) + note; widget 075a0e2 on main & /rewards; KR /registration updated; published
+- 2026-10-26 PM: EN /registration jacket notice + charts (record en/registration_jacket_size_addon.html); published
