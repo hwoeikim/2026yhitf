@@ -191,7 +191,7 @@ function layout(){
   FIT=Math.min(1,mode==='h'?(vh-150)/ph:(vh-190)/(ph*2));
   root.style.setProperty('--pw',pw+'px');root.style.setProperty('--ph',ph+'px');root.style.setProperty('--rows',mode==='h'?1:2);
   SMAX=Math.max(vw/pw,vh/ph)*1.02;
-  cv.width=Math.round(pw*SMAX*dpr);cv.height=Math.round(ph*SMAX*dpr);
+  var cw=pw*SMAX*dpr,ch=ph*SMAX*dpr,cap=Math.min(1,Math.sqrt(1.2e7/(cw*ch)));cv.width=Math.round(cw*cap);cv.height=Math.round(ch*cap);/* Safari caps canvas area (~16.7M px) */
   if(reduce)root.classList.add('rm');
   update();}
 function update(){
