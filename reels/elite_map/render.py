@@ -30,7 +30,7 @@ def p_at(t):
     return KEYS[-1][3]
 
 JS_STATE = """([t,p,cam,camx,camy,tx,ty,hudIn,hudP,endA,endKr,endUrl,fade,swap,creep])=>new Promise(res=>{
-  const E=document.getElementById('end');E.querySelector('.bg').style.opacity=Math.max(0,Math.min(1,(fade-.85)/.15));const HL=E.querySelector('.hl');HL.style.opacity=swap;HL.style.transform='translate('+(camx+tx-270)+'px,'+(camy+ty-375)+'px) scale('+(cam/window.ZOOM*creep)+')';document.querySelectorAll('#yh-lf .txt h3').forEach(x=>x.style.opacity=swap>=1?0:1);
+  const E=document.getElementById('end');E.querySelector('.bg').style.opacity=Math.max(0,Math.min(1,(fade-.85)/.15));const HL=E.querySelector('.hl');HL.style.opacity=swap;HL.style.transform='translate('+(camx+tx-270)+'px,'+(camy+ty-414)+'px) scale('+(cam/window.ZOOM*creep)+')';document.querySelectorAll('#yh-lf .txt h3').forEach(x=>x.style.opacity=swap>=1?0:1);
   document.querySelectorAll('#yh-lf .items,#yh-lf .lg,#yh-lf .mp,#yh-lf .shade').forEach(x=>x.style.opacity=1-fade);
   if(fade>0)document.querySelectorAll('#yh-lf .lf .face,#yh-lf .lf .sheet,#yh-lf .lf .txt').forEach(x=>{x.style.background='#fff';x.style.boxShadow='none'});
   const r=document.getElementById('yh-lf');
@@ -46,8 +46,8 @@ JS_STATE = """([t,p,cam,camx,camy,tx,ty,hudIn,hudP,endA,endKr,endUrl,fade,swap,c
   hp.style.opacity=hudP; hp.style.transform='translateY('+((1-hudP)*3)+'vh)';
   const e=document.getElementById('end');
   e.querySelector('.lk').style.opacity=endA; e.querySelector('.lk').style.transform='translateX(-50%) translateY('+((1-endA)*4)+'vh)';
-  e.querySelector('.kr').style.opacity=endKr; e.querySelector('.kr').style.transform='translateY('+((1-endKr)*3)+'vh)';
-  e.querySelector('.url').style.opacity=endUrl; e.querySelector('.url').style.transform='translateX(-50%) translateY('+((1-endUrl)*3)+'vh)';
+  e.querySelector('.ev').style.opacity=endKr;e.querySelector('.ev').style.transform='translateY('+((1-endKr)*3)+'vh)';e.querySelector('.kr').style.opacity=endA; e.querySelector('.kr').style.transform='translateY('+((1-endA)*3)+'vh)';
+  e.querySelector('.url').style.opacity=endUrl; e.querySelector('.url').style.transform='translateY('+((1-endUrl)*3)+'vh)';
   requestAnimationFrame(()=>requestAnimationFrame(()=>res(1)));
 })"""
 
@@ -68,7 +68,7 @@ async def main():
           const rg=document.createRange();rg.selectNodeContents(o);const rs=[...rg.getClientRects()];const l=Math.min(...rs.map(r=>r.left)),r=Math.max(...rs.map(r=>r.right)),t=Math.min(...rs.map(r=>r.top)),b=Math.max(...rs.map(r=>r.bottom));
           const want=z*hw;const k=want/(r-l);o.style.fontSize=(parseFloat(o.style.fontSize)*k)+'px';o.style.lineHeight=(parseFloat(o.style.lineHeight)*k)+'px';if(o.style.letterSpacing!=='normal')o.style.letterSpacing=(parseFloat(o.style.letterSpacing)*k)+'px';
           {const rs2=[...(()=>{const g=document.createRange();g.selectNodeContents(o);return g.getClientRects()})()];const l2=Math.min(...rs2.map(r=>r.left)),r2=Math.max(...rs2.map(r=>r.right)),t2=Math.min(...rs2.map(r=>r.top)),b2=Math.max(...rs2.map(r=>r.bottom));
-          const L=cx-(l2+r2)/2,T=cy-(t2+b2)/2;o.style.left=L+'px';o.style.top=T+'px';o.style.transformOrigin=(cx-L)+'px '+(cy-T)+'px';return [l2,t2,r2-l2,b2-t2]}}""", [zoom_to, 270, 375, hb[2]])
+          const L=cx-(l2+r2)/2,T=cy-(t2+b2)/2;o.style.left=L+'px';o.style.top=T+'px';o.style.transformOrigin=(cx-L)+'px '+(cy-T)+'px';return [l2,t2,r2-l2,b2-t2]}}""", [zoom_to, 270, 414, hb[2]])
         print('overlay', ov, flush=True)
         await pg.evaluate(f'window.ZOOM={zoom_to}')
         n = int(DUR*FPS)
@@ -84,8 +84,8 @@ async def main():
             camx, camy = hx, hy
             # Origin-based scaling keeps the headline fixed; add a translate by shifting origin over time
             hudIn = expo_o(seg(t, 0.0, 0.4)); hudP = eo(seg(t, 0.2, 0.6))
-            endKr = eo(seg(t, 7.5, 7.95)); endA = eo(seg(t, 7.95, 8.5)); endUrl = eo(seg(t, 7.7, 8.2))
-            await pg.evaluate(JS_STATE, [t, p, cam, camx, camy, (270-hx)*push, (375-hy)*push, hudIn, hudP, endA, endKr, endUrl, eio(seg(t, 6.2, 7.0)), eio(seg(t, 6.25, 6.45)), creep])
+            endKr = eo(seg(t, 7.5, 7.95)); endA = eo(seg(t, 7.7, 8.15)); endUrl = eo(seg(t, 7.9, 8.4))
+            await pg.evaluate(JS_STATE, [t, p, cam, camx, camy, (270-hx)*push, (414-hy)*push, hudIn, hudP, endA, endKr, endUrl, eio(seg(t, 6.2, 7.0)), eio(seg(t, 6.25, 6.45)), creep])
             name = f'{OUT}/f_{i:04d}.png' if not ONLY else f'{OUT}/t_{t:05.2f}.png'
             await pg.screenshot(path=name)
             if i % 30 == 0: print(i, flush=True)
