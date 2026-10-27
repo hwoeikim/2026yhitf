@@ -39,6 +39,9 @@ T = {
  '앞면 메달끈을 건 모습': 'Front with lanyard',
  '뒷면 메달끈을 건 모습': 'Back with lanyard',
  # kit list
+ '노란 배경 위 샘트리 맛 병아리콩 파우치와 그릇에 담긴 병아리콩': 'Samtree Roasted Chickpeas pouch and a bowl of chickpeas on a yellow background',
+ '06 샘트리 맛 병아리콩': '06 Samtree Roasted Chickpeas',
+ '샘트리 맛 병아리콩': 'Samtree Roasted Chickpeas',
  '92 바르셀로나 기념 황영조 감독 사인 모자': "Hwang Young-cho Signed Cap ('92 Barcelona)",
  '네이처밸리 오츠 앤 다크 초콜릿': "Nature Valley Oats 'n Dark Chocolate",
  '네이처밸리 크런치 초콜릿칩': 'Nature Valley Crunchy Chocolate Chip',
