@@ -35,3 +35,4 @@
 - 2026-10-26 19:30: leaflet 99af14e (Firefox: visible faces ignore backface-visibility) published KR; EN pending (extension permission)
 - 2026-10-26 19:45: leaflet 597f283 (Firefox flat crossfade fallback, ?yhff=1 to preview) published KR+EN
 - 2026-10-27 18:40: Samtree chickpea kit item (06), renumbered; widget 6eb24e8, assets 8b23424 — KR/EN main + /rewards published
+- 2026-10-27 19:10: medal renamed to '2026 YHITF 기념 메달' / 'Commemorative Medal'; widget 3ee8ef9 — KR/EN main + /rewards published
