@@ -1,0 +1,3 @@
+<!-- 카카오톡 내장 브라우저 → 외부 브라우저로 열기 (회원가입·로그인 오류 방지)
+     위치: KR "하단 오피셜" 위젯 맨 위 / EN "하단 버튼 고정 위젯" 맨 위 (둘 다 전 페이지 공통) -->
+<script>(function(){try{var ua=navigator.userAgent||'';if(!/KAKAOTALK/i.test(ua))return;if(sessionStorage.getItem('yhKkOut'))return;sessionStorage.setItem('yhKkOut','1');location.href='kakaotalk://web/openExternal?url='+encodeURIComponent(location.href);}catch(e){}})();</script>
