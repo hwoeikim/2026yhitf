@@ -39,3 +39,4 @@
 - 2026-10-28 AM: tee size chart restyled like the jacket chart (horizontal, white card); widget cdef090, KR/EN main + /rewards published
 - 2026-10-28 AM: jacket back image (jk_back_mock.webp) replaced with a properly clipped file; assets 1652c6c, widget 5860f57, KR/EN main + /rewards published
 - 2026-10-28: size chart notices posted on the KR and EN notice boards (tables only)
+- 2026-10-28: Samtree sponsor logo (medal/v2/logo_samtree.png via goods-assets e47ba76) added after Nature Valley in yh-sp, yh-roll (main) and yh-inv (/invited), KR + EN; EN name map 'Samtree'
