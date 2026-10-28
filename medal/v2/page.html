@@ -48,17 +48,17 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 #yh-tee figure img{display:block;width:100%;max-width:440px;height:auto;margin:0 auto}
 #yh-tee .dim{stroke:var(--mint);stroke-width:1;stroke-dasharray:3 3;fill:none;opacity:.75}
 #yh-tee .dimt{fill:var(--mint);font:700 10px "Archivo",sans-serif}
-#yh-tee .yx-size{margin-top:clamp(40px,6vh,64px);border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden}
-#yh-tee .yx-size .yx-cap{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.12);font-weight:800}
-#yh-tee .yx-size .yx-cap small{font-weight:500;color:rgba(255,255,255,.5);font-size:13px}
-#yh-tee table{width:100%;border-collapse:collapse;font-size:15px}
-#yh-tee th,#yh-tee td{padding:14px 24px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07)}
-#yh-tee th{color:rgba(255,255,255,.5);font-weight:600;font-size:13px}
-#yh-tee th:first-child,#yh-tee td:first-child{text-align:left}
-#yh-tee td:first-child{font-weight:800}
-#yh-tee tr:last-child td{border-bottom:0}
-#yh-tee tbody tr:hover td{background:rgba(169,205,183,.06)}
-@media (max-width:720px){#yh-tee .yx-flats{grid-template-columns:1fr}#yh-tee .yx-size{overflow-x:auto}#yh-tee .yx-size .yx-cap{padding:16px}#yh-tee table{table-layout:fixed}#yh-tee th,#yh-tee td{padding:11px 4px;font-size:13px;white-space:nowrap}#yh-tee th{font-size:11.5px;letter-spacing:-.05em}#yh-tee th:first-child,#yh-tee td:first-child{padding-left:14px;width:27%}#yh-tee th:last-child,#yh-tee td:last-child{padding-right:14px}}
+
+
+
+
+
+
+
+
+
+
+@media (max-width:720px){#yh-tee .yx-flats{grid-template-columns:1fr}}
 
 
 /* ---------- medal spec sheet ---------- */
@@ -240,15 +240,30 @@ html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard"
 @media (prefers-reduced-motion:reduce){#yh-goods .yx-cta img{transform:none;transition:none}}
 #yh-goods .yx-note{margin:clamp(48px,8vh,72px) 0 0;font-size:12px;color:rgba(255,255,255,.42);text-align:center}
 @media (max-width:720px){#yh-goods .yx-kit{grid-template-columns:1fr;gap:40px}#yh-goods .yx-specs .yx-art{height:84px}#yh-goods .yx-specs .yx-no{display:block;margin-bottom:6px}#yh-goods .yx-specs .yx-only{margin-left:0}#yh-goods .yx-lb{display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 4px;scroll-padding:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}#yh-goods .yx-lb::-webkit-scrollbar{display:none}#yh-goods .yx-lr,#yh-goods .yx-lr.yx-r2,#yh-goods .yx-sub{display:contents}#yh-goods .yx-it,#yh-goods .yx-it.yx-on{flex:0 0 80%;height:auto;aspect-ratio:4/5;scroll-snap-align:start;cursor:default}#yh-goods .yx-it img{filter:none;transform:none}#yh-goods .yx-it::before{opacity:.45}#yh-goods .yx-it .yx-cap,#yh-goods .yx-it .yx-nm{opacity:1;transform:none}#yh-goods .yx-it .yx-cap .yx-no{color:#FF6D07}#yh-goods .yx-it .yx-cap{gap:8px}}
-#yh-jk .yx-szn{position:sticky;left:0;margin:0;padding:14px 20px 4px;font-size:13px;color:#666;letter-spacing:-.01em}</style>
+#yh-jk .yx-szn{position:sticky;left:0;margin:0;padding:14px 20px 4px;font-size:13px;color:#666;letter-spacing:-.01em}
+/* tee size chart: same look as jacket chart */
+#yh-tee .yx-size{--jk-bg:#EEF0F3;--jk-ink:#212121;--jk-mute:#6b6f76;--jk-line:#d9dce1;color:var(--jk-ink)}
+#yh-tee .yx-size{margin-top:clamp(40px,6vh,64px);background:#fff;border-radius:20px;overflow:hidden}
+#yh-tee .yx-size .yx-cap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--jk-line);font-weight:800}
+#yh-tee .yx-size .yx-cap small{font-weight:500;color:var(--jk-mute);font-size:13px}
+#yh-tee .yx-tw{overflow-x:auto}
+#yh-tee table{width:100%;min-width:520px;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+#yh-tee th,#yh-tee td{padding:13px 20px;text-align:right;border-bottom:1px solid #eef0f3;white-space:nowrap}
+#yh-tee thead th{font-size:13px;color:var(--jk-mute);font-weight:700}
+#yh-tee th[scope="row"]{text-align:left;font-weight:700;color:var(--jk-ink)}
+#yh-tee td{color:var(--jk-ink);font-size:15px}
+#yh-tee thead th:first-child{text-align:left}
+#yh-tee tbody tr:last-child th,#yh-tee tbody tr:last-child td{border-bottom:0}
+@media (max-width:820px){#yh-tee th,#yh-tee td{padding:11px 9px;font-size:13px}#yh-tee table{min-width:0}#yh-tee th[scope="row"],#yh-tee thead th:first-child{position:sticky;left:0;background:#fff;white-space:normal;min-width:86px;padding-left:14px;z-index:1}}
+</style>
 <script>
 /* a CDN hiccup on first load shouldn't leave a broken picture: try again twice */
 document.addEventListener('error',function(e){var i=e.target;if(!i||i.tagName!=='IMG'||!/2026yhitf|^[a-z_0-9]+\.(svg|jpg|webp|png)$/.test(i.getAttribute('src')||''))return;
   var n=+(i.dataset.retry||0);if(n>=2)return;i.dataset.retry=n+1;var u=(i.getAttribute('src')||'').split('?')[0];setTimeout(function(){i.src=u+'?r='+(n+1)},600*(n+1))},true);
 </script>
-<section id="yh-hero" aria-label="완주 메달">
-  <div class="yx-ph"><img src="h_medal.webp" alt="어두운 네이비 배경에 세워 둔 2026 YHITF 완주 메달. 은색과 로즈골드 띠가 얽힌 투각 디자인, 위로 메달끈" width="1536" height="1024" fetchpriority="high"><span class="yx-sweep" aria-hidden="true"></span></div>
-  <div class="yx-meta"><b>완주 메달</b><span>실버 &amp; 로즈골드 투톤</span></div>
+<section id="yh-hero" aria-label="기념 메달">
+  <div class="yx-ph"><img src="h_medal.webp" alt="어두운 네이비 배경에 세워 둔 2026 YHITF 기념 메달. 은색과 로즈골드 띠가 얽힌 투각 디자인, 위로 메달끈" width="1536" height="1024" fetchpriority="high"><span class="yx-sweep" aria-hidden="true"></span></div>
+  <div class="yx-meta"><b>기념 메달</b><span>실버 &amp; 로즈골드 투톤</span></div>
 </section>
 <script>
 (function(){var H=document.getElementById('yh-hero');if(!H)return;var done=false;
@@ -324,19 +339,8 @@ addEventListener('scroll',on,{passive:true});})();
    <figure><img src="tee_back.webp" alt="뒷면: 등 상단에 흰색 YHITF 로고, 아래에 민트 Keen for the Trails와 KEEN 로고" width="1200" height="1573" loading="lazy"><figcaption>BACK</figcaption></figure>
   </div>
   <div class="yx-size">
-   <div class="yx-cap">사이즈표 <small>단위: cm</small></div>
-   <table>
-    <thead><tr><th scope="col">사이즈</th><th scope="col">기장</th><th scope="col">가슴단면</th><th scope="col">어깨너비</th><th scope="col">소매길이</th></tr></thead>
-    <tbody>
-     <tr><td>XS(85)</td><td>65</td><td>45</td><td>41</td><td>59</td></tr>
-     <tr><td>S(90)</td><td>67</td><td>48</td><td>43</td><td>60</td></tr>
-     <tr><td>M(95)</td><td>69</td><td>51</td><td>45</td><td>61</td></tr>
-     <tr><td>L(100)</td><td>71</td><td>54</td><td>47</td><td>62</td></tr>
-     <tr><td>XL(105)</td><td>73</td><td>58</td><td>49</td><td>63</td></tr>
-     <tr><td>2XL(110)</td><td>75</td><td>61</td><td>51</td><td>64</td></tr>
-     <tr><td>3XL(115)</td><td>77</td><td>64</td><td>53</td><td>65</td></tr>
-    </tbody>
-   </table>
+   <div class="yx-cap"><span>사이즈표 <small>단위: cm</small></span></div>
+   <div class="yx-tw"><table><thead><tr><th scope="col">항목</th><th scope="col">XS(85)</th><th scope="col">S(90)</th><th scope="col">M(95)</th><th scope="col">L(100)</th><th scope="col">XL(105)</th><th scope="col">2XL(110)</th><th scope="col">3XL(115)</th></tr></thead><tbody><tr><th scope="row">기장</th><td>65</td><td>67</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td></tr><tr><th scope="row">가슴단면</th><td>45</td><td>48</td><td>51</td><td>54</td><td>58</td><td>61</td><td>64</td></tr><tr><th scope="row">어깨너비</th><td>41</td><td>43</td><td>45</td><td>47</td><td>49</td><td>51</td><td>53</td></tr><tr><th scope="row">소매길이</th><td>59</td><td>60</td><td>61</td><td>62</td><td>63</td><td>64</td><td>65</td></tr></tbody></table></div>
   </div>
  </div>
 </section>
@@ -429,12 +433,12 @@ function q(){if(!t)t=requestAnimationFrame(upd)}addEventListener('scroll',q,{pas
  <div class="yx-wrap">
   <h2 id="yh-goods-t"><b>10만원 상당</b> 러닝 키트,<br>참가자 전원 증정</h2>
   <div class="yx-kit">
-   <div class="yx-tbl"><table><thead><tr><th scope="col">구성품</th><th scope="col">수량</th></tr></thead><tbody><tr class="yx-grp yx-first"><th scope="rowgroup" colspan="2">전 종목 공통</th></tr><tr><td><span class="yx-no">01</span>2026 YHITF 완주 메달</td><td>1ea</td></tr><tr><td><span class="yx-no">02</span>KEEN 콜라보 기념 티셔츠</td><td>1ea</td></tr><tr><td><span class="yx-no">03</span>92 바르셀로나 기념 황영조 감독 사인 모자</td><td>1ea</td></tr><tr><td><span class="yx-no">04</span>네이처밸리 오츠 앤 다크 초콜릿</td><td>1ea</td></tr><tr><td><span class="yx-no">05</span>네이처밸리 크런치 초콜릿칩</td><td>1ea</td></tr><tr><td><span class="yx-no">06</span>샘트리 맛 병아리콩</td><td>1ea</td></tr><tr><td><span class="yx-no">07</span>타포린백</td><td>1ea</td></tr><tr><td><span class="yx-no">08</span>기능성 마스크<small class="yx-nt">색상 3종 중 랜덤 1</small></td><td>1ea</td></tr><tr class="yx-grp"><th scope="rowgroup" colspan="2">15KM · 28KM 트레일런 참가자 대상</th></tr><tr><td><span class="yx-no">09</span>완주 기념 자켓 (완주 시)</td><td>1ea</td></tr></tbody></table></div>
-   <ul class="yx-specs" aria-label="러닝 키트 구성품 일러스트"><li class=""><div class="yx-art"><img src="l_medal.svg" alt="" decoding="async"></div><span class="yx-no">01</span><span class="yx-nm">2026 YHITF 완주 메달</span></li><li class=""><div class="yx-art"><img src="l_tee_front.svg" alt="" decoding="async"></div><span class="yx-no">02</span><span class="yx-nm">KEEN 콜라보 기념 티셔츠</span></li><li class=""><div class="yx-art"><img src="l_hat_side.svg" alt="" decoding="async"></div><span class="yx-no">03</span><span class="yx-nm">92 바르셀로나 기념 황영조 감독 사인 모자</span></li><li class="yx-bar"><div class="yx-art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="yx-no">04</span><span class="yx-nm">네이처밸리 오츠 앤 다크 초콜릿</span></li><li class="yx-bar"><div class="yx-art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="yx-no">05</span><span class="yx-nm">네이처밸리 크런치 초콜릿칩</span></li><li class=""><div class="yx-art"><img src="l_chickpea.svg" alt="" decoding="async"></div><span class="yx-no">06</span><span class="yx-nm">샘트리 맛 병아리콩</span></li><li class=""><div class="yx-art"><img src="l_bag.svg" alt="" decoding="async"></div><span class="yx-no">07</span><span class="yx-nm">타포린백</span></li><li class=""><div class="yx-art"><img src="l_gaiter.svg" alt="" decoding="async"></div><span class="yx-no">08</span><span class="yx-nm">기능성 마스크</span></li><li class="yx-tr"><div class="yx-art yx-two"><img src="l_jk_front.svg" alt="" decoding="async"><img src="l_jk_back.svg" alt="" decoding="async"></div><span class="yx-no">09</span><span class="yx-nm">완주 기념 자켓</span><span class="yx-only">15KM · 28KM 트레일런만 해당</span></li></ul>
+   <div class="yx-tbl"><table><thead><tr><th scope="col">구성품</th><th scope="col">수량</th></tr></thead><tbody><tr class="yx-grp yx-first"><th scope="rowgroup" colspan="2">전 종목 공통</th></tr><tr><td><span class="yx-no">01</span>2026 YHITF 기념 메달</td><td>1ea</td></tr><tr><td><span class="yx-no">02</span>KEEN 콜라보 기념 티셔츠</td><td>1ea</td></tr><tr><td><span class="yx-no">03</span>92 바르셀로나 기념 황영조 감독 사인 모자</td><td>1ea</td></tr><tr><td><span class="yx-no">04</span>네이처밸리 오츠 앤 다크 초콜릿</td><td>1ea</td></tr><tr><td><span class="yx-no">05</span>네이처밸리 크런치 초콜릿칩</td><td>1ea</td></tr><tr><td><span class="yx-no">06</span>샘트리 맛 병아리콩</td><td>1ea</td></tr><tr><td><span class="yx-no">07</span>타포린백</td><td>1ea</td></tr><tr><td><span class="yx-no">08</span>기능성 마스크<small class="yx-nt">색상 3종 중 랜덤 1</small></td><td>1ea</td></tr><tr class="yx-grp"><th scope="rowgroup" colspan="2">15KM · 28KM 트레일런 참가자 대상</th></tr><tr><td><span class="yx-no">09</span>완주 기념 자켓 (완주 시)</td><td>1ea</td></tr></tbody></table></div>
+   <ul class="yx-specs" aria-label="러닝 키트 구성품 일러스트"><li class=""><div class="yx-art"><img src="l_medal.svg" alt="" decoding="async"></div><span class="yx-no">01</span><span class="yx-nm">2026 YHITF 기념 메달</span></li><li class=""><div class="yx-art"><img src="l_tee_front.svg" alt="" decoding="async"></div><span class="yx-no">02</span><span class="yx-nm">KEEN 콜라보 기념 티셔츠</span></li><li class=""><div class="yx-art"><img src="l_hat_side.svg" alt="" decoding="async"></div><span class="yx-no">03</span><span class="yx-nm">92 바르셀로나 기념 황영조 감독 사인 모자</span></li><li class="yx-bar"><div class="yx-art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="yx-no">04</span><span class="yx-nm">네이처밸리 오츠 앤 다크 초콜릿</span></li><li class="yx-bar"><div class="yx-art"><img src="l_bar.svg" alt="" decoding="async"></div><span class="yx-no">05</span><span class="yx-nm">네이처밸리 크런치 초콜릿칩</span></li><li class=""><div class="yx-art"><img src="l_chickpea.svg" alt="" decoding="async"></div><span class="yx-no">06</span><span class="yx-nm">샘트리 맛 병아리콩</span></li><li class=""><div class="yx-art"><img src="l_bag.svg" alt="" decoding="async"></div><span class="yx-no">07</span><span class="yx-nm">타포린백</span></li><li class=""><div class="yx-art"><img src="l_gaiter.svg" alt="" decoding="async"></div><span class="yx-no">08</span><span class="yx-nm">기능성 마스크</span></li><li class="yx-tr"><div class="yx-art yx-two"><img src="l_jk_front.svg" alt="" decoding="async"><img src="l_jk_back.svg" alt="" decoding="async"></div><span class="yx-no">09</span><span class="yx-nm">완주 기념 자켓</span><span class="yx-only">15KM · 28KM 트레일런만 해당</span></li></ul>
   </div>
   <div class="yx-lb" aria-label="러닝 키트 연출 사진">
    <div class="yx-lr yx-r1">
-    <button type="button" class="yx-it" aria-label="01 2026 YHITF 완주 메달" style="--pos:50% 60%"><img src="e_medal3.webp" alt="종목별 메달끈을 단 완주 메달 세 개" width="1672" height="940" loading="lazy" draggable="false"><span class="yx-cap"><span class="yx-no">01</span><span class="yx-nm">2026 YHITF 완주 메달</span></span></button>
+    <button type="button" class="yx-it" aria-label="01 2026 YHITF 기념 메달" style="--pos:50% 60%"><img src="e_medal3.webp" alt="종목별 메달끈을 단 기념 메달 세 개" width="1672" height="940" loading="lazy" draggable="false"><span class="yx-cap"><span class="yx-no">01</span><span class="yx-nm">2026 YHITF 기념 메달</span></span></button>
     <button type="button" class="yx-it" aria-label="02 KEEN 콜라보 기념 티셔츠" style="--pos:50% 50%"><img src="e_tee.webp" alt="KEEN 콜라보 기념 티셔츠 앞면과 뒷면" width="1536" height="1024" loading="lazy" draggable="false"><span class="yx-cap"><span class="yx-no">02</span><span class="yx-nm">KEEN 콜라보 기념 티셔츠</span></span></button>
    </div>
    <div class="yx-lr yx-r2">
