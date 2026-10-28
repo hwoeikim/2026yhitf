@@ -36,3 +36,6 @@
 - 2026-10-26 19:45: leaflet 597f283 (Firefox flat crossfade fallback, ?yhff=1 to preview) published KR+EN
 - 2026-10-27 18:40: Samtree chickpea kit item (06), renumbered; widget 6eb24e8, assets 8b23424 — KR/EN main + /rewards published
 - 2026-10-27 19:10: medal renamed to '2026 YHITF 기념 메달' / 'Commemorative Medal'; widget 3ee8ef9 — KR/EN main + /rewards published
+- 2026-10-28 AM: tee size chart restyled like the jacket chart (horizontal, white card); widget cdef090, KR/EN main + /rewards published
+- 2026-10-28 AM: jacket back image (jk_back_mock.webp) replaced with a properly clipped file; assets 1652c6c, widget 5860f57, KR/EN main + /rewards published
+- 2026-10-28: size chart notices posted on the KR and EN notice boards (tables only)
