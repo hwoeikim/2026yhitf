@@ -3,6 +3,7 @@
 <style>
 #yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#141518;--sub:#5d626b;--mute:#9a9fa7;--line:#e6e8ec;--soft:#f4f5f7;--ease:cubic-bezier(.22,1,.36,1);
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+#yh-tr{width:var(--yhvw,100vw);margin-left:calc(50% - var(--yhvw,100vw) / 2);position:relative}
 #yh-tr *{box-sizing:border-box;margin:0;padding:0}
 #yh-tr .blk{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:stretch}
 #yh-tr .sec{padding:clamp(64px,8vw,128px) clamp(16px,4.4vw,72px)}
@@ -184,6 +185,7 @@
   var PARK=[]; /* 주차장 → 자차·주차장 */
 
   var root=document.getElementById('yh-tr'); if(!root) return;
+  var fitW=function(){var cw=document.documentElement.clientWidth;root.style.setProperty('--yhvw',cw+'px');root.style.marginLeft='0px';var l=root.getBoundingClientRect().left;root.style.marginLeft=(-l)+'px'};fitW();window.addEventListener('resize',fitW);window.addEventListener('load',fitW);
   var en=encodeURIComponent, $=function(id){return document.getElementById(id)};
   if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) root.classList.add('mob');
   $('yhTrNv').href='https://map.naver.com/p/search/'+en(NAME);
