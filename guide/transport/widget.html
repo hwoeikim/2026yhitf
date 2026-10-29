@@ -247,7 +247,7 @@
   (function(){var t=Date.UTC(2026,11,11,15,0,0),n=Date.now(),dd=Math.ceil((t-n)/864e5),el=$('yhTrD');
     el.textContent=dd>0?'D-'+dd:(n<Date.UTC(2026,11,13,15)?'D-DAY':'');})();
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){stage.classList.add('in');io.disconnect()}})},{threshold:.35});io.observe(stage)}else stage.classList.add('in');
-  var auto=false;function autoOpen(){if(!auto&&!cur){auto=true;setTimeout(function(){if(!cur)open('t')},450)}}
+  var auto=false;function autoOpen(){if(!auto&&!cur){auto=true;setTimeout(function(){if(!cur)open('t')},1600)}}
   if('IntersectionObserver' in window){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){autoOpen();io2.disconnect()}})},{threshold:.45});io2.observe(box)}else autoOpen();
   var btns=[].slice.call(root.querySelectorAll('.list button'));
   btns.forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-k');open(cur===k?'':k)}});
