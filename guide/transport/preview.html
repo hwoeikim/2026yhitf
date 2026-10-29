@@ -157,7 +157,7 @@
           <p class="rd">주차장 위치와 집결지까지 도보 시간을 곧 안내해 드려요.</p></div>
         </div>
         <div class="row">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l16-14M4 5l6 6M14 13l6 6"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21l3-18M18 21l-3-18M12 5v2M12 11v2M12 17v2"/></svg></div>
           <div><div class="rt">주요 진입로</div>
           <p class="rd">올림픽대로 · 중부고속도로 · 팔당대교 방면에서 미사대로로 진입해요.</p></div>
         </div>
@@ -208,7 +208,7 @@
     var pts=(mode==='t'?STN:PARK).map(function(p){return [p[0],p[1]]});
     var desk=window.innerWidth>820, padL=desk?460:30;
     if(pts.length){pts.push(V);lmap.fitBounds(pts,{paddingTopLeft:[padL,60],paddingBottomRight:[60,60],maxZoom:16})}
-    else{lmap.setView(V,15,{animate:true}); if(desk) lmap.panBy([-200,0],{animate:false})}
+    else{var z=15,c=V; if(desk){var p=lmap.project(V,z).subtract([200,0]); c=lmap.unproject(p,z)} lmap.setView(c,z,{animate:false})}
   }
   function init(){
     var el=document.getElementById('yhTrMap'), touch=('ontouchstart' in window);
