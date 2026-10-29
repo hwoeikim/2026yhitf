@@ -44,3 +44,5 @@
 ## 2026-10-29
 - 교통 및 집결지 안내: guide/transport/widget.html (KR /access), widget_en.html (EN /gettinghere). 정보 출처 88run.kr 오시는 길. 지도 OSM+Leaflet, 역 좌표 OSM 기준.
 - 사이트 공통: common/site_tweaks_kr.html / _en.html 을 떠 있는 버튼 위젯(KR "하단 좌측 고정위젯", EN "하단 버튼 고정 위젯") 코드 맨 끝에 추가. 헤더 불투명, 노트북 높이(≤860px)에서 메인 첫 화면 위 여백 80px, 스크롤 시 버튼 85% 축소.
+
+- 10/29 23:10 교통안내 v7 배포 (KR /access, EN /gettinghere): 목록+패널을 지도 블록으로, 하단 마감 배너(참가신청 CTA), 라벨 1.6초 후 대중교통 자동 열림·라벨 숨김. commit ea4adeb
