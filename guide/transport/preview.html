@@ -55,10 +55,23 @@
 #yh-tr .list button:hover i,#yh-tr .list button[aria-expanded=true] i{opacity:1;transform:none}
 #yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--blue);transition:width .6s var(--ease)}
 #yh-tr .list button[aria-expanded=true]:after{width:100%}
-#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:#1d3fd6 url(https://cdn.imweb.me/thumbnail/20261001/b20e66ea76d8b.png) 72% 46%/cover no-repeat}
+#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:var(--blue)}
 #yh-tr .sheet{position:absolute;top:12px;right:12px;bottom:12px;width:min(440px,calc(100% - 24px));background:#fff;border-radius:14px;padding:30px 30px 26px;overflow:auto;
   transform:translateX(calc(100% + 24px));transition:transform .7s var(--ease);box-shadow:0 20px 50px rgba(10,20,50,.18)}
 #yh-tr .stage.open .sheet{transform:none}
+#yh-tr .crs{position:absolute;inset:0;width:100%;height:100%;padding:6% 4% 14% 30%}
+#yh-tr .crs path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+#yh-tr .crs .r28{stroke:#fff;stroke-width:2.4}
+#yh-tr .crs .r15{stroke:rgba(255,255,255,.5);stroke-width:2}
+#yh-tr .crs .r5{stroke:var(--orange);stroke-width:3}
+#yh-tr .crs .st{fill:var(--orange);stroke:#fff;stroke-width:3}
+#yh-tr .crs .stp{fill:none;stroke:var(--orange);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:yhTrPing 2.4s var(--ease) infinite}
+@keyframes yhTrPing{0%{transform:scale(1);opacity:1}100%{transform:scale(4);opacity:0}}
+#yh-tr .stage.in .crs path{transition:stroke-dashoffset 2.6s var(--ease);stroke-dashoffset:0}
+#yh-tr .stage.in .crs .r15{transition-delay:.35s}#yh-tr .stage.in .crs .r5{transition-delay:.7s}
+#yh-tr .dday{position:absolute;left:clamp(20px,3vw,36px);bottom:clamp(20px,3vw,32px);color:#fff}
+#yh-tr .dday b{display:block;font-family:Archivo,Pretendard,sans-serif;font-stretch:75%;font-weight:900;font-size:clamp(72px,9vw,128px);line-height:.85;letter-spacing:-.02em}
+#yh-tr .dday span{display:block;margin-top:14px;font-family:Archivo,Pretendard,sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;line-height:1.6;color:rgba(255,255,255,.8)}
 #yh-tr .x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:var(--soft);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink)}
 #yh-tr .x svg{width:16px;height:16px}
 #yh-tr .pg{display:none}
@@ -71,7 +84,7 @@
 #yh-tr .it dd{font-size:14px;color:var(--sub);line-height:1.6;margin-top:5px}
 #yh-tr .ln{font-weight:800;font-size:11.5px;color:#fff;background:#996CAC;border-radius:5px;padding:2px 6px}
 #yh-tr .tbd{font-size:12.5px;font-weight:600;color:var(--mute)}
-#yh-tr .note{margin-top:20px;background:#FFF3EA;color:#8a3a00;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:600;line-height:1.55}
+#yh-tr .note{margin-top:20px;background:var(--soft);color:var(--ink);border-left:3px solid var(--orange);border-radius:12px;padding:14px 16px;font-size:14px;font-weight:600;line-height:1.55}
 #yh-tr .pg.on>*{animation:yhTrUp .7s var(--ease) both}
 #yh-tr .pg.on>*:nth-child(2){animation-delay:.06s}#yh-tr .pg.on>*:nth-child(3){animation-delay:.12s}#yh-tr .pg.on>*:nth-child(4){animation-delay:.18s}#yh-tr .pg.on>*:nth-child(5){animation-delay:.24s}
 @keyframes yhTrUp{from{opacity:0;transform:translateY(10px)}}
@@ -82,6 +95,8 @@
   #yh-tr .when{padding-top:20px}
   #yh-tr .list{margin-top:28px}
   #yh-tr .stage{min-height:0;height:auto}
+  #yh-tr .crs{padding:4% 4% 26% 26%}
+  #yh-tr .stage.open .crs,#yh-tr .stage.open .dday{display:none}
   #yh-tr .stage:before{content:"";display:block;padding-top:62%}
   #yh-tr .stage.open:before{display:none}
   #yh-tr .sheet{position:relative;inset:auto;width:auto;transform:none;display:none;box-shadow:none}
@@ -116,8 +131,7 @@
 </div>
 <div class="sec s2"><div class="blk">
   <div class="col">
-    <h2>러닝 수도,<br>하남에서.</h2>
-    <p class="en">ARRIVAL GUIDE</p>
+    <h2>러닝 수도,<br>하남으로!</h2>
     <div class="list" role="tablist">
       <button type="button" aria-expanded="false" data-k="t">대중교통<i>보기</i></button>
       <button type="button" aria-expanded="false" data-k="c">자차 이용<i>보기</i></button>
@@ -125,6 +139,13 @@
     </div>
   </div>
   <div class="stage" id="yhTrStage">
+    <svg class="crs" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="r28" pathLength="1" d="M415.2 153.2 L416.5 153.3 L420.9 149.4 L422.8 148.4 L425.6 160.9 L425.2 164.0 L425.7 167.3 L426.1 167.0 L426.7 168.2 L428.6 169.4 L423.1 176.6 L421.6 180.1 L420.1 194.0 L419.9 207.5 L420.7 213.9 L420.0 218.4 L416.9 223.5 L413.5 227.7 L408.5 231.3 L404.2 232.9 L392.1 234.6 L385.7 237.4 L372.7 241.3 L369.5 242.9 L359.5 255.1 L356.1 265.3 L356.7 265.3 L358.0 262.8 L366.5 263.3 L367.6 264.4 L367.4 267.7 L368.1 269.1 L377.0 269.6 L379.3 269.3 L379.6 266.3 L380.2 265.8 L385.9 265.6 L388.9 264.4 L404.2 265.0 L411.1 267.0 L413.0 269.2 L412.8 271.6 L414.7 272.5 L414.0 275.3 L415.8 280.1 L415.7 282.0 L414.9 282.8 L414.6 284.8 L412.0 288.0 L406.6 292.7 L406.8 296.5 L405.6 298.3 L405.0 298.3 L404.5 300.1 L404.4 305.6 L403.8 306.5 L404.2 309.5 L401.1 315.8 L401.4 318.9 L402.5 320.3 L403.9 324.3 L403.2 327.8 L401.5 329.6 L401.1 332.2 L403.0 335.2 L402.5 338.7 L403.9 341.3 L403.8 342.8 L404.8 345.1 L405.1 349.8 L404.1 356.9 L406.6 358.9 L405.0 359.0 L400.0 357.7 L397.2 358.8 L400.3 363.9 L400.7 367.2 L404.6 369.2 L406.2 371.6 L404.8 375.8 L404.9 377.6 L406.0 378.5 L408.8 379.3 L411.9 381.9 L412.4 383.9 L414.1 386.2 L414.0 389.6 L415.2 390.6 L415.8 393.1 L414.0 396.1 L414.6 399.2 L416.3 400.5 L416.6 403.0 L414.4 408.3 L409.2 409.7 L407.6 412.0 L405.3 413.3 L401.7 413.5 L400.1 416.1 L395.3 419.5 L388.6 421.6 L385.9 420.6 L383.7 422.1 L381.9 422.1 L378.0 427.7 L376.5 431.8 L374.8 432.9 L374.0 434.3 L375.1 437.1 L374.6 440.5 L375.3 443.2 L374.1 444.3 L374.5 446.8 L373.1 450.0 L376.9 455.7 L374.9 458.3 L370.8 458.5 L368.7 460.0 L368.1 461.0 L365.8 462.4 L365.4 464.0 L364.4 465.0 L364.1 468.6 L365.4 470.2 L365.4 472.5 L367.6 474.8 L368.1 479.1 L365.6 486.0 L365.2 489.4 L366.1 492.1 L364.7 494.0 L363.6 494.5 L363.0 497.0 L362.2 497.5 L361.6 499.0 L361.9 500.9 L363.4 502.8 L363.3 504.5 L360.3 507.8 L360.2 510.4 L358.7 511.5 L359.3 514.0 L357.8 522.5 L359.1 525.4 L357.6 529.3 L357.7 531.2 L356.2 532.3 L355.7 533.9 L352.9 535.7 L347.8 536.4 L345.4 538.3 L339.6 540.0 L334.8 539.0 L333.2 539.2 L330.8 537.6 L330.8 535.8 L329.9 534.7 L328.7 534.4 L327.3 534.9 L325.0 533.3 L320.0 531.5 L318.9 531.5 L314.6 534.8 L306.2 535.2 L301.6 537.1 L297.9 536.9 L293.5 533.3 L291.7 535.0 L290.3 534.9 L287.6 533.3 L286.0 533.2 L282.8 529.7 L281.5 524.4 L277.6 518.7 L275.4 519.1 L273.5 517.7 L267.8 516.1 L266.2 516.6 L261.6 513.5 L257.1 513.0 L255.7 511.0 L253.8 510.0 L253.0 508.8 L253.9 508.1 L255.0 503.6 L253.1 502.4 L252.4 499.2 L250.9 498.0 L250.0 495.9 L248.6 495.1 L248.1 492.7 L247.0 490.9 L247.3 487.1 L248.5 483.5 L247.0 480.1 L246.1 474.5 L247.0 469.9 L246.8 467.0 L244.6 461.5 L246.1 457.1 L245.9 450.9 L245.0 447.8 L245.7 445.5 L245.0 444.3 L242.9 443.0 L243.0 439.8 L241.2 437.0 L241.2 434.9 L241.8 432.7 L246.3 427.3 L246.7 425.4 L250.9 418.3 L250.1 414.9 L251.1 413.3 L250.8 411.3 L251.2 409.8 L252.1 409.5 L255.3 405.6 L257.4 404.5 L258.0 402.5 L260.9 399.1 L260.4 397.8 L262.6 395.5 L262.6 394.5 L264.9 391.2 L264.7 390.7 L262.6 391.2 L262.0 390.6 L264.8 387.2 L264.9 378.5 L267.8 374.8 L266.9 373.9 L267.5 373.2 L267.2 371.7 L267.9 370.3 L267.5 369.7 L267.9 368.7 L266.4 367.4 L266.4 365.1 L268.1 363.2 L266.4 362.2 L263.5 359.0 L264.8 353.6 L264.1 352.5 L263.7 349.2 L260.8 344.4 L259.6 343.7 L257.4 340.4 L257.8 336.3 L256.6 332.3 L258.3 329.4 L256.2 326.8 L256.1 325.4 L255.2 324.4 L254.8 320.9 L255.0 317.3 L257.1 315.2 L256.6 313.6 L256.9 312.8 L254.5 312.5 L254.1 309.5 L257.3 307.3 L259.1 306.9 L260.5 304.2 L264.8 303.3 L265.1 302.2 L266.6 301.0 L268.1 298.6 L269.7 293.6 L271.8 292.2 L271.8 289.1 L272.7 286.3 L274.7 285.1 L274.9 284.1 L277.1 283.5 L280.4 284.0 L283.5 282.1 L284.1 280.2 L285.0 280.1 L286.1 278.7 L287.3 276.0 L289.0 274.0 L291.0 267.8 L297.1 263.1 L299.9 262.3 L303.1 260.3 L303.5 259.2 L302.8 256.3 L301.0 253.1 L302.4 252.6 L302.2 251.4 L304.0 252.5 L306.9 247.8 L309.5 248.1 L311.2 244.2 L310.2 241.2 L311.1 238.6 L310.6 237.1 L311.2 232.3 L310.6 230.2 L310.9 227.4 L310.1 225.7 L310.4 223.7 L312.2 220.7 L319.6 215.6 L323.0 212.4 L328.5 210.8 L327.0 217.1 L328.9 219.1 L329.0 220.9 L333.9 223.4 L335.0 226.4 L338.7 228.1 L338.9 230.7 L340.9 233.9 L341.5 236.7 L341.0 240.2 L339.5 242.4 L341.3 244.9 L343.3 244.8 L343.6 246.4 L343.1 248.0 L340.8 250.3 L340.9 252.9 L339.5 254.3 L339.6 254.9 L340.8 255.8 L345.2 255.8 L351.1 258.0 L353.2 258.1 L356.8 256.5 L358.1 253.1 L367.7 242.4 L370.7 240.4 L382.2 236.2 L385.4 235.8 L386.6 234.7 L393.7 232.1 L401.0 231.1 L405.0 231.1 L408.8 229.5 L410.8 227.7 L416.9 220.5 L419.3 216.8 L419.3 211.8 L418.5 207.7 L419.1 188.5 L421.1 177.5 L426.7 169.0 L426.1 166.8 L425.7 167.2 L425.3 164.0 L425.7 160.2 L422.9 148.3 L420.8 149.3 L416.4 153.2 L415.3 153.2"/>
+      <path class="r15" pathLength="1" d="M417.6 152.5 L421.2 149.1 L423.0 148.5 L425.5 158.7 L425.7 161.5 L425.1 163.9 L425.9 164.8 L425.6 167.0 L426.3 167.0 L426.7 168.2 L428.2 169.1 L429.4 169.3 L432.3 166.0 L437.7 164.9 L444.5 167.0 L448.6 169.8 L452.3 169.7 L457.1 172.4 L460.6 175.7 L469.5 179.4 L477.0 184.5 L484.2 188.5 L485.8 190.2 L485.7 194.3 L487.0 195.1 L487.9 195.1 L491.4 192.1 L493.1 192.2 L495.8 193.7 L497.2 193.5 L499.2 194.5 L499.3 195.8 L504.5 198.2 L505.9 200.0 L511.9 203.2 L509.7 204.1 L509.3 206.0 L507.5 208.1 L503.4 209.5 L500.6 212.6 L494.2 216.1 L489.6 222.3 L488.7 225.1 L489.8 227.0 L491.2 227.2 L492.0 228.6 L494.7 230.7 L497.5 229.7 L498.0 230.1 L500.6 229.9 L501.9 233.2 L506.1 234.5 L506.8 236.2 L512.5 239.4 L518.3 238.8 L520.6 240.6 L522.1 242.9 L526.3 247.0 L529.8 248.0 L532.5 252.6 L533.7 253.8 L534.8 253.8 L535.1 255.3 L537.3 258.8 L537.0 261.5 L539.6 267.1 L541.9 270.3 L545.1 272.3 L546.1 275.1 L546.6 274.9 L546.9 276.1 L548.4 277.5 L548.8 280.5 L551.3 283.7 L550.9 284.8 L552.4 286.2 L552.7 287.5 L553.9 287.9 L555.3 290.7 L555.1 291.8 L555.9 292.4 L555.5 293.3 L553.0 294.9 L553.4 295.2 L552.2 297.3 L551.0 303.4 L552.7 308.5 L552.9 311.7 L554.1 314.4 L553.9 317.2 L552.9 318.9 L553.9 323.3 L553.4 325.6 L555.5 330.1 L555.5 331.7 L558.8 336.3 L555.9 340.2 L554.6 340.1 L554.7 338.8 L552.7 336.9 L549.8 336.7 L549.3 335.9 L548.7 336.0 L547.0 333.9 L541.8 330.4 L541.0 328.7 L539.1 326.9 L537.2 326.5 L533.1 323.9 L535.4 321.0 L536.8 320.2 L537.7 317.3 L536.8 315.9 L537.1 313.4 L535.9 311.2 L534.8 311.7 L535.4 313.4 L534.4 313.4 L528.4 307.9 L529.4 312.4 L528.7 312.7 L527.3 311.5 L518.8 299.9 L517.0 298.4 L515.4 294.9 L514.4 294.3 L511.3 290.1 L510.6 287.0 L508.3 284.8 L507.3 282.3 L505.9 281.6 L502.8 277.3 L500.5 275.3 L500.4 274.4 L501.9 273.5 L502.2 272.3 L500.4 268.9 L501.5 267.3 L501.8 265.1 L503.4 264.3 L503.1 263.5 L500.2 262.3 L498.3 260.3 L497.5 257.7 L494.3 254.8 L493.8 250.3 L491.6 248.0 L486.2 244.4 L476.1 235.2 L471.7 233.2 L473.6 230.6 L480.1 227.5 L488.0 226.0 L489.5 222.3 L494.2 216.1 L500.5 212.5 L503.8 209.1 L507.0 208.3 L509.4 205.8 L509.7 204.1 L512.0 203.1 L505.9 200.0 L504.5 198.2 L499.2 195.8 L499.1 194.8 L496.6 193.5 L495.6 193.7 L491.8 192.3 L487.3 195.4 L485.6 194.1 L485.5 192.1 L475.9 188.5 L472.3 186.5 L467.3 185.1 L465.9 182.8 L455.1 178.4 L451.7 177.6 L431.1 168.8 L430.7 168.2 L431.0 166.6 L429.7 164.9 L427.8 166.7 L425.8 166.2 L425.2 164.2 L425.4 158.8 L422.9 148.4 L416.9 153.0 L415.3 153.2"/>
+      <path class="r5" pathLength="1" d="M415.4 153.2 L416.5 152.9 L420.5 149.9 L420.5 149.3 L419.2 147.5 L410.6 137.2 L403.4 128.1 L392.2 114.9 L381.4 102.2 L374.1 93.5 L369.5 88.2 L361.2 78.4 L345.8 60.3 L345.1 60.0 L340.4 64.0 L339.8 65.9 L343.2 74.1 L346.5 79.8 L350.2 83.9 L356.5 88.9 L382.2 118.9 L385.1 122.7 L385.7 125.7 L386.7 127.3 L395.4 137.9 L402.7 146.4 L405.8 149.8 L408.2 149.8 L408.6 149.5 L409.0 148.9 L409.0 147.0 L408.7 146.4 L398.3 134.1 L389.6 123.9 L352.4 80.3 L340.1 66.0 L340.5 64.2 L344.7 60.8 L346.8 63.0 L360.6 79.6 L367.9 88.2 L374.4 96.0 L391.0 115.5 L402.6 129.1 L409.3 137.0 L414.4 143.0 L415.9 143.5 L419.5 147.8 L420.5 149.3 L420.5 149.9 L416.5 152.9 L415.4 153.2"/>
+      <circle class="st" cx="414.7" cy="153.2" r="7"/><circle class="stp" cx="414.7" cy="153.2" r="7"/>
+    </svg>
+    <div class="dday"><b id="yhTrD">D-0</b><span>12.12 SAT 10:00 START<br>12.13 SUN 08:00 START</span></div>
         <div class="sheet" role="region" aria-live="polite">
       <button type="button" class="x" id="yhTrX" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="pg" data-p="t">
@@ -170,6 +191,9 @@
   cp.onclick=function(){try{navigator.clipboard.writeText(ADDR).then(function(){cps.textContent='복사됨';setTimeout(function(){cps.textContent='복사'},1500)})}catch(e){}};
 
   var lmap,layT,layP,stage=$('yhTrStage'),cur='';
+  (function(){var t=Date.UTC(2026,11,11,15,0,0),n=Date.now(),dd=Math.ceil((t-n)/864e5),el=$('yhTrD');
+    el.textContent=dd>0?'D-'+dd:(n<Date.UTC(2026,11,13,15)?'D-DAY':'');})();
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){stage.classList.add('in');io.disconnect()}})},{threshold:.35});io.observe(stage)}else stage.classList.add('in');
   var btns=[].slice.call(root.querySelectorAll('.list button'));
   btns.forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-k');open(cur===k?'':k)}});
   $('yhTrX').onclick=function(){open('')};
