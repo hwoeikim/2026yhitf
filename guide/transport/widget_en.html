@@ -137,7 +137,6 @@
       <a id="yhTrTm" target="_blank" rel="noopener">Google Maps<span>↗</span></a>
       <button type="button" id="yhTrCp">Copy address<span>Copy</span></button>
     </div>
-    <p class="when"><span><b>Sat 12.12</b> 5KM · 10KM · 15KM</span><br><span><b>Sun 12.13</b> 10KM · 28KM</span></p>
   </div>
   <div class="mapbox" id="yhTrBox">
     <div id="yhTrMap" aria-label="Venue map"></div>
@@ -207,7 +206,7 @@
   var root=document.getElementById('yh-tr'); if(!root) return;
   var fitW=function(){var cw=document.documentElement.clientWidth;root.style.setProperty('--yhvw',cw+'px');root.style.marginLeft='0px';var l=root.getBoundingClientRect().left;root.style.marginLeft=(-l)+'px'};fitW();window.addEventListener('resize',fitW);window.addEventListener('load',fitW);
   var en=encodeURIComponent, $=function(id){return document.getElementById(id)};
-  if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) root.classList.add('mob');
+  if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent))) root.classList.add('mob');
   $('yhTrNv').href='https://map.naver.com/p/search/'+en(NAME);
   $('yhTrKk').href='https://map.kakao.com/link/to/'+en(NAME)+','+V[0]+','+V[1];
   $('yhTrTm').href='https://www.google.com/maps/dir/?api=1&destination='+V[0]+','+V[1];
