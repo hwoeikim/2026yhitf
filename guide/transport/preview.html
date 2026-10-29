@@ -1,29 +1,32 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>교통 안내 시안</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"><style>body{margin:0;background:#fff}</style></head><body><div id="yh-tr">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
 <style>
 #yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#141518;--sub:#5d626b;--mute:#9a9fa7;--line:#e6e8ec;--soft:#f4f5f7;--ease:cubic-bezier(.22,1,.36,1);
-  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;
-  padding:clamp(64px,8vw,128px) clamp(16px,4.4vw,72px);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 #yh-tr *{box-sizing:border-box;margin:0;padding:0}
 #yh-tr .blk{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:stretch}
-#yh-tr .blk+.blk{margin-top:clamp(64px,8vw,120px)}
+#yh-tr .sec{padding:clamp(64px,8vw,128px) clamp(16px,4.4vw,72px)}
+#yh-tr .s1{background:var(--blue);color:#fff}
+#yh-tr .en{font-family:Archivo,Pretendard,sans-serif;font-stretch:80%;font-weight:900;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.01em;color:var(--orange);margin-top:10px;line-height:1.1}
 #yh-tr .col{display:flex;flex-direction:column}
 #yh-tr h2{font-size:clamp(34px,4.2vw,56px);font-weight:800;line-height:1.14;letter-spacing:-.045em}
-#yh-tr .addr{margin-top:18px;font-size:16px;font-weight:600}
-#yh-tr .addr small{display:block;font-size:14px;font-weight:500;color:var(--sub);margin-top:4px}
-#yh-tr .when{margin-top:auto;padding-top:32px;font-size:14px;color:var(--sub);line-height:1.7}
-#yh-tr .when b{color:var(--ink);font-weight:700}
+#yh-tr .addr{margin-top:26px;font-size:17px;font-weight:700}
+#yh-tr .addr small{display:block;font-size:14px;font-weight:500;color:rgba(255,255,255,.75);margin-top:4px}
+#yh-tr .when{margin-top:auto;padding-top:32px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.7}
+#yh-tr .when b{color:#fff;font-weight:700}
 
 /* 길찾기 */
-#yh-tr .nav{margin-top:28px;border-top:1px solid var(--ink)}
-#yh-tr .nav a,#yh-tr .nav button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 2px;border:none;border-bottom:1px solid var(--line);background:none;font:inherit;font-size:16px;font-weight:600;color:var(--ink);text-decoration:none;cursor:pointer;text-align:left}
-#yh-tr .nav a span,#yh-tr .nav button span{font-size:13px;font-weight:500;color:var(--mute);transition:color .3s,transform .4s var(--ease)}
-#yh-tr .nav a:hover span,#yh-tr .nav button:hover span{color:var(--ink);transform:translateX(-4px)}
+#yh-tr .nav{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+#yh-tr .nav a,#yh-tr .nav button{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid #fff;border-radius:999px;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+#yh-tr .nav a span,#yh-tr .nav button span{font-size:13px;color:var(--mute);transition:color .25s}
+#yh-tr .nav a:hover,#yh-tr .nav button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+#yh-tr .nav a:hover span,#yh-tr .nav button:hover span{color:#fff}
 #yh-tr .nav .tm{display:none}
-#yh-tr.mob .nav .tm{display:flex}
-#yh-tr .nav a:focus-visible,#yh-tr .nav button:focus-visible,#yh-tr .list button:focus-visible,#yh-tr .mbtn:focus-visible,#yh-tr .x:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+#yh-tr.mob .nav .tm{display:inline-flex}
+#yh-tr .nav a:focus-visible,#yh-tr .nav button:focus-visible,#yh-tr .list button:focus-visible,#yh-tr .mbtn:focus-visible,#yh-tr .x:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 
 /* 지도 */
-#yh-tr .mapbox{position:relative;border-radius:20px;overflow:hidden;background:#f2f0ec;min-height:520px;isolation:isolate}
+#yh-tr .mapbox{position:relative;border-radius:24px;overflow:hidden;background:#f2f0ec;min-height:520px;isolation:isolate}
 #yh-tr #yhTrMap{position:absolute;inset:0;background:#f2f0ec}
 #yh-tr #yhTrMap .leaflet-tile-pane{filter:saturate(.55) contrast(.96) brightness(1.03)}
 #yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;transition:none!important}
@@ -47,14 +50,12 @@
 /* 아래 블록 */
 #yh-tr .list{margin-top:40px;border-top:1px solid var(--ink)}
 #yh-tr .list button{position:relative;display:flex;align-items:baseline;justify-content:space-between;width:100%;padding:22px 2px;border:none;border-bottom:1px solid var(--line);background:none;font:inherit;font-size:clamp(20px,1.8vw,24px);font-weight:700;letter-spacing:-.03em;color:var(--mute);cursor:pointer;text-align:left;transition:color .35s}
-#yh-tr .list button:hover,#yh-tr .list button[aria-expanded=true]{color:var(--ink)}
-#yh-tr .list button i{font-style:normal;font-size:14px;font-weight:600;letter-spacing:0;opacity:0;transform:translateX(-8px);transition:opacity .35s,transform .45s var(--ease)}
+#yh-tr .list button:hover{color:var(--ink)}#yh-tr .list button[aria-expanded=true]{color:var(--blue)}
+#yh-tr .list button i{font-style:normal;font-size:14px;font-weight:700;color:var(--orange);letter-spacing:0;opacity:0;transform:translateX(-8px);transition:opacity .35s,transform .45s var(--ease)}
 #yh-tr .list button:hover i,#yh-tr .list button[aria-expanded=true] i{opacity:1;transform:none}
-#yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--ink);transition:width .6s var(--ease)}
+#yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--blue);transition:width .6s var(--ease)}
 #yh-tr .list button[aria-expanded=true]:after{width:100%}
-#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:#7fa8dc url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@d62146f1829024770066e58cb91a391d3caa80c5/guide/transport/sky_43.webp) center 70%/cover no-repeat}
-#yh-tr .cap{position:absolute;left:20px;bottom:18px;color:#fff;font-size:13px;font-weight:600;opacity:.9;transition:opacity .4s}
-#yh-tr .stage.open .cap{opacity:0}
+#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:#1d3fd6 url(https://cdn.imweb.me/thumbnail/20261001/b20e66ea76d8b.png) 72% 46%/cover no-repeat}
 #yh-tr .sheet{position:absolute;top:12px;right:12px;bottom:12px;width:min(440px,calc(100% - 24px));background:#fff;border-radius:14px;padding:30px 30px 26px;overflow:auto;
   transform:translateX(calc(100% + 24px));transition:transform .7s var(--ease);box-shadow:0 20px 50px rgba(10,20,50,.18)}
 #yh-tr .stage.open .sheet{transform:none}
@@ -80,7 +81,7 @@
   #yh-tr .mapbox{min-height:0;height:64vh;max-height:560px}
   #yh-tr .when{padding-top:20px}
   #yh-tr .list{margin-top:28px}
-  #yh-tr .stage{min-height:0;height:auto;background-image:url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@d62146f1829024770066e58cb91a391d3caa80c5/guide/transport/sky_m.webp)}
+  #yh-tr .stage{min-height:0;height:auto}
   #yh-tr .stage:before{content:"";display:block;padding-top:62%}
   #yh-tr .stage.open:before{display:none}
   #yh-tr .sheet{position:relative;inset:auto;width:auto;transform:none;display:none;box-shadow:none}
@@ -89,9 +90,10 @@
 @media (prefers-reduced-motion:reduce){#yh-tr *{animation:none!important;transition:none!important}}
 </style>
 
-<div class="blk">
+<div class="sec s1"><div class="blk">
   <div class="col">
     <h2>교통 안내</h2>
+    <p class="en">HOW TO GET THERE</p>
     <p class="addr">하남미사경정공원<small>경기 하남시 미사대로 505 · 집결지·출발·도착</small></p>
     <div class="nav">
       <a id="yhTrNv" target="_blank" rel="noopener">네이버 지도로 길찾기<span>↗</span></a>
@@ -111,9 +113,11 @@
   </div>
 </div>
 
-<div class="blk">
+</div>
+<div class="sec s2"><div class="blk">
   <div class="col">
     <h2>러닝 수도,<br>하남에서.</h2>
+    <p class="en">ARRIVAL GUIDE</p>
     <div class="list" role="tablist">
       <button type="button" aria-expanded="false" data-k="t">대중교통<i>보기</i></button>
       <button type="button" aria-expanded="false" data-k="c">자차 이용<i>보기</i></button>
@@ -121,8 +125,7 @@
     </div>
   </div>
   <div class="stage" id="yhTrStage">
-    <span class="cap">하남 미사경정공원 · 2026.12</span>
-    <div class="sheet" role="region" aria-live="polite">
+        <div class="sheet" role="region" aria-live="polite">
       <button type="button" class="x" id="yhTrX" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="pg" data-p="t">
         <h3>대중교통</h3>
@@ -148,6 +151,7 @@
   </div>
 </div>
 
+</div>
 <script>
 (function(){
   var V=[37.5517,127.21580], NAME='하남미사경정공원', ADDR='경기 하남시 미사대로 505';
