@@ -40,3 +40,7 @@
 - 2026-10-28 AM: jacket back image (jk_back_mock.webp) replaced with a properly clipped file; assets 1652c6c, widget 5860f57, KR/EN main + /rewards published
 - 2026-10-28: size chart notices posted on the KR and EN notice boards (tables only)
 - 2026-10-28: Samtree sponsor logo (medal/v2/logo_samtree.png via goods-assets e47ba76) added after Nature Valley in yh-sp, yh-roll (main) and yh-inv (/invited), KR + EN; EN name map 'Samtree'
+
+## 2026-10-29
+- 교통 및 집결지 안내: guide/transport/widget.html (KR /access), widget_en.html (EN /gettinghere). 정보 출처 88run.kr 오시는 길. 지도 OSM+Leaflet, 역 좌표 OSM 기준.
+- 사이트 공통: common/site_tweaks_kr.html / _en.html 을 떠 있는 버튼 위젯(KR "하단 좌측 고정위젯", EN "하단 버튼 고정 위젯") 코드 맨 끝에 추가. 헤더 불투명, 노트북 높이(≤860px)에서 메인 첫 화면 위 여백 80px, 스크롤 시 버튼 85% 축소.
