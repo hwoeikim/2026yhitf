@@ -208,7 +208,7 @@
   }
   function pinS(cls,n,txt){return L.divIcon({className:'',html:'<div class="pin-s '+cls+'"><span>'+n+'</span>'+txt+'</div>',iconSize:null,iconAnchor:[12,15]})}
   function fit(k){var src=k==='t'?STN:(k?PARK:[]);var pts=src.map(function(p){return [p[0],p[1]]});
-    if(pts.length){pts.push(V);lmap.fitBounds(pts,{padding:[60,60],maxZoom:16})}else lmap.setView(V,15);}
+    if(pts.length){pts.push(V);lmap.fitBounds(pts,{paddingTopLeft:[50,60],paddingBottomRight:[100,70],maxZoom:16})}else lmap.setView(V,15);}
   function init(){
     var el=$('yhTrMap'),touch=('ontouchstart' in window);
     lmap=L.map(el,{zoomControl:false,scrollWheelZoom:false,dragging:!touch,minZoom:12,maxZoom:18,maxBounds:[[37.462,127.150],[37.620,127.290]],maxBoundsViscosity:1});
