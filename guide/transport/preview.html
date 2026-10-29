@@ -18,6 +18,7 @@
 
 /* 길찾기 */
 #yh-tr .nav{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+#yh-tr .nav i{font-style:normal}
 #yh-tr .nav:before,#yh-tr .nav:after,#yh-tr .list:before,#yh-tr .list:after{content:none!important;display:none!important}
 #yh-tr .nav a,#yh-tr .nav button{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid #fff;border-radius:999px;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
 #yh-tr .nav a span,#yh-tr .nav button span{font-size:13px;color:var(--mute);transition:color .25s}
@@ -109,6 +110,18 @@
 #yh-tr .s1 .when{font-size:clamp(15px,1.15vw,17px);line-height:1.75}
 #yh-tr .s1 .nav{margin-top:30px}
 @media (max-width:900px){#yh-tr .s1 h2{font-size:38px}}
+@media (max-width:900px){
+  #yh-tr .s1{padding-top:48px;padding-bottom:48px}
+  #yh-tr .s1 .nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
+  #yh-tr .s1 .nav a,#yh-tr .s1 .nav button{justify-content:space-between;padding:15px 16px;border-radius:14px;font-size:15px;width:100%}
+  #yh-tr .s1 .nav .lg{display:none}
+  #yh-tr .s1 .when{display:flex;gap:0;margin-top:20px;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.25);font-size:14px;line-height:1.5}
+  #yh-tr .s1 .when br{display:none}
+  #yh-tr .s1 .when span{flex:1}
+  #yh-tr .s1 .when span+span{padding-left:14px;border-left:1px solid rgba(255,255,255,.25);margin-left:14px}
+  #yh-tr .s1 .when b{display:block;font-size:16px;margin-bottom:2px}
+  #yh-tr .mapbox{height:56vh;max-height:460px;border-radius:20px}
+}
 @media (prefers-reduced-motion:reduce){#yh-tr *{animation:none!important;transition:none!important}}
 </style>
 
@@ -117,12 +130,12 @@
     <h2>교통 안내</h2>
     <p class="addr">하남미사경정공원 및 하남시 일대<small>경기 하남시 미사대로 505</small></p>
     <div class="nav">
-      <a id="yhTrNv" target="_blank" rel="noopener">네이버 지도로 길찾기<span>↗</span></a>
-      <a id="yhTrKk" target="_blank" rel="noopener">카카오맵으로 길찾기<span>↗</span></a>
-      <a id="yhTrTm" class="tm">티맵으로 길찾기<span>↗</span></a>
+      <a id="yhTrNv" target="_blank" rel="noopener">네이버<i class="lg"> 지도로 길찾기</i><span>↗</span></a>
+      <a id="yhTrKk" target="_blank" rel="noopener">카카오맵<i class="lg">으로 길찾기</i><span>↗</span></a>
+      <a id="yhTrTm" class="tm">티맵<i class="lg">으로 길찾기</i><span>↗</span></a>
       <button type="button" id="yhTrCp">주소 복사<span>복사</span></button>
     </div>
-    <p class="when"><b>12.12 토</b> 5KM · 10KM · 15KM<br><b>12.13 일</b> 10KM · 28KM</p>
+    <p class="when"><span><b>12.12 토</b> 5KM · 10KM · 15KM</span><br><span><b>12.13 일</b> 10KM · 28KM</span></p>
   </div>
   <div class="mapbox" id="yhTrBox">
     <div id="yhTrMap" aria-label="대회장 지도"></div>
