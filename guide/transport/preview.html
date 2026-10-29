@@ -6,14 +6,16 @@
 <style>
 #yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#16181d;--sub:#5f646d;--mute:#9aa0a8;--line:#e7e9ee;--bg:#f4f5f7;--line5:#996CAC;
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#f3f4f6;
-  padding:clamp(56px,8vw,120px) clamp(16px,4.4vw,72px);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  padding:0 0 clamp(56px,8vw,120px);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 #yh-tr *{box-sizing:border-box;margin:0;padding:0}
-#yh-tr .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;max-width:1280px;margin:0 auto 28px}
-#yh-tr .ttl{font-size:clamp(15px,1.3vw,18px);font-weight:700;color:var(--blue)}
-#yh-tr .kick{font-weight:800;font-size:clamp(32px,4.6vw,60px);line-height:1.18;letter-spacing:-.045em;color:var(--ink);margin-top:10px}
+#yh-tr .hero{position:relative;background:#6f9fd8 url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@33bdd2031024f369393ea3f77b1db066edc57b76/guide/transport/hero_sky.webp) center bottom/cover no-repeat;padding:clamp(72px,9vw,132px) clamp(16px,4.4vw,72px) clamp(150px,15vw,230px)}
+#yh-tr .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,30,90,.22),rgba(0,30,90,0) 60%)}
+#yh-tr .hd{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;max-width:1280px;margin:0 auto;color:#fff}
+#yh-tr .wrap{padding:0 clamp(16px,4.4vw,72px);margin-top:clamp(-120px,-8vw,-64px);position:relative}
+#yh-tr .kick{font-weight:800;font-size:clamp(34px,5vw,64px);line-height:1.15;letter-spacing:-.045em;color:#fff;text-shadow:0 2px 24px rgba(0,30,90,.18)}
 #yh-tr .dd{text-align:right}
 #yh-tr .dd b{display:block;font-family:Archivo,Pretendard,sans-serif;font-weight:800;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.03em}
-#yh-tr .dd span{display:block;font-size:14px;font-weight:600;color:var(--sub);margin-top:4px}
+#yh-tr .dd span{display:block;font-size:14px;font-weight:600;color:rgba(255,255,255,.88);margin-top:4px}
 
 #yh-tr .stage{position:relative;max-width:1280px;margin:0 auto;border-radius:28px;overflow:hidden;background:#fff;height:min(82vh,760px);min-height:680px;isolation:isolate;box-shadow:0 1px 0 rgba(20,24,40,.04),0 20px 50px rgba(20,24,40,.06)}
 #yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#f2f0ec}
@@ -42,9 +44,6 @@
 #yh-tr .panel{position:absolute;z-index:600;top:20px;left:20px;bottom:20px;width:420px;background:#fff;
   border-radius:22px;box-shadow:0 12px 40px rgba(20,24,40,.14);display:flex;flex-direction:column;overflow:hidden}
 #yh-tr .grip{display:none}
-#yh-tr .ph{margin:10px 10px 0;height:150px;border-radius:16px;background:#e9ebef center/cover no-repeat;display:flex;align-items:flex-end;padding:12px;flex:none}
-#yh-tr .ph span{font-size:12px;font-weight:600;color:#8b9099;background:rgba(255,255,255,.8);padding:4px 9px;border-radius:7px}
-#yh-tr .ph.on span{display:none}
 #yh-tr .dest{padding:20px 26px 16px}
 #yh-tr .lbl{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--orange)}
 #yh-tr .lbl:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
@@ -87,6 +86,7 @@
 #yh-tr .gob.pc{grid-template-columns:1fr 1fr}
 
 @media (max-width:820px){
+  #yh-tr .hero{background-image:url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@33bdd2031024f369393ea3f77b1db066edc57b76/guide/transport/hero_sky_m.webp);padding-bottom:120px}
   #yh-tr .hd{flex-direction:column;align-items:flex-start;margin-bottom:20px}
   #yh-tr .dd{text-align:left}
   #yh-tr .stage{height:auto;min-height:0;border-radius:24px;overflow:visible;background:none}
@@ -102,16 +102,16 @@
 @media (prefers-reduced-motion:reduce){#yh-tr .pin-v s{animation:none}#yh-tr .pane.on{animation:none}#yh-tr .seg .thumb{transition:none}}
 </style>
 
-<div class="hd">
+<div class="hero"><div class="hd">
   <div>
-    <p class="ttl">교통 및 집결지 안내</p>
-    <h2 class="kick">미사경정공원에서<br>만나요</h2>
+    <h2 class="kick">교통 및<br>집결지 안내</h2>
   </div>
   <div class="dd">
     <b>12.12 SAT – 12.13 SUN</b>
     <span>하남 미사경정공원 일대</span>
   </div>
-</div>
+</div></div>
+<div class="wrap">
 
 <div class="stage">
   <div id="yhTrMap" aria-label="집결지 지도"></div>
@@ -119,7 +119,6 @@
 
   <div class="panel">
     <div class="grip"></div>
-    <div class="ph" id="yhTrPh"><span>현장 사진 자리</span></div>
     <div class="dest">
       <span class="lbl">집결지 · 출발 · 도착</span>
       <h3>하남미사경정공원</h3>
@@ -177,17 +176,16 @@
   </div>
 </div>
 
+</div>
 <script>
 (function(){
   var V=[37.5517,127.21580], NAME='하남미사경정공원';
   /* 확정되면 채우기: [lat,lng,'이름'] */
   var LOOP=[[37.5517,127.21568],[37.55175,127.21609],[37.55242,127.21708],[37.55466,127.21476],[37.55634,127.21308],[37.55879,127.21045],[37.56121,127.20786],[37.56279,127.20617],[37.56381,127.20507],[37.5656,127.20316],[37.56905,127.19943],[37.56828,127.19831],[37.56798,127.19817],[37.56625,127.19904],[37.56541,127.19968],[37.56459,127.2006],[37.56372,127.20196],[37.55961,127.20639],[37.55899,127.20707],[37.55739,127.20872],[37.5568,127.20889],[37.5546,127.2112],[37.55368,127.21219],[37.55192,127.2141],[37.55184,127.21432],[37.55169,127.21564]]; /* 5K 코스 (분위기용) */
-  var PHOTO=''; /* 집결지 사진 URL */
   var STN=[]; /* 역·정류장 (대중교통 탭) */
   var PARK=[]; /* 주차장 (자차 탭) */
 
   var root=document.getElementById('yh-tr'); if(!root) return;
-  if(PHOTO){var ph=document.getElementById('yhTrPh');ph.style.backgroundImage='url('+PHOTO+')';ph.className='ph on'}
   var en=encodeURIComponent;
   document.getElementById('yhTrNv').href='https://map.naver.com/p/search/'+en(NAME);
   document.getElementById('yhTrKk').href='https://map.kakao.com/link/to/'+en(NAME)+','+V[0]+','+V[1];
