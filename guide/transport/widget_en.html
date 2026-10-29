@@ -114,7 +114,7 @@
 <div class="sec s1"><div class="blk">
   <div class="col">
     <h2>Getting Here</h2>
-    <p class="addr">Misa Regatta Park, Hanam<small>505 Misa-daero, Hanam-si, Gyeonggi-do · Assembly, Start &amp; Finish</small></p>
+    <p class="addr">Misa Regatta Park, Hanam<small>505 Misa-daero, Hanam-si, Gyeonggi-do · Misa Regatta Park and around Hanam</small></p>
     <div class="nav">
       <a id="yhTrNv" target="_blank" rel="noopener">Naver Map<span>↗</span></a>
       <a id="yhTrKk" target="_blank" rel="noopener">Kakao Map<span>↗</span></a>
@@ -220,7 +220,7 @@
     lmap=L.map(el,{zoomControl:false,scrollWheelZoom:false,dragging:!touch,minZoom:12,maxZoom:18,maxBounds:[[37.462,127.150],[37.620,127.290]],maxBoundsViscosity:1});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(lmap);
     L.polyline(LOOP,{color:'#002ACF',weight:4,opacity:.5,lineCap:'round',lineJoin:'round',interactive:false}).addTo(lmap);
-    L.marker(V,{zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="pin-v"><i></i><b>Venue</b></div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(lmap);
+    L.marker(V,{zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="pin-v"><i></i><b>2026 YHITF</b></div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(lmap);
     layT=L.layerGroup(STN.map(function(p,i){return L.marker([p[0],p[1]],{icon:pinS('',i+1,p[2])})}));
     layP=L.layerGroup(PARK.map(function(p){return L.marker([p[0],p[1]],{icon:pinS('p','P',p[2])})}));
     lmap.setView(V,15);
