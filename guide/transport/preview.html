@@ -1,11 +1,11 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>교통 안내 시안</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"><style>body{margin:0;background:#fff}</style></head><body><div id="yh-tr">
+<body><div id="yh-tr">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
 <style>
 #yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#141518;--sub:#5d626b;--mute:#9a9fa7;--line:#e6e8ec;--soft:#f4f5f7;--ease:cubic-bezier(.22,1,.36,1);
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 #yh-tr{width:var(--yhvw,100vw);margin-left:calc(50% - var(--yhvw,100vw) / 2);position:relative}
 #yh-tr *{box-sizing:border-box;margin:0;padding:0}
-#yh-tr .blk{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:stretch}
+#yh-tr .blk{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:4fr 8fr;gap:clamp(24px,4vw,64px);align-items:stretch}
 #yh-tr .sec{padding:clamp(64px,8vw,128px) clamp(16px,4.4vw,72px)}
 #yh-tr .s1{background:var(--blue);color:#fff}
 #yh-tr .en{font-family:Archivo,Pretendard,sans-serif;font-stretch:80%;font-weight:900;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.01em;color:var(--orange);margin-top:10px;line-height:1.1}
@@ -32,7 +32,7 @@
 #yh-tr .nav a:focus-visible,#yh-tr .nav button:focus-visible,#yh-tr .list button:focus-visible,#yh-tr .mbtn:focus-visible,#yh-tr .x:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 
 /* 지도 */
-#yh-tr .mapbox{position:relative;border-radius:24px;overflow:hidden;background:#f2f0ec;min-height:520px;isolation:isolate}
+#yh-tr .mapbox{position:relative;border-radius:24px;overflow:hidden;background:#f2f0ec;min-height:580px;isolation:isolate}
 #yh-tr #yhTrMap{position:absolute;inset:0;background:#f2f0ec;color:var(--ink)}
 #yh-tr #yhTrMap .leaflet-tile-pane{filter:saturate(.55) contrast(.96) brightness(1.03)}
 #yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;transition:none!important}
@@ -74,7 +74,7 @@
 #yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--blue);transition:width .6s var(--ease)}
 #yh-tr .list button[aria-expanded=true]:after{width:100%}
 #yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:var(--blue)}
-#yh-tr .sheet{position:absolute;z-index:700;top:12px;right:12px;bottom:12px;width:min(400px,calc(100% - 24px));color:var(--ink);background:#fff;border-radius:14px;padding:30px 30px 26px;overflow:auto;
+#yh-tr .sheet{position:absolute;z-index:700;top:12px;right:12px;bottom:12px;width:min(360px,calc(100% - 24px));color:var(--ink);background:#fff;border-radius:14px;padding:30px 30px 26px;overflow:auto;
   transform:translateX(calc(100% + 24px));transition:transform .7s var(--ease);box-shadow:0 20px 50px rgba(10,20,50,.18)}
 #yh-tr .mapbox.open .sheet{transform:none}
 #yh-tr .mapbox.full .sheet{display:none}
