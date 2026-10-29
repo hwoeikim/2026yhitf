@@ -51,8 +51,8 @@
 #yh-tr .list{margin-top:40px;border-top:1px solid var(--ink)}
 #yh-tr .list button{position:relative;display:flex;align-items:baseline;justify-content:space-between;width:100%;padding:22px 2px;border:none;border-bottom:1px solid var(--line);background:none;font:inherit;font-size:clamp(20px,1.8vw,24px);font-weight:700;letter-spacing:-.03em;color:var(--mute);cursor:pointer;text-align:left;transition:color .35s}
 #yh-tr .list button:hover{color:var(--ink)}#yh-tr .list button[aria-expanded=true]{color:var(--blue)}
-#yh-tr .list button i{font-style:normal;font-size:14px;font-weight:700;color:var(--orange);letter-spacing:0;opacity:0;transform:translateX(-8px);transition:opacity .35s,transform .45s var(--ease)}
-#yh-tr .list button:hover i,#yh-tr .list button[aria-expanded=true] i{opacity:1;transform:none}
+#yh-tr .list button i{display:flex;align-self:center;width:22px;height:22px;color:var(--orange);transition:transform .45s var(--ease)}#yh-tr .list button i svg{width:22px;height:22px}
+#yh-tr .list button:hover i{transform:translateX(4px)}#yh-tr .list button[aria-expanded=true] i{transform:translateX(6px)}
 #yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--blue);transition:width .6s var(--ease)}
 #yh-tr .list button[aria-expanded=true]:after{width:100%}
 #yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:var(--blue)}
@@ -133,9 +133,9 @@
   <div class="col">
     <h2>러닝 수도,<br>하남으로!</h2>
     <div class="list" role="tablist">
-      <button type="button" aria-expanded="false" data-k="t">대중교통<i>보기</i></button>
-      <button type="button" aria-expanded="false" data-k="c">자차 이용<i>보기</i></button>
-      <button type="button" aria-expanded="false" data-k="p">주차장 안내<i>보기</i></button>
+      <button type="button" aria-expanded="false" data-k="t">대중교통<i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></i></button>
+      <button type="button" aria-expanded="false" data-k="c">자차 이용<i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></i></button>
+      <button type="button" aria-expanded="false" data-k="p">주차장 안내<i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></i></button>
     </div>
   </div>
   <div class="stage" id="yhTrStage">
