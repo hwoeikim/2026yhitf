@@ -1,0 +1,12 @@
+<!-- YH site tweaks (2026-10-29): header solid, laptop first view, floating buttons shrink on scroll -->
+<style>
+#s202609188f49b6fcae137 ._section_bg_color,#s2026091886e4a1b6cc46d ._section_bg_color{background-color:#fff!important}
+@media (min-width:992px) and (max-height:860px){
+  #s20260918fcd822b1eba7f{padding-top:80px!important}
+  #w202609180dccff3661a69 img{width:85%!important;height:auto!important;margin:0 auto!important;display:block!important}
+}
+html body #yfab{transition:transform .4s cubic-bezier(.22,1,.36,1)!important;transform-origin:left bottom!important}
+html body #yfab.yfab-mini{transform:scale(.85)!important}
+html body #yfab.yfab-mini .yfab-sub{display:none!important}
+</style>
+<script>(function(){try{var run=function(){var f=document.getElementById('yfab');if(!f)return;var u=function(){f.classList.toggle('yfab-mini',(window.scrollY||0)>window.innerHeight*0.8)};window.addEventListener('scroll',u,{passive:true});u()};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run()}catch(e){}})();</script>
