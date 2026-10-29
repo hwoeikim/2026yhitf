@@ -4,10 +4,6 @@
 #yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#141518;--sub:#5d626b;--mute:#9a9fa7;--line:#e6e8ec;--soft:#f4f5f7;--ease:cubic-bezier(.22,1,.36,1);
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 #yh-tr{width:var(--yhvw,100vw);margin-left:calc(50% - var(--yhvw,100vw) / 2);position:relative}
-/* EN GETTING HERE: hide the old COMING SOON section look */
-#s20260922b3510b1a78506,#s20260922b3510b1a78506 .inside,#s20260922b3510b1a78506 .doz_row,#s20260922b3510b1a78506 .section_wrap_inner{padding-top:0!important;padding-bottom:0!important;min-height:0!important;height:auto!important}
-#s20260922b3510b1a78506 .section_bg,#s20260922b3510b1a78506 ._section_bg,#s20260922b3510b1a78506 [data-widget-type=text]{display:none!important}
-#s20260922b3510b1a78506 .doz_row:not(:has(#yh-tr)){display:none!important}
 #yh-tr *{box-sizing:border-box;margin:0;padding:0}
 #yh-tr .blk{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:stretch}
 #yh-tr .sec{padding:clamp(64px,8vw,128px) clamp(16px,4.4vw,72px)}
@@ -22,6 +18,7 @@
 
 /* 길찾기 */
 #yh-tr .nav{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+#yh-tr .nav:before,#yh-tr .nav:after,#yh-tr .list:before,#yh-tr .list:after{content:none!important;display:none!important}
 #yh-tr .nav a,#yh-tr .nav button{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid #fff;border-radius:999px;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
 #yh-tr .nav a span,#yh-tr .nav button span{font-size:13px;color:var(--mute);transition:color .25s}
 #yh-tr .nav a:hover,#yh-tr .nav button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
