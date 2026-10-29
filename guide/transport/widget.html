@@ -1,0 +1,233 @@
+<div id="yh-tr">
+<style>
+#yh-tr{--blue:#002ACF;--orange:#FF6D07;--ink:#16181d;--sub:#5f646d;--mute:#9aa0a8;--line:#e7e9ee;--bg:#f4f5f7;--line5:#996CAC;
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#fff;
+  padding:clamp(56px,8vw,120px) clamp(16px,4.4vw,72px);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+#yh-tr *{box-sizing:border-box;margin:0;padding:0}
+#yh-tr .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;max-width:1280px;margin:0 auto 28px}
+#yh-tr .kick{font-family:Archivo,Pretendard,sans-serif;font-weight:800;font-size:clamp(40px,7vw,104px);line-height:.88;letter-spacing:-.04em;color:var(--ink)}
+#yh-tr .kick em{font-style:normal;color:var(--blue)}
+#yh-tr .ttl{font-size:clamp(17px,1.5vw,21px);font-weight:600;color:var(--sub);margin-top:14px}
+#yh-tr .dd{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+#yh-tr .chip{display:flex;align-items:baseline;gap:8px;border:1.5px solid var(--ink);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;white-space:nowrap}
+#yh-tr .chip b{font-family:Archivo,sans-serif;font-weight:800;font-size:17px;letter-spacing:-.02em}
+#yh-tr .chip.o{background:var(--orange);border-color:var(--orange);color:#fff}
+
+#yh-tr .stage{position:relative;max-width:1280px;margin:0 auto;border-radius:28px;overflow:hidden;background:#e9ebee;height:min(74vh,700px);min-height:560px;isolation:isolate}
+#yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#e9ebee}
+#yh-tr #yhTrMap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(1.06)}
+#yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;width:257px!important;height:257px!important;transition:none!important}
+#yh-tr #yhTrMap svg{max-width:none;width:auto;height:auto}
+#yh-tr .leaflet-control-zoom{border:none!important;box-shadow:0 6px 20px rgba(20,24,40,.14)!important;border-radius:14px!important;overflow:hidden}
+#yh-tr .leaflet-control-zoom a{color:var(--ink)!important;text-decoration:none;width:38px!important;height:38px!important;line-height:38px!important;border:none!important}
+#yh-tr .leaflet-control-attribution{font-size:10px;background:rgba(255,255,255,.7)!important}
+#yh-tr .hint{position:absolute;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(10,14,30,.42);color:#fff;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s}
+#yh-tr .hint.on{opacity:1}
+
+/* pins */
+#yh-tr .pin-v{position:relative;width:22px;height:22px}
+#yh-tr .pin-v i{position:absolute;inset:0;border-radius:50%;background:var(--orange);border:4px solid #fff;box-shadow:0 4px 14px rgba(255,109,7,.45)}
+#yh-tr .pin-v s{position:absolute;inset:-14px;border-radius:50%;background:rgba(255,109,7,.28);animation:yhTrPulse 2.2s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes yhTrPulse{0%{transform:scale(.35);opacity:1}100%{transform:scale(1.6);opacity:0}}
+#yh-tr .pin-v b{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:7px 12px;border-radius:10px}
+#yh-tr .pin-v b:after{content:"";position:absolute;left:50%;top:100%;margin-left:-5px;border:5px solid transparent;border-top-color:var(--ink)}
+#yh-tr .pin-s{display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:5px 10px 5px 5px;box-shadow:0 4px 14px rgba(20,24,40,.18);font-size:12px;font-weight:700;white-space:nowrap;width:max-content}
+#yh-tr .pin-s span{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-family:Archivo,sans-serif;font-weight:800}
+#yh-tr .pin-s.t span{background:var(--blue)}
+#yh-tr .pin-s.c span{background:var(--orange)}
+
+/* panel */
+#yh-tr .panel{position:absolute;z-index:600;top:20px;left:20px;bottom:20px;width:420px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  border-radius:22px;box-shadow:0 18px 50px rgba(20,24,40,.18);display:flex;flex-direction:column;overflow:hidden}
+#yh-tr .grip{display:none}
+#yh-tr .dest{padding:26px 26px 18px}
+#yh-tr .lbl{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--orange)}
+#yh-tr .lbl:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+#yh-tr .dest h3{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:8px;line-height:1.2}
+#yh-tr .addr{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:14.5px;color:var(--sub)}
+#yh-tr .cp{border:none;background:var(--bg);color:var(--sub);font:inherit;font-size:12px;font-weight:600;padding:4px 9px;border-radius:7px;cursor:pointer}
+#yh-tr .cp:hover{color:var(--ink)}
+#yh-tr .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;margin:4px 26px 0;background:rgba(20,24,40,.06);border-radius:14px;padding:4px}
+#yh-tr .seg button{position:relative;z-index:1;border:none;background:none;font:inherit;font-size:15px;font-weight:700;color:var(--sub);padding:11px 0;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:color .3s}
+#yh-tr .seg button svg{width:18px;height:18px}
+#yh-tr .seg button[aria-selected=true]{color:#fff}
+#yh-tr .seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:11px;background:var(--blue);transition:transform .45s cubic-bezier(.16,1,.3,1),background .45s}
+#yh-tr .seg.car .thumb{transform:translateX(100%);background:var(--orange)}
+#yh-tr .seg button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+#yh-tr .body{flex:1;overflow:auto;padding:20px 26px 8px}
+#yh-tr .pane{display:none}
+#yh-tr .pane.on{display:block;animation:yhTrIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes yhTrIn{from{opacity:0;transform:translateY(8px)}}
+#yh-tr .row{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+#yh-tr .row:first-child{border-top:none;padding-top:4px}
+#yh-tr .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+#yh-tr .ic svg{width:22px;height:22px}
+#yh-tr .t .ic{color:var(--blue)}#yh-tr .c .ic{color:var(--orange)}
+#yh-tr .rt{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#yh-tr .rd{font-size:14px;color:var(--sub);margin-top:4px;line-height:1.55}
+#yh-tr .ln{font-family:Archivo,sans-serif;font-weight:800;font-size:12px;color:#fff;background:var(--line5);border-radius:6px;padding:3px 7px}
+#yh-tr .tbd{font-size:11.5px;font-weight:700;color:var(--mute);background:var(--bg);border-radius:6px;padding:3px 8px}
+#yh-tr .min{font-family:Archivo,sans-serif;font-weight:800;font-size:28px;letter-spacing:-.03em;line-height:1}
+#yh-tr .min small{font-size:13px;font-weight:700;margin-left:2px}
+#yh-tr .note{display:flex;gap:10px;align-items:flex-start;background:#FFF3EA;color:#8a3a00;border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.5;font-weight:600;margin-bottom:6px}
+#yh-tr .note b{font-family:Archivo,sans-serif}
+#yh-tr .go{padding:16px 26px 22px;border-top:1px solid var(--line)}
+#yh-tr .go p{font-size:12.5px;font-weight:600;color:var(--mute);margin-bottom:10px}
+#yh-tr .gob{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#yh-tr .gob a{display:flex;align-items:center;justify-content:center;gap:7px;height:46px;border-radius:13px;background:var(--ink);color:#fff;text-decoration:none;font-size:14px;font-weight:700;transition:transform .2s,background .2s}
+#yh-tr .gob a:hover{transform:translateY(-2px);background:#000}
+#yh-tr .gob a i{width:8px;height:8px;border-radius:50%}
+#yh-tr .gob a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+#yh-tr .gob.pc .tm{display:none}
+#yh-tr .gob.pc{grid-template-columns:1fr 1fr}
+
+@media (max-width:820px){
+  #yh-tr .hd{flex-direction:column;align-items:flex-start;margin-bottom:20px}
+  #yh-tr .dd{justify-content:flex-start}
+  #yh-tr .stage{height:auto;min-height:0;border-radius:24px;overflow:visible;background:none}
+  #yh-tr #yhTrMap{position:relative;height:58vh;min-height:340px;border-radius:24px;overflow:hidden}
+  #yh-tr .panel{position:relative;inset:auto;width:auto;margin:-48px 0 0;border-radius:24px;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 -6px 30px rgba(20,24,40,.12)}
+  #yh-tr .grip{display:block;width:40px;height:5px;border-radius:5px;background:#d6d9df;margin:10px auto 0}
+  #yh-tr .dest{padding:16px 20px 16px}
+  #yh-tr .dest h3{font-size:23px}
+  #yh-tr .seg{margin:0 20px}
+  #yh-tr .body{padding:18px 20px 4px;overflow:visible}
+  #yh-tr .go{padding:16px 20px 20px}
+}
+@media (prefers-reduced-motion:reduce){#yh-tr .pin-v s{animation:none}#yh-tr .pane.on{animation:none}#yh-tr .seg .thumb{transition:none}}
+</style>
+
+<div class="hd">
+  <div>
+    <h2 class="kick">Getting<br><em>there.</em></h2>
+    <p class="ttl">교통 및 집결지 안내</p>
+  </div>
+  <div class="dd">
+    <span class="chip"><b>12.12</b>토 · 5K 10K 15K</span>
+    <span class="chip o"><b>12.13</b>일 · 10K 28K</span>
+  </div>
+</div>
+
+<div class="stage">
+  <div id="yhTrMap" aria-label="집결지 지도"></div>
+  <div class="hint" id="yhTrHint">두 손가락으로 지도를 움직이세요</div>
+
+  <div class="panel">
+    <div class="grip"></div>
+    <div class="dest">
+      <span class="lbl">집결지 · 출발 · 도착</span>
+      <h3>하남미사경정공원</h3>
+      <div class="addr"><span id="yhTrAddr">경기 하남시 미사대로 505</span><button class="cp" type="button" id="yhTrCp">주소 복사</button></div>
+    </div>
+
+    <div class="seg" role="tablist">
+      <span class="thumb"></span>
+      <button type="button" role="tab" aria-selected="true" data-m="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l-2 0M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6" fill="currentColor"/><circle cx="15" cy="14" r=".6" fill="currentColor"/></svg>대중교통</button>
+      <button type="button" role="tab" aria-selected="false" data-m="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="16" r="1.6"/><circle cx="16.5" cy="16" r="1.6"/></svg>자차</button>
+    </div>
+
+    <div class="body">
+      <div class="pane t on" data-p="t">
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/></svg></div>
+          <div><div class="rt">지하철 <span class="ln">5</span> <span class="tbd">추후 안내</span></div>
+          <p class="rd">가까운 역과 출구, 도보 시간을 곧 안내해 드려요.</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16M7 18v3M17 18v3"/></svg></div>
+          <div><div class="rt">버스 <span class="tbd">추후 안내</span></div>
+          <p class="rd">이용 노선과 하차 정류장을 곧 안내해 드려요.</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13l4-5H7z"/><path d="M7 12l3-5h6"/><circle cx="7" cy="19" r="1.5"/><circle cx="15" cy="19" r="1.5"/></svg></div>
+          <div><div class="rt">셔틀버스 <span class="tbd">추후 안내</span></div>
+          <p class="rd">운영 여부와 탑승 위치·시간을 곧 안내해 드려요.</p></div>
+        </div>
+      </div>
+
+      <div class="pane c" data-p="c">
+        <div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><span>대회 당일은 주차 공간이 한정돼 있어요.<br>가능하면 대중교통을 이용해 주세요.</span></div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg></div>
+          <div><div class="rt">참가자 주차장 <span class="tbd">추후 안내</span></div>
+          <p class="rd">주차장 위치와 집결지까지 도보 시간을 곧 안내해 드려요.</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l16-14M4 5l6 6M14 13l6 6"/></svg></div>
+          <div><div class="rt">주요 진입로</div>
+          <p class="rd">올림픽대로 · 중부고속도로 · 팔당대교 방면에서 미사대로로 진입해요.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="go">
+      <p>집결지까지 길찾기</p>
+      <div class="gob" id="yhTrGo">
+        <a id="yhTrNv" target="_blank" rel="noopener"><i style="background:#03C75A"></i>네이버</a>
+        <a id="yhTrKk" target="_blank" rel="noopener"><i style="background:#FEE500"></i>카카오</a>
+        <a id="yhTrTm" class="tm"><i style="background:#3B6BFF"></i>티맵</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var V=[37.5517,127.21580], NAME='하남미사경정공원';
+  /* 확정되면 채우기: [lat,lng,'이름'] */
+  var STN=[]; /* 역·정류장 (대중교통 탭) */
+  var PARK=[]; /* 주차장 (자차 탭) */
+
+  var root=document.getElementById('yh-tr'); if(!root) return;
+  var en=encodeURIComponent;
+  document.getElementById('yhTrNv').href='https://map.naver.com/p/search/'+en(NAME);
+  document.getElementById('yhTrKk').href='https://map.kakao.com/link/to/'+en(NAME)+','+V[0]+','+V[1];
+  document.getElementById('yhTrTm').href='tmap://route?goalname='+en(NAME)+'&goalx='+V[1]+'&goaly='+V[0];
+  var mob=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if(!mob) document.getElementById('yhTrGo').className='gob pc';
+
+  var cp=document.getElementById('yhTrCp');
+  cp.onclick=function(){var t=document.getElementById('yhTrAddr').textContent;
+    try{navigator.clipboard.writeText(t).then(function(){cp.textContent='복사됨';setTimeout(function(){cp.textContent='주소 복사'},1500)})}catch(e){}};
+
+  var lmap,layT,layC,mode='t';
+  var seg=root.querySelector('.seg');
+  [].forEach.call(seg.querySelectorAll('button'),function(b){b.onclick=function(){setMode(b.getAttribute('data-m'))}});
+  function setMode(m){mode=m;seg.className='seg'+(m==='c'?' car':'');
+    [].forEach.call(seg.querySelectorAll('button'),function(b){b.setAttribute('aria-selected',b.getAttribute('data-m')===m)});
+    [].forEach.call(root.querySelectorAll('.pane'),function(p){p.classList.toggle('on',p.getAttribute('data-p')===m)});
+    if(lmap){ if(m==='t'){lmap.removeLayer(layC);layT.addTo(lmap)}else{lmap.removeLayer(layT);layC.addTo(lmap)} fit(); }
+  }
+  function pinS(cls,n,txt){return L.divIcon({className:'',html:'<div class="pin-s '+cls+'"><span>'+n+'</span>'+txt+'</div>',iconSize:null,iconAnchor:[12,15]})}
+  function fit(){
+    var pts=(mode==='t'?STN:PARK).map(function(p){return [p[0],p[1]]});
+    var desk=window.innerWidth>820, padL=desk?460:30;
+    if(pts.length){pts.push(V);lmap.fitBounds(pts,{paddingTopLeft:[padL,60],paddingBottomRight:[60,60],maxZoom:16})}
+    else{lmap.setView(V,15,{animate:true}); if(desk) lmap.panBy([-200,0],{animate:false})}
+  }
+  function init(){
+    var el=document.getElementById('yhTrMap'), touch=('ontouchstart' in window);
+    lmap=L.map(el,{zoomControl:false,attributionControl:true,scrollWheelZoom:false,dragging:!touch,minZoom:12,maxZoom:18,
+      maxBounds:[[37.462,127.150],[37.620,127.290]],maxBoundsViscosity:1});
+    L.control.zoom({position:'topright'}).addTo(lmap);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(lmap);
+    L.marker(V,{zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="pin-v"><s></s><i></i><b>집결지</b></div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(lmap);
+    layT=L.layerGroup(STN.map(function(p,i){return L.marker([p[0],p[1]],{icon:pinS('t',i+1,p[2])})}));
+    layC=L.layerGroup(PARK.map(function(p,i){return L.marker([p[0],p[1]],{icon:pinS('c','P',p[2])})}));
+    layT.addTo(lmap); fit();
+    if(touch){var h=document.getElementById('yhTrHint'),tm;
+      el.addEventListener('touchmove',function(e){if(e.touches.length===1){h.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){h.classList.remove('on')},900)}},{passive:true});
+      lmap.on('touchstart',function(){});}
+    window.addEventListener('resize',function(){lmap.invalidateSize()});
+  }
+  function load(){
+    if(window.L&&L.map){init();return}
+    if(!document.getElementById('yhLeafCss')){var c=document.createElement('link');c.id='yhLeafCss';c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(c)}
+    var s=document.getElementById('yhLeafJs');
+    if(!s){s=document.createElement('script');s.id='yhLeafJs';s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';document.head.appendChild(s)}
+    s.addEventListener('load',init);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
+})();
+</script>
+</div>
