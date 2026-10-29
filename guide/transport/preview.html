@@ -18,9 +18,9 @@
 #yh-tr .chip.o{background:var(--orange);border-color:var(--orange);color:#fff}
 
 #yh-tr .stage{position:relative;max-width:1280px;margin:0 auto;border-radius:28px;overflow:hidden;background:#e9ebee;height:min(74vh,700px);min-height:560px;isolation:isolate}
-#yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#e9ebee}
+#yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#eeeeee}
 #yh-tr #yhTrMap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(1.06)}
-#yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;width:257px!important;height:257px!important;transition:none!important}
+#yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;width:257px!important;height:257px!important;transition:none!important;outline:1px solid transparent}
 #yh-tr #yhTrMap svg{max-width:none;width:auto;height:auto}
 #yh-tr .leaflet-control-zoom{border:none!important;box-shadow:0 6px 20px rgba(20,24,40,.14)!important;border-radius:14px!important;overflow:hidden}
 #yh-tr .leaflet-control-zoom a{color:var(--ink)!important;text-decoration:none;width:38px!important;height:38px!important;line-height:38px!important;border:none!important}
@@ -179,6 +179,7 @@
 (function(){
   var V=[37.5517,127.21580], NAME='하남미사경정공원';
   /* 확정되면 채우기: [lat,lng,'이름'] */
+  var LOOP=[[37.5517,127.21568],[37.55175,127.21609],[37.55242,127.21708],[37.55466,127.21476],[37.55634,127.21308],[37.55879,127.21045],[37.56121,127.20786],[37.56279,127.20617],[37.56381,127.20507],[37.5656,127.20316],[37.56905,127.19943],[37.56828,127.19831],[37.56798,127.19817],[37.56625,127.19904],[37.56541,127.19968],[37.56459,127.2006],[37.56372,127.20196],[37.55961,127.20639],[37.55899,127.20707],[37.55739,127.20872],[37.5568,127.20889],[37.5546,127.2112],[37.55368,127.21219],[37.55192,127.2141],[37.55184,127.21432],[37.55169,127.21564]]; /* 5K 코스 (분위기용) */
   var STN=[]; /* 역·정류장 (대중교통 탭) */
   var PARK=[]; /* 주차장 (자차 탭) */
 
@@ -215,6 +216,7 @@
       maxBounds:[[37.462,127.150],[37.620,127.290]],maxBoundsViscosity:1});
     L.control.zoom({position:'topright'}).addTo(lmap);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(lmap);
+    L.polyline(LOOP,{color:'#002ACF',weight:4,opacity:.55,lineCap:'round',lineJoin:'round',interactive:false}).addTo(lmap);
     L.marker(V,{zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="pin-v"><s></s><i></i><b>집결지</b></div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(lmap);
     layT=L.layerGroup(STN.map(function(p,i){return L.marker([p[0],p[1]],{icon:pinS('t',i+1,p[2])})}));
     layC=L.layerGroup(PARK.map(function(p,i){return L.marker([p[0],p[1]],{icon:pinS('c','P',p[2])})}));
