@@ -17,10 +17,10 @@
 #yh-tr .chip b{font-family:Archivo,sans-serif;font-weight:800;font-size:17px;letter-spacing:-.02em}
 #yh-tr .chip.o{background:var(--orange);border-color:var(--orange);color:#fff}
 
-#yh-tr .stage{position:relative;max-width:1280px;margin:0 auto;border-radius:28px;overflow:hidden;background:#e9ebee;height:min(74vh,700px);min-height:560px;isolation:isolate}
-#yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#eeeeee}
+#yh-tr .stage{position:relative;max-width:1280px;margin:0 auto;border-radius:28px;overflow:hidden;background:#e9ebee;height:min(78vh,720px);min-height:600px;isolation:isolate}
+#yh-tr #yhTrMap{position:absolute;inset:0;z-index:0;background:#f1f1f1}
 #yh-tr #yhTrMap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(1.06)}
-#yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;width:257px!important;height:257px!important;transition:none!important;outline:1px solid transparent}
+#yh-tr #yhTrMap img.leaflet-tile{max-width:none!important;transition:none!important}
 #yh-tr #yhTrMap svg{max-width:none;width:auto;height:auto}
 #yh-tr .leaflet-control-zoom{border:none!important;box-shadow:0 6px 20px rgba(20,24,40,.14)!important;border-radius:14px!important;overflow:hidden}
 #yh-tr .leaflet-control-zoom a{color:var(--ink)!important;text-decoration:none;width:38px!important;height:38px!important;line-height:38px!important;border:none!important}
@@ -58,7 +58,7 @@
 #yh-tr .seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:11px;background:var(--blue);transition:transform .45s cubic-bezier(.16,1,.3,1),background .45s}
 #yh-tr .seg.car .thumb{transform:translateX(100%);background:var(--orange)}
 #yh-tr .seg button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-#yh-tr .body{flex:1;overflow:auto;padding:20px 26px 8px}
+#yh-tr .body{flex:1;overflow:auto;padding:20px 26px 8px;scrollbar-width:none}#yh-tr .body::-webkit-scrollbar{display:none}
 #yh-tr .pane{display:none}
 #yh-tr .pane.on{display:block;animation:yhTrIn .4s cubic-bezier(.16,1,.3,1)}
 @keyframes yhTrIn{from{opacity:0;transform:translateY(8px)}}
