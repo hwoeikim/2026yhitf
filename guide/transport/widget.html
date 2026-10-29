@@ -52,7 +52,7 @@
 #yh-tr .list button:hover i,#yh-tr .list button[aria-expanded=true] i{opacity:1;transform:none}
 #yh-tr .list button:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--ink);transition:width .6s var(--ease)}
 #yh-tr .list button[aria-expanded=true]:after{width:100%}
-#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:#7fa8dc url(__PHOTO__) center 70%/cover no-repeat}
+#yh-tr .stage{position:relative;border-radius:20px;overflow:hidden;min-height:520px;background:#7fa8dc url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@d62146f1829024770066e58cb91a391d3caa80c5/guide/transport/sky_43.webp) center 70%/cover no-repeat}
 #yh-tr .cap{position:absolute;left:20px;bottom:18px;color:#fff;font-size:13px;font-weight:600;opacity:.9;transition:opacity .4s}
 #yh-tr .stage.open .cap{opacity:0}
 #yh-tr .sheet{position:absolute;top:12px;right:12px;bottom:12px;width:min(440px,calc(100% - 24px));background:#fff;border-radius:14px;padding:30px 30px 26px;overflow:auto;
@@ -80,7 +80,7 @@
   #yh-tr .mapbox{min-height:0;height:64vh;max-height:560px}
   #yh-tr .when{padding-top:20px}
   #yh-tr .list{margin-top:28px}
-  #yh-tr .stage{min-height:0;height:auto;background-image:url(__PHOTOM__)}
+  #yh-tr .stage{min-height:0;height:auto;background-image:url(https://cdn.jsdelivr.net/gh/hwoeikim/2026yhitf@d62146f1829024770066e58cb91a391d3caa80c5/guide/transport/sky_m.webp)}
   #yh-tr .stage:before{content:"";display:block;padding-top:62%}
   #yh-tr .stage.open:before{display:none}
   #yh-tr .sheet{position:relative;inset:auto;width:auto;transform:none;display:none;box-shadow:none}
@@ -151,7 +151,7 @@
 <script>
 (function(){
   var V=[37.5517,127.21580], NAME='하남미사경정공원', ADDR='경기 하남시 미사대로 505';
-  var LOOP=__LOOP__; /* 5K 코스 */
+  var LOOP=[[37.5517,127.21568],[37.55175,127.21609],[37.55242,127.21708],[37.55466,127.21476],[37.55634,127.21308],[37.55879,127.21045],[37.56121,127.20786],[37.56279,127.20617],[37.56381,127.20507],[37.5656,127.20316],[37.56905,127.19943],[37.56828,127.19831],[37.56798,127.19817],[37.56625,127.19904],[37.56541,127.19968],[37.56459,127.2006],[37.56372,127.20196],[37.55961,127.20639],[37.55899,127.20707],[37.55739,127.20872],[37.5568,127.20889],[37.5546,127.2112],[37.55368,127.21219],[37.55192,127.2141],[37.55184,127.21432],[37.55169,127.21564]]; /* 5K 코스 */
   /* 확정되면 채우기: [lat,lng,'이름'] */
   var STN=[];  /* 역·정류장 → 대중교통 */
   var PARK=[]; /* 주차장 → 자차·주차장 */
