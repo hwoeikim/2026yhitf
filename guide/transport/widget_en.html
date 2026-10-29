@@ -18,6 +18,9 @@
 
 /* 길찾기 */
 #yh-tr .nav{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+#yh-tr .cpy{display:inline-flex;align-items:center;margin-left:10px;padding:3px 11px;border:1px solid rgba(255,255,255,.55);border-radius:999px;background:none;color:#fff;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;vertical-align:1px;transition:background .25s,color .25s}
+#yh-tr .cpy:hover,#yh-tr .cpy.ok{background:#fff;color:var(--blue)}
+#yh-tr .cpy:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 #yh-tr .nav i{font-style:normal}
 #yh-tr .nav:before,#yh-tr .nav:after,#yh-tr .list:before,#yh-tr .list:after{content:none!important;display:none!important}
 #yh-tr .nav a,#yh-tr .nav button{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid #fff;border-radius:999px;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
@@ -114,6 +117,9 @@
   #yh-tr .s1 .nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
   #yh-tr .s1 .nav a,#yh-tr .s1 .nav button{justify-content:space-between;padding:15px 16px;border-radius:14px;font-size:15px;width:100%}
   #yh-tr .s1 .nav .lg{display:none}
+  #yh-tr .s1 .nav{grid-template-columns:1fr 1fr 1fr}
+  #yh-tr .s1 .nav a{justify-content:center;padding:15px 6px;font-size:14px}
+  #yh-tr .s1 .nav a span{display:none}
   #yh-tr .s1 .nav a,#yh-tr .s1 .nav button{white-space:nowrap;text-align:left}
   #yh-tr .s1 .nav button span{display:none}
   #yh-tr .s1 .nav button.ok span{display:inline}
@@ -130,12 +136,11 @@
 <div class="sec s1"><div class="blk">
   <div class="col">
     <h2>Getting Here</h2>
-    <p class="addr">Misa Regatta Park and around Hanam<small>505 Misa-daero, Hanam-si, Gyeonggi-do</small></p>
+    <p class="addr">Misa Regatta Park and around Hanam<small>505 Misa-daero, Hanam-si, Gyeonggi-do<button type="button" id="yhTrCp" class="cpy">Copy</button></small></p>
     <div class="nav">
       <a id="yhTrNv" target="_blank" rel="noopener">Naver Map<span>↗</span></a>
       <a id="yhTrKk" target="_blank" rel="noopener">Kakao Map<span>↗</span></a>
       <a id="yhTrTm" target="_blank" rel="noopener">Google Maps<span>↗</span></a>
-      <button type="button" id="yhTrCp">Copy address<span>Copy</span></button>
     </div>
   </div>
   <div class="mapbox" id="yhTrBox">
@@ -210,8 +215,8 @@
   $('yhTrNv').href='https://map.naver.com/p/search/'+en(NAME);
   $('yhTrKk').href='https://map.kakao.com/link/to/'+en(NAME)+','+V[0]+','+V[1];
   $('yhTrTm').href='https://www.google.com/maps/dir/?api=1&destination='+V[0]+','+V[1];
-  var cp=$('yhTrCp'), cps=cp.querySelector('span');
-  cp.onclick=function(){try{navigator.clipboard.writeText(ADDR).then(function(){cps.textContent='Copied';cp.classList.add('ok');setTimeout(function(){cps.textContent='Copy';cp.classList.remove('ok')},1500)})}catch(e){}};
+  var cp=$('yhTrCp'),cpl=cp.textContent;
+  cp.onclick=function(){try{navigator.clipboard.writeText(ADDR).then(function(){cp.textContent='Copied';cp.classList.add('ok');setTimeout(function(){cp.textContent=cpl;cp.classList.remove('ok')},1500)})}catch(e){}};
 
   var lmap,layT,layP,stage=$('yhTrStage'),cur='';
   (function(){var t=Date.UTC(2026,11,11,15,0,0),n=Date.now(),dd=Math.ceil((t-n)/864e5),el=$('yhTrD');
