@@ -53,6 +53,8 @@
 #yh-tr .pin-s span{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;background:var(--blue)}
 #yh-tr .pin-s.p span{background:var(--orange)}
 
+#yh-tr .pin-v b{transition:opacity .25s}
+#yh-tr .mapbox[data-k=t] .pin-v b{opacity:0}
 /* 목록 (파란 섹션) */
 #yh-tr .s1 .list{margin-top:auto;padding-top:36px;border-top:none}
 #yh-tr .s1 .list button{color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.2);padding:18px 2px}
@@ -253,7 +255,7 @@
   function open(k){cur=k;
     btns.forEach(function(b){b.setAttribute('aria-expanded',b.getAttribute('data-k')===k)});
     [].forEach.call(root.querySelectorAll('.pg'),function(p){p.classList.toggle('on',p.getAttribute('data-p')===k)});
-    box.classList.toggle('open',!!k);
+    box.classList.toggle('open',!!k);box.setAttribute('data-k',k||'');
     if(lmap){lmap.removeLayer(layT);lmap.removeLayer(layP);
       if(k==='t')layT.addTo(lmap); if(k==='c'||k==='p')layP.addTo(lmap); fit(k);}
   }
