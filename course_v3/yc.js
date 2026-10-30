@@ -76,7 +76,7 @@
     '.yc-root .yc-head b{font-size:28px}' +
     '.yc-root .yc-head span{font-size:14px}' +
     '.yc-root .yc-map,.yc-root.compact .yc-map{height:360px;border-radius:14px;margin-top:14px}' +
-    '.yc-root .yc-gpx{top:12px;right:12px;padding:9px 14px;font-size:13px}' +
+    '.yc-root .yc-gpx{top:auto;bottom:12px;right:auto;left:12px;padding:9px 14px;font-size:13px}' +
     '.yc-root .yc-stats,.yc-root .yc-stats.run{grid-template-columns:1fr 1fr;row-gap:18px}' +
     '.yc-root .yc-stats div:nth-child(odd){padding-left:0}.yc-root .yc-stats div:nth-child(even){padding-left:16px}' +
     '.yc-root .yc-stats dd{font-size:26px}' +
@@ -187,7 +187,7 @@
       meMk = new maplibregl.Marker({ element: me }).setLngLat(co[0]).addTo(map); marks.push(meMk);
       var b = co.reduce(function (b, x) { return b.extend(x); }, new maplibregl.LngLatBounds(co[0], co[0]));
       var mob = root.clientWidth < 600;
-      map.fitBounds(b, { padding: mob ? 36 : 60, duration: 0 });
+      map.fitBounds(b, { padding: mob ? { top: 64, bottom: 36, left: 28, right: 28 } : { top: 80, bottom: 50, left: 60, right: 60 }, duration: 0 });
     }
 
     function prof(k) {
