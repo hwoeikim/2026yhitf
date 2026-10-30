@@ -38,3 +38,8 @@
 - course_v3/yc.js + data.js (jsDelivr @ec4f7eb). 위젯: KR main w20260918255cdeb142673(compact, 같은 섹션 탭·개요·제목 위젯은 CSS로 숨김) / KR /course w20261007be06f20be368c / EN main w202609229caaeda57860d / EN /courses w2026092299060d1830e0e
 - 지도 MapLibre 4.7.1 + OpenFreeMap positron 색 재지정. 15KM CP 1개(3.5K) 반영. 5KM 제한 없음·10KM 2:00 표기(변동 가능)
 - 롤백: 각 페이지 디자인 히스토리(시계 아이콘)
+
+## 대회 일정 표 (미게시, course_v3/schedule_kr.html @1769fe0) — 10/31 오후 이어서
+- 요일을 날짜와 같은 크기로: "12. 12 토" 한 줄, 요일만 회색 (사용자 제안)
+- 지도 섹션(고도 그래프)과 일정 표 사이 여백 늘리기 (현재 72px → 120~140px)
+- 확정 후 KR /course 위젯 w20261007fd7bc0256bda9 교체 게시, EN /courses 추가 여부 확인
