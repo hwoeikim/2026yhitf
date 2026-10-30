@@ -33,3 +33,8 @@
 - 15KM 4시간·컷오프 없음 / 28KM 7:30·CP2 4:30 → 10/31 오후 톡방 확인 예정
 - CP: GPX 기준 (15K 1개 3.5K / 28K 3개 4.8·15·24K)
 - 코스 개편 시안: course_v3/mock3.html (민트 지도·오렌지 코스·회색 망점 + 오렌지 능선)
+
+## 대회코스 v3 배포 (10/31 새벽)
+- course_v3/yc.js + data.js (jsDelivr @ec4f7eb). 위젯: KR main w20260918255cdeb142673(compact, 같은 섹션 탭·개요·제목 위젯은 CSS로 숨김) / KR /course w20261007be06f20be368c / EN main w202609229caaeda57860d / EN /courses w2026092299060d1830e0e
+- 지도 MapLibre 4.7.1 + OpenFreeMap positron 색 재지정. 15KM CP 1개(3.5K) 반영. 5KM 제한 없음·10KM 2:00 표기(변동 가능)
+- 롤백: 각 페이지 디자인 히스토리(시계 아이콘)
