@@ -1,0 +1,104 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--blue:#002ACF;--orange:#FF6D07;--ink:#141518;--mute:#8a8f99;--line:#e6e8ec}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:Pretendard,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.02em}
+.yc{max-width:1200px;margin:0 auto;padding:72px 24px 80px}
+.yc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.yc h2{font-size:56px;font-weight:900;color:var(--blue);letter-spacing:-.05em;line-height:1}
+.yc-tabs{display:flex;gap:6px;background:#f1f3f7;border-radius:999px;padding:5px}
+.yc-tabs button{border:0;background:none;font:inherit;cursor:pointer;padding:12px 22px;border-radius:999px;font-size:17px;font-weight:800;color:#7b808a;letter-spacing:-.02em;white-space:nowrap}
+.yc-tabs button small{font-size:12px;font-weight:700;margin-left:6px;opacity:.75}
+.yc-tabs button.on{background:var(--blue);color:#fff}
+.yc-head{margin-top:44px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.yc-head b{font-size:40px;font-weight:900;letter-spacing:-.045em}
+.yc-head span{font-size:18px;font-weight:700;color:#4a4f58}
+.yc-map{position:relative;margin-top:20px;height:540px;border-radius:20px;overflow:hidden;background:#eef0f3;isolation:isolate}
+.yc-map .leaflet-container{background:#eef0f3;font-family:Pretendard,sans-serif}
+.yc-gpx{position:absolute;right:18px;top:18px;z-index:500;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;padding:11px 18px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.yc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:2px solid var(--ink)}
+.yc-stats div{padding:18px 0 0}
+.yc-stats div+div{padding-left:24px}
+.yc-stats dt{font-size:14px;font-weight:700;color:#4a4f58}
+.yc-stats dd{margin-top:6px;font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1.1}
+.yc-stats dd small{font-size:16px;font-weight:800;margin-left:3px}
+.yc-stats dd em{display:block;font-style:normal;font-size:14px;font-weight:800;color:var(--orange);margin-top:6px;letter-spacing:-.02em}
+.yc-prof{position:relative;margin-top:36px;height:190px}
+.yc-prof svg{width:100%;height:100%;display:block;overflow:visible}
+.yc-tip{position:absolute;top:-6px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0}
+.yc-tip.on{opacity:1}
+.yc-cp{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#fff;border:2.5px solid var(--blue);color:var(--blue);font:800 11px Pretendard,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.yc-sf{display:flex;align-items:center;gap:6px;white-space:nowrap;font:900 12px Pretendard,sans-serif;color:#fff;background:var(--orange);padding:6px 10px 6px 8px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.yc-sf:before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.yc-me{width:16px;height:16px;border-radius:50%;background:var(--orange);border:3px solid #fff;box-shadow:0 0 0 2px var(--orange)}
+.yc-run .yc-prof{display:none}
+@media (max-width:767px){
+.yc{padding:48px 16px 56px}
+.yc h2{font-size:40px}
+.yc-tabs{width:100%;justify-content:space-between}
+.yc-tabs button{padding:11px 0;flex:1;font-size:15px}
+.yc-tabs button small{display:none}
+.yc-head{margin-top:28px;gap:4px 12px}
+.yc-head b{font-size:30px}
+.yc-head span{font-size:15px}
+.yc-map{height:360px;border-radius:14px}
+.yc-gpx{top:12px;right:12px;padding:9px 14px;font-size:13px}
+.yc-stats{grid-template-columns:1fr 1fr;row-gap:18px}
+.yc-stats div:nth-child(3){padding-left:0}
+.yc-stats dd{font-size:26px}
+.yc-prof{height:150px;margin-top:28px}
+}
+</style></head><body>
+<section class="yc" id="yc">
+ <div class="yc-top"><h2>대회코스</h2>
+  <div class="yc-tabs" id="yc-tabs"><button data-k="5">5KM<small>RUN</small></button><button data-k="10">10KM<small>RUN</small></button><button data-k="15">15KM<small>TRAIL</small></button><button data-k="28" class="on">28KM<small>TRAIL</small></button></div></div>
+ <div class="yc-head"><b id="yc-name"></b><span id="yc-sub"></span></div>
+ <div class="yc-map"><div id="yc-map" style="position:absolute;inset:0"></div><a class="yc-gpx" id="yc-gpx" href="#">GPX 다운로드</a></div>
+ <dl class="yc-stats" id="yc-stats"></dl>
+ <div class="yc-prof" id="yc-prof"><svg id="yc-svg"></svg><div class="yc-tip" id="yc-tip"></div></div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+var C={5:{n:'5KM RUNNING',s:'12.12 토 10:00 · 미사경정공원 조정호수',run:1,lim:'—',cp:[]},10:{n:'10KM RUNNING',s:'12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복',run:1,lim:'—',cp:[]},
+15:{n:'15KM TRAIL RUN',s:'12.12 토 10:00 · 검단산 일대',lim:'4:00',cut:'중도 컷오프 없음',cp:[['CP',3.5]]},
+28:{n:'28KM TRAIL RUN',s:'12.13 일 08:00 · 위례둘레길 · 남한산성 일대',lim:'7:30',cut:'CP2 컷오프 4:30',cp:[['CP1',4.8],['CP2',15],['CP3',24]]}};
+var G=window.__GPX||{};
+function hav(a,b){var R=6371,t=Math.PI/180,dl=(b[0]-a[0])*t,dn=(b[1]-a[1])*t,x=Math.sin(dl/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+var map=L.map('yc-map',{zoomControl:false,scrollWheelZoom:false,attributionControl:true});
+L.control.zoom({position:'bottomright'}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);
+var lay=L.layerGroup().addTo(map),me=null,cur=null;
+function show(k){cur=k;var c=C[k],d=G[k];document.getElementById('yc').classList.toggle('yc-run',!!c.run);
+document.querySelectorAll('#yc-tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.k==k)});
+document.getElementById('yc-name').textContent=c.n;document.getElementById('yc-sub').textContent=c.s;
+lay.clearLayers();if(!d)return;var pts=d.p;
+L.polyline(pts,{color:'#fff',weight:9,opacity:.95,lineJoin:'round'}).addTo(lay);
+L.polyline(pts,{color:'#002ACF',weight:4.5,lineJoin:'round'}).addTo(lay);
+L.marker(pts[0],{icon:L.divIcon({className:'',html:'<div class="yc-sf">START · FINISH</div>',iconSize:null,iconAnchor:[8,14]})}).addTo(lay);
+c.cp.forEach(function(p){var i=at(d,p[1]);L.marker(d.p[i],{icon:L.divIcon({className:'',html:'<div class="yc-cp">'+(p[0]=='CP'?'CP':p[0].slice(2))+'</div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(lay)});
+me=L.marker(pts[0],{icon:L.divIcon({className:'',html:'<div class="yc-me"></div>',iconSize:[16,16],iconAnchor:[8,8]}),opacity:0}).addTo(lay);
+map.fitBounds(L.latLngBounds(pts),{padding:[50,50]});
+var km=d.km.toFixed(2).replace(/0$/,'');
+var st='<div><dt>거리</dt><dd>'+km+'<small>km</small></dd></div>';
+if(c.run){st+='<div><dt>코스</dt><dd>평지<small>로드</small></dd></div><div><dt>제한시간</dt><dd>추후 안내</dd></div><div><dt>CP</dt><dd>—</dd></div>';}
+else{st+='<div><dt>누적 상승</dt><dd>+'+d.up.toLocaleString()+'<small>m</small></dd></div><div><dt>제한시간</dt><dd>'+c.lim+'<em>'+c.cut+'</em></dd></div><div><dt>CP</dt><dd>'+c.cp.length+'<small>개소</small></dd></div>';}
+document.getElementById('yc-stats').innerHTML=st;
+document.getElementById('yc-gpx').textContent=c.n.split(' ')[0]+' GPX 다운로드';
+if(!c.run)prof(d,c);}
+function at(d,km){var i=0;while(i<d.d.length-1&&d.d[i]<km)i++;return i;}
+function prof(d,c){var svg=document.getElementById('yc-svg'),W=svg.clientWidth,H=svg.clientHeight,L0=40,T=26,B=24,w=W-L0,h=H-T-B,mx=Math.ceil(Math.max.apply(0,d.e)/200)*200;
+var X=function(k){return L0+k/d.km*w},Y=function(m){return T+(1-m/mx)*h};
+var g='';for(var m=0;m<=mx;m+=200){g+='<line x1="'+L0+'" x2="'+W+'" y1="'+Y(m)+'" y2="'+Y(m)+'" stroke="'+(m?'#eceef2':'#141518')+'"/>';g+='<text x="'+(L0-8)+'" y="'+(Y(m)+4)+'" text-anchor="end" font-size="11" font-weight="700" fill="#8a8f99">'+m+'</text>';}
+var s=Math.max(1,Math.floor(d.e.length/600)),path='M'+X(0)+','+Y(0);for(var i=0;i<d.e.length;i+=s)path+='L'+X(d.d[i]).toFixed(1)+','+Y(d.e[i]).toFixed(1);path+='L'+X(d.km)+','+Y(0)+'Z';
+g+='<path d="'+path+'" fill="#002ACF"/>';
+for(var k=0;k<=d.km;k+=5)g+='<text x="'+X(k)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#8a8f99">'+k+(k==0?'':'')+'</text>';
+g+='<text x="'+W+'" y="'+(H-6)+'" text-anchor="end" font-size="11" font-weight="800" fill="#141518">'+d.km.toFixed(1)+' km</text>';
+c.cp.forEach(function(p){var x=X(p[1]),cut=c.cut&&c.cut.indexOf(p[0])==0;g+='<line x1="'+x+'" x2="'+x+'" y1="'+(T-8)+'" y2="'+Y(0)+'" stroke="'+(cut?'#FF6D07':'#141518')+'" stroke-dasharray="3 3" stroke-width="1.2"/><rect x="'+(x-(cut?44:17))+'" y="0" width="'+(cut?88:34)+'" height="20" rx="10" fill="'+(cut?'#FF6D07':'#141518')+'"/><text x="'+x+'" y="14" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">'+(cut?p[0]+' · 4:30':p[0])+'</text>';});
+g+='<line id="yc-hl" y1="'+T+'" y2="'+Y(0)+'" stroke="#FF6D07" stroke-width="1.5" opacity="0"/>';
+svg.innerHTML=g;svg.onmousemove=function(ev){var r=svg.getBoundingClientRect(),x=ev.clientX-r.left;if(x<L0)return;var km=(x-L0)/w*d.km,i=at(d,km);var hl=document.getElementById('yc-hl');hl.setAttribute('x1',x);hl.setAttribute('x2',x);hl.setAttribute('opacity',1);var tp=document.getElementById('yc-tip');tp.textContent=km.toFixed(1)+' km · '+Math.round(d.e[i])+' m';tp.style.left=x+'px';tp.classList.add('on');me.setLatLng(d.p[i]);me.setOpacity(1);};
+svg.onmouseleave=function(){document.getElementById('yc-tip').classList.remove('on');document.getElementById('yc-hl').setAttribute('opacity',0);me.setOpacity(0);};}
+document.querySelectorAll('#yc-tabs button').forEach(function(b){b.onclick=function(){show(b.dataset.k)}});
+show(28);
+</script></body></html>
