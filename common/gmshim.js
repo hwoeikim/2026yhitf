@@ -29,6 +29,7 @@
     var st = document.createElement('style');
     st.id = 'yhGmShimCss';
     st.textContent =
+      '.yh-lf{isolation:isolate;z-index:0}' +
       '.yh-lf .leaflet-tile-pane{filter:saturate(.55) contrast(.96) brightness(1.03)}' +
       '.yh-lf img.leaflet-tile{max-width:none!important;max-height:none!important;transition:none!important}' +
       '.yh-lf svg{max-width:none}' +
