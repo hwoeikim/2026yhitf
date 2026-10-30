@@ -11,3 +11,15 @@ html body #yhitf-coupon{transition:bottom .4s cubic-bezier(.22,1,.36,1)!importan
 html body.yq-mini-on #yhitf-coupon{bottom:70px!important}
 </style>
 <script>(function(){try{var run=function(){var f=document.getElementById('yhitf-quick');if(!f)return;var u=function(){var m=(window.scrollY||0)>window.innerHeight*0.8;f.classList.toggle('yq-mini',m);document.body.classList.toggle('yq-mini-on',m)};window.addEventListener('scroll',u,{passive:true});u()};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run()}catch(e){}})();</script>
+<style>
+/* 하단 사업자 정보 푸터 (2026-10-30) */
+html body #doz_footer_wrap{background:#002ACF!important}
+html body #doz_footer_wrap .footer-section{padding:0 0 110px!important;background:none!important}
+html body #doz_footer_wrap .inside{max-width:none!important;padding:0 100px!important;margin:0!important}
+html body #doz_footer_wrap .footer-company-info p{margin:0!important;line-height:1.85!important}
+html body #doz_footer_wrap .footer-company-info__item{color:rgba(255,255,255,.55)!important;font-size:12.5px!important;margin:0 18px 0 0!important;padding:0!important;border:0!important}
+html body #doz_footer_wrap .footer-company-info__item:before,html body #doz_footer_wrap .footer-company-info__item:after{display:none!important}
+html body #doz_footer_wrap .footer-company-info__hosting{display:none!important}
+@media (max-width:767px){html body #doz_footer_wrap .inside{padding:0 24px!important}html body #doz_footer_wrap .footer-company-info__item{display:block!important;margin:0!important}}
+</style>
+<script>(function(){try{var M={'상호명':'Company','대표자':'Representative','사업장주소':'Address','연락처':'Tel','사업자등록번호':'Business Reg. No.','통신판매업신고번호':'Mail-order Sales Reg. No.','대표자 이메일':'Email'};var run=function(){var w=document.getElementById('doz_footer_wrap');if(!w)return;w.querySelectorAll('.footer-company-info__item').forEach(function(s){var t=s.textContent,i=t.indexOf(':');if(i<0)return;var k=t.slice(0,i).trim();if(M[k])s.textContent=M[k]+t.slice(i)})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run()}catch(e){}})();</script>
