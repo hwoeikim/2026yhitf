@@ -16,6 +16,7 @@ body{background:#fff;font-family:Pretendard,sans-serif;color:var(--ink);-webkit-
 .yc-head b{font-size:40px;font-weight:900;letter-spacing:-.045em}
 .yc-head span{font-size:18px;font-weight:700;color:#4a4f58}
 .yc-map{position:relative;margin-top:20px;height:540px;border-radius:20px;overflow:hidden;background:#eef0f3;isolation:isolate}
+.yc-map .leaflet-tile-pane{filter:grayscale(1) contrast(.88) brightness(1.08)}
 .yc-map .leaflet-container{background:#eef0f3;font-family:Pretendard,sans-serif}
 .yc-gpx{position:absolute;right:18px;top:18px;z-index:500;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;padding:11px 18px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
 .yc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:2px solid var(--ink)}
@@ -68,7 +69,7 @@ var G=window.__GPX||{};
 function hav(a,b){var R=6371,t=Math.PI/180,dl=(b[0]-a[0])*t,dn=(b[1]-a[1])*t,x=Math.sin(dl/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
 var map=L.map('yc-map',{zoomControl:false,scrollWheelZoom:false,attributionControl:true});
 L.control.zoom({position:'bottomright'}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
 var lay=L.layerGroup().addTo(map),me=null,cur=null;
 function show(k){cur=k;var c=C[k],d=G[k];document.getElementById('yc').classList.toggle('yc-run',!!c.run);
 document.querySelectorAll('#yc-tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.k==k)});
@@ -79,7 +80,7 @@ L.polyline(pts,{color:'#002ACF',weight:4.5,lineJoin:'round'}).addTo(lay);
 L.marker(pts[0],{icon:L.divIcon({className:'',html:'<div class="yc-sf">START · FINISH</div>',iconSize:null,iconAnchor:[8,14]})}).addTo(lay);
 c.cp.forEach(function(p){var i=at(d,p[1]);L.marker(d.p[i],{icon:L.divIcon({className:'',html:'<div class="yc-cp">'+(p[0]=='CP'?'CP':p[0].slice(2))+'</div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(lay)});
 me=L.marker(pts[0],{icon:L.divIcon({className:'',html:'<div class="yc-me"></div>',iconSize:[16,16],iconAnchor:[8,8]}),opacity:0}).addTo(lay);
-map.fitBounds(L.latLngBounds(pts),{padding:[50,50]});
+map.fitBounds(L.latLngBounds(pts),{padding:[40,40]});
 var km=d.km.toFixed(2).replace(/0$/,'');
 var st='<div><dt>거리</dt><dd>'+km+'<small>km</small></dd></div>';
 if(c.run){st+='<div><dt>코스</dt><dd>평지<small>로드</small></dd></div><div><dt>제한시간</dt><dd>추후 안내</dd></div><div><dt>CP</dt><dd>—</dd></div>';}
