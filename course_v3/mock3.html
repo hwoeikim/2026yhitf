@@ -1,0 +1,140 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--blue:#002ACF;--orange:#FF6D07;--ink:#141518}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:Pretendard,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.02em}
+.yc{max-width:1200px;margin:0 auto;padding:72px 24px 120px}
+.yc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.yc h2{font-size:56px;font-weight:900;color:var(--blue);letter-spacing:-.05em;line-height:1}
+.yc-tabs{display:flex;gap:6px;background:#f1f3f7;border-radius:999px;padding:5px}
+.yc-tabs button{border:0;background:none;font:inherit;cursor:pointer;padding:12px 22px;border-radius:999px;font-size:17px;font-weight:800;color:#7b808a;white-space:nowrap}
+.yc-tabs button small{font-size:12px;font-weight:700;margin-left:6px;opacity:.75}
+.yc-tabs button.on{background:var(--blue);color:#fff}
+.yc-head{margin-top:44px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.yc-head b{font-size:40px;font-weight:900;letter-spacing:-.045em}
+.yc-head span{font-size:18px;font-weight:700;color:#4a4f58}
+.yc-map{position:relative;margin-top:20px;height:540px;border-radius:20px;overflow:hidden;background:#f4f6f8}
+#yc-map{position:absolute;inset:0}
+.yc-gpx{position:absolute;right:18px;top:18px;z-index:5;background:#fff;color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;padding:11px 18px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.yc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:2px solid var(--ink)}
+.yc-stats div{padding:18px 0 0}.yc-stats div+div{padding-left:24px}
+.yc-stats dt{font-size:14px;font-weight:700;color:#4a4f58}
+.yc-stats dd{margin-top:6px;font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1.1}
+.yc-stats dd small{font-size:16px;font-weight:800;margin-left:3px}
+.yc-stats dd em{display:block;font-style:normal;font-size:14px;font-weight:800;color:var(--orange);margin-top:6px}
+.yc-prof{position:relative;margin-top:40px;height:230px}
+.yc-prof svg{width:100%;height:100%;display:block;overflow:visible}
+.yc-tip{position:absolute;top:-6px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0}
+.yc-tip.on{opacity:1}
+.yc-cp{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#fff;border:2.5px solid var(--rc);color:var(--rc);font:800 11px Pretendard,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.yc-sf{display:flex;align-items:center;gap:6px;white-space:nowrap;font:900 12px Pretendard,sans-serif;color:#fff;background:var(--sc);padding:6px 10px 6px 8px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.yc-sf:before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.yc-me{width:16px;height:16px;border-radius:50%;background:#FF6D07;border:3px solid #fff;box-shadow:0 0 0 2px #FF6D07}
+.yc-run .yc-prof{display:none}
+.maplibregl-ctrl-attrib{font-size:10px}
+#vbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:6px;background:#fff;padding:6px;border-radius:999px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+#vbar button{border:0;border-radius:999px;padding:10px 16px;font:800 14px Pretendard;cursor:pointer;background:#fff;color:#141518}
+#vbar button.on{background:#141518;color:#fff}
+</style></head><body>
+<section class="yc" id="yc">
+ <div class="yc-top"><h2>대회코스</h2>
+  <div class="yc-tabs" id="yc-tabs"><button data-k="5">5KM<small>RUN</small></button><button data-k="10">10KM<small>RUN</small></button><button data-k="15">15KM<small>TRAIL</small></button><button data-k="28" class="on">28KM<small>TRAIL</small></button></div></div>
+ <div class="yc-head"><b id="yc-name"></b><span id="yc-sub"></span></div>
+ <div class="yc-map"><div id="yc-map"></div><a class="yc-gpx" id="yc-gpx" href="#">GPX 다운로드</a></div>
+ <dl class="yc-stats" id="yc-stats"></dl>
+ <div class="yc-prof" id="yc-prof"><svg id="yc-svg"></svg><div class="yc-tip" id="yc-tip"></div></div>
+</section>
+<div id="vbar"></div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+var C={5:{n:'5KM RUNNING',s:'12.12 토 10:00 · 미사경정공원 조정호수',run:1,cp:[]},10:{n:'10KM RUNNING',s:'12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복',run:1,cp:[]},
+15:{n:'15KM TRAIL RUN',s:'12.12 토 10:00 · 검단산 일대',lim:'4:00',cut:'중도 컷오프 없음',cp:[['CP',3.5]]},
+28:{n:'28KM TRAIL RUN',s:'12.13 일 08:00 · 위례둘레길 · 남한산성 일대',lim:'7:30',cut:'CP2 컷오프 4:30',cp:[['CP1',4.8],['CP2',15],['CP3',24]]}};
+var G=window.__GPX||{};
+var PAL={ /* map palettes */
+ mint:{bg:'#F5F7F6',green:'#D9F0E1',wood:'#CDEAD7',water:'#CFE3F4',bld:'#E9ECEF',road:'#FFFFFF',case:'#E2E5E9',label:'#7A808A',labelHalo:'#FFFFFF'},
+ snow:{bg:'#F7F8FA',green:'#E8F1EC',wood:'#E1ECE5',water:'#DCE7F2',bld:'#ECEEF1',road:'#FFFFFF',case:'#E4E7EB',label:'#8A8F99',labelHalo:'#FFFFFF'},
+ sand:{bg:'#F6F4EF',green:'#E2EDDC',wood:'#D7E6CF',water:'#D3E4EE',bld:'#ECE8E1',road:'#FFFFFF',case:'#E6E1D8',label:'#857F75',labelHalo:'#FFFFFF'}};
+var ROUTE={blue:{rc:'#002ACF',sc:'#FF6D07'},orange:{rc:'#FF6D07',sc:'#002ACF'}};
+var state={pal:'mint',route:'orange'};var HT={step:3.2,depth:70,R:1.25,col:'#9AA1AC',line:'#5C636E',lw:1.4};
+var map,base,cur=28,meMk=null,mk=[];
+function loadGPX(){return fetch('/notice/?bmode=view&idx=175007884').then(function(r){return r.text()}).then(function(nh){var nd=new DOMParser().parseFromString(nh,'text/html');var as=[].slice.call(nd.querySelectorAll('a')).filter(function(a){return /\.gpx/.test(a.textContent)});var Gx={};
+return Promise.all(as.map(function(a){var t=a.textContent.trim(),k=/^5KM/.test(t)?5:/^10KM/.test(t)?10:/^15KM/.test(t)?15:/^28KM/.test(t)?28:0;if(!k)return;return fetch(a.getAttribute('href')).then(function(r){return r.text()}).then(function(x){var d=new DOMParser().parseFromString(x,'text/xml'),tp=d.querySelectorAll('trkpt'),st=Math.max(1,Math.floor(tp.length/1500)),p=[],e=[],dd=[],cum=0,prev=null,R=6371,tt=Math.PI/180;
+for(var i=0;i<tp.length;i++){var q=[+tp[i].getAttribute('lat'),+tp[i].getAttribute('lon'),+((tp[i].querySelector('ele')||{}).textContent||0)];if(prev){var dl=(q[0]-prev[0])*tt,dn=(q[1]-prev[1])*tt,hh=Math.pow(Math.sin(dl/2),2)+Math.cos(prev[0]*tt)*Math.cos(q[0]*tt)*Math.pow(Math.sin(dn/2),2);cum+=2*R*Math.asin(Math.sqrt(hh));}prev=q;if(i%st===0||i===tp.length-1){p.push([q[0],q[1]]);e.push(q[2]);dd.push(cum);}}
+Gx[k]={p:p,e:e,d:dd,km:cum,up:k==15?829:k==28?1208:0};});})).then(function(){window.__GPX=Gx;});});}
+function classify(l){var s=l['source-layer']||'',id=l.id;
+ if(l.type==='background')return'bg';
+ if(s==='water'||/water/.test(id))return l.type==='fill'?'water':(l.type==='line'?'waterline':null);
+ if(s==='park'||/park/.test(id))return'green';
+ if(s==='landcover'&&/wood|forest/.test(id))return'wood';
+ if(s==='landcover')return'green';
+ if(s==='landuse')return'landuse';
+ if(s==='building')return'bld';
+ if(s==='transportation'&&l.type==='line')return /casing/.test(id)?'case':'road';
+ if(l.type==='symbol')return'label';return null;}
+function applyPal(){var P=PAL[state.pal];base.layers.forEach(function(l){var c=classify(l);try{
+ if(c==='bg')map.setPaintProperty(l.id,'background-color',P.bg);
+ else if(c==='water')map.setPaintProperty(l.id,'fill-color',P.water);
+ else if(c==='waterline')map.setPaintProperty(l.id,'line-color',P.water);
+ else if(c==='green'){map.setPaintProperty(l.id,'fill-color',P.green);map.setPaintProperty(l.id,'fill-opacity',1);}
+ else if(c==='wood'){map.setPaintProperty(l.id,'fill-color',P.wood);map.setPaintProperty(l.id,'fill-opacity',1);}
+ else if(c==='landuse'){map.setPaintProperty(l.id,'fill-color',P.bg);}
+ else if(c==='bld'){if(l.type==='fill'){map.setPaintProperty(l.id,'fill-color',P.bld);map.setPaintProperty(l.id,'fill-outline-color',P.case);}}
+ else if(c==='road')map.setPaintProperty(l.id,'line-color',P.road);
+ else if(c==='case')map.setPaintProperty(l.id,'line-color',P.case);
+ else if(c==='label'){map.setPaintProperty(l.id,'text-color',P.label);map.setPaintProperty(l.id,'text-halo-color',P.labelHalo);}
+ }catch(e){}});}
+function applyRoute(){var R=ROUTE[state.route];document.documentElement.style.setProperty('--rc',R.rc);document.documentElement.style.setProperty('--sc',R.sc);if(map.getLayer('rt'))map.setPaintProperty('rt','line-color',R.rc);if(G[cur]&&!C[cur].run)prof(G[cur],C[cur]);}
+function at(d,km){var i=0;while(i<d.d.length-1&&d.d[i]<km)i++;return i;}
+function el(h,cls){var e=document.createElement('div');e.innerHTML=h;return e.firstChild;}
+function show(k){cur=k;var c=C[k],d=G[k];document.getElementById('yc').classList.toggle('yc-run',!!c.run);
+ document.querySelectorAll('#yc-tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.k==k)});
+ document.getElementById('yc-name').textContent=c.n;document.getElementById('yc-sub').textContent=c.s;
+ mk.forEach(function(m){m.remove()});mk=[];if(!d)return;
+ var coords=d.p.map(function(p){return[p[1],p[0]]});
+ map.getSource('route').setData({type:'Feature',geometry:{type:'LineString',coordinates:coords}});
+ mk.push(new maplibregl.Marker({element:el('<div class="yc-sf">START · FINISH</div>'),anchor:'left',offset:[-8,0]}).setLngLat(coords[0]).addTo(map));
+ c.cp.forEach(function(p){mk.push(new maplibregl.Marker({element:el('<div class="yc-cp">'+(p[0]=='CP'?'CP':p[0].slice(2))+'</div>')}).setLngLat(coords[at(d,p[1])]).addTo(map))});
+ var me=el('<div class="yc-me"></div>');me.style.opacity=0;meMk=new maplibregl.Marker({element:me}).setLngLat(coords[0]).addTo(map);mk.push(meMk);
+ var b=coords.reduce(function(b,c){return b.extend(c)},new maplibregl.LngLatBounds(coords[0],coords[0]));map.fitBounds(b,{padding:60,duration:0});
+ var km=d.km.toFixed(2).replace(/0$/,''),st='<div><dt>거리</dt><dd>'+km+'<small>km</small></dd></div>';
+ if(c.run)st+='<div><dt>코스</dt><dd>평지<small>로드</small></dd></div><div><dt>제한시간</dt><dd>추후 안내</dd></div><div><dt>CP</dt><dd>—</dd></div>';
+ else st+='<div><dt>누적 상승</dt><dd>+'+d.up.toLocaleString()+'<small>m</small></dd></div><div><dt>제한시간</dt><dd>'+c.lim+'<em>'+c.cut+'</em></dd></div><div><dt>CP</dt><dd>'+c.cp.length+'<small>개소</small></dd></div>';
+ document.getElementById('yc-stats').innerHTML=st;document.getElementById('yc-gpx').textContent=c.n.split(' ')[0]+' GPX 다운로드';
+ if(!c.run)prof(d,c);}
+function prof(d,c){var svg=document.getElementById('yc-svg'),W=svg.clientWidth,H=svg.clientHeight,T=34,B=44,w=W,h=H-T-B,base=T+h;
+var n=d.e.length,sm=[],k=Math.max(2,Math.round(n/180));for(var i=0;i<n;i++){var a=0,c2=0;for(var j=Math.max(0,i-k);j<=Math.min(n-1,i+k);j++){a+=d.e[j];c2++;}sm.push(a/c2);}
+var mx=Math.max.apply(0,sm)*1.08;var X=function(q){return q/d.km*w},Y=function(m){return T+(1-m/mx)*h};
+var pts=[],s=Math.max(1,Math.floor(n/260));for(var i=0;i<n;i+=s)pts.push([X(d.d[i]),Y(sm[i])]);pts.push([X(d.km),Y(sm[n-1])]);
+var ln='M'+pts[0][0].toFixed(1)+','+pts[0][1].toFixed(1);for(var i=1;i<pts.length;i++){var p0=pts[i-1],p1=pts[i],m=(p0[0]+p1[0])/2;ln+='C'+m.toFixed(1)+','+p0[1].toFixed(1)+' '+m.toFixed(1)+','+p1[1].toFixed(1)+' '+p1[0].toFixed(1)+','+p1[1].toFixed(1);}
+var g='<defs><clipPath id="htc"><path d="'+ln+'L'+W+','+base+'L0,'+base+'Z"/></clipPath></defs><g id="ht" clip-path="url(#htc)" fill="'+HT.col+'"></g>';
+g+='<line x1="0" x2="'+W+'" y1="'+base+'" y2="'+base+'" stroke="#141518" stroke-width="1"/>';
+g+='<path id="pl" d="'+ln+'" fill="none" stroke="'+HT.line+'" stroke-width="'+HT.lw+'" stroke-linejoin="round" stroke-linecap="round"/>';
+var im=0;for(var i=1;i<n;i++)if(sm[i]>sm[im])im=i;var px=X(d.d[im]),py=Y(sm[im]);
+g+='<g id="pk"><circle cx="'+px+'" cy="'+py+'" r="3.5" fill="#141518"/><text x="'+px+'" y="'+(py-11)+'" text-anchor="middle" font-size="13" font-weight="800" fill="#141518">'+Math.round(Math.max.apply(0,d.e))+'m</text></g>';
+for(var q=5;q<d.km-1;q+=5)g+='<line x1="'+X(q)+'" x2="'+X(q)+'" y1="'+base+'" y2="'+(base+5)+'" stroke="#141518"/><text x="'+X(q)+'" y="'+(base+20)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#8a8f99">'+q+'</text>';
+g+='<text x="0" y="'+(base+20)+'" font-size="12" font-weight="800" fill="#141518">START</text><text x="'+W+'" y="'+(base+20)+'" text-anchor="end" font-size="12" font-weight="800" fill="#141518">'+d.km.toFixed(1)+'km</text>';
+c.cp.forEach(function(q){var i=at(d,q[1]),x=X(q[1]),y=Y(sm[i]),cut=c.cut&&c.cut.indexOf(q[0])==0,col=cut?'#FF6D07':'#141518';
+ g+='<line x1="'+x+'" x2="'+x+'" y1="'+y+'" y2="'+base+'" stroke="'+col+'" stroke-width="1" opacity=".45"/><circle cx="'+x+'" cy="'+y+'" r="5" fill="#fff" stroke="'+col+'" stroke-width="2"/>';
+ g+='<text x="'+x+'" y="'+(base+38)+'" text-anchor="middle" font-size="12" font-weight="800" fill="'+col+'">'+q[0]+(cut?' · 컷오프 4:30':'')+'</text>';});
+g+='<line id="yc-hl" y1="'+T+'" y2="'+base+'" stroke="#141518" stroke-width="1" opacity="0"/><circle id="yc-hd" r="5" fill="#FF6D07" stroke="#fff" stroke-width="2.5" opacity="0"/>';svg.innerHTML=g;
+var line=document.getElementById('pl'),tot=line.getTotalLength(),cols={};for(var t=0;t<=tot;t+=1.5){var p=line.getPointAtLength(t);cols[Math.round(p.x)]=p.y;}
+var st=HT.step,hh='',row=0;for(var y=base-st*0.5;y>T-10;y-=st,row++){var off=(row%2)*st/2;for(var x=off+st/2;x<W;x+=st){var cy=cols[Math.round(x)];for(var kk=1;kk<4&&cy==null;kk++)cy=cols[Math.round(x)+kk]||cols[Math.round(x)-kk];if(cy==null||y<cy-HT.R)continue;var r=HT.R*(1-Math.max(0,y-cy)/HT.depth);if(r<.3)continue;hh+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(2)+'"/>';}}
+document.getElementById('ht').innerHTML=hh;
+svg.onmousemove=function(ev){var r=svg.getBoundingClientRect(),x=ev.clientX-r.left,km=Math.max(0,Math.min(d.km,x/w*d.km)),i=at(d,km),hl=document.getElementById('yc-hl'),hd=document.getElementById('yc-hd');hl.setAttribute('x1',x);hl.setAttribute('x2',x);hl.setAttribute('opacity',.35);hd.setAttribute('cx',x);hd.setAttribute('cy',Y(sm[i]));hd.setAttribute('opacity',1);document.getElementById('pk').style.opacity=0;var tp=document.getElementById('yc-tip');tp.textContent=km.toFixed(1)+' km · '+Math.round(d.e[i])+' m';tp.style.left=x+'px';tp.classList.add('on');meMk.setLngLat([d.p[i][1],d.p[i][0]]);meMk.getElement().style.opacity=1;};
+svg.onmouseleave=function(){document.getElementById('yc-tip').classList.remove('on');document.getElementById('yc-hl').setAttribute('opacity',0);document.getElementById('yc-hd').setAttribute('opacity',0);document.getElementById('pk').style.opacity=1;meMk.getElement().style.opacity=0;};}
+function bar(){var V=[['mint','민트','pal'],['snow','스노우','pal'],['sand','샌드','pal'],['blue','파랑 코스','route'],['orange','오렌지 코스','route']],h='';
+ V.forEach(function(v){h+='<button data-v="'+v[0]+'" data-t="'+v[2]+'" class="'+(state[v[2]]==v[0]?'on':'')+'">'+v[1]+'</button>';});
+ var b=document.getElementById('vbar');b.innerHTML=h;b.querySelectorAll('button').forEach(function(x){x.onclick=function(){state[x.dataset.t]=x.dataset.v;bar();if(x.dataset.t=='pal')applyPal();else applyRoute();}});}
+(window.__GPX?Promise.resolve():loadGPX()).then(function(){G=window.__GPX;return fetch('https://tiles.openfreemap.org/styles/positron')}).then(function(r){return r.json()}).then(function(st){base=st;
+ map=new maplibregl.Map({container:'yc-map',style:st,center:[127.2,37.52],zoom:11,attributionControl:{compact:true},cooperativeGestures:false,scrollZoom:false});
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
+ map.on('load',function(){applyPal();map.getStyle().layers.forEach(function(l){if(l.type==='symbol'&&l.layout&&l.layout['text-field']&&!/shield|ref/.test(l.id))map.setLayoutProperty(l.id,'text-field',['coalesce',['get','name:'+(window.YC_LANG||'ko')],['get','name']]);});
+  map.addSource('route',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:[]}}});
+  map.addLayer({id:'rt-halo',type:'line',source:'route',paint:{'line-color':'#fff','line-width':9},layout:{'line-join':'round','line-cap':'round'}});
+  map.addLayer({id:'rt',type:'line',source:'route',paint:{'line-color':'#FF6D07','line-width':4.5},layout:{'line-join':'round','line-cap':'round'}});
+  show(28);applyRoute();
+  document.querySelectorAll('#yc-tabs button').forEach(function(b){b.onclick=function(){show(+b.dataset.k)}});});});
+</script></body></html>
