@@ -55,3 +55,4 @@
   - 제19조 보험 조항 교체 + 나./B. 보험 안내: 공지·약관·상품상세·신청서·규정 모달 (KR/EN)
   - 공지 신규: 스포츠활동안심공제 KR idx=175344676 / EN idx=175344686
 - 2026-10-31 PM: AMINOREGEN (아미노리젠) — logo (two-line ®, ratio 2.5) after Samtree/last in yh-sp, yh-roll, yh-inv KR+EN; kit 09 에너지젤 스퍼트 + 10 오리지널 (15K·28K trail only), jacket → 11; line art l_gel.svg, l_stick.svg; photo e_amino.webp; lookbook caption fix (number no-shrink, name wraps). assets d9d7313, widget 546e13d — KR/EN main + /rewards published. Note: EN name map typo broke EN main logo sections ~25 min, fixed.
+- 2026-10-31 18:xx: lookbook 3rd row (09–10 AMINOREGEN, 11 finisher jacket e_jkfit.webp) with orange '15KM · 28KM만' tags; assets 0bc30f2, widget b02a616 — KR/EN main + /rewards. Sponsor order unified on /invited KR+EN (KEEN, 진안홍삼, 네이처밸리, 샘트리, 아미노리젠). KR /course schedule mobile top spacing 72px.
