@@ -1,0 +1,61 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:Pretendard,sans-serif;color:#141518;-webkit-font-smoothing:antialiased;letter-spacing:-.02em}
+.w{max-width:1200px;margin:0 auto;padding:40px 24px 120px}
+.cap{font-size:15px;font-weight:800;margin:56px 0 6px}
+.cap span{font-weight:600;color:#7a808a;margin-left:8px}
+.pf{position:relative;height:300px}
+.pf canvas,.pf svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.tabs{display:flex;gap:8px}
+.tabs button{border:0;border-radius:999px;padding:10px 18px;font:800 15px Pretendard;background:#f1f3f7;color:#7b808a;cursor:pointer}
+.tabs button.on{background:#002ACF;color:#fff}
+</style></head><body><div class="w">
+<div class="tabs" id="tabs"><button data-k="15">15KM</button><button data-k="28" class="on">28KM</button></div>
+<div id="out"></div></div>
+<script>
+var O='#FF6D07',INK='#141518',OR=[255,109,7];
+var CPL={15:[['CP',3.5]],28:[['CP1',4.8],['CP2',15],['CP3',24]]},CUT={28:['CP2','4:30']};
+var LV=[1,0.8,0.62,0.46,0.32,0.2,0.1];
+var V=[['F','등고선 + 일반 그라데이션','각 선에서 시작해 다음 선까지 부드럽게 옅어짐'],['G','등고선 + 노이즈 그라데이션','같은 구조에 필름 그레인처럼 거친 입자로 옅어짐']];
+function smooth(e,k){var n=e.length,o=[];for(var i=0;i<n;i++){var a=0,c=0;for(var j=Math.max(0,i-k);j<=Math.min(n-1,i+k);j++){a+=e[j];c++;}o.push(a/c);}return o;}
+function resample(a,m){var o=[];for(var i=0;i<m;i++){var f=i/(m-1)*(a.length-1),j=Math.floor(f),t=f-j;o.push(j>=a.length-1?a[a.length-1]:a[j]*(1-t)+a[j+1]*t);}return o;}
+function cr(pts){var s='M'+pts[0][0].toFixed(1)+','+pts[0][1].toFixed(1);for(var i=0;i<pts.length-1;i++){var p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];var c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];s+='C'+c1[0].toFixed(1)+','+c1[1].toFixed(1)+' '+c2[0].toFixed(1)+','+c2[1].toFixed(1)+' '+p2[0].toFixed(1)+','+p2[1].toFixed(1);}return s;}
+function draw(box,k,v){
+ var d=YC_DATA[k],W=box.clientWidth,H=box.clientHeight,T=70,B=48,h=H-T-B,base=T+h;
+ var prof=resample(smooth(smooth(smooth(d.e,3),3),3),64),n=prof.length,mx=Math.max.apply(0,prof)*1.04;
+ var X=function(i){return i/(n-1)*W},Y=function(m,f){return base-(m/mx)*h*f};
+ /* 연속 곡선 샘플 (캔버스용): Catmull-Rom 으로 촘촘히 */
+ var cv=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);cv.width=W*dpr;cv.height=H*dpr;box.appendChild(cv);
+ var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');box.appendChild(svg);
+ var tmp=document.createElementNS('http://www.w3.org/2000/svg','path');svg.appendChild(tmp);
+ var colY=function(f){tmp.setAttribute('d',cr(prof.map(function(m,i){return[X(i),Y(m,f)]})));var L=tmp.getTotalLength(),c=new Float32Array(Math.ceil(W)+2).fill(NaN);for(var t=0;t<=L;t+=0.5){var p=tmp.getPointAtLength(t),xi=Math.round(p.x);if(xi>=0&&xi<c.length)c[xi]=p.y;}for(var x=0;x<c.length;x++)if(isNaN(c[x]))c[x]=x?c[x-1]:base;return c;};
+ var lines=LV.map(colY);lines.push(new Float32Array(Math.ceil(W)+2).fill(base));
+ var ctx=cv.getContext('2d'),img=ctx.createImageData(cv.width,cv.height),px=img.data;
+ for(var X0=0;X0<cv.width;X0++){var xi=Math.min(Math.round(X0/dpr),lines[0].length-1);
+  for(var b=0;b<LV.length;b++){var y0=lines[b][xi]*dpr,y1=lines[b+1][xi]*dpr;if(y1-y0<0.5)continue;var A=(b===0?0.30:0.24);
+   for(var Yp=Math.floor(y0);Yp<Math.ceil(y1);Yp++){if(Yp<0||Yp>=cv.height)continue;var t=(Yp-y0)/(y1-y0);if(t<0)continue;var a=A*Math.pow(1-t,1.6);
+    if(v==='G'){var r=Math.random();a=r<a*2.2?Math.min(0.9,a*2.6):a*0.08;}
+    var o=(Yp*cv.width+X0)*4;var ea=px[o+3]/255,na=a+ea*(1-a);px[o]=OR[0];px[o+1]=OR[1];px[o+2]=OR[2];px[o+3]=Math.round(na*255);}}}
+ ctx.putImageData(img,0,0);svg.removeChild(tmp);
+ var g='';
+ LV.slice(1).forEach(function(f,j){g+='<path d="'+cr(prof.map(function(m,i){return[X(i),Y(m,f)]}))+'" fill="none" stroke="'+O+'" stroke-width="1" opacity="'+(0.6-j*0.07).toFixed(2)+'"/>';});
+ g+='<line x1="0" x2="'+W+'" y1="'+base+'" y2="'+base+'" stroke="'+INK+'" stroke-width="1.2"/>';
+ g+='<path d="'+cr(prof.map(function(m,i){return[X(i),Y(m,1)]}))+'" fill="none" stroke="'+O+'" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';
+ var im=0;for(var i=1;i<n;i++)if(prof[i]>prof[im])im=i;var pxx=X(im),py=Y(prof[im],1),tp=Math.round(Math.max.apply(0,d.e)),pk=(im/(n-1)*d.km).toFixed(1);
+ g+='<line x1="'+pxx+'" x2="'+pxx+'" y1="'+(py-8)+'" y2="'+(T-58)+'" stroke="'+INK+'" stroke-width="1.2"/><circle cx="'+pxx+'" cy="'+py+'" r="4.5" fill="'+INK+'"/>';
+ g+='<text x="'+(pxx-10)+'" y="'+(T-28)+'" text-anchor="end" font-size="44" font-weight="900" fill="'+INK+'" letter-spacing="-2">'+tp+'<tspan font-size="20" dx="2">m</tspan></text><text x="'+(pxx-10)+'" y="'+(T-8)+'" text-anchor="end" font-size="13" font-weight="700" fill="#8a8f99">최고점 · '+pk+'km</text>';
+ for(var q=5;q<d.km-1.5;q+=5)g+='<line x1="'+(q/d.km*W)+'" x2="'+(q/d.km*W)+'" y1="'+base+'" y2="'+(base+5)+'" stroke="'+INK+'"/><text x="'+(q/d.km*W)+'" y="'+(base+22)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#8a8f99">'+q+'</text>';
+ g+='<text x="0" y="'+(base+22)+'" font-size="13" font-weight="800" fill="'+INK+'">START</text><text x="'+W+'" y="'+(base+22)+'" text-anchor="end" font-size="13" font-weight="800" fill="'+INK+'">'+d.km.toFixed(1)+'<tspan font-size="11"> km</tspan></text>';
+ var top=colY(1);
+ (CPL[k]||[]).forEach(function(c){var x=c[1]/d.km*W,y=top[Math.round(x)],cut=CUT[k]&&CUT[k][0]===c[0];
+  g+='<line x1="'+x+'" x2="'+x+'" y1="'+y+'" y2="'+base+'" stroke="'+(cut?O:INK)+'" stroke-width="1" stroke-dasharray="3 3" opacity="'+(cut?.9:.5)+'"/><circle cx="'+x+'" cy="'+y+'" r="5.5" fill="#fff" stroke="'+O+'" stroke-width="2.5"/>';
+  if(cut){var lab=c[0]+' · 컷오프 '+CUT[k][1],w=lab.length*9+28;g+='<rect x="'+(x-w/2)+'" y="'+(base+8)+'" width="'+w+'" height="28" rx="14" fill="'+O+'"/><text x="'+x+'" y="'+(base+27)+'" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">'+lab+'</text>';}
+  else{var w=c[0].length*9+22;g+='<rect x="'+(x-w/2)+'" y="'+(y-46)+'" width="'+w+'" height="26" rx="13" fill="#fff" stroke="'+INK+'" stroke-width="1.2"/><text x="'+x+'" y="'+(y-28.5)+'" text-anchor="middle" font-size="12.5" font-weight="800" fill="'+INK+'">'+c[0]+'</text>';}});
+ svg.innerHTML=g;}
+function render(k){var o=document.getElementById('out');o.innerHTML='';V.forEach(function(v){var c=document.createElement('div');c.innerHTML='<div class="cap">'+v[0]+'. '+v[1]+'<span>'+v[2]+'</span></div><div class="pf"></div>';o.appendChild(c);draw(c.querySelector('.pf'),k,v[0]);});
+ document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('on',+b.dataset.k===k)});}
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){render(+b.dataset.k)}});
+render(28);
+</script></body></html>
