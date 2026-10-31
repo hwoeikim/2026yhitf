@@ -13,7 +13,7 @@
   var T = {
     ko: {
       title: '대회코스', dist: '거리', gain: '누적 상승', limit: '제한시간', cp: 'CP', course: '코스', road: '평지', roadU: '로드', ea: '개소',
-      gpx: ' GPX 다운로드', more: '코스 자세히 보기', start: 'START', cutoff: '컷오프',
+      gpx: ' GPX 다운로드', more: '코스 자세히 보기', start: 'START', cutoff: '컷오프', peak: '최고점',
       C: {
         5: { n: '5KM RUNNING', s: '12.12 토 10:00 · 미사경정공원 조정호수 일대', lim: '제한 없음', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: '12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복', lim: '2:00', tab: 'RUN' },
@@ -23,7 +23,7 @@
     },
     en: {
       title: 'Course', dist: 'Distance', gain: 'Elevation gain', limit: 'Time limit', cp: 'CP', course: 'Course', road: 'Flat', roadU: 'road', ea: '',
-      gpx: ' GPX download', more: 'View course details', start: 'START', cutoff: 'cut-off',
+      gpx: ' GPX download', more: 'View course details', start: 'START', cutoff: 'cut-off', peak: 'Highest',
       C: {
         5: { n: '5KM RUNNING', s: 'DEC 12 SAT 10:00 · Misa Regatta Park', lim: 'No limit', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: 'DEC 12 SAT · DEC 13 SUN 10:00 · Misa Regatta Park (out & back)', lim: '2:00', tab: 'RUN' },
@@ -55,9 +55,9 @@
     '.yc-root .yc-stats dd{margin:6px 0 0;font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1.1}' +
     '.yc-root .yc-stats dd small{font-size:16px;font-weight:800;margin-left:3px}' +
     '.yc-root .yc-stats dd em{display:block;font-style:normal;font-size:14px;font-weight:800;color:var(--orange);margin-top:6px;letter-spacing:-.02em}' +
-    '.yc-root .yc-prof{position:relative;margin-top:40px;height:230px}' +
+    '.yc-root .yc-prof{position:relative;margin-top:44px;height:310px}' +
     '.yc-root .yc-prof svg{width:100%;height:100%;display:block;overflow:visible;touch-action:pan-y}' +
-    '.yc-root .yc-tip{position:absolute;top:-6px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s}' +
+    '.yc-root .yc-tip{position:absolute;top:0;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s}' +
     '.yc-root .yc-tip.on{opacity:1}' +
     '.yc-root .yc-more{display:inline-flex;align-items:center;gap:8px;margin-top:32px;padding:14px 26px;border-radius:999px;background:var(--blue);color:#fff!important;text-decoration:none!important;font-weight:800;font-size:16px}' +
     '.yc-root .yc-more b{color:var(--orange)}' +
@@ -80,7 +80,7 @@
     '.yc-root .yc-stats,.yc-root .yc-stats.run{grid-template-columns:1fr 1fr;row-gap:18px}' +
     '.yc-root .yc-stats div:nth-child(odd){padding-left:0}.yc-root .yc-stats div:nth-child(even){padding-left:16px}' +
     '.yc-root .yc-stats dd{font-size:26px}' +
-    '.yc-root .yc-prof{height:190px;margin-top:32px}' +
+    '.yc-root .yc-prof{height:250px;margin-top:32px}' +
     '.yc-root .yc-more{margin-top:24px;width:100%;justify-content:center}' +
     '}';
 
@@ -132,6 +132,9 @@
     return st;
   }
 
+  function smooth(e, k) { var n = e.length, o = []; for (var i = 0; i < n; i++) { var a = 0, c = 0; for (var j = Math.max(0, i - k); j <= Math.min(n - 1, i + k); j++) { a += e[j]; c++; } o.push(a / c); } return o; }
+  function resample(a, m) { var o = []; for (var i = 0; i < m; i++) { var f = i / (m - 1) * (a.length - 1), j = Math.floor(f), t = f - j; o.push(j >= a.length - 1 ? a[a.length - 1] : a[j] * (1 - t) + a[j + 1] * t); } return o; }
+  function cr(p) { var s = 'M' + p[0][0].toFixed(1) + ',' + p[0][1].toFixed(1); for (var i = 0; i < p.length - 1; i++) { var p0 = p[Math.max(0, i - 1)], p1 = p[i], p2 = p[i + 1], p3 = p[Math.min(p.length - 1, i + 2)]; s += 'C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ',' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' + (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ',' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1); } return s; }
   function el(h) { var d = document.createElement('div'); d.innerHTML = h; return d.firstChild; }
   function at(d, km) { var i = 0; while (i < d.d.length - 1 && d.d[i] < km) i++; return i; }
 
@@ -192,54 +195,49 @@
 
     function prof(k) {
       var d = DATA[k], c = tt.C[k], svg = $('.yc-prof svg'); if (!svg) return;
-      var W = svg.clientWidth, H = svg.clientHeight; if (!W) return;
-      var mob = W < 600, Tp = 34, B = 44, h = H - Tp - B, base = Tp + h, n = d.e.length, sm = [], kk = mob ? 3 : 2;
-      for (var i = 0; i < n; i++) { var a = 0, c2 = 0; for (var j = Math.max(0, i - kk); j <= Math.min(n - 1, i + kk); j++) { a += d.e[j]; c2++; } sm.push(a / c2); }
-      var mx = Math.max.apply(0, sm) * 1.1;
-      var X = function (q) { return q / d.km * W; }, Y = function (m) { return Tp + (1 - m / mx) * h; };
-      var kmAt = function (i) { return i / (n - 1) * d.km; };
-      var pts = []; for (var i = 0; i < n; i++) pts.push([X(kmAt(i)), Y(sm[i])]);
-      var ln = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
-      for (var i = 1; i < n; i++) { var p0 = pts[i - 1], p1 = pts[i], m = (p0[0] + p1[0]) / 2; ln += 'C' + m.toFixed(1) + ',' + p0[1].toFixed(1) + ' ' + m.toFixed(1) + ',' + p1[1].toFixed(1) + ' ' + p1[0].toFixed(1) + ',' + p1[1].toFixed(1); }
-      var cid = 'ycc' + k + Math.random().toString(36).slice(2, 6);
-      var g = '<defs><clipPath id="' + cid + '"><path d="' + ln + 'L' + W + ',' + base + 'L0,' + base + 'Z"/></clipPath></defs><g class="ht" clip-path="url(#' + cid + ')" fill="' + HT.col + '"></g>';
-      g += '<line x1="0" x2="' + W + '" y1="' + base + '" y2="' + base + '" stroke="' + INK + '" stroke-width="1"/>';
-      g += '<path class="pl" d="' + ln + '" fill="none" stroke="' + HT.line + '" stroke-width="' + HT.lw + '" stroke-linejoin="round" stroke-linecap="round"/>';
+      var W0 = svg.clientWidth, H = svg.clientHeight; if (!W0) return;
+      var mob = W0 < 600, L = mob ? 34 : 44, W = W0 - L, Tp = mob ? 62 : 74, B = 50, h = H - Tp - B, base = Tp + h;
+      var sm0 = smooth(smooth(d.e, 2), 2), n = mob ? 70 : 110, sm = resample(sm0, n);
+      var topv = Math.max.apply(0, sm), mx = Math.ceil(topv * 1.12 / 100) * 100;
+      var X = function (i) { return L + i / (n - 1) * W; }, Y = function (m) { return base - m / mx * h; };
+      var ln = cr(sm.map(function (m, i) { return [X(i), Y(m)]; })), area = ln + 'L' + (L + W) + ',' + base + 'L' + L + ',' + base + 'Z';
+      var cid = 'ycc' + k + Math.random().toString(36).slice(2, 6), fs = mob ? 11 : 13;
+      var g = '<defs><clipPath id="' + cid + '"><path d="' + area + '"/></clipPath></defs>', gi = '';
+      var gstep = mx > 600 ? 200 : 100;
+      for (var m = gstep; m <= mx; m += gstep) {
+        var yy = Y(m).toFixed(1);
+        g += '<line x1="' + L + '" x2="' + (L + W) + '" y1="' + yy + '" y2="' + yy + '" stroke="#E6E8EC" stroke-width="1"/><text x="' + (L - 8) + '" y="' + (+yy + 4) + '" text-anchor="end" font-size="' + (fs - 1) + '" font-weight="700" fill="#9aa0a8">' + m + '</text>';
+        gi += '<line x1="' + L + '" x2="' + (L + W) + '" y1="' + yy + '" y2="' + yy + '" stroke="' + ORANGE + '" stroke-width="1" opacity=".55"/>';
+      }
+      g += '<text x="' + (L - 8) + '" y="' + (base + 4) + '" text-anchor="end" font-size="' + (fs - 1) + '" font-weight="700" fill="#9aa0a8">0</text>';
+      g += '<path d="' + area + '" fill="' + ORANGE + '" fill-opacity=".07"/><g clip-path="url(#' + cid + ')">' + gi + '</g>';
+      g += '<line x1="' + L + '" x2="' + (L + W) + '" y1="' + base + '" y2="' + base + '" stroke="' + INK + '" stroke-width="1.2"/>';
+      g += '<path d="' + ln + '" fill="none" stroke="' + ORANGE + '" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>';
       var im = 0; for (var i = 1; i < n; i++) if (sm[i] > sm[im]) im = i;
-      var px = X(kmAt(im)), py = Y(sm[im]), top = Math.max.apply(0, d.e);
-      g += '<g class="pk"><circle cx="' + px + '" cy="' + py + '" r="3.5" fill="' + INK + '"/><text x="' + px + '" y="' + (py - 11) + '" text-anchor="middle" font-size="13" font-weight="800" fill="' + INK + '">' + Math.round(top) + 'm</text></g>';
+      var px = X(im), py = Y(sm[im]), top = Math.round(Math.max.apply(0, d.e)), pk = (im / (n - 1) * d.km).toFixed(1);
+      var big = mob ? 30 : 44;
+      g += '<g class="pk"><line x1="' + px + '" x2="' + px + '" y1="' + (py - 8) + '" y2="' + (Tp - big - 14) + '" stroke="' + INK + '" stroke-width="1.2"/><circle cx="' + px + '" cy="' + py + '" r="4.5" fill="' + INK + '"/>' +
+        '<text x="' + (px - 10) + '" y="' + (Tp - 28) + '" text-anchor="end" font-size="' + big + '" font-weight="900" fill="' + INK + '" letter-spacing="-1.5">' + top + '<tspan font-size="' + Math.round(big * .45) + '" dx="2">m</tspan></text>' +
+        '<text x="' + (px - 10) + '" y="' + (Tp - 8) + '" text-anchor="end" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + tt.peak + ' · ' + pk + 'km</text></g>';
       var stp = mob ? 10 : 5;
-      for (var q = stp; q < d.km - 1.5; q += stp) g += '<line x1="' + X(q) + '" x2="' + X(q) + '" y1="' + base + '" y2="' + (base + 5) + '" stroke="' + INK + '"/><text x="' + X(q) + '" y="' + (base + 20) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#8a8f99">' + q + '</text>';
-      g += '<text x="0" y="' + (base + 20) + '" font-size="12" font-weight="800" fill="' + INK + '">' + tt.start + '</text><text x="' + W + '" y="' + (base + 20) + '" text-anchor="end" font-size="12" font-weight="800" fill="' + INK + '">' + d.km.toFixed(1) + 'km</text>';
+      for (var q = stp; q < d.km - 1.5; q += stp) { var xq = L + q / d.km * W; g += '<line x1="' + xq + '" x2="' + xq + '" y1="' + base + '" y2="' + (base + 5) + '" stroke="' + INK + '"/><text x="' + xq + '" y="' + (base + 22) + '" text-anchor="middle" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + q + '</text>'; }
+      g += '<text x="' + L + '" y="' + (base + 22) + '" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + tt.start + '</text><text x="' + (L + W) + '" y="' + (base + 22) + '" text-anchor="end" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + d.km.toFixed(1) + '<tspan font-size="' + (fs - 2) + '"> km</tspan></text>';
       (c.cpl || []).forEach(function (q) {
-        var x = X(q[1]), i = Math.round(q[1] / d.km * (n - 1)), y = Y(sm[i]), cut = c.cut === q[0], col = cut ? ORANGE : INK;
-        g += '<line x1="' + x + '" x2="' + x + '" y1="' + y + '" y2="' + base + '" stroke="' + col + '" stroke-width="1" opacity=".45"/><circle cx="' + x + '" cy="' + y + '" r="5" fill="#fff" stroke="' + col + '" stroke-width="2"/>';
-        var lab = q[0] + (cut ? (mob ? ' ' + c.cutT : ' · ' + tt.cutoff + ' ' + c.cutT) : '');
-        g += '<text x="' + x + '" y="' + (base + 38) + '" text-anchor="middle" font-size="12" font-weight="800" fill="' + col + '">' + lab + '</text>';
+        var x = L + q[1] / d.km * W, i = Math.round(q[1] / d.km * (n - 1)), y = Y(sm[i]), cut = c.cut === q[0];
+        g += '<line x1="' + x + '" x2="' + x + '" y1="' + y + '" y2="' + base + '" stroke="' + (cut ? ORANGE : INK) + '" stroke-width="1" stroke-dasharray="3 3" opacity="' + (cut ? .9 : .5) + '"/><circle cx="' + x + '" cy="' + y + '" r="5.5" fill="#fff" stroke="' + ORANGE + '" stroke-width="2.5"/>';
+        if (cut) { var lab = q[0] + ' · ' + tt.cutoff + ' ' + c.cutT, w = lab.length * (mob ? 7.6 : 8.6) + 26; g += '<rect x="' + (x - w / 2) + '" y="' + (base + 8) + '" width="' + w + '" height="28" rx="14" fill="' + ORANGE + '"/><text x="' + x + '" y="' + (base + 27) + '" text-anchor="middle" font-size="' + fs + '" font-weight="800" fill="#fff">' + lab + '</text>'; }
+        else { var w2 = q[0].length * 9 + 22; g += '<rect x="' + (x - w2 / 2) + '" y="' + (y - 46) + '" width="' + w2 + '" height="26" rx="13" fill="#fff" stroke="' + INK + '" stroke-width="1.2"/><text x="' + x + '" y="' + (y - 28.5) + '" text-anchor="middle" font-size="' + (fs - .5) + '" font-weight="800" fill="' + INK + '">' + q[0] + '</text>'; }
       });
       g += '<line class="hl" y1="' + Tp + '" y2="' + base + '" stroke="' + INK + '" stroke-width="1" opacity="0"/><circle class="hd" r="5" fill="' + ORANGE + '" stroke="#fff" stroke-width="2.5" opacity="0"/>';
       svg.innerHTML = g;
-      var line = svg.querySelector('.pl'), tot = line.getTotalLength(), cols = {};
-      for (var t = 0; t <= tot; t += 1.5) { var p = line.getPointAtLength(t); cols[Math.round(p.x)] = p.y; }
-      var st = HT.step, hh = '', row = 0;
-      for (var y = base - st * 0.5; y > Tp - 10; y -= st, row++) {
-        var off = (row % 2) * st / 2;
-        for (var x = off + st / 2; x < W; x += st) {
-          var cy = cols[Math.round(x)]; for (var z = 1; z < 4 && cy == null; z++) cy = cols[Math.round(x) + z] || cols[Math.round(x) - z];
-          if (cy == null || y < cy - HT.R) continue;
-          var r = HT.R * (1 - Math.max(0, y - cy) / HT.depth); if (r < .3) continue;
-          hh += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(2) + '"/>';
-        }
-      }
-      svg.querySelector('.ht').innerHTML = hh;
       function move(cx) {
-        var r = svg.getBoundingClientRect(), x = Math.max(0, Math.min(W, cx - r.left)), km = x / W * d.km;
-        var i = Math.round(km / d.km * (n - 1)), hl = svg.querySelector('.hl'), hd = svg.querySelector('.hd');
+        var r = svg.getBoundingClientRect(), x = Math.max(L, Math.min(L + W, cx - r.left)), km = (x - L) / W * d.km;
+        var i = Math.round(km / d.km * (n - 1)), ie = Math.round(km / d.km * (d.e.length - 1)), hl = svg.querySelector('.hl'), hd = svg.querySelector('.hd');
         hl.setAttribute('x1', x); hl.setAttribute('x2', x); hl.setAttribute('opacity', .35);
         hd.setAttribute('cx', x); hd.setAttribute('cy', Y(sm[i])); hd.setAttribute('opacity', 1);
         svg.querySelector('.pk').style.opacity = 0;
-        var tp = $('.yc-tip'); tp.textContent = km.toFixed(1) + ' km · ' + Math.round(d.e[i]) + ' m';
-        tp.style.left = Math.max(60, Math.min(W - 60, x)) + 'px'; tp.classList.add('on');
+        var tp = $('.yc-tip'); tp.textContent = km.toFixed(1) + ' km · ' + Math.round(d.e[ie]) + ' m';
+        tp.style.left = Math.max(60, Math.min(W0 - 60, x)) + 'px'; tp.style.top = (Y(sm[i]) - 40) + 'px'; tp.classList.add('on');
         if (meMk) { var j = at(d, km); meMk.setLngLat([d.p[j][1], d.p[j][0]]); meMk.getElement().style.opacity = 1; }
       }
       function leave() {
