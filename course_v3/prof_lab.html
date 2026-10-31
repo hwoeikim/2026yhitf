@@ -20,14 +20,15 @@ var O='#FF6D07',INK='#141518';
 var CPL={15:[['CP',3.5]],28:[['CP1',4.8],['CP2',15],['CP3',24]]},CUT={28:['CP2','4:30']};
 var V=[
  ['A','등고선 + 스티플 믹스','능선을 위에서부터 여러 겹 등고선으로 내리고, 겹 사이를 점묘로 채움'],
- ['B','겹치는 능선 일러스트','같은 능선을 뒤로 갈수록 연하게 몇 겹 겹쳐서, 산맥이 멀리 이어지는 느낌'],
+ ['B','겹치는 능선 일러스트','뒤에 옅은 산 두 겹을 깔고, 앞 능선은 단색 면 — 판화·포스터 느낌'],
+ ['E','능선 일러스트 + 망점','B의 겹친 산 위에, 앞 능선만 망점으로 톤 처리'],
  ['C','등고선만','제안받은 1번 정리형 — 면 대신 선 몇 겹으로 깊이감'],
  ['D','스티플만','제안받은 2번 정리형 — 세로 점묘가 아래로 흩어짐']];
 function smooth(e,k){var n=e.length,o=[];for(var i=0;i<n;i++){var a=0,c=0;for(var j=Math.max(0,i-k);j<=Math.min(n-1,i+k);j++){a+=e[j];c++;}o.push(a/c);}return o;}
 function path(pts){var s='M'+pts[0][0].toFixed(1)+','+pts[0][1].toFixed(1);for(var i=1;i<pts.length;i++){var p0=pts[i-1],p1=pts[i],m=(p0[0]+p1[0])/2;s+='C'+m.toFixed(1)+','+p0[1].toFixed(1)+' '+m.toFixed(1)+','+p1[1].toFixed(1)+' '+p1[0].toFixed(1)+','+p1[1].toFixed(1);}return s;}
 function draw(box,k,v){
  var d=YC_DATA[k],svg=document.createElementNS('http://www.w3.org/2000/svg','svg');box.appendChild(svg);
- var W=box.clientWidth,H=box.clientHeight,T=70,B=48,h=H-T-B,base=T+h,n=d.e.length,sm=smooth(d.e,2),mx=Math.max.apply(0,sm)*1.04;
+ var W=box.clientWidth,H=box.clientHeight,T=70,B=48,h=H-T-B,base=T+h,n=d.e.length,sm=smooth(smooth(d.e,3),3),mx=Math.max.apply(0,sm)*1.04;
  var X=function(i){return i/(n-1)*W},Y=function(m,f){return base-(m/mx)*h*(f==null?1:f)};
  var pts=function(f,dx){return sm.map(function(m,i){return[X(i)+(dx||0),Y(m,f)]})};
  var top=path(pts(1)),g='<defs>',uid='u'+Math.random().toString(36).slice(2,6);
@@ -41,13 +42,14 @@ function draw(box,k,v){
    layers+='<g fill="'+O+'" opacity="'+.38+'" clip-path="url(#'+uid+'c)">'+dots+'</g>';}
   L.forEach(function(f,j){layers+='<path d="'+path(pts(f))+'" fill="none" stroke="'+O+'" stroke-width="1" opacity="'+(0.55-j*0.08).toFixed(2)+'"/>';});
  }
- if(v==='B'){
-  var sets=[[0.62,-60,.10],[0.78,40,.14],[0.9,-20,.2]];
-  sets.forEach(function(s){layers+='<path d="'+path(pts(s[0],s[1]))+'L'+(W+80)+','+base+'L-80,'+base+'Z" fill="'+O+'" opacity="'+s[2]+'" clip-path="url(#'+uid+'v)"/>';});
+ if(v==='B'||v==='E'){
   g=g.replace('</defs>','<clipPath id="'+uid+'v"><rect x="0" y="0" width="'+W+'" height="'+base+'"/></clipPath></defs>');
-  layers+='<path d="'+top+'L'+W+','+base+'L0,'+base+'Z" fill="#FFF4EC"/>';
-  var st=4,dots='';for(var x=st/2;x<W;x+=st){var i=Math.round(x/W*(n-1)),y0=Y(sm[i]);for(var y=y0+3;y<base;y+=st){var t=(y-y0)/50;var r=1.1*(1-t);if(r>.25)dots+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(2)+'"/>';}}
-  layers+='<g fill="'+O+'" opacity=".55" clip-path="url(#'+uid+'c)">'+dots+'</g>';
+  var far=smooth(smooth(d.e,9),9),mid=smooth(smooth(d.e,6),6);
+  var sil=function(arr,f,dx){var q=arr.map(function(m,i){return[X(i)+dx,Y(m,f)]});return path(q)+'L'+(W+200)+','+base+'L-200,'+base+'Z';};
+  layers+='<g clip-path="url(#'+uid+'v)"><path d="'+sil(far,1.12,-110)+'" fill="#FFF1E7"/><path d="'+sil(mid,0.98,90)+'" fill="#FFE2CC"/></g>';
+  layers+='<path d="'+top+'L'+W+','+base+'L0,'+base+'Z" fill="'+(v==='B'?'#FFC79F':'#FFF6F0')+'"/>';
+  if(v==='E'){var st=3.2,dots='';for(var x=st/2;x<W;x+=st){var i=Math.round(x/W*(n-1)),y0=Y(sm[i]);var row=0;for(var y=y0+1.5;y<base;y+=st,row++){var t=(y-y0)/(base-y0+1);var r=1.2*(1-t*0.85);if(r>.25)dots+='<circle cx="'+(x+(row%2)*st/2).toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(2)+'"/>';}}
+   layers+='<g fill="'+O+'" opacity=".55" clip-path="url(#'+uid+'c)">'+dots+'</g>';}
  }
  if(v==='D'){var st=3.2,dots='';for(var x=st/2;x<W;x+=st){var i=Math.round(x/W*(n-1)),y0=Y(sm[i]);for(var y=y0+2;y<base;y+=2.6){var t=(y-y0)/(base-y0+1);if(Math.random()<1-t*0.95)dots+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r=".75"/>';}}layers+='<g fill="'+O+'" opacity=".7">'+dots+'</g>';}
  g+=layers;
