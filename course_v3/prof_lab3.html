@@ -1,0 +1,53 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:Pretendard,sans-serif;color:#141518;-webkit-font-smoothing:antialiased;letter-spacing:-.02em}
+.w{max-width:1200px;margin:0 auto;padding:40px 24px 120px}
+.cap{font-size:15px;font-weight:800;margin:56px 0 6px}
+.cap span{font-weight:600;color:#7a808a;margin-left:8px}
+.pf{position:relative;height:300px}
+.pf canvas,.pf svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.tabs{display:flex;gap:8px}
+.tabs button{border:0;border-radius:999px;padding:10px 18px;font:800 15px Pretendard;background:#f1f3f7;color:#7b808a;cursor:pointer}
+.tabs button.on{background:#002ACF;color:#fff}
+</style></head><body><div class="w">
+<div class="tabs" id="tabs"><button data-k="15">15KM</button><button data-k="28" class="on">28KM</button></div>
+<div id="out"></div></div>
+<script>
+var O='#FF6D07',INK='#141518',OR=[255,109,7];
+var CPL={15:[['CP',3.5]],28:[['CP1',4.8],['CP2',15],['CP3',24]]},CUT={28:['CP2','4:30']};
+var V=[['H','가로선 + 그라데이션 채움','능선 아래가 위에서 아래로 옅어지는 오렌지'],['I','가로선 + 반투명 단색','오렌지를 투명도만 낮춰 한 톤으로 채움'],['J','가로선이 산 안에서 오렌지로','바탕의 고도 가로선이 산 안으로 들어가면 오렌지 선으로 바뀜 + 아주 옅은 채움']];
+function smooth(e,k){var n=e.length,o=[];for(var i=0;i<n;i++){var a=0,c=0;for(var j=Math.max(0,i-k);j<=Math.min(n-1,i+k);j++){a+=e[j];c++;}o.push(a/c);}return o;}
+function resample(a,m){var o=[];for(var i=0;i<m;i++){var f=i/(m-1)*(a.length-1),j=Math.floor(f),t=f-j;o.push(j>=a.length-1?a[a.length-1]:a[j]*(1-t)+a[j+1]*t);}return o;}
+function cr(pts){var s='M'+pts[0][0].toFixed(1)+','+pts[0][1].toFixed(1);for(var i=0;i<pts.length-1;i++){var p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];var c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];s+='C'+c1[0].toFixed(1)+','+c1[1].toFixed(1)+' '+c2[0].toFixed(1)+','+c2[1].toFixed(1)+' '+p2[0].toFixed(1)+','+p2[1].toFixed(1);}return s;}
+function draw(box,k,v){
+ var d=YC_DATA[k],W0=box.clientWidth,H=box.clientHeight,L=44,W=W0-L,T=70,B=48,h=H-T-B,base=T+h;
+ var prof=resample(smooth(smooth(d.e,2),2),110),n=prof.length,top=Math.max.apply(0,prof),mx=Math.ceil(top*1.12/100)*100;
+ var X=function(i){return L+i/(n-1)*W},Y=function(m){return base-(m/mx)*h};
+ var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');box.appendChild(svg);
+ var line=cr(prof.map(function(m,i){return[X(i),Y(m)]})),area=line+'L'+(L+W)+','+base+'L'+L+','+base+'Z',uid='u'+Math.random().toString(36).slice(2,6);
+ var g='<defs><linearGradient id="'+uid+'g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+O+'" stop-opacity=".42"/><stop offset=".55" stop-color="'+O+'" stop-opacity=".14"/><stop offset="1" stop-color="'+O+'" stop-opacity=".02"/></linearGradient><clipPath id="'+uid+'c"><path d="'+area+'"/></clipPath></defs>';
+ var grid='',gridIn='';for(var m=100;m<=mx;m+=100){var y=Y(m).toFixed(1);grid+='<line x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'" stroke="#E6E8EC" stroke-width="1"/>';gridIn+='<line x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'" stroke="'+O+'" stroke-width="1" opacity=".55"/>';g+='<text x="'+(L-10)+'" y="'+(+y+4)+'" text-anchor="end" font-size="12" font-weight="700" fill="#9aa0a8">'+m+'</text>';}
+ g+='<text x="'+(L-10)+'" y="'+(base+4)+'" text-anchor="end" font-size="12" font-weight="700" fill="#9aa0a8">0</text>';
+ g+=grid;
+ if(v==='H')g+='<path d="'+area+'" fill="url(#'+uid+'g)"/>';
+ if(v==='I')g+='<path d="'+area+'" fill="'+O+'" fill-opacity=".16"/>';
+ if(v==='J')g+='<path d="'+area+'" fill="'+O+'" fill-opacity=".07"/><g clip-path="url(#'+uid+'c)">'+gridIn+'</g>';
+ g+='<line x1="'+L+'" x2="'+(L+W)+'" y1="'+base+'" y2="'+base+'" stroke="'+INK+'" stroke-width="1.2"/>';
+ g+='<path d="'+line+'" fill="none" stroke="'+O+'" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>';
+ var im=0;for(var i=1;i<n;i++)if(prof[i]>prof[im])im=i;var pxx=X(im),py=Y(prof[im]),tp=Math.round(Math.max.apply(0,d.e)),pk=(im/(n-1)*d.km).toFixed(1);
+ g+='<line x1="'+pxx+'" x2="'+pxx+'" y1="'+(py-8)+'" y2="'+(T-58)+'" stroke="'+INK+'" stroke-width="1.2"/><circle cx="'+pxx+'" cy="'+py+'" r="4.5" fill="'+INK+'"/>';
+ g+='<rect x="'+(pxx-150)+'" y="'+(T-66)+'" width="140" height="62" fill="#fff"/><text x="'+(pxx-10)+'" y="'+(T-28)+'" text-anchor="end" font-size="44" font-weight="900" fill="'+INK+'" letter-spacing="-2">'+tp+'<tspan font-size="20" dx="2">m</tspan></text><text x="'+(pxx-10)+'" y="'+(T-8)+'" text-anchor="end" font-size="13" font-weight="700" fill="#8a8f99">최고점 · '+pk+'km</text>';
+ for(var q=5;q<d.km-1.5;q+=5){var xq=L+q/d.km*W;g+='<line x1="'+xq+'" x2="'+xq+'" y1="'+base+'" y2="'+(base+5)+'" stroke="'+INK+'"/><text x="'+xq+'" y="'+(base+22)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#8a8f99">'+q+'</text>';}
+ g+='<text x="'+L+'" y="'+(base+22)+'" font-size="13" font-weight="800" fill="'+INK+'">START</text><text x="'+(L+W)+'" y="'+(base+22)+'" text-anchor="end" font-size="13" font-weight="800" fill="'+INK+'">'+d.km.toFixed(1)+'<tspan font-size="11"> km</tspan></text>';
+ (CPL[k]||[]).forEach(function(c){var x=L+c[1]/d.km*W,i=Math.round(c[1]/d.km*(n-1)),y=Y(prof[i]),cut=CUT[k]&&CUT[k][0]===c[0];
+  g+='<line x1="'+x+'" x2="'+x+'" y1="'+y+'" y2="'+base+'" stroke="'+(cut?O:INK)+'" stroke-width="1" stroke-dasharray="3 3" opacity="'+(cut?.9:.5)+'"/><circle cx="'+x+'" cy="'+y+'" r="5.5" fill="#fff" stroke="'+O+'" stroke-width="2.5"/>';
+  if(cut){var lab=c[0]+' · 컷오프 '+CUT[k][1],w=lab.length*9+28;g+='<rect x="'+(x-w/2)+'" y="'+(base+8)+'" width="'+w+'" height="28" rx="14" fill="'+O+'"/><text x="'+x+'" y="'+(base+27)+'" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">'+lab+'</text>';}
+  else{var w=c[0].length*9+22;g+='<rect x="'+(x-w/2)+'" y="'+(y-46)+'" width="'+w+'" height="26" rx="13" fill="#fff" stroke="'+INK+'" stroke-width="1.2"/><text x="'+x+'" y="'+(y-28.5)+'" text-anchor="middle" font-size="12.5" font-weight="800" fill="'+INK+'">'+c[0]+'</text>';}});
+ svg.innerHTML=g;}
+function render(k){var o=document.getElementById('out');o.innerHTML='';V.forEach(function(v){var c=document.createElement('div');c.innerHTML='<div class="cap">'+v[0]+'. '+v[1]+'<span>'+v[2]+'</span></div><div class="pf"></div>';o.appendChild(c);draw(c.querySelector('.pf'),k,v[0]);});
+ document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('on',+b.dataset.k===k)});}
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){render(+b.dataset.k)}});
+render(28);
+</script></body></html>
