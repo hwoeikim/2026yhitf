@@ -18,7 +18,7 @@
         5: { n: '5KM RUNNING', s: '12.12 토 10:00 · 미사경정공원 조정호수 일대', lim: '제한 없음', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: '12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복', lim: '2:00', tab: 'RUN' },
         15: { n: '15KM TRAIL RUN', s: '12.12 토 10:00 · 검단산 일대', lim: '4:00', note: '중도 컷오프 없음', cpl: [['CP', 3.5]], tab: 'TRAIL' },
-        28: { n: '28KM TRAIL RUN', s: '12.13 일 08:00 · 위례둘레길 · 남한산성 일대', lim: '7:30', note: 'CP2 컷오프 4:30', cut: 'CP2', cutT: '4:30', cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
+        28: { n: '28KM TRAIL RUN', s: '12.13 일 08:00 · 위례둘레길 · 남한산성 일대', lim: '7:30', note: '컷오프 CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
       }
     },
     en: {
@@ -28,7 +28,7 @@
         5: { n: '5KM RUNNING', s: 'DEC 12 SAT 10:00 · Misa Regatta Park', lim: 'No limit', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: 'DEC 12 SAT · DEC 13 SUN 10:00 · Misa Regatta Park (out & back)', lim: '2:00', tab: 'RUN' },
         15: { n: '15KM TRAIL RUN', s: 'DEC 12 SAT 10:00 · Geomdansan', lim: '4:00', note: 'No mid-race cut-off', cpl: [['CP', 3.5]], tab: 'TRAIL' },
-        28: { n: '28KM TRAIL RUN', s: 'DEC 13 SUN 08:00 · Wirye Trail · Namhansanseong', lim: '7:30', note: 'CP2 cut-off 4:30', cut: 'CP2', cutT: '4:30', cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
+        28: { n: '28KM TRAIL RUN', s: 'DEC 13 SUN 08:00 · Wirye Trail · Namhansanseong', lim: '7:30', note: 'Cut-offs CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
       }
     }
   };
@@ -221,11 +221,12 @@
         '<text x="' + (px - 10) + '" y="' + (Tp - 8) + '" text-anchor="end" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + tt.peak + ' · ' + pk + 'km</text></g>';
       var stp = mob ? 10 : 5;
       for (var q = stp; q < d.km - 1.5; q += stp) { var xq = L + q / d.km * W; g += '<line x1="' + xq + '" x2="' + xq + '" y1="' + base + '" y2="' + (base + 5) + '" stroke="' + INK + '"/><text x="' + xq + '" y="' + (base + 22) + '" text-anchor="middle" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + q + '</text>'; }
-      g += '<text x="' + L + '" y="' + (base + 22) + '" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + tt.start + '</text><text x="' + (L + W) + '" y="' + (base + 22) + '" text-anchor="end" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + d.km.toFixed(1) + '<tspan font-size="' + (fs - 2) + '"> km</tspan></text>';
+      var endHide = mob && c.cuts && Object.keys(c.cuts).length > 1;
+      g += '<text x="' + L + '" y="' + (base + 22) + '" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + tt.start + '</text>' + (endHide ? '' : '<text x="' + (L + W) + '" y="' + (base + 22) + '" text-anchor="end" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + d.km.toFixed(1) + '<tspan font-size="' + (fs - 2) + '"> km</tspan></text>');
       (c.cpl || []).forEach(function (q) {
-        var x = L + q[1] / d.km * W, i = Math.round(q[1] / d.km * (n - 1)), y = Y(sm[i]), cut = c.cut === q[0];
+        var x = L + q[1] / d.km * W, i = Math.round(q[1] / d.km * (n - 1)), y = Y(sm[i]), cutT = c.cuts && c.cuts[q[0]], cut = !!cutT;
         g += '<line x1="' + x + '" x2="' + x + '" y1="' + y + '" y2="' + base + '" stroke="' + (cut ? ORANGE : INK) + '" stroke-width="1" stroke-dasharray="3 3" opacity="' + (cut ? .9 : .5) + '"/><circle cx="' + x + '" cy="' + y + '" r="5.5" fill="#fff" stroke="' + ORANGE + '" stroke-width="2.5"/>';
-        if (cut) { var lab = q[0] + ' · ' + tt.cutoff + ' ' + c.cutT, w = lab.length * (mob ? 7.6 : 8.6) + 26; g += '<rect x="' + (x - w / 2) + '" y="' + (base + 8) + '" width="' + w + '" height="28" rx="14" fill="' + ORANGE + '"/><text x="' + x + '" y="' + (base + 27) + '" text-anchor="middle" font-size="' + fs + '" font-weight="800" fill="#fff">' + lab + '</text>'; }
+        if (cut) { var lab = mob ? q[0] + ' ' + cutT : q[0] + ' · ' + tt.cutoff + ' ' + cutT, w = lab.length * (mob ? 7.2 : 8.6) + (mob ? 18 : 26), xc = Math.max(L + w / 2, Math.min(L + W - (endHide ? 0 : (mob ? 50 : 64)) - w / 2, x)); g += '<rect x="' + (xc - w / 2) + '" y="' + (base + 8) + '" width="' + w + '" height="28" rx="14" fill="' + ORANGE + '"/><text x="' + xc + '" y="' + (base + 27) + '" text-anchor="middle" font-size="' + fs + '" font-weight="800" fill="#fff">' + lab + '</text>'; }
         else { var w2 = q[0].length * 9 + 22; g += '<rect x="' + (x - w2 / 2) + '" y="' + (y - 46) + '" width="' + w2 + '" height="26" rx="13" fill="#fff" stroke="' + INK + '" stroke-width="1.2"/><text x="' + x + '" y="' + (y - 28.5) + '" text-anchor="middle" font-size="' + (fs - .5) + '" font-weight="800" fill="' + INK + '">' + q[0] + '</text>'; }
       });
       g += '<line class="hl" y1="' + Tp + '" y2="' + base + '" stroke="' + INK + '" stroke-width="1" opacity="0"/><circle class="hd" r="5" fill="' + ORANGE + '" stroke="#fff" stroke-width="2.5" opacity="0"/>';
