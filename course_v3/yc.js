@@ -12,7 +12,7 @@
 
   var T = {
     ko: {
-      title: '대회코스', dist: '거리', gain: '누적 상승', limit: '제한시간', cp: 'CP', course: '코스', road: '평지', roadU: '로드', ea: '개소',
+      title: '대회코스', dist: '거리', gain: '누적 상승', limit: '제한시간', cp: 'CP', course: '코스', road: '평지', roadU: '로드', ea: '개소', ws: '급수대',
       gpx: ' GPX 다운로드', more: '코스 자세히 보기', start: 'START', cutoff: '컷오프', peak: '최고점',
       C: {
         5: { n: '5KM RUNNING', s: '12.12 토 10:00 · 미사경정공원 조정호수 일대', lim: '제한 없음', tab: 'RUN' },
@@ -22,7 +22,7 @@
       }
     },
     en: {
-      title: 'Course', dist: 'Distance', gain: 'Elevation gain', limit: 'Time limit', cp: 'CP', course: 'Course', road: 'Flat', roadU: 'road', ea: '',
+      title: 'Course', dist: 'Distance', gain: 'Elevation gain', limit: 'Time limit', cp: 'CP', course: 'Course', road: 'Flat', roadU: 'road', ea: '', ws: 'Water',
       gpx: ' GPX download', more: 'View course details', start: 'START', cutoff: 'cut-off', peak: 'Highest',
       C: {
         5: { n: '5KM RUNNING', s: 'DEC 12 SAT 10:00 · Misa Regatta Park', lim: 'No limit', tab: 'RUN' },
@@ -49,7 +49,7 @@
     '.yc-root .yc-mapc{position:absolute;inset:0}' +
     '.yc-root .yc-gpx{position:absolute;right:18px;top:18px;z-index:5;background:#fff;color:var(--ink)!important;text-decoration:none!important;font-weight:800;font-size:14px;padding:11px 18px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.12);line-height:1.2}' +
     '.yc-root .yc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:28px 0 0;padding:0;border-top:2px solid var(--ink)}' +
-    '.yc-root .yc-stats.run{grid-template-columns:repeat(3,1fr)}' +
+    '.yc-root .yc-stats.run{grid-template-columns:repeat(4,1fr)}' +
     '.yc-root .yc-stats div{padding:18px 0 0}.yc-root .yc-stats div+div{padding-left:24px}' +
     '.yc-root .yc-stats dt{font-size:14px;font-weight:700;color:#4a4f58;margin:0}' +
     '.yc-root .yc-stats dd{margin:6px 0 0;font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1.1}' +
@@ -62,6 +62,8 @@
     '.yc-root .yc-more{display:inline-flex;align-items:center;gap:8px;margin-top:32px;padding:14px 26px;border-radius:999px;background:var(--blue);color:#fff!important;text-decoration:none!important;font-weight:800;font-size:16px}' +
     '.yc-root .yc-more b{color:var(--orange)}' +
     '.yc-cp{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#fff;border:2.5px solid #FF6D07;color:#FF6D07;font:800 11px Pretendard,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.18)}' +
+    '.yc-ws{display:flex;align-items:center;gap:5px;white-space:nowrap;background:#fff;border:2px solid #002ACF;color:#002ACF;font:800 11px Pretendard,sans-serif;padding:3px 8px 3px 5px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.18)}' +
+    '.yc-ws svg{width:12px;height:12px;flex:none}' +
     '.yc-sf{display:flex;align-items:center;gap:6px;white-space:nowrap;font:900 12px Pretendard,sans-serif;color:#fff;background:#002ACF;padding:6px 10px 6px 8px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.2)}' +
     '.yc-sf:before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}' +
     '.yc-me{width:16px;height:16px;border-radius:50%;background:#002ACF;border:3px solid #fff;box-shadow:0 0 0 2px #002ACF;pointer-events:none}' +
@@ -160,7 +162,7 @@
       var c = tt.C[k], d = DATA[k], km = (Math.round(d.km * 100) / 100).toString();
       var h = '<div><dt>' + tt.dist + '</dt><dd>' + km + '<small>km</small></dd></div>';
       if (k <= 10) {
-        h += '<div><dt>' + tt.course + '</dt><dd>' + tt.road + '<small>' + tt.roadU + '</small></dd></div><div><dt>' + tt.limit + '</dt><dd>' + c.lim + '</dd></div>';
+        h += '<div><dt>' + tt.course + '</dt><dd>' + tt.road + '<small>' + tt.roadU + '</small></dd></div><div><dt>' + tt.limit + '</dt><dd>' + c.lim + '</dd></div><div><dt>' + tt.ws + '</dt><dd>' + (d.ws || []).length + (tt.ea ? '<small>' + tt.ea + '</small>' : '') + '</dd></div>';
       } else {
         var up = k == 15 ? '829' : '1,208';
         h += '<div><dt>' + tt.gain + '</dt><dd>+' + up + '<small>m</small></dd></div>' +
@@ -185,6 +187,9 @@
       marks.push(new maplibregl.Marker({ element: el('<div class="yc-sf">START · FINISH</div>'), anchor: 'left', offset: [-8, 0] }).setLngLat(co[0]).addTo(map));
       (d.cp || []).forEach(function (q) {
         marks.push(new maplibregl.Marker({ element: el('<div class="yc-cp">' + (q[0] === 'CP' ? 'CP' : q[0].slice(2)) + '</div>') }).setLngLat([q[2][1], q[2][0]]).addTo(map));
+      });
+      (d.ws || []).forEach(function (q) {
+        marks.push(new maplibregl.Marker({ element: el('<div class="yc-ws"><svg viewBox="0 0 12 12"><path d="M6 1C6 1 2.2 5.3 2.2 7.6a3.8 3.8 0 0 0 7.6 0C9.8 5.3 6 1 6 1z" fill="#002ACF"/></svg>' + q[0] + 'K</div>') }).setLngLat([q[1][1], q[1][0]]).addTo(map));
       });
       var me = el('<div class="yc-me"></div>'); me.style.opacity = 0;
       meMk = new maplibregl.Marker({ element: me }).setLngLat(co[0]).addTo(map); marks.push(meMk);
