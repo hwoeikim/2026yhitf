@@ -1,0 +1,29 @@
+<!-- YHITF 메인 15KM·28KM 마감 띠 (2026-11-09). 헤더 바로 아래에 한 줄 띠를 끼워 넣음. 국문·영문 공용 -->
+<script>
+(function(){
+  if(location.pathname!=='/' && !/^\/(index|main)?$/.test(location.pathname)) return;
+  if(document.getElementById('yh-soldout')) return;
+  var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
+  var T=EN?{a:'15KM · 28KM Trail Run registration is closed',b:'5KM · 10KM Running is still open',c:'Register',h:'/registration'}
+         :{a:'15KM · 28KM 트레일런 접수가 마감되었습니다',b:'5KM · 10KM 러닝은 계속 신청할 수 있어요',c:'러닝 신청하기',h:'/registration'};
+  var css='#yh-soldout{background:#0A0A0B;color:#fff;font-family:Pretendard,"Pretendard Variable",-apple-system,"Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;position:relative;z-index:5}'
+  +'#yh-soldout .i{max-width:1440px;margin:0 auto;padding:0 clamp(20px,4.4vw,72px);min-height:60px;display:flex;align-items:center;gap:20px}'
+  +'#yh-soldout .s{font-family:Archivo,"Arial Narrow",sans-serif;font-stretch:62%;font-weight:800;font-size:24px;line-height:1;letter-spacing:-.005em;color:#FF6D07;flex:none;padding-top:2px}'
+  +'#yh-soldout .a{font-size:17px;font-weight:700;letter-spacing:-.03em}'
+  +'#yh-soldout .b{margin-left:auto;font-size:15px;font-weight:500;letter-spacing:-.02em;color:rgba(255,255,255,.78)}'
+  +'#yh-soldout .c{flex:none;display:inline-flex;align-items:center;height:36px;padding:0 18px;border-radius:999px;background:#fff;color:#002ACF!important;font-size:14px;font-weight:700;letter-spacing:-.02em;text-decoration:none;transition:background .2s,color .2s}'
+  +'#yh-soldout .c:hover{background:#FF6D07;color:#fff!important}'
+  +'@media (max-width:820px){#yh-soldout .i{min-height:0;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;gap:6px 12px}#yh-soldout .s{font-size:21px}#yh-soldout .a{font-size:15.5px;flex:1 1 auto}#yh-soldout .b{margin-left:0;font-size:14px;flex:1 1 auto}#yh-soldout .c{height:32px;padding:0 14px;font-size:13px}}';
+  var st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
+  var d=document.createElement('div'); d.id='yh-soldout'; d.setAttribute('role','note');
+  d.innerHTML='<div class="i"><span class="s">SOLD OUT</span><span class="a"></span><span class="b"></span><a class="c"></a></div>';
+  d.querySelector('.a').textContent=T.a; d.querySelector('.b').textContent=T.b;
+  var c=d.querySelector('.c'); c.textContent=T.c; c.href=T.h;
+  function put(){
+    if(document.getElementById('yh-soldout')) return true;
+    var h=document.getElementById('doz_header_wrap'); if(!h) return false;
+    h.parentNode.insertBefore(d,h.nextSibling); return true;
+  }
+  if(!put()) document.addEventListener('DOMContentLoaded',put);
+})();
+</script>
