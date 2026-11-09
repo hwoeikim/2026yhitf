@@ -1,0 +1,28 @@
+<script>
+/* YHITF 15KM·28KM 마감 (2026-11-09). 신청서 코드는 건드리지 않고, 종목 선택에서 두 종목만 막음 */
+(function(){
+  var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
+  var TAG=EN?' (SOLD OUT)':' (마감)';
+  var OUT=/^(15KM|28KM) TRAIL RUN/;
+  function run(){
+    var sels=document.querySelectorAll('select[name="participant_course"]');
+    for(var i=0;i<sels.length;i++){
+      var s=sels[i];
+      for(var j=0;j<s.options.length;j++){
+        var o=s.options[j];
+        if(OUT.test(o.value)){
+          o.disabled=true;
+          if(o.text.indexOf(TAG)<0) o.text=o.text+TAG;
+        }
+      }
+      if(OUT.test(s.value)){
+        s.value='';
+        s.dispatchEvent(new Event('input',{bubbles:true}));
+        s.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    }
+  }
+  run();
+  setInterval(run,700);
+})();
+</script>
