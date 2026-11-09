@@ -1,0 +1,18 @@
+<script>
+/* EN 메인 히어로의 28KM 50% 쿠폰 문구 숨김 (2026-11-09, 28KM 마감) */
+(function(){
+  var IDS=['w202610113e53d2254bff4','w20260922d6bd99b21ba22'];
+  var RX=/^(\*?28KM? TRAIL( 50% OFF)?|50% OFF FOR THE FIRST 300|FOR THE FIRST 300 INTERNATIONAL PARTICIPANTS|INTERNATIONAL PARTICIPANTS)$/i;
+  function run(){
+    IDS.forEach(function(id){
+      var w=document.getElementById(id); if(!w) return;
+      [].forEach.call(w.querySelectorAll('p'),function(p){
+        var t=p.textContent.replace(/\s+/g,' ').trim();
+        if(RX.test(t)) p.style.display='none';
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  window.addEventListener('load',run);
+})();
+</script>
