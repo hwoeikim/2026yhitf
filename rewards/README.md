@@ -58,3 +58,4 @@
 - 2026-10-31 18:xx: lookbook 3rd row (09–10 AMINOREGEN, 11 finisher jacket e_jkfit.webp) with orange '15KM · 28KM만' tags; assets 0bc30f2, widget b02a616 — KR/EN main + /rewards. Sponsor order unified on /invited KR+EN (KEEN, 진안홍삼, 네이처밸리, 샘트리, 아미노리젠). KR /course schedule mobile top spacing 72px.
 - 10/31 e_amino.webp 그림자 좌우 잘림 수정(여백 두고 재합성) — assets 1840c0d / widget 9ea0728, KR·EN 메인·/rewards 4곳 게시·라이브 확인 (EN 메인 KIA 코드 유지)
 - 10/31 19:xx e_jkfit.webp 교체(사용자가 덮어쓴 '완주자켓 모델핏 추가수정.png' 반영) — assets 1e12b2b / widget 6da9bf5, KR·EN 메인·/rewards 4곳 게시·라이브 확인 (EN 메인 KIA 유지)
+- 2026-11-11 PM: HESSED (헤세드, Original military goods) — logo only (no kit item): medal/v2/logo_hesed.svg (cropped from 헤세드 로고 24.12.26.ai, ratio 2.4), asset 0be7510; added after 아미노리젠 in yh-sp, yh-roll, yh-inv KR+EN, EN YH_NAME_EN '헤세드':'Hessed'. Saved in design mode, publish pending (user).
