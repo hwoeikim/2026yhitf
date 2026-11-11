@@ -62,3 +62,4 @@
 - 11/11 PM: kit 09 헤세드 스포츠 양말 / Hessed Sports Socks (all events; l_socks.svg, e_socks.webp), AMINOREGEN → 10–11, jacket → 12; lookbook row 3 = socks · amino · jacket. assets 451f61b, widget ab33396 — KR/EN main + /rewards published, PC + mobile checked (EN main KIA kept). Hessed logo (logo_hesed.svg 0be7510) live in yh-sp, yh-roll, yh-inv KR+EN. Note: build_en.py regenerates page_en.html from page.html with an old map — don't run it; edit page_en.html directly and use build.py <SHA> enmain|en.
 - 11/11 15:30: l_socks.svg redrawn cleanly by hand (stroke 3.8), l_gel.svg inner lines/label removed + AMINOREGEN logo; assets a6e25b4 — KR/EN main + /rewards published
 - 11/11 15:35: l_gel.svg stray shoulder stroke removed; assets 859be2d — KR/EN main + /rewards published
+- 11/11 15:55: l_stick.svg inner lines removed + vertical one-line AMINOREGEN® logo; assets 9a2df64 — KR/EN main + /rewards published
