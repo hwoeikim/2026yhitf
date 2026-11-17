@@ -63,3 +63,4 @@
 - 11/11 15:30: l_socks.svg redrawn cleanly by hand (stroke 3.8), l_gel.svg inner lines/label removed + AMINOREGEN logo; assets a6e25b4 — KR/EN main + /rewards published
 - 11/11 15:35: l_gel.svg stray shoulder stroke removed; assets 859be2d — KR/EN main + /rewards published
 - 11/11 15:55: l_stick.svg inner lines removed + vertical one-line AMINOREGEN® logo; assets 9a2df64 — KR/EN main + /rewards published
+- 11/17 PM: SAMYANG FOODS (삼양식품) — logo only (no kit item): medal/v2/logo_samyang.svg (KR horizontal, ratio 4.76) + logo_samyang_en.svg (EN horizontal, ratio 4.05), cropped from 로고/samyang_ci.ai, asset 0cb969d; added after 헤세드 in yh-sp, yh-roll, yh-inv KR (KR svg) + EN (EN svg), EN YH_NAME_EN '삼양식품':'Samyang Foods'. KR+EN published, live checked on PC (main section wraps to a 2nd row: 7 logos don't fit 1200px). Mobile not checked.
