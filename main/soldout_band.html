@@ -1,12 +1,11 @@
-<!-- YHITF 메인 15KM·28KM 마감 띠 (2026-11-09). 헤더 바로 아래에 한 줄 띠를 끼워 넣음. 국문·영문 공용 -->
+<!-- YHITF 메인 28KM 마감 띠 (2026-11-17, 15KM는 계속 접수). 헤더 바로 아래에 한 줄 띠를 끼워 넣음. 국문·영문 공용 -->
 <script>
 (function(){
-  return; /* 11/16 추가접수 오픈: SOLD OUT 띠 내림. 다시 띄우려면 이 줄만 지우기 */
   if(location.pathname!=='/' && !/^\/(index|main)?$/.test(location.pathname)) return;
   if(document.getElementById('yh-soldout')) return;
   var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
-  var T=EN?{a:'15KM · 28KM Trail Run registration is closed',b:'5KM · 10KM Running is still open',c:'Register',h:'/registration'}
-         :{a:'15KM · 28KM 트레일런 접수가 마감되었습니다',b:'5KM · 10KM 러닝은 계속 신청할 수 있어요',c:'러닝 신청하기',h:'/registration'};
+  var T=EN?{a:'28KM Trail Run registration is closed',b:'5KM · 10KM · 15KM are still open',c:'Register',h:'/registration'}
+         :{a:'28KM 트레일런 접수가 마감되었습니다',b:'5KM · 10KM · 15KM는 계속 신청할 수 있어요',c:'참가 신청하기',h:'/registration'};
   var css='#yh-soldout{background:#0A0A0B;color:#fff;font-family:Pretendard,"Pretendard Variable",-apple-system,"Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;position:relative;z-index:5}'
   +'#yh-soldout .i{max-width:1440px;margin:0 auto;padding:0 clamp(20px,4.4vw,72px);min-height:60px;display:flex;align-items:center;gap:20px}'
   +'#yh-soldout .s{font-family:Archivo,"Arial Narrow",sans-serif;font-stretch:62%;font-weight:800;font-size:24px;line-height:1;letter-spacing:-.005em;color:#FF6D07;flex:none;padding-top:2px}'
