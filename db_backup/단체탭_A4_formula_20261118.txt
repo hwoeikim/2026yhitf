@@ -1,0 +1,5 @@
+# DB 시트 '단체' 탭 (sheetId 377604262) A4 수식 — 11/18 15:1x 값으로 고정 전 백업
+=ARRAYFORMULA(IFERROR(LET(w,'KOREA DB'!W2:W,u,'KOREA DB'!U2:U,ok,(u="결제완료")*(w<>"")*(w<>"해당없음"),cnt,COUNTIFS(w,w,u,"결제완료"),SORT(FILTER({w,IF(cnt>=20,"부스 대상",""),cnt,TO_TEXT('KOREA DB'!A2:Z)},ok=1),3,FALSE,1,TRUE,5,TRUE)),""))
+# A2: =IFERROR(COUNTUNIQUE(A4:A)&"팀 · "&COUNTA(A4:A)&"명","")
+# E2: ="부스 대상 "&IFERROR(COUNTUNIQUE(FILTER(A4:A,B4:B<>"")),0)&"팀 (결제완료 20명 이상, 초록색 표시)"
+# D3: ={'KOREA DB'!A1:Z1}
