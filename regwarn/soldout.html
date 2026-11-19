@@ -1,9 +1,9 @@
 <script>
-/* YHITF 28KM 마감 (2026-11-17, 15KM는 계속 접수). 신청서 코드는 건드리지 않고, 종목 선택에서 28KM만 막음 */
+/* YHITF 28KM 마감 (2026-11-17) + 15KM 마감 (2026-11-19). 신청서 코드는 건드리지 않고, 종목 선택에서 28KM만 막음 */
 (function(){
   var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
   var TAG=EN?' (SOLD OUT)':' (마감)';
-  var OUT=/^28KM TRAIL RUN/;
+  var OUT=/^(15|28)KM TRAIL RUN/; /* 11/19 15KM 마감 추가 */
   function run(){
     var sels=document.querySelectorAll('select[name="participant_course"]');
     for(var i=0;i<sels.length;i++){
