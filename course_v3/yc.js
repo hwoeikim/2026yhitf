@@ -159,7 +159,7 @@
     var map = null, marks = [], meMk = null, cur = 28, ready = false;
 
     function stats(k) {
-      var c = tt.C[k], d = DATA[k], km = (Math.round(d.km * 100) / 100).toString();
+      var c = tt.C[k], d = DATA[k], km = d.label || (Math.round(d.km * 100) / 100).toString();  // 표기용 거리(label)가 있으면 그걸 씀 (11/22 10K 9.97→10 요청)
       var h = '<div><dt>' + tt.dist + '</dt><dd>' + km + '<small>km</small></dd></div>';
       if (k <= 10) {
         h += '<div><dt>' + tt.course + '</dt><dd>' + tt.road + '<small>' + tt.roadU + '</small></dd></div><div><dt>' + tt.limit + '</dt><dd>' + c.lim + '</dd></div><div><dt>' + tt.ws + '</dt><dd>' + (d.ws || []).length + (tt.ea ? '<small>' + tt.ea + '</small>' : '') + '</dd></div>';
