@@ -70,3 +70,10 @@
 - data.js ws 배열 추가: 5K [2.5K], 10K [2.5·7.5K 공통(반환점), 5K(출발 근처)]. 협회 안 "5K·10K 겹치는 구간 1 + 10K 1, 12일 2·13일 2, 2.5K 기준 표시, 현장 근방 조정"
 - yc.js: 파란 물방울 라벨 마커(.yc-ws) + 러닝 탭 통계에 '급수대 N개소'
 - jsDelivr @af22fbb. 위젯 4곳(KR main/course, EN main/courses) 해시 교체 저장, 게시 대기(서브방 대기 건과 같이 게시)
+
+## 2026-11-23 영문 28KM 재오픈 (외국인 전용, 서브방)
+- 결제 상품 idx=7 28KM 옵션 품절 → 판매중 (국문·영문 공용 옵션이라 언어별 품절 불가). 15KM 품절 그대로
+- 국문: SEO 공통 코드(Footer) 맨 끝에 regwarn/kr_shopview_28_lock.html 추가 — 국문 상품 화면에서 28KM 옵션 숨김·클릭 차단. 국문 신청서 잠금(15|28) 그대로
+- 영문 디자인(게시 완료): '영어 카운터' 위젯 — 띠 문구 "15KM Trail Run registration is closed"(오른쪽 문구 비움), 히어로 쿠폰 숨김 끔 / '하단 버튼 고정 위젯' — YH_COUPON_OPEN=true / REGISTRATION 'Registration warning' 위젯 — OUT=/^15KM TRAIL RUN/ + en/intl28_notice_addon.html(28KM 선택 시 영·한 안내+동의 체크, 체크 전 결제 진행 막음)
+- 라이브 확인: 영문 띠·쿠폰 배지·히어로 문구, 영문 신청서 28KM 선택 가능·동의 박스·미체크 차단(alert 없음)·체크 시 기존 검사 정상, 국문 상품 화면 28KM 숨김, 국문 신청서 15·28 마감 유지
+- 되돌리기: 위 4곳 원래 값(주석에 남김) + 옵션 품절 + 국문 Footer 추가분 삭제

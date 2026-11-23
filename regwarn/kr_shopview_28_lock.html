@@ -1,0 +1,17 @@
+<script>/* YHITF: 국문 결제 상품(idx=7) 화면에서 28KM 옵션 막음 (2026-11-23 서브방). 상품 옵션은 영문 28KM 재오픈 때문에 판매중이지만, 국문은 계속 마감. 화면만 막고 주문·DB 로직은 건드리지 않음 */
+(function(){try{
+  var h=location.hostname; if(!/^(yhitf\.co\.kr|yhitf\.imweb\.me)$/.test(h)) return;
+  if(!/^\/shop_view/.test(location.pathname)) return;
+  if(new URLSearchParams(location.search).get('idx')!=='7') return;
+  var RX=/28KM TRAIL RUN/;
+  function run(){
+    var a=document.querySelectorAll('a._requireOption');
+    for(var i=0;i<a.length;i++){ if(RX.test(a[i].textContent)){ var it=a[i].closest('.dropdown-item')||a[i]; it.style.display='none'; } }
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a._requireOption');
+    if(a&&RX.test(a.textContent)){ e.preventDefault(); e.stopImmediatePropagation(); }
+  },true);
+  run(); setInterval(run,700);
+}catch(e){}})();
+</script>

@@ -1,0 +1,57 @@
+<!-- 2026-11-23 서브방: 영문 28KM 재오픈(외국인 전용분). 참가자 중 28KM를 고르면 결제 버튼 위에 안내 + 동의 체크 1칸이 나타나고, 체크 전에는 결제로 넘어가지 않음.
+     화면만 추가. 신청서 저장·결제·DB 로직은 건드리지 않음. 국적 대조·차단은 하지 않음. alert 대신 안내 문구로 표시 -->
+<style>
+#yhitf-entry .yh-i28{display:none;gap:10px;align-items:flex-start;margin:14px 0 10px;padding:12px 14px;border:1.5px solid #002ACF;border-radius:12px;background:#f5f7ff;cursor:pointer}
+#yhitf-entry .yh-i28.on{display:flex}
+#yhitf-entry .yh-i28 input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:#002ACF}
+#yhitf-entry .yh-i28 span{font-size:13.5px;line-height:1.55;color:#3d4149}
+#yhitf-entry .yh-i28 b{display:block;color:#212121;font-weight:700}
+#yhitf-entry .yh-i28 small{display:block;margin-top:3px;font-size:12.5px;color:#666}
+#yhitf-entry .yh-i28 em{display:none;margin-top:4px;font-style:normal;font-weight:700;color:#D93025}
+#yhitf-entry .yh-i28.err{border-color:#D93025}
+#yhitf-entry .yh-i28.err em{display:block}
+</style>
+<script>
+(function(){
+  'use strict';
+  var root=null, box=null;
+  function make(){
+    var l=document.createElement('label'); l.className='yh-i28'; l.id='yh-i28-box';
+    l.innerHTML='<input type="checkbox" id="yh-i28-agree"><span><b></b><small></small><em></em></span>';
+    l.querySelector('b').textContent='This 28KM slot is reserved for international participants. Entries confirmed as Korean nationals may be cancelled and refunded without notice. I agree. (Required)';
+    l.querySelector('small').textContent='외국인 전용으로 확보된 28KM입니다. 내국인 신청으로 확인될 시 무통보 취소·환불 처리될 수 있습니다. 동의합니다. (필수)';
+    l.querySelector('em').textContent='Please check this box to continue.';
+    l.querySelector('input').addEventListener('change',function(){ if(this.checked) l.classList.remove('err'); });
+    return l;
+  }
+  function has28(){
+    if(!root) return false;
+    var s=root.querySelectorAll('select[name="participant_course"]');
+    for(var i=0;i<s.length;i++){ if(/^28KM TRAIL RUN/.test(s[i].value)) return true; }
+    return false;
+  }
+  function place(){
+    root=document.getElementById('yhitf-entry');   /* 신청서 위젯이 이 코드보다 아래에 있어 매번 찾음 */
+    var btn=document.getElementById('entry-submit'); if(!root || !btn) return;
+    if(!box) box=make();
+    var anchor=document.getElementById('yh-final-agree-box')||btn;
+    if(box.parentNode!==anchor.parentNode || box.nextSibling!==anchor) anchor.parentNode.insertBefore(box,anchor);
+    var on=has28();
+    box.classList.toggle('on',on);
+    if(!on){ box.classList.remove('err'); }
+  }
+  place(); setInterval(place,700);
+  document.addEventListener('change',function(e){ if(e.target && e.target.name==='participant_course') place(); });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('#entry-submit'); if(!b) return;
+    place();
+    if(!has28()) return;
+    var c=document.getElementById('yh-i28-agree');
+    if(c && !c.checked){
+      e.preventDefault(); e.stopImmediatePropagation();
+      box.classList.add('err');
+      box.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  },true);
+})();
+</script>
