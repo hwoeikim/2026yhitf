@@ -77,3 +77,4 @@
 - 영문 디자인(게시 완료): '영어 카운터' 위젯 — 띠 문구 "15KM Trail Run registration is closed"(오른쪽 문구 비움), 히어로 쿠폰 숨김 끔 / '하단 버튼 고정 위젯' — YH_COUPON_OPEN=true / REGISTRATION 'Registration warning' 위젯 — OUT=/^15KM TRAIL RUN/ + en/intl28_notice_addon.html(28KM 선택 시 영·한 안내+동의 체크, 체크 전 결제 진행 막음)
 - 라이브 확인: 영문 띠·쿠폰 배지·히어로 문구, 영문 신청서 28KM 선택 가능·동의 박스·미체크 차단(alert 없음)·체크 시 기존 검사 정상, 국문 상품 화면 28KM 숨김, 국문 신청서 15·28 마감 유지
 - 되돌리기: 위 4곳 원래 값(주석에 남김) + 옵션 품절 + 국문 Footer 추가분 삭제
+- 20:4x 영문 SEO 공통 코드(Footer)의 yh-paynote(메인방 11/5) 'Korean card' 줄만 교체: 국문 사이트 링크 → "원화 결제 원하면 신청서 작성·제출 후 신청번호와 함께 1:1 문의, 원화 결제로 연결"(영·한). 사용자 요청. 원래 문구: "Paying with a card issued in Korea? Please register on the Korean site (KRW). / 국내 카드·간편결제는 국문 사이트에서 원화로 신청해 주세요. → yhitf.co.kr"
