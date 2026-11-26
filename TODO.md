@@ -79,3 +79,10 @@
 - 되돌리기: 위 4곳 원래 값(주석에 남김) + 옵션 품절 + 국문 Footer 추가분 삭제
 - 20:4x 영문 SEO 공통 코드(Footer)의 yh-paynote(메인방 11/5) 'Korean card' 줄만 교체: 국문 사이트 링크 → "원화 결제 원하면 신청서 작성·제출 후 신청번호와 함께 1:1 문의, 원화 결제로 연결"(영·한). 사용자 요청. 원래 문구: "Paying with a card issued in Korea? Please register on the Korean site (KRW). / 국내 카드·간편결제는 국문 사이트에서 원화로 신청해 주세요. → yhitf.co.kr"
 - 20:5x 위 줄 다시 수정(사용자): 라벨 'Korean card'→'KRW payment', "KRW payment is available by bank transfer. ... 1:1 inquiry with your registration number, and we will help you with the next steps." / "원화 결제는 무통장 입금으로 가능합니다. 참가신청서 작성·제출 후 신청번호와 함께 1:1 문의를 남겨 주시면 진행을 도와드립니다." 처리 방식: 어한달처럼 원화 주문 생성 → 입금 확인 → 결제완료
+
+## 2026-11-26 5KM 마감 (국문·영문, 서브방 11:0x)
+- 결제 상품 idx=7 5KM 옵션 품절(국·영 공용). 10KM만 판매중, 15KM 품절, 28KM 판매중(영문 외국인 전용) 그대로
+- 국문 참가신청 '신청 경고 (regwarn/kr.html)' 위젯(w2026103052ae84a1d9110) OUT=/^(15|28)KM TRAIL RUN|^5KM RUNNING/ / 영문 REGISTRATION 'Registration warning' 위젯(w20261030fc410f192088d) OUT=/^15KM TRAIL RUN|^5KM RUNNING/
+- 메인 띠: 국문 pc카운터(w202610028a1233ea76087) "5KM · 15KM · 28KM 접수가 마감되었습니다 / 10KM는 계속 신청할 수 있어요", 영문 영어 카운터(w20260927ab03a0b75388c) "5KM · 15KM registration is closed"
+- 라이브 확인: 국·영 신청서 5KM (마감)/(SOLD OUT) 비활성, 메인 띠 문구
+- 되돌리기: 위 OUT에서 |^5KM RUNNING 삭제, 띠 문구 원래대로, 옵션 판매중
