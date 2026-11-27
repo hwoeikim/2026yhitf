@@ -93,3 +93,4 @@
 - 메인 띠 EN: 5KM · 15KM · 28KM closed / 10KM still open
 - YH_COUPON_OPEN=false, 히어로 쿠폰 숨김 IDS 복구
 - 등록 페이지 '28KM 선착순 할인' 프로모 위젯은 11/17 첫 마감 때도 건드리지 않아 그대로 둠
+- 11/27 10:1x (메인방, 사용자 요청) 영문 REGISTRATION 페이지 '28KM 선착순 할인' 프로모 위젯(w20261007b2a861d4e0ed1, YHITF GLOBAL 28K PROMOTION) 삭제 → 게시. 되돌리려면 디자인 모드 기록(시계 아이콘)에서 복구
