@@ -17,7 +17,7 @@
       C: {
         5: { n: '5KM RUNNING', s: '12.12 토 10:00 · 미사경정공원 조정호수 일대', lim: '제한 없음', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: '12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복', lim: '2:00', tab: 'RUN' },
-        15: { n: '15KM TRAIL RUN', s: '12.12 토 10:00 · 검단산 일대', lim: '4:00', note: '중도 컷오프 없음', cpl: [['CP', 3.5]], tab: 'TRAIL' },
+        15: { n: '15KM TRAIL RUN', s: '12.12 토 10:00 · 검단산 일대', lim: '4:30', note: '중도 컷오프 없음', cpl: [['CP', 4.96]], tab: 'TRAIL' },   // 11/27 최종 코스: 제한시간 4:30, CP 위치 변경
         28: { n: '28KM TRAIL RUN', s: '12.13 일 08:00 · 위례둘레길 · 남한산성 일대', lim: '7:30', note: '컷오프 CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
       }
     },
@@ -27,7 +27,7 @@
       C: {
         5: { n: '5KM RUNNING', s: 'DEC 12 SAT 10:00 · Misa Regatta Park', lim: 'No limit', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: 'DEC 12 SAT · DEC 13 SUN 10:00 · Misa Regatta Park (out & back)', lim: '2:00', tab: 'RUN' },
-        15: { n: '15KM TRAIL RUN', s: 'DEC 12 SAT 10:00 · Geomdansan', lim: '4:00', note: 'No mid-race cut-off', cpl: [['CP', 3.5]], tab: 'TRAIL' },
+        15: { n: '15KM TRAIL RUN', s: 'DEC 12 SAT 10:00 · Geomdansan', lim: '4:30', note: 'No mid-race cut-off', cpl: [['CP', 4.96]], tab: 'TRAIL' },
         28: { n: '28KM TRAIL RUN', s: 'DEC 13 SUN 08:00 · Wirye Trail · Namhansanseong', lim: '7:30', note: 'Cut-offs CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
       }
     }
@@ -164,7 +164,7 @@
       if (k <= 10) {
         h += '<div><dt>' + tt.course + '</dt><dd>' + tt.road + '<small>' + tt.roadU + '</small></dd></div><div><dt>' + tt.limit + '</dt><dd>' + c.lim + '</dd></div><div><dt>' + tt.ws + '</dt><dd>' + (d.ws || []).length + (tt.ea ? '<small>' + tt.ea + '</small>' : '') + '</dd></div>';
       } else {
-        var up = k == 15 ? '829' : '1,208';
+        var up = k == 15 ? '850' : '1,208';   // 11/27 15K 최종 GPX 기준(약 840~880m)
         h += '<div><dt>' + tt.gain + '</dt><dd>+' + up + '<small>m</small></dd></div>' +
           '<div><dt>' + tt.limit + '</dt><dd>' + c.lim + '<em>' + c.note + '</em></dd></div>' +
           '<div><dt>' + tt.cp + '</dt><dd>' + c.cpl.length + (tt.ea ? '<small>' + tt.ea + '</small>' : '') + '</dd></div>';
@@ -219,14 +219,15 @@
       g += '<line x1="' + L + '" x2="' + (L + W) + '" y1="' + base + '" y2="' + base + '" stroke="' + INK + '" stroke-width="1.2"/>';
       g += '<path d="' + ln + '" fill="none" stroke="' + ORANGE + '" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>';
       var im = 0; for (var i = 1; i < n; i++) if (sm[i] > sm[im]) im = i;
+      var nokm = !!d.label && k > 10;   // 11/27: 15K는 정확한 거리 대신 '약 15km' — 고도 그래프에 km 숫자 안 씀
       var px = X(im), py = Y(sm[im]), top = Math.round(Math.max.apply(0, d.e)), pk = (im / (n - 1) * d.km).toFixed(1);
       var big = mob ? 30 : 44;
       g += '<g class="pk"><line x1="' + px + '" x2="' + px + '" y1="' + (py - 8) + '" y2="' + (Tp - big - 14) + '" stroke="' + INK + '" stroke-width="1.2"/><circle cx="' + px + '" cy="' + py + '" r="4.5" fill="' + INK + '"/>' +
         '<text x="' + (px - 10) + '" y="' + (Tp - 28) + '" text-anchor="end" font-size="' + big + '" font-weight="900" fill="' + INK + '" letter-spacing="-1.5">' + top + '<tspan font-size="' + Math.round(big * .45) + '" dx="2">m</tspan></text>' +
-        '<text x="' + (px - 10) + '" y="' + (Tp - 8) + '" text-anchor="end" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + tt.peak + ' · ' + pk + 'km</text></g>';
+        '<text x="' + (px - 10) + '" y="' + (Tp - 8) + '" text-anchor="end" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + tt.peak + (nokm ? '' : ' · ' + pk + 'km') + '</text></g>';
       var stp = mob ? 10 : 5;
-      for (var q = stp; q < d.km - 1.5; q += stp) { var xq = L + q / d.km * W; g += '<line x1="' + xq + '" x2="' + xq + '" y1="' + base + '" y2="' + (base + 5) + '" stroke="' + INK + '"/><text x="' + xq + '" y="' + (base + 22) + '" text-anchor="middle" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + q + '</text>'; }
-      var endHide = mob && c.cuts && Object.keys(c.cuts).length > 1;
+      for (var q = stp; !nokm && q < d.km - 1.5; q += stp) { var xq = L + q / d.km * W; g += '<line x1="' + xq + '" x2="' + xq + '" y1="' + base + '" y2="' + (base + 5) + '" stroke="' + INK + '"/><text x="' + xq + '" y="' + (base + 22) + '" text-anchor="middle" font-size="' + fs + '" font-weight="700" fill="#8a8f99">' + q + '</text>'; }
+      var endHide = nokm || (mob && c.cuts && Object.keys(c.cuts).length > 1);
       g += '<text x="' + L + '" y="' + (base + 22) + '" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + tt.start + '</text>' + (endHide ? '' : '<text x="' + (L + W) + '" y="' + (base + 22) + '" text-anchor="end" font-size="' + fs + '" font-weight="800" fill="' + INK + '">' + d.km.toFixed(1) + '<tspan font-size="' + (fs - 2) + '"> km</tspan></text>');
       (c.cpl || []).forEach(function (q) {
         var x = L + q[1] / d.km * W, i = Math.round(q[1] / d.km * (n - 1)), y = Y(sm[i]), cutT = c.cuts && c.cuts[q[0]], cut = !!cutT;
@@ -242,7 +243,7 @@
         hl.setAttribute('x1', x); hl.setAttribute('x2', x); hl.setAttribute('opacity', .35);
         hd.setAttribute('cx', x); hd.setAttribute('cy', Y(sm[i])); hd.setAttribute('opacity', 1);
         svg.querySelector('.pk').style.opacity = 0;
-        var tp = $('.yc-tip'); tp.textContent = km.toFixed(1) + ' km · ' + Math.round(d.e[ie]) + ' m';
+        var tp = $('.yc-tip'); tp.textContent = (nokm ? '' : km.toFixed(1) + ' km · ') + Math.round(d.e[ie]) + ' m';
         tp.style.left = Math.max(60, Math.min(W0 - 60, x)) + 'px'; tp.style.top = (Y(sm[i]) - 40) + 'px'; tp.classList.add('on');
         if (meMk) { var j = at(d, km); meMk.setLngLat([d.p[j][1], d.p[j][0]]); meMk.getElement().style.opacity = 1; }
       }
