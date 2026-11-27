@@ -18,7 +18,7 @@
         5: { n: '5KM RUNNING', s: '12.12 토 10:00 · 미사경정공원 조정호수 일대', lim: '제한 없음', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: '12.12 토 · 12.13 일 10:00 · 미사경정공원 왕복', lim: '2:00', tab: 'RUN' },
         15: { n: '15KM TRAIL RUN', s: '12.12 토 10:00 · 검단산 일대', lim: '4:30', note: '중도 컷오프 없음', cpl: [['CP', 4.96]], tab: 'TRAIL' },   // 11/27 최종 코스: 제한시간 4:30, CP 위치 변경
-        28: { n: '28KM TRAIL RUN', s: '12.13 일 08:00 · 위례둘레길 · 남한산성 일대', lim: '7:30', note: '컷오프 CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
+        28: { n: '28KM TRAIL RUN', s: '12.13 일 08:00 · 위례둘레길 · 남한산성 일대', lim: '7:30', note: '컷오프 CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 14.5], ['CP3', 24]], tab: 'TRAIL' }
       }
     },
     en: {
@@ -28,7 +28,7 @@
         5: { n: '5KM RUNNING', s: 'DEC 12 SAT 10:00 · Misa Regatta Park', lim: 'No limit', tab: 'RUN' },
         10: { n: '10KM RUNNING', s: 'DEC 12 SAT · DEC 13 SUN 10:00 · Misa Regatta Park (out & back)', lim: '2:00', tab: 'RUN' },
         15: { n: '15KM TRAIL RUN', s: 'DEC 12 SAT 10:00 · Geomdansan', lim: '4:30', note: 'No mid-race cut-off', cpl: [['CP', 4.96]], tab: 'TRAIL' },
-        28: { n: '28KM TRAIL RUN', s: 'DEC 13 SUN 08:00 · Wirye Trail · Namhansanseong', lim: '7:30', note: 'Cut-offs CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 15], ['CP3', 24]], tab: 'TRAIL' }
+        28: { n: '28KM TRAIL RUN', s: 'DEC 13 SUN 08:00 · Wirye Trail · Namhansanseong', lim: '7:30', note: 'Cut-offs CP2 4:30 · CP3 6:30', cuts: { CP2: '4:30', CP3: '6:30' }, cpl: [['CP1', 4.8], ['CP2', 14.5], ['CP3', 24]], tab: 'TRAIL' }
       }
     }
   };
