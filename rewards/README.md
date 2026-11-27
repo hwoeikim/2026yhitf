@@ -69,4 +69,4 @@
 - 11/19 16:00: TOCOBO logo size 0.85 in all 6 logo widgets; stick line art left edge straightened (l_stick, l_vita), assets afb45f6, widget bc3e11d — KR/EN main + /rewards published.
 - 11/20 AM: SOLAB (쏘랩, 우바퍼니처 SOFA LABORATORY) — logo only: medal/v2/logo_solab.svg (cropped from 로고/우바퍼니처(쏘랩) 로고.ai, ratio 2.91, stroke duplicates removed), asset ef7dfb5; added after 비타팜 in yh-sp, yh-roll, yh-inv KR+EN, EN YH_NAME_EN '쏘랩':'SOLAB'.
 - 11/20 PM: 금호티앤씨 (Kumho T&C) — logo only: medal/v2/logo_kumho.svg (source .ai was a 454x149 raster → redrawn: geometric ellipse + chevron cut, text traced with potrace; URL line removed per user; ratio 7.32, size 0.85), asset 0430de0; added after 쏘랩 in yh-sp, yh-roll, yh-inv KR+EN, EN YH_NAME_EN '금호티앤씨':'Kumho T&C'. 6 widgets published, live checked (KR main PC: wraps to 3rd row).
-- 2026-11-27 15:xx: kit 11 TOCOBO Cica Calming Sun Serum 10ml (all races), AMINOREGEN 12–13, jacket 14; l_sun.svg, e_sun.webp; assets d5b3a71 (l_sun 직선 상단·로고 중앙)
+- 2026-11-27 15:xx: kit 11 TOCOBO Cica Calming Sun Serum 10ml (all races), AMINOREGEN 12–13, jacket 14; l_sun.svg, e_sun.webp; assets 51b215c (l_sun 상단 직선·홈 없음·로고 중앙)
