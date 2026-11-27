@@ -94,3 +94,10 @@
 - YH_COUPON_OPEN=false, 히어로 쿠폰 숨김 IDS 복구
 - 등록 페이지 '28KM 선착순 할인' 프로모 위젯은 11/17 첫 마감 때도 건드리지 않아 그대로 둠
 - 11/27 10:1x (메인방, 사용자 요청) 영문 REGISTRATION 페이지 '28KM 선착순 할인' 프로모 위젯(w20261007b2a861d4e0ed1, YHITF GLOBAL 28K PROMOTION) 삭제 → 게시. 되돌리려면 디자인 모드 기록(시계 아이콘)에서 복구
+
+## 2026-11-27 11/27 이후 신청자 배번·기념품 현장 수령 (메인방)
+- 공지: 국문 176020266 '[안내] 11/27(금) 이후 신청자 배번·기념품 현장 수령 안내' / 영문 176020393 '[Notice] On-site Bib and Race Kit Pickup for Registrations from Nov 27 (Fri)'
+- 참가신청서 확인 체크(필수, 체크 전 결제 진행 막음): regwarn/onsite_pickup_kr.html · onsite_pickup_en.html 내용을 신청 경고 위젯 맨 끝에 붙임
+  - 영문 Registration warning w20261030fc410f192088d: 저장·게시 완료
+  - 국문 신청 경고 w2026103052ae84a1d9110: 저장 완료, 게시는 사용자 확인 후(국문 디자인에 11/26 10:49 이후 게시 안 된 다른 변경이 있음)
+- 되돌리기: 위젯 끝의 '2026-11-27 메인방' 주석부터 </script>까지 삭제

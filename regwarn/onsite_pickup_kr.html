@@ -1,0 +1,39 @@
+<!-- 2026-11-27 메인방: 11/27(금) 이후 신청자 배번·기념품 현장 수령 확인 체크 1칸. 결제 버튼 위에 늘 보이고, 체크 전에는 결제로 넘어가지 않음.
+     화면만 추가. 신청서 저장·결제·DB 로직은 건드리지 않음. 공지 176020266 -->
+<style>
+#yhitf-entry .yh-op{display:flex;gap:10px;align-items:flex-start;margin:14px 0 10px;padding:12px 14px;border:1.5px solid #FF6D07;border-radius:12px;background:#fff6ef;cursor:pointer}
+#yhitf-entry .yh-op input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:#FF6D07}
+#yhitf-entry .yh-op span{font-size:14px;line-height:1.55;color:#212121}
+#yhitf-entry .yh-op b{font-weight:700}
+#yhitf-entry .yh-op em{display:none;margin-top:4px;font-style:normal;font-weight:700;color:#D93025}
+#yhitf-entry .yh-op.err{border-color:#D93025}
+#yhitf-entry .yh-op.err em{display:block}
+</style>
+<script>
+(function(){
+  'use strict';
+  var box=null;
+  function make(){
+    var l=document.createElement('label'); l.className='yh-op'; l.id='yh-op-box';
+    l.innerHTML='<input type="checkbox" id="yh-op-agree"><span><b></b><em></em></span>';
+    l.querySelector('b').textContent=TXT.t;
+    l.querySelector('em').textContent=TXT.e;
+    l.querySelector('input').addEventListener('change',function(){ if(this.checked) l.classList.remove('err'); });
+    return l;
+  }
+  var TXT={t:'11/27(금) 이후 신청자는 배번·기념품을 택배가 아닌 대회 현장에서 수령합니다. 확인했습니다. (필수)', e:'확인 후 체크해 주세요.'};
+  function place(){
+    var root=document.getElementById('yhitf-entry'); var btn=document.getElementById('entry-submit'); if(!root||!btn) return;
+    if(!box) box=make();
+    var anchor=document.getElementById('yh-i28-box')||document.getElementById('yh-final-agree-box')||btn;
+    if(box.parentNode!==anchor.parentNode || box.nextSibling!==anchor) anchor.parentNode.insertBefore(box,anchor);
+  }
+  place(); setInterval(place,700);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('#entry-submit'); if(!b) return;
+    place();
+    var c=document.getElementById('yh-op-agree');
+    if(c && !c.checked){ e.preventDefault(); e.stopImmediatePropagation(); box.classList.add('err'); box.scrollIntoView({behavior:'smooth',block:'center'}); }
+  },true);
+})();
+</script>
