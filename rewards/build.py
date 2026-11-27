@@ -40,6 +40,7 @@ s=s.replace('</style>',css+'</style>',1)
 # main: breathing room under the section above (elite invitation banner)
 if VAR in ('main','enmain'): s=s.replace('</style>','#yh-rewards{margin-top:clamp(56px,9vh,112px)}</style>',1)
 add=prize   # full prize table on main too
+add=re.sub(r'src="([a-z_0-9]+\.(?:webp|jpg|png))"',lambda m:f'src="{CDN}{m.group(1)}"',add)
 k=s.index('<script>window.YH_ASSET_BASE')
 s=s[:k]+add+'\n'+s[k:]
 out=f'<div id="yh-rewards">\n{s}\n{hd}\n</div>'

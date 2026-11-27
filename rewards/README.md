@@ -71,3 +71,4 @@
 - 11/20 PM: 금호티앤씨 (Kumho T&C) — logo only: medal/v2/logo_kumho.svg (source .ai was a 454x149 raster → redrawn: geometric ellipse + chevron cut, text traced with potrace; URL line removed per user; ratio 7.32, size 0.85), asset 0430de0; added after 쏘랩 in yh-sp, yh-roll, yh-inv KR+EN, EN YH_NAME_EN '금호티앤씨':'Kumho T&C'. 6 widgets published, live checked (KR main PC: wraps to 3rd row).
 - 2026-11-27 15:xx: kit 11 TOCOBO Cica Calming Sun Serum 10ml (all races), AMINOREGEN 12–13, jacket 14; l_sun.svg, e_sun.webp; assets 51b215c (l_sun 상단 직선·홈 없음·로고 중앙)
 - 2026-11-27 15:2x: lookbook rows 10–11 / 12–13·14 (trail row), e_sun landscape 1672×941; assets 57bfe26
+- 2026-11-27 17:0x: 입상 시상품 band (KEEN 트레일 러닝화 · 비타팜 PS 브레인케어, 50명) under prize board KR/EN; p_keen/p_vita.webp; build.py CDN for prize imgs; assets 762eb0f

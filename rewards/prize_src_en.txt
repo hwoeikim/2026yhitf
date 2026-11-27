@@ -34,6 +34,24 @@
 @media (max-width:760px){#yh-money .board{grid-template-columns:1fr}#yh-money .seg{width:100%}#yh-money .seg button{min-width:0;padding:0}}
 @media (prefers-reduced-motion:reduce){#yh-money .seg i{transition:none}#yh-money .board.swap .col{animation:none}}
 
+/* ---------- podium prizes (11/27) ---------- */
+#yh-money .bonus{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(12px,1.6vw,16px);margin-top:clamp(12px,2vw,20px);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:clamp(20px,2.6vw,32px)}
+#yh-money .bonus .bx{display:flex;flex-direction:column;justify-content:center;padding:8px 4px}
+#yh-money .bonus h3{margin:0;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.04em;font-weight:800}
+#yh-money .bonus .n{margin:clamp(14px,2.4vh,24px) 0 0;display:flex;align-items:baseline;gap:6px}
+#yh-money .bonus .n b{font:800 clamp(72px,7.4vw,112px)/.9 "Archivo",sans-serif;letter-spacing:-.04em;color:var(--o)}
+#yh-money .bonus .n span{font-size:clamp(20px,2vw,28px);font-weight:800}
+#yh-money .bonus .d{margin:clamp(16px,2.6vh,26px) 0 0;font-size:clamp(18px,1.6vw,21px);font-weight:600;line-height:1.55;color:rgba(255,255,255,.82);letter-spacing:-.03em}
+#yh-money .bonus .d b{font-weight:800;color:var(--o)}
+#yh-money .bonus .it{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#1a1a1c}
+#yh-money .bonus .it img{width:100%;height:100%;object-fit:cover;display:block}
+#yh-money .bonus .it::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.35) 28%,transparent 50%);pointer-events:none}
+#yh-money .bonus figcaption{position:absolute;left:clamp(16px,2vw,24px);right:16px;bottom:clamp(16px,2vw,22px);z-index:1}
+#yh-money .bonus figcaption em{display:block;font-style:normal;font-size:14px;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:6px}
+#yh-money .bonus figcaption strong{display:block;font-size:clamp(20px,1.8vw,24px);font-weight:800;letter-spacing:-.03em}
+#yh-money .bnote{margin:14px 4px 0;font-size:13px;color:rgba(255,255,255,.45)}
+@media (max-width:760px){#yh-money .bonus{grid-template-columns:1fr 1fr}#yh-money .bonus .bx{grid-column:1/-1;padding:4px 2px 8px}#yh-money .bonus .d{font-size:17px}}
+
 /* ---------- prize strip (main page) ---------- */
 #yh-mstrip{background:var(--bg);color:#fff;padding-block:clamp(56px,9vh,100px)}
 #yh-mstrip .wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -67,6 +85,16 @@
    <div class="col w"><h3>Women</h3><div class="first"><div class="rk"><b>1st</b></div><div class="amt"></div></div><ol></ol></div>
   </div>
   <div class="foot"><span class="nt"></span><span></span></div>
+  <div class="bonus">
+   <div class="bx">
+    <h3>Podium Prizes</h3>
+    <p class="n"><b>50</b><span>winners</span></p>
+    <p class="d">All races · Top 5 men &amp; women<br><b>A gift for every podium finisher</b></p>
+   </div>
+   <figure class="it"><img src="p_keen.webp" alt="KEEN trail running shoes" width="888" height="1088" loading="lazy" style="object-position:62% 62%"><figcaption><em>KEEN</em><strong>Trail Running Shoes</strong></figcaption></figure>
+   <figure class="it"><img src="p_vita.webp" alt="Vitapharm PS Brain Care" width="1000" height="1333" loading="lazy" style="object-position:52% 58%"><figcaption><em>Vitapharm</em><strong>PS Brain Care</strong></figcaption></figure>
+  </div>
+  <p class="bnote">※ Prize items are subject to change.</p>
  </div>
 </section>
 <script>
