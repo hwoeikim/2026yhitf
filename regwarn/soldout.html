@@ -3,7 +3,7 @@
 (function(){
   var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
   var TAG=EN?' (SOLD OUT)':' (마감)';
-  var OUT=EN?/^15KM TRAIL RUN|^5KM RUNNING/:/^(15|28)KM TRAIL RUN|^5KM RUNNING/; /* 11/26 5KM 마감(국·영) */ /* 11/19 15KM 마감 추가, 11/23 영문은 28KM 재오픈(외국인 전용) — 라이브 영문 위젯은 /^15KM TRAIL RUN/ */
+  var OUT=/^(15|28)KM TRAIL RUN|^5KM RUNNING/; /* 11/27 영문 28KM 다시 마감 */ /* 11/26 5KM 마감(국·영) */ /* 11/19 15KM 마감 추가, 11/23 영문은 28KM 재오픈(외국인 전용) — 라이브 영문 위젯은 /^15KM TRAIL RUN/ */
   function run(){
     var sels=document.querySelectorAll('select[name="participant_course"]');
     for(var i=0;i<sels.length;i++){

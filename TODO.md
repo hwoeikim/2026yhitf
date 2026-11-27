@@ -86,3 +86,10 @@
 - 메인 띠: 국문 pc카운터(w202610028a1233ea76087) "5KM · 15KM · 28KM 접수가 마감되었습니다 / 10KM는 계속 신청할 수 있어요", 영문 영어 카운터(w20260927ab03a0b75388c) "5KM · 15KM registration is closed"
 - 라이브 확인: 국·영 신청서 5KM (마감)/(SOLD OUT) 비활성, 메인 띠 문구
 - 되돌리기: 위 OUT에서 |^5KM RUNNING 삭제, 띠 문구 원래대로, 옵션 판매중
+
+## 2026-11-27 영문 28KM 다시 마감 (디자인 모드 저장 완료, 게시 대기)
+- 상품 idx=7 옵션 28KM TRAIL RUN 품절
+- regwarn OUT 국·영 공통 /^(15|28)KM TRAIL RUN|^5KM RUNNING/
+- 메인 띠 EN: 5KM · 15KM · 28KM closed / 10KM still open
+- YH_COUPON_OPEN=false, 히어로 쿠폰 숨김 IDS 복구
+- 등록 페이지 '28KM 선착순 할인' 프로모 위젯은 11/17 첫 마감 때도 건드리지 않아 그대로 둠

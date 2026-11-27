@@ -4,7 +4,7 @@
   if(location.pathname!=='/' && !/^\/(index|main)?$/.test(location.pathname)) return;
   if(document.getElementById('yh-soldout')) return;
   var EN=/^en\./.test(location.hostname)||/yhitfeng/.test(location.hostname);
-  var T=EN?{a:'5KM · 15KM registration is closed',b:'',c:'Register',h:'/registration'}
+  var T=EN?{a:'5KM · 15KM · 28KM registration is closed',b:'10KM is still open',c:'Register',h:'/registration'}
          :{a:'5KM · 15KM · 28KM 접수가 마감되었습니다',b:'10KM는 계속 신청할 수 있어요',c:'참가 신청하기',h:'/registration'};
   var css='#yh-soldout{background:#0A0A0B;color:#fff;font-family:Pretendard,"Pretendard Variable",-apple-system,"Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;position:relative;z-index:5}'
   +'#yh-soldout .i{max-width:1440px;margin:0 auto;padding:0 clamp(20px,4.4vw,72px);min-height:60px;display:flex;align-items:center;gap:20px}'
